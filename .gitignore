@@ -8,5 +8,5 @@ cmake-build-debug/
 *.txt
 CMakeLists.txt
 notas.cpp
-
+/bin/
 *.txt

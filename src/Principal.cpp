@@ -1,4 +1,4 @@
-#include "../includes/Principal.h"
+#include "Principal.h"
 
 Principal::Principal():
 pGGrafico(pGGrafico->getGerenciadorGrafico())
@@ -17,8 +17,6 @@ void Principal::executar() {
             }
         }
         pGGrafico->limpaJanela();
-        pGGrafico->desenhaElemento(*jogador.getCorpo());
-        jogador.move();
         pGGrafico->mostraElementos();
     }
 }

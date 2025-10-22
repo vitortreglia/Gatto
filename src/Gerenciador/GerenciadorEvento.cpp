@@ -1,9 +1,10 @@
-#include "../../includes/Gerenciador/GerenciadorEvento.h"
+#include "Gerenciador/GerenciadorEvento.h"
 
 namespace Gerenciador {
+    GerenciadorEvento* GerenciadorEvento::pGEvento(nullptr);
+
     GerenciadorEvento::GerenciadorEvento():
-    pGGrafico(pGGrafico->getGerenciadorGrafico()),
-    pJogador(nullptr)
+    pGGrafico(pGGrafico->getGerenciadorGrafico())
     {}
 
     GerenciadorEvento* GerenciadorEvento::getGerenciadorEvento() {
@@ -13,7 +14,7 @@ namespace Gerenciador {
         return pGEvento;
     }
 
-    void GerenciadorEvento::setJogador(Jogador::Jogador *pJ) {
+ /*   void GerenciadorEvento::setJogador(Jogador::Jogador *pJ) {
         pJogador = pJ;
     }
 
@@ -45,6 +46,6 @@ namespace Gerenciador {
             }
         }
     }
-
+*/
 
 }
