@@ -6,7 +6,9 @@
 
 Gerenciador::GerenciadorGrafico* Ente::pGGrafico(pGGrafico->getGerenciadorGrafico());
 
-Ente::Ente() {}
+Ente::Ente(IDs::IDs id) {
+    ID = id;
+}
 
 Ente::~Ente() {}
 

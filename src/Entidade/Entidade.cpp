@@ -2,6 +2,7 @@
 
 namespace Entidade {
     Entidade::Entidade(sf::Vector2f tamanho, sf::Vector2f posicao):
+    Ente(IDs::IDs::jogador),
     tam(tamanho),
     pos(posicao),
     corpo(tam) {
@@ -34,6 +35,9 @@ namespace Entidade {
 
     void Entidade::desenhar() {
         pGGrafico->desenhaElemento(corpo);
+    }
+    void Entidade::atualizar() {
+
     }
 
 

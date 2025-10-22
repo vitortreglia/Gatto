@@ -11,7 +11,7 @@ namespace Entidade {
             bool esquerda;
             bool andando;
         public:
-            Personagem();
+            Personagem(sf::Vector2f vmax);
             ~Personagem();
             void setVel(sf::Vector2f vel);
             sf::Vector2f getVel();
@@ -19,6 +19,7 @@ namespace Entidade {
             sf::Vector2f getVelMax();
             void andar();
             void parar();
+            void setEsquerda(bool esq);
             void atualizarPos();
             virtual void atualizar() = 0;
         };

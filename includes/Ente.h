@@ -9,7 +9,7 @@ protected:
     IDs::IDs ID;
     static Gerenciador::GerenciadorGrafico* pGGrafico;
 public:
-    Ente();
+    Ente(IDs::IDs id);
     virtual ~Ente();
     virtual void desenhar() = 0;
 };
