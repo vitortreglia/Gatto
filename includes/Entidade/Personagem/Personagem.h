@@ -12,7 +12,7 @@ namespace Entidade {
             float dt;
         public:
             Personagem(sf::Vector2f vel);
-            ~Personagem();
+            virtual ~Personagem();
             void setVel(sf::Vector2f vel);
             sf::Vector2f getVel();
             void andar(const bool esq);
