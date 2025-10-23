@@ -14,10 +14,9 @@ namespace Entidade {
         const sf::RectangleShape* getCorpo() const;
         void setPosicao(sf::Vector2f posicao);
         const sf::Vector2f getPosicao() const;
-        void setTamanho(sf::Vector2f tamanho);
         const sf::Vector2f getTamanho() const;
-        virtual void atualizar() = 0;
         virtual void desenhar();
+        virtual void atualizar() = 0;
     };
 }
 

@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "../includes/Principal.h"
+#include "Principal.h"
 
 
 int main() {

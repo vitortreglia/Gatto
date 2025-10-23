@@ -1,8 +1,11 @@
-#include "../includes/Principal.h"
+#include "Principal.h"
 
 Principal::Principal():
-pGGrafico(pGGrafico->getGerenciadorGrafico())
+pGGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico()),
+pGEvento(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
+jog()
 {
+    pGEvento->setJogador(&jog);
     executar();
 }
 
@@ -10,16 +13,12 @@ Principal::~Principal() {}
 
 void Principal::executar() {
     while (pGGrafico->verificaJanelaAberta()) {
-        sf::Event event;
-        while (pGGrafico->getWindow()->pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                pGGrafico->fecharJanela();
-            }
-        }
         pGGrafico->limpaJanela();
-        pGGrafico->desenhaElemento(*jogador.getCorpo());
-        jogador.move();
+        pGGrafico->desenhaElemento(sf::RectangleShape(sf::Vector2f(100.0f, 100.0f)));
+        jog.atualizar();
         pGGrafico->mostraElementos();
+        pGEvento->executar();
+        pGGrafico->resetaRelogio();
     }
 }
 

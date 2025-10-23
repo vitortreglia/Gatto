@@ -9,8 +9,7 @@ namespace Entidade {
         public:
             Jogador();
             ~Jogador();
-            void andar();
-            sf::RectangleShape* getCorpo();
+            void atualizar();
         };
     }
 }

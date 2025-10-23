@@ -11,6 +11,7 @@ protected:
 public:
     Ente(IDs::IDs id);
     virtual ~Ente();
+    const IDs::IDs getId() const;
     virtual void desenhar() = 0;
 };
 

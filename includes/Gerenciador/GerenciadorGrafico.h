@@ -13,18 +13,22 @@ namespace Gerenciador {
     class GerenciadorGrafico {
     private:
         sf::RenderWindow* window;
+        sf::Clock relogio;
+        float tempo;
         static GerenciadorGrafico* pGGrafico;
     private:
         GerenciadorGrafico();
     public:
         ~GerenciadorGrafico();
         const bool verificaJanelaAberta();
-        GerenciadorGrafico* getGerenciadorGrafico();
+        static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
         void desenhaElemento(sf::RectangleShape corpo);
         void mostraElementos();
         void fecharJanela();
         void limpaJanela();
+        float getTempo();
+        void resetaRelogio();
     };
 }
 

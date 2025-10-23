@@ -1,11 +1,11 @@
-#include "../../includes/Gerenciador/GerenciadorGrafico.h"
+#include "Gerenciador/GerenciadorGrafico.h"
 
 namespace Gerenciador {
 
-    GerenciadorGrafico* GerenciadorGrafico::pGGrafico = nullptr;
+    GerenciadorGrafico* GerenciadorGrafico::pGGrafico(nullptr);
 
     GerenciadorGrafico::GerenciadorGrafico():
-        window(new sf::RenderWindow(sf::VideoMode(TELA_X, TELA_Y), "Gatto"))
+    window(new sf::RenderWindow(sf::VideoMode(TELA_X, TELA_Y), "Gatto"))
     {
         if (window == nullptr) {
             cout << "Nao foi possivel criar a janela grafica" << endl;
@@ -52,6 +52,16 @@ namespace Gerenciador {
     void GerenciadorGrafico::limpaJanela() {
         window->clear();
     }
+
+    float GerenciadorGrafico::getTempo() {
+        return tempo;
+    }
+
+    void GerenciadorGrafico::resetaRelogio() {
+        tempo = relogio.getElapsedTime().asSeconds();
+        relogio.restart();
+    }
+
 
 }
 

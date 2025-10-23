@@ -3,16 +3,14 @@
 namespace Entidade {
     Entidade::Entidade(sf::Vector2f tamanho, sf::Vector2f posicao):
     Ente(IDs::IDs::jogador),
-    tam(tamanho),
-    pos(posicao),
-    corpo(tam) {
-        corpo.setPosition(posicao);
+    corpo(tamanho) {
+        tam = tamanho;
+        setPosicao(posicao);
+        corpo.setFillColor(sf::Color::Blue);
     }
 
-    Entidade::~Entidade() {}
-
-    const sf::Vector2f Entidade::getPosicao() const {
-        return pos;
+    Entidade::~Entidade() {
+        setPosicao(sf::Vector2f(0.0f, 0.0f));
     }
 
     void Entidade::setPosicao(sf::Vector2f posicao) {
@@ -24,10 +22,6 @@ namespace Entidade {
         return tam;
     }
 
-    void Entidade::setTamanho(sf::Vector2f tamanho) {
-        tam = tamanho;
-        corpo.setSize(tam);
-    }
 
     const sf::RectangleShape* Entidade::getCorpo() const {
         return &corpo;
@@ -36,9 +30,5 @@ namespace Entidade {
     void Entidade::desenhar() {
         pGGrafico->desenhaElemento(corpo);
     }
-    void Entidade::atualizar() {
-
-    }
-
 
 }
