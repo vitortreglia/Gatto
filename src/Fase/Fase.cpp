@@ -20,16 +20,22 @@ namespace Fase {
         listaPersonagens.addEntidade(objEntidade);
         objEntidade = nullptr;
         objEntidade = new Entidade::Personagem::Personagem(100.0f);
-        objEntidade->setPosicao(sf::Vector2f(0.0f, 100.0f));
+        objEntidade->setPosicao(sf::Vector2f(100.0f, 100.0f));
         listaPersonagens.addEntidade(objEntidade);
         objEntidade = nullptr;
         objEntidade = new Entidade::Obstaculo::Obstaculo();
+        listaPersonagens.addEntidade(objEntidade);
+        objEntidade = nullptr;
+        objEntidade = new Entidade::Obstaculo::Obstaculo();
+        objEntidade->setPosicao(sf::Vector2f(0.0f, 200.0f));
+        objEntidade->setTamanho(sf::Vector2f(200.0f, 100.0f));
         listaPersonagens.addEntidade(objEntidade);
     }
 
     void Fase::executar() {
         pGColisoes->executar();
         listaPersonagens.operator[](2)->atualizar();
+        listaPersonagens.operator[](3)->atualizar();
         listaPersonagens.operator[](0)->atualizar();
         listaPersonagens.operator[](1)->atualizar();
 

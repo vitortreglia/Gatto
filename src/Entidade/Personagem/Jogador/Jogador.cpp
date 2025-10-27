@@ -5,7 +5,7 @@
 namespace Entidade {
     namespace Personagem {
         Jogador::Jogador():
-        Personagem(400.0f) {
+        Personagem(1000.0f) {
             Gerenciador::GerenciadorEvento::setJogador(this);
         }
 
@@ -13,6 +13,14 @@ namespace Entidade {
         void Jogador::atualizar() {
             atualizarPos();
             desenhar();
+        }
+
+        void Jogador::pular() {
+            if (noChao) {
+                cout << "pulo" << endl;
+                velocidade.y = -0.3f;
+                estaNoChao(false);
+            }
         }
 
 

@@ -12,6 +12,7 @@ namespace Entidade {
             sf::Vector2f deltaS;
             bool esquerda;
             bool andando;
+            bool noChao;
             float dt;
         public:
             Personagem(float vel);
@@ -22,7 +23,9 @@ namespace Entidade {
             void parar();
             void calculaVelocidade();
             void atualizarPos();
-            void colisao(float overlap);
+            void atualizarPos(sf::Vector2f pos);
+            void estaNoChao(bool c);
+            void colisao(sf::Vector2f colisao);
             void desenhar();
             virtual void atualizar();
         };

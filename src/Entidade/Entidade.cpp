@@ -50,7 +50,7 @@ namespace Entidade {
         pGGrafico->desenhaElemento(corpo);
     }
 
-    void Entidade::colisao(float overlap) {
+    void Entidade::colisao(sf::Vector2f colisao) {
 
     }
 

@@ -15,8 +15,8 @@ namespace Gerenciador {
         ~GerenciadorEvento();
         static GerenciadorEvento* getGerenciadorEvento();
         static void setJogador(Entidade::Personagem::Jogador* pJ);
-        void verificaTeclaPressionada(sf::Keyboard::Key tecla);
-        void verificaTeclaSolta(sf::Keyboard::Key tecla);
+        void verificaTeclaPressionada();
+        void verificaTeclaSolta();
         void executar();
     };
 }

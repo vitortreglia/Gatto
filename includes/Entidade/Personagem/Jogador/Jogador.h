@@ -9,6 +9,7 @@ namespace Entidade {
         public:
             Jogador();
             ~Jogador();
+            void pular();
             void atualizar();
         };
     }

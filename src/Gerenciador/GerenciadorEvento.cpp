@@ -25,34 +25,36 @@ namespace Gerenciador {
         pJogador = pJ;
     }
 
-    void GerenciadorEvento::verificaTeclaPressionada(sf::Keyboard::Key tecla) {
-        if (tecla == sf::Keyboard::A) {
+    void GerenciadorEvento::verificaTeclaPressionada() {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             pJogador->andar(false);
-        } else if (tecla == sf::Keyboard::D) {
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             pJogador->andar(true);
+        } else {
+            pJogador->parar();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+            pJogador->pular();
         }
     }
 
-    void GerenciadorEvento::verificaTeclaSolta(sf::Keyboard::Key tecla) {
-        if (tecla == sf::Keyboard::A) {
+    void GerenciadorEvento::verificaTeclaSolta() {
+        /*if (sf::Keyboard::(sf::Keyboard::A)) {
             pJogador->parar();
         } else if (tecla == sf::Keyboard::D) {
             pJogador->parar();
-        }
+        }*/
+
     }
 
     void GerenciadorEvento::executar() {
         sf::Event evento;
         while (pGGrafico->getWindow()->pollEvent(evento)) {
-            if (evento.type == sf::Event::KeyPressed) {
-                verificaTeclaPressionada(evento.key.code);
-            } else if (evento.type == sf::Event::KeyReleased && evento.type != sf::Event::KeyPressed) {
-                verificaTeclaSolta(evento.key.code);
-            } else if (evento.type == sf::Event::Closed) {
+            if (evento.type == sf::Event::Closed) {
                 pGGrafico->fecharJanela();
-
             }
         }
+        verificaTeclaPressionada();
     }
 
 

@@ -19,7 +19,7 @@ namespace Entidade {
         std::vector<sf::Vector2f> getCoordenadas();
         virtual void desenhar();
         virtual void atualizar();
-        virtual void colisao(float overlap);
+        virtual void colisao(sf::Vector2f colisao);
     };
 }
 
