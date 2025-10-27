@@ -50,7 +50,7 @@ namespace Lista {
     }
 
     template<class TL>
-    void Lista<TL>::Elemento::setProx(Elemento<TL>* pProximo) {
+    void Lista<TL>::Elemento::setProx(Elemento* pProximo) {
         pProx = pProximo;
     }
 
@@ -100,7 +100,7 @@ namespace Lista {
                 anterior = atual;
                 atual = anterior->getProx();
             }
-            if (atual == pElem) {
+            if (atual->getElemento() == pElem) {
                 anterior->setProx(atual->getProx());
                 delete atual;
                 tam--;
@@ -149,9 +149,13 @@ namespace Lista {
         while (aux2) {
             aux1 = aux2;
             aux2 = aux1->getProx();
-            delete aux1->getElemento();
-            delete aux1;
+            if (aux1) {
+                delete (aux1->getElemento());
+                delete aux1;
+            }
         }
+        pPrimeiro = nullptr;
+        pUltimo = nullptr;
         tam = 0;
     }
 

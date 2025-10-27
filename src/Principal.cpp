@@ -2,10 +2,8 @@
 
 Principal::Principal():
 pGGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico()),
-pGEvento(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
-jog()
+pGEvento(Gerenciador::GerenciadorEvento::getGerenciadorEvento())
 {
-    pGEvento->setJogador(&jog);
     executar();
 }
 
@@ -14,10 +12,9 @@ Principal::~Principal() {}
 void Principal::executar() {
     while (pGGrafico->verificaJanelaAberta()) {
         pGGrafico->limpaJanela();
-        pGGrafico->desenhaElemento(sf::RectangleShape(sf::Vector2f(100.0f, 100.0f)));
-        jog.atualizar();
-        pGGrafico->mostraElementos();
         pGEvento->executar();
+        fase.executar();
+        pGGrafico->mostraElementos();
         pGGrafico->resetaRelogio();
     }
 }

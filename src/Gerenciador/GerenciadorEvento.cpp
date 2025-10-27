@@ -2,12 +2,17 @@
 
 namespace Gerenciador {
     GerenciadorEvento* GerenciadorEvento::pGEvento(nullptr);
-
+    Entidade::Personagem::Jogador* GerenciadorEvento::pJogador(nullptr);
 
     GerenciadorEvento::GerenciadorEvento():
-    pGGrafico(GerenciadorGrafico::getGerenciadorGrafico()),
-    pJogador(nullptr)
+    pGGrafico(GerenciadorGrafico::getGerenciadorGrafico())
     {}
+
+    GerenciadorEvento::~GerenciadorEvento() {
+        pGEvento = nullptr;
+        pJogador = nullptr;
+    }
+
 
     GerenciadorEvento* GerenciadorEvento::getGerenciadorEvento() {
         if (!pGEvento) {
@@ -41,10 +46,11 @@ namespace Gerenciador {
         while (pGGrafico->getWindow()->pollEvent(evento)) {
             if (evento.type == sf::Event::KeyPressed) {
                 verificaTeclaPressionada(evento.key.code);
-            } else if (evento.type == sf::Event::KeyReleased) {
+            } else if (evento.type == sf::Event::KeyReleased && evento.type != sf::Event::KeyPressed) {
                 verificaTeclaSolta(evento.key.code);
             } else if (evento.type == sf::Event::Closed) {
                 pGGrafico->fecharJanela();
+
             }
         }
     }

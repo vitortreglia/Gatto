@@ -2,6 +2,7 @@
 #define GERENCIADORGRAFICO_H
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include <iostream>
 
 #define TELA_X 800.0f

@@ -2,13 +2,17 @@
 
 namespace Entidade {
     namespace Personagem {
-        Personagem::Personagem(sf::Vector2f vel):
-        Entidade(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(100.0f, 100.0f)),
-        velocidade(vel),
+        Personagem::Personagem(float vel):
+        Entidade(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(400.0f, 100.0f)),
+        velocidade(sf::Vector2f(0.0f, 0.0f)),
+        vMax(sf::Vector2f(vel, 300.0f)),
+        aceleracao(sf::Vector2f(300.0f, 2000.0f)),
         esquerda(true),
         andando(false),
-        dt(0.0f)
-        {}
+        dt(0.0f),
+        deltaS(sf::Vector2f(0.0f, 0.0f)) {
+            corpo.setFillColor(sf::Color::Red);
+        }
 
         Personagem::~Personagem() {
             velocidade = sf::Vector2f(0.0f, 0.0f);
@@ -32,16 +36,40 @@ namespace Entidade {
             andando = false;
         }
 
-        void Personagem::atualizarPos() {
+        void Personagem::calculaVelocidade() {
             if (andando) {
-                dt = pGGrafico->getTempo();
-                sf::Vector2f ds;
-                esquerda ? ds.x = velocidade.x * dt : ds.x = velocidade.x * dt * -1;
-                ds.y = 0.0f;
-
-                setPosicao(sf::Vector2f(pos.x + ds.x, pos.y + ds.y));
+                esquerda ? velocidade.x += (aceleracao.x * dt * dt) / 2 : velocidade.x += -(aceleracao.x * dt * dt) / 2;
+            } else {
+                velocidade.x = 0.0;
             }
+            if (velocidade.x > vMax.x * dt) {
+                velocidade.x = vMax.x * dt;
+            } else if (velocidade.x < -vMax.x * dt) {
+                velocidade.x = -vMax.x * dt;
+            }
+            velocidade.y += ((aceleracao.y * dt * dt) / 2);
         }
+
+        void Personagem::atualizarPos() {
+            dt = pGGrafico->getTempo();
+            calculaVelocidade();
+            setPosicao(sf::Vector2f(getPosicao().x + velocidade.x, getPosicao().y + velocidade.y));
+        }
+
+        void Personagem::colisao(float overlap) {
+            velocidade.y = 0.0f - (overlap * dt) / 2;
+            atualizarPos();
+        }
+
+        void Personagem::desenhar() {
+            Entidade::desenhar();
+        }
+
+        void Personagem::atualizar() {
+            atualizarPos();
+            Entidade::atualizar();
+        }
+
 
     }
 }

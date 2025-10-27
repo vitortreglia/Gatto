@@ -6,7 +6,6 @@ namespace Lista {
     {}
 
     ListaEntidades::~ListaEntidades() {
-        limparLista();
     }
 
     void ListaEntidades::addEntidade(Entidade::Entidade *pEntidade) {
