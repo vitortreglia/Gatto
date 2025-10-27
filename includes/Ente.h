@@ -6,12 +6,14 @@
 
 class Ente {
 protected:
-    IDs::IDs ID;
+    IDs::IDs ID; //identificacao do ente
     static Gerenciador::GerenciadorGrafico* pGGrafico;
 public:
     Ente(IDs::IDs id);
     virtual ~Ente();
+    const IDs::IDs getId() const;
     virtual void desenhar() = 0;
+    virtual void atualizar() = 0;
 };
 
 

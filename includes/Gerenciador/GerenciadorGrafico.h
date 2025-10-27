@@ -2,6 +2,7 @@
 #define GERENCIADORGRAFICO_H
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include <iostream>
 
 #define TELA_X 800.0f
@@ -13,18 +14,22 @@ namespace Gerenciador {
     class GerenciadorGrafico {
     private:
         sf::RenderWindow* window;
+        sf::Clock relogio;
+        float tempo;
         static GerenciadorGrafico* pGGrafico;
     private:
         GerenciadorGrafico();
     public:
         ~GerenciadorGrafico();
         const bool verificaJanelaAberta();
-        GerenciadorGrafico* getGerenciadorGrafico();
+        static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
         void desenhaElemento(sf::RectangleShape corpo);
         void mostraElementos();
         void fecharJanela();
         void limpaJanela();
+        float getTempo();
+        void resetaRelogio();
     };
 }
 

@@ -1,7 +1,8 @@
 #include "Principal.h"
 
 Principal::Principal():
-pGGrafico(pGGrafico->getGerenciadorGrafico())
+pGGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico()),
+pGEvento(Gerenciador::GerenciadorEvento::getGerenciadorEvento())
 {
     executar();
 }
@@ -10,14 +11,11 @@ Principal::~Principal() {}
 
 void Principal::executar() {
     while (pGGrafico->verificaJanelaAberta()) {
-        sf::Event event;
-        while (pGGrafico->getWindow()->pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                pGGrafico->fecharJanela();
-            }
-        }
         pGGrafico->limpaJanela();
+        pGEvento->executar();
+        fase.executar();
         pGGrafico->mostraElementos();
+        pGGrafico->resetaRelogio();
     }
 }
 
