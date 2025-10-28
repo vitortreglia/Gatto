@@ -6,3 +6,4 @@ cmake-build-debug/
 .DS_Store
 notas.cpp
 /bin/
+/SFML-2.6.2/
