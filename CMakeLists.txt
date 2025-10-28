@@ -58,7 +58,7 @@ set_target_properties(Gatto PROPERTIES
 if(WIN32)
     add_custom_command(TARGET Gatto POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${SFML_DIR}/../../bin"
+            "${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.6.2/bin"
             "$<TARGET_FILE_DIR:Gatto>"
     )
 endif()
