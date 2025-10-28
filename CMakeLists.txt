@@ -17,7 +17,7 @@ elseif(WIN32)
     # Caminho onde a SFML foi extraída no Windows
     # (ajuste se necessário)
     set(SFML_STATIC_LIBRARIES FALSE)
-    set(SFML_DIR "C:/Libraries/SFML-2.6.2/lib/cmake/SFML")
+    set(SFML_DIR "${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.6.2/lib/cmake/SFML")
 endif()
 
 # --- Encontra a SFML ---
