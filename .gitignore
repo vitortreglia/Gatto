@@ -10,3 +10,4 @@ CMakeLists.txt
 notas.cpp
 /bin/
 *.txt
+/SFML-2.6.2/
