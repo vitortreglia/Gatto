@@ -1,4 +1,4 @@
-#include "Gerenciador/GerenciadorColisoes.h"
+ #include "Gerenciador/GerenciadorColisoes.h"
 
 namespace Gerenciador {
     GerenciadorColisoes::GerenciadorColisoes(Lista::ListaEntidades *pLPersonagens) {
