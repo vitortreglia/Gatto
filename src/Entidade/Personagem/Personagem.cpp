@@ -52,14 +52,14 @@ namespace Entidade {
             //velocidade.y = vMax.y * dt;
         }
 
-        void Personagem::mover() {
+        void Personagem::atualizarPos() {
             dt = pGGrafico->getTempo();
             //cout << velocidade.x << endl;
             setPosicao(sf::Vector2f(getPosicao().x + velocidade.x, getPosicao().y + velocidade.y));
             calculaVelocidade();
         }
 
-        void Personagem::mover(sf::Vector2f pos) {
+        void Personagem::atualizarPos(sf::Vector2f pos) {
             setPosicao(sf::Vector2f(pos.x, pos.y));
         }
 
@@ -88,7 +88,7 @@ namespace Entidade {
             }
             colisao.x += getPosicao().x;
             colisao.y += getPosicao().y;
-            mover(colisao);
+            atualizarPos(colisao);
         }
 
 

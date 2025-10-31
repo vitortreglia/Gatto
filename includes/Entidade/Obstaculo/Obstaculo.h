@@ -10,6 +10,7 @@ namespace Entidade {
         public:
             Obstaculo();
             ~Obstaculo();
+            //virtual void obstaculizar() = 0;
             virtual void executar();
             virtual void colisao();
         };

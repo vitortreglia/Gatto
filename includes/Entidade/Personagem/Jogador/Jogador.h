@@ -10,6 +10,7 @@ namespace Entidade {
             Jogador();
             ~Jogador();
             void pular();
+            void mover();
             void executar();
         };
     }

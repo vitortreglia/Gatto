@@ -22,10 +22,11 @@ namespace Entidade {
             void andar(const bool esq);
             void parar();
             void calculaVelocidade();
-            void mover(sf::Vector2f pos);
+            void atualizarPos(sf::Vector2f pos);
+            void atualizarPos();
             void estaNoChao(bool c);
             void colisao(sf::Vector2f colisao);
-            virtual void mover();
+            virtual void mover() = 0;
             virtual void executar() = 0;
         };
     }
