@@ -8,8 +8,8 @@ namespace Lista {
     ListaEntidades::~ListaEntidades() {
     }
 
-    void ListaEntidades::addEntidade(Entidade::Entidade *pEntidade) {
-        LEs.novoElemento(pEntidade);
+    void ListaEntidades::incluir(Entidade::Entidade *pEntidade) {
+        LEs.incluir(pEntidade);
     }
 
     void ListaEntidades::apagarEntidade(Entidade::Entidade *pEntidade) {
@@ -25,7 +25,7 @@ namespace Lista {
     }
 
     void ListaEntidades::limparLista() {
-        LEs.limparLista();
+        LEs.limpar();
     }
     Entidade::Entidade *ListaEntidades::operator[](unsigned int pos) {
         return LEs.operator[](pos);

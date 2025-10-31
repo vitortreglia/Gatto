@@ -3,11 +3,11 @@
 namespace Entidade {
     namespace Personagem {
         Personagem::Personagem(float vel):
-        Entidade(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(400.0f, 300.0f)),
+        Entidade(sf::Vector2f(100.0f, 100.0f), 400.0f, 200.0f),
         velocidade(sf::Vector2f(0.0f, 0.0f)),
         vMax(sf::Vector2f(vel, 1000.0f)),
         aceleracao(sf::Vector2f(2000.0f, 10000.0f)),
-        esquerda(true),
+        direita(true),
         andando(false),
         noChao(false),
         dt(0.0f),
@@ -29,7 +29,7 @@ namespace Entidade {
         }
 
         void Personagem::andar(const bool esq) {
-            esquerda = esq;
+            direita = esq;
             andando = true;
         }
 
@@ -39,7 +39,7 @@ namespace Entidade {
 
         void Personagem::calculaVelocidade() {
             if (andando) {
-                esquerda ? velocidade.x += (aceleracao.x * dt * dt) / 2 : velocidade.x += -(aceleracao.x * dt * dt) / 2;
+                direita ? velocidade.x += (aceleracao.x * dt * dt) / 2 : velocidade.x += -(aceleracao.x * dt * dt) / 2;
             } else {
                 velocidade.x = 0.0f;
             }
@@ -52,14 +52,14 @@ namespace Entidade {
             //velocidade.y = vMax.y * dt;
         }
 
-        void Personagem::atualizarPos() {
+        void Personagem::mover() {
             dt = pGGrafico->getTempo();
             //cout << velocidade.x << endl;
             setPosicao(sf::Vector2f(getPosicao().x + velocidade.x, getPosicao().y + velocidade.y));
             calculaVelocidade();
         }
 
-        void Personagem::atualizarPos(sf::Vector2f pos) {
+        void Personagem::mover(sf::Vector2f pos) {
             setPosicao(sf::Vector2f(pos.x, pos.y));
         }
 
@@ -69,6 +69,7 @@ namespace Entidade {
 
 
         void Personagem::colisao(sf::Vector2f colisao) {
+            cout << colisao.x << " " << colisao.y << endl;
             if (colisao.y != 0.0f) {
                 if (colisao.y < 0.0f) {
                     estaNoChao(true);
@@ -87,16 +88,7 @@ namespace Entidade {
             }
             colisao.x += getPosicao().x;
             colisao.y += getPosicao().y;
-            atualizarPos(colisao);
-        }
-
-        void Personagem::desenhar() {
-            Entidade::desenhar();
-        }
-
-        void Personagem::atualizar() {
-            atualizarPos();
-            Entidade::atualizar();
+            mover(colisao);
         }
 
 

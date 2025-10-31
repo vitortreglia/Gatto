@@ -10,7 +10,7 @@ namespace Entidade {
             sf::Vector2f vMax;
             sf::Vector2f aceleracao;
             sf::Vector2f deltaS;
-            bool esquerda;
+            bool direita;
             bool andando;
             bool noChao;
             float dt;
@@ -22,12 +22,11 @@ namespace Entidade {
             void andar(const bool esq);
             void parar();
             void calculaVelocidade();
-            void atualizarPos();
-            void atualizarPos(sf::Vector2f pos);
+            void mover(sf::Vector2f pos);
             void estaNoChao(bool c);
             void colisao(sf::Vector2f colisao);
-            void desenhar();
-            virtual void atualizar();
+            virtual void mover();
+            virtual void executar() = 0;
         };
     }
 }

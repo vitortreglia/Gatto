@@ -31,7 +31,7 @@ namespace Gerenciador {
         return window;
     }
 
-    void GerenciadorGrafico::desenhaElemento(sf::RectangleShape corpo) {
+    void GerenciadorGrafico::desenharEnte(sf::RectangleShape corpo) {
         window->draw(corpo);
     }
 

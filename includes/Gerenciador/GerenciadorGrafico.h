@@ -24,7 +24,7 @@ namespace Gerenciador {
         const bool verificaJanelaAberta();
         static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
-        void desenhaElemento(sf::RectangleShape corpo);
+        void desenharEnte(sf::RectangleShape corpo);
         void mostraElementos();
         void fecharJanela();
         void limpaJanela();

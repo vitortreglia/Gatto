@@ -16,7 +16,7 @@ namespace Gerenciador {
         sf::Vector2f calculaNormal(const sf::Vector2f& vertice1, const sf::Vector2f& vertice2);
         vector<pair<float, float>> calculaProjecao(const vector<sf::Vector2f>& vertices, const vector<sf::Vector2f>& normal);
         sf::Vector2f calculaSobreposicao(vector<sf::Vector2f> coordCorpo1, vector<sf::Vector2f> coordCorpo2);
-        sf::Vector2f calcularColisao(Entidade::Entidade* corpo1, Entidade::Entidade* corpo2);
+        sf::Vector2f verificarColisao(Entidade::Entidade* corpo1, Entidade::Entidade* corpo2);
         void executar();
     };
 }

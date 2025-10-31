@@ -13,7 +13,7 @@ public:
     virtual ~Ente();
     const IDs::IDs getId() const;
     virtual void desenhar() = 0;
-    virtual void atualizar() = 0;
+    virtual void executar() = 0;
 };
 
 

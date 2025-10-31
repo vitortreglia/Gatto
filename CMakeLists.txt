@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 if(APPLE)
     message(STATUS "Configurando para macOS...")
 
-    # Caminho padrão da SFML instalada via Homebrew abbbbbb
+    # Caminho padrão da SFML instalada via Homebrew
     set(SFML_STATIC_LIBRARIES FALSE)
     set(SFML_DIR "/opt/homebrew/opt/sfml@2/lib/cmake/SFML")
 
@@ -30,7 +30,11 @@ file(GLOB_RECURSE SOURCES
 )
 
 # --- Cria o executável ---
-add_executable(Gatto ${SOURCES})
+add_executable(Gatto ${SOURCES}
+        src/Entidade/Obstaculo/Plataforma.cpp
+        includes/Entidade/Obstaculo/Plataforma.h
+        src/Entidade/Obstaculo/ObstaculoMedio.cpp
+        includes/Entidade/Obstaculo/ObstaculoMedio.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE

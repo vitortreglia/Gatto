@@ -10,14 +10,15 @@ namespace Entidade {
         }
 
         Jogador::~Jogador() {}
-        void Jogador::atualizar() {
-            atualizarPos();
+
+        void Jogador::executar() {
+            mover();
             desenhar();
         }
 
         void Jogador::pular() {
             if (noChao) {
-                velocidade.y = -0.3f;
+                velocidade.y = -0.35f;
                 estaNoChao(false);
             }
         }

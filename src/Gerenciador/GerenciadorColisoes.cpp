@@ -71,7 +71,7 @@ namespace Gerenciador {
     }
 
 
-    sf::Vector2f GerenciadorColisoes::calcularColisao(Entidade::Entidade* corpo1, Entidade::Entidade* corpo2) {
+    sf::Vector2f GerenciadorColisoes::verificarColisao(Entidade::Entidade* corpo1, Entidade::Entidade* corpo2) {
         vector<sf::Vector2f> coordCorpo1 = corpo1->getCoordenadas();
         vector<sf::Vector2f> coordCorpo2 = corpo2->getCoordenadas();
 
@@ -84,27 +84,27 @@ namespace Gerenciador {
 
         obj1 = pListaPersonagens->operator[](0);
         obj2 = pListaPersonagens->operator[](2);
-        sf::Vector2f colisao = calcularColisao(obj1, obj2);
+        sf::Vector2f colisao = verificarColisao(obj1, obj2);
         if (colisao.x != 0.0f || colisao.y != 0.0f) {
             obj1->colisao(colisao);
         }
 
-        obj1 = pListaPersonagens->operator[](1);
+        /*obj1 = pListaPersonagens->operator[](1);
         colisao = calcularColisao(obj1, obj2);
         if (colisao.x != 0.0f || colisao.y != 0.0f) {
             obj1->colisao(colisao);
 
-        }
+        }*/
 
-        obj1 = pListaPersonagens->operator[](0);
+        /*obj1 = pListaPersonagens->operator[](0);
         obj2 = pListaPersonagens->operator[](1);
         colisao = calcularColisao(obj1, obj2);
         if (colisao.x != 0.0f || colisao.y != 0.0f) {
             obj1->colisao(colisao);
-        }
+        }*/
         obj1 = pListaPersonagens->operator[](0);
-        obj2 = pListaPersonagens->operator[](3);
-        colisao = calcularColisao(obj1, obj2);
+        obj2 = pListaPersonagens->operator[](1);
+        colisao = verificarColisao(obj1, obj2);
         if (colisao.x != 0.0f || colisao.y != 0.0f) {
             obj1->colisao(colisao);
         }
