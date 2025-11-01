@@ -68,21 +68,20 @@ namespace Entidade {
 
 
         void Personagem::colisao(sf::Vector2f colisao) {
-            if (colisao.y != 0.0f) {
-                if (colisao.y < 0.0f) {
-                    estaNoChao(true);
-                }
+            if (colisao.y < 0.0f) {
+                estaNoChao(true);
                 if (colisao.x != 0.0f) {
                     float tg;
                     tg = colisao.x / colisao.y;
-                    if (tg >= -1 && tg <= 1 && noChao == true && velocidade.y > 0.0f) {
+                    if (tg >= -1 && tg <= 1 && velocidade.y > 0.0f) {
                         velocidade.y = 0.0f;
                     }
                 } else {
                     velocidade.y = 0.0f;
                 }
-            } else if (colisao.x != 0.0f) {
-
+            } else if (colisao.y > 0.0f) {
+                velocidade.y = velocidade.y * -1;
+            } else if (colisao.x > 0.01f || colisao.x < 0.01f) {
                 velocidade.x = 0.0f;
             }
             colisao.x += getPosicao().x;

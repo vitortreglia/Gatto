@@ -10,6 +10,7 @@ namespace Entidade {
         somaTempo(0.0f)
         {
             posInicial = {x, y};
+            corpo.setFillColor(sf::Color::Magenta);
         }
 
         PlataformaGiratoria::~PlataformaGiratoria() {}
@@ -31,8 +32,6 @@ namespace Entidade {
                 angulo = 0.0f;
                 somaTempo = 0.0f;
             }
-
-
         }
 
         void PlataformaGiratoria::executar() {

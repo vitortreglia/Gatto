@@ -8,13 +8,14 @@ namespace Entidade {
         tempoMax(4.0f),
         somaTempo(0.0f),
         direcao(false),
-        somaMovimento(0.0f)
-        {}
+        somaMovimento(0.0f) {
+            corpo.setFillColor(sf::Color::Green);
+        }
 
         PlataformaMovel::~PlataformaMovel() {}
 
         void PlataformaMovel::mover() {
-            float ds = 300 * tempoFrame;
+            float ds = 200 * tempoFrame;
             if (ds > movimentoMax - somaMovimento)
                 ds = movimentoMax - somaMovimento;
             if (!direcao)

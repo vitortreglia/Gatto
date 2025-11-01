@@ -31,7 +31,7 @@ namespace Fase {
 
 
     void FaseJardim::criarFaseTorre() {
-        ifstream arquivo("FaseJardim.dat");
+        ifstream arquivo("Data/Fases/FaseJardim.dat");
         int espaco = 0;
         float x = 0.0f;
         float y = 100.0f;

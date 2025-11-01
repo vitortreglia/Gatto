@@ -7,7 +7,7 @@ namespace Gerenciador {
     GerenciadorGrafico::GerenciadorGrafico():
     window(new sf::RenderWindow(sf::VideoMode(TELA_X, TELA_Y), "Gatto")),
     camera(sf::FloatRect(0, 0, 1280, 720)),
-    limitesCamera({0.0f, 0.0f, 3000.0f, 2000.0f}),
+    limitesCamera({0.0f, 0.0f, 3300.0f, 2000.0f}),
     cameraX(TELA_X/2),
     cameraY(TELA_Y/2)
     {
