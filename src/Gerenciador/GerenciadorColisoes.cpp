@@ -83,16 +83,13 @@ namespace Gerenciador {
         Entidade::Entidade* obj2 = nullptr;
 
         obj1 = pListaPersonagens->operator[](0);
-        obj2 = pListaPersonagens->operator[](1);
-        sf::Vector2f colisao = verificarColisao(obj1, obj2);
-        if (colisao.x != 0.0f || colisao.y != 0.0f) {
-            obj1->colisao(colisao);
-        }
-        obj1 = pListaPersonagens->operator[](0);
-        obj2 = pListaPersonagens->operator[](2);
-        colisao = verificarColisao(obj1, obj2);
-        if (colisao.x != 0.0f || colisao.y != 0.0f) {
-            obj1->colisao(colisao);
+        sf::Vector2f colisao;
+        for (int i = 1; i < pListaPersonagens->getTam(); i++) {
+            obj2 = pListaPersonagens->operator[](i);
+            colisao = verificarColisao(obj1, obj2);
+            if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                obj1->colisao(colisao);
+            }
         }
     }
 

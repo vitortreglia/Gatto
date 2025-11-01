@@ -14,7 +14,7 @@ namespace Entidade {
             bool direcao;
 
         public:
-            PlataformaMovel(sf::Vector2f tam, float x, float y, float totalMovimento);
+            PlataformaMovel(float x = 100, float y = 100);
             ~PlataformaMovel();
             void mover();
             void executar();

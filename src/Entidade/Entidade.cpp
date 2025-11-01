@@ -1,4 +1,4 @@
-#include "../../includes/Entidade/Entidade.h"
+#include "Entidade/Entidade.h"
 #include <vector>
 #include <iostream>
 namespace Entidade {

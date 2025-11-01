@@ -39,8 +39,8 @@ add_executable(Gatto ${SOURCES}
         includes/Entidade/Obstaculo/PlataformaMovel.h
         src/Entidade/Obstaculo/PlataformaGiratoria.cpp
         includes/Entidade/Obstaculo/PlataformaGiratoria.h
-        src/Fase/Torre.cpp
-        includes/Fase/Torre.h)
+        src/Fase/FaseJardim.cpp
+        includes/Fase/FaseJardim.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE

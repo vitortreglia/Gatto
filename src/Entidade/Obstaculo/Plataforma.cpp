@@ -1,8 +1,8 @@
 #include "Entidade/Obstaculo/Plataforma.h"
 namespace Entidade {
     namespace Obstaculo {
-        Plataforma::Plataforma(sf::Vector2f tam, float x, float y):
-        Obstaculo(false, tam, x, y) {
+        Plataforma::Plataforma(float x, float y):
+        Obstaculo(false, sf::Vector2f(100,50), x, y) {
             corpo.setFillColor(sf::Color::Blue);
         }
 

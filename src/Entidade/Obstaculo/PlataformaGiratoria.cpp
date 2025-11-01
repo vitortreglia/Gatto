@@ -2,9 +2,9 @@
 
 namespace Entidade {
     namespace Obstaculo {
-        PlataformaGiratoria::PlataformaGiratoria(sf::Vector2f tam, float x, float y, float velGiro):
-        Obstaculo(false, tam, x, y),
-        velocidadeGiro(velGiro),
+        PlataformaGiratoria::PlataformaGiratoria(float x, float y):
+        Obstaculo(false, sf::Vector2f(200, 50), x, y),
+        velocidadeGiro(100),
         angulo(0.0001f),
         tempoMax(3.0f),
         somaTempo(0.0f)

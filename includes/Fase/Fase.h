@@ -2,6 +2,8 @@
 #define FASE_H
 #include "Gerenciador/GerenciadorColisoes.h"
 #include "Lista/ListaEntidades.h"
+#include <fstream>
+#include <string>
 
 namespace Fase {
     class Fase {
@@ -14,7 +16,7 @@ namespace Fase {
         void executar();
     protected:
         void criarFase();
-        void criarPlataformas();
+        void criarPlataforma(float x, float y);
         void criarCenario();
         //virtual void criarObstaculo() = 0;
     };

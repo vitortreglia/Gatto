@@ -13,7 +13,7 @@ namespace Entidade {
             float somaTempo;
             sf::Vector2f posInicial;
         public:
-            PlataformaGiratoria(sf::Vector2f tam, float x, float y, float velGiro);
+            PlataformaGiratoria(float x, float y);
             ~PlataformaGiratoria();
             void girar();
             void executar();

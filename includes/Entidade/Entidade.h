@@ -17,7 +17,7 @@ namespace Entidade {
         const sf::Vector2f getPosicao() const;
         void setTamanho(sf::Vector2f tamanho);
         const sf::Vector2f getTamanho() const;
-        std::vector<sf::Vector2f> getCoordenadas();
+        vector<sf::Vector2f> getCoordenadas();
         static void getTempoFrame();
         virtual void desenhar();
         virtual void executar() = 0;
