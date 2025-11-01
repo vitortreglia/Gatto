@@ -5,8 +5,8 @@ namespace Entidade {
         Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas):
         Entidade(tam, px, py),
         velocidade(sf::Vector2f(0.0f, 0.0f)),
-        vMax(sf::Vector2f(vel, 1000.0f)),
-        aceleracao(sf::Vector2f(2000.0f, 10000.0f)),
+        vMax(sf::Vector2f(vel, 500.0f)),
+        aceleracao(sf::Vector2f(1.0f, 1.0f)),
         direita(true),
         andando(false),
         noChao(false),
@@ -39,16 +39,17 @@ namespace Entidade {
 
         void Personagem::calculaVelocidade() {
             if (andando) {
-                direita ? velocidade.x += (aceleracao.x * tempoFrame * tempoFrame) / 2 : velocidade.x += -(aceleracao.x * tempoFrame * tempoFrame) / 2;
+                direita ? velocidade.x += (aceleracao.x * tempoFrame) : velocidade.x += -(aceleracao.x * tempoFrame);
+
             } else {
                 velocidade.x = 0.0f;
             }
             if (velocidade.x > vMax.x * tempoFrame) {
                 velocidade.x = vMax.x * tempoFrame;
-            } else if (velocidade.x < -vMax.x * tempoFrame) {
-                velocidade.x = -vMax.x * tempoFrame;
+            } else if (velocidade.x < -(vMax.x * tempoFrame)) {
+                velocidade.x = -(vMax.x * tempoFrame);
             }
-            velocidade.y += ((aceleracao.y * tempoFrame * tempoFrame) / 2);
+            velocidade.y += aceleracao.y * tempoFrame;
             //velocidade.y = vMax.y * dt;
         }
 
@@ -81,7 +82,8 @@ namespace Entidade {
                     velocidade.y = 0.0f;
                 }
             } else if (colisao.x != 0.0f) {
-                 velocidade.x = 0.0f;
+
+                velocidade.x = 0.0f;
             }
             colisao.x += getPosicao().x;
             colisao.y += getPosicao().y;

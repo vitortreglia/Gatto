@@ -5,7 +5,7 @@
 namespace Entidade {
     namespace Personagem {
         Jogador::Jogador():
-        Personagem(1000.0f, sf::Vector2f(100, 100), 100, 1200, 7),
+        Personagem(1000.0f, sf::Vector2f(100, 100), 100, 1300, 7),
         podePular(true)
         {
             Gerenciador::GerenciadorEvento::setJogador(this);
@@ -29,6 +29,7 @@ namespace Entidade {
                 velocidade.y = -0.4f;
                 estaNoChao(false);
                 podePular = false;
+                cout << "pulo" << endl;
             }
         }
 
