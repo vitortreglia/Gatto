@@ -35,6 +35,8 @@ namespace Gerenciador {
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             pJogador->pular();
+        } else {
+            pJogador->liberaPulo();
         }
     }
 

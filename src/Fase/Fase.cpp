@@ -30,9 +30,9 @@ namespace Fase {
     }
 
     void Fase::executar() {
-        pGColisoes->executar();
         Entidade::Entidade::getTempoFrame();
         listaEnt.percorrer();
+        pGColisoes->executar();
 
     }
 

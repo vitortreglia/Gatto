@@ -5,7 +5,9 @@
 namespace Entidade {
     namespace Personagem {
         Jogador::Jogador():
-        Personagem(1000.0f, sf::Vector2f(100, 100), 100, 1300, 7) {
+        Personagem(1000.0f, sf::Vector2f(100, 100), 100, 1200, 7),
+        podePular(true)
+        {
             Gerenciador::GerenciadorEvento::setJogador(this);
         }
 
@@ -17,10 +19,16 @@ namespace Entidade {
             desenhar();
         }
 
+        void Jogador::liberaPulo() {
+            podePular = true;
+        }
+
+
         void Jogador::pular() {
-            if (noChao) {
-                velocidade.y = -0.5f;
+            if (noChao && podePular) {
+                velocidade.y = -0.4f;
                 estaNoChao(false);
+                podePular = false;
             }
         }
 
