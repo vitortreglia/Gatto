@@ -1,7 +1,9 @@
-#include "../../includes/Entidade/Entidade.h"
+#include "Entidade/Entidade.h"
 #include <vector>
 #include <iostream>
 namespace Entidade {
+    float Entidade::tempoFrame(0.0f);
+
     Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy):
     Ente(IDs::IDs::jogador),
     x(posx),
@@ -39,13 +41,16 @@ namespace Entidade {
 
     std::vector<sf::Vector2f> Entidade::getCoordenadas() {
         std::vector<sf::Vector2f> coordenadas(4);
-        std::vector<int> oi = {1, 2, 3, 4};
         for (int i = 0; i < 4; i++) {
             sf::Vector2f c = corpo.getTransform().transformPoint(corpo.getPoint(i));
             coordenadas[i].x = c.x;
             coordenadas[i].y = c.y;
         }
         return coordenadas;
+    }
+
+    void Entidade::getTempoFrame() {
+        tempoFrame = pGGrafico->getTempo();
     }
 
 

@@ -12,6 +12,14 @@ namespace Lista {
         LEs.incluir(pEntidade);
     }
 
+    void ListaEntidades::percorrer() {
+        int tam = LEs.getTam();
+        for (int i = 0; i < tam; i++) {
+            LEs[i]->executar();
+        }
+    }
+
+
     void ListaEntidades::apagarEntidade(Entidade::Entidade *pEntidade) {
         LEs.apagarElemento(pEntidade);
     }

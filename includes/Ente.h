@@ -2,7 +2,7 @@
 #define ENTE_H
 #include "IDs.h"
 #include "Gerenciador/GerenciadorGrafico.h"
-
+using namespace std;
 
 class Ente {
 protected:

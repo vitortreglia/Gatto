@@ -6,16 +6,16 @@ namespace Entidade {
     namespace Personagem {
         class Personagem : public Entidade {
         protected:
+            int numVidas;
+            bool vivo;
             sf::Vector2f velocidade;
             sf::Vector2f vMax;
             sf::Vector2f aceleracao;
-            sf::Vector2f deltaS;
             bool direita;
             bool andando;
             bool noChao;
-            float dt;
         public:
-            Personagem(float vel);
+            Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas);
             virtual ~Personagem();
             void setVel(sf::Vector2f vel);
             sf::Vector2f getVel();
@@ -26,6 +26,7 @@ namespace Entidade {
             void atualizarPos();
             void estaNoChao(bool c);
             void colisao(sf::Vector2f colisao);
+            virtual void verificaVidas() = 0;
             virtual void mover() = 0;
             virtual void executar() = 0;
         };
