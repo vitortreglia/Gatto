@@ -17,7 +17,7 @@ namespace Entidade {
 
         void Jogador::pular() {
             if (noChao) {
-                velocidade.y = -0.3f;
+                velocidade.y = -0.35f;
                 estaNoChao(false);
             }
         }
