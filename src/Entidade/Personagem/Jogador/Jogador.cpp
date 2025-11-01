@@ -10,7 +10,8 @@ namespace Entidade {
         }
 
         Jogador::~Jogador() {}
-        void Jogador::atualizar() {
+
+        void Jogador::executar() {
             atualizarPos();
             desenhar();
         }
@@ -20,6 +21,10 @@ namespace Entidade {
                 velocidade.y = -0.35f;
                 estaNoChao(false);
             }
+        }
+
+        void Jogador::mover() {
+
         }
 
 

@@ -2,11 +2,13 @@
 #include <vector>
 #include <iostream>
 namespace Entidade {
-    Entidade::Entidade(sf::Vector2f tamanho, sf::Vector2f posicao):
+    Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy):
     Ente(IDs::IDs::jogador),
+    x(posx),
+    y(posy),
+    tam(tamanho),
     corpo(tamanho) {
-        tam = tamanho;
-        setPosicao(posicao);
+        setPosicao(sf::Vector2f(x, y));
         corpo.setFillColor(sf::Color::Blue);
     }
 
@@ -20,8 +22,9 @@ namespace Entidade {
 
 
     void Entidade::setPosicao(sf::Vector2f posicao) {
-        pos = posicao;
-        corpo.setPosition(pos);
+        x = posicao.x;
+        y = posicao.y;
+        corpo.setPosition(x, y);
     }
 
     void Entidade::setTamanho(sf::Vector2f tamanho) {
@@ -47,15 +50,11 @@ namespace Entidade {
 
 
     void Entidade::desenhar() {
-        pGGrafico->desenhaElemento(corpo);
+        pGGrafico->desenharEnte(corpo);
     }
 
     void Entidade::colisao(sf::Vector2f colisao) {
 
-    }
-
-    void Entidade::atualizar() {
-        desenhar();
     }
 
 }

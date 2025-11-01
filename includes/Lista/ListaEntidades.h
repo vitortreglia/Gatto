@@ -10,7 +10,8 @@ namespace Lista {
     public:
         ListaEntidades();
         ~ListaEntidades();
-        void addEntidade(Entidade::Entidade* pEntidade);
+        void incluir(Entidade::Entidade* pEntidade);
+        void percorrer();
         void apagarEntidade(Entidade::Entidade* pEntidade);
         void apagarEntidade(unsigned int pos);
         unsigned int getTam() const;

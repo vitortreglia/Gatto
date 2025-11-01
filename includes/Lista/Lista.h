@@ -11,7 +11,7 @@ namespace Lista {
         public:
             Elemento();
             ~Elemento();
-            void setElemento(TL* pElem);
+            void incluir(TL* pElem);
             TL* getElemento();
             void setProx(Elemento* pProximo);
             Elemento* getProx();
@@ -22,11 +22,11 @@ namespace Lista {
     public:
         Lista();
         ~Lista();
-        void novoElemento(TL* pElem);
+        void incluir(TL* pElem);
         void apagarElemento(TL* pElem);
         void apagarElemento(unsigned int pos);
         unsigned int getTam() const;
-        void limparLista();
+        void limpar();
         TL* operator[](unsigned int pos);
     };
 
@@ -40,7 +40,7 @@ namespace Lista {
     Lista<TL>::Elemento::~Elemento() {}
 
     template<class TL>
-    void Lista<TL>::Elemento::setElemento(TL* pElem) {
+    void Lista<TL>::Elemento::incluir(TL* pElem) {
         pInfo = pElem;
     }
 
@@ -68,22 +68,22 @@ namespace Lista {
 
     template<class TL>
     Lista<TL>::~Lista() {
-        Lista<TL>::limparLista();
+        Lista<TL>::limpar();
     }
 
     template<class TL>
-    void Lista<TL>::novoElemento(TL *pElem) {
+    void Lista<TL>::incluir(TL *pElem) {
         if (pElem) {
             if (!pPrimeiro) {
                 pPrimeiro = new Elemento();
                 if (pPrimeiro) {
-                    pPrimeiro->setElemento(pElem);
+                    pPrimeiro->incluir(pElem);
                     pUltimo = pPrimeiro;
                     tam++;
                 }
             } else {
                 Elemento* aux = new Elemento();
-                aux->setElemento(pElem);
+                aux->incluir(pElem);
                 pUltimo->setProx(aux);
                 pUltimo = aux;
                 tam++;
@@ -143,7 +143,7 @@ namespace Lista {
     }
 
     template<class TL>
-    void Lista<TL>::limparLista() {
+    void Lista<TL>::limpar() {
         Elemento* aux1 = nullptr;
         Elemento* aux2 = pPrimeiro;
         while (aux2) {
