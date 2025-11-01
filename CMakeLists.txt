@@ -34,7 +34,13 @@ add_executable(Gatto ${SOURCES}
         src/Entidade/Obstaculo/Plataforma.cpp
         includes/Entidade/Obstaculo/Plataforma.h
         src/Entidade/Obstaculo/ObstaculoMedio.cpp
-        includes/Entidade/Obstaculo/ObstaculoMedio.h)
+        includes/Entidade/Obstaculo/ObstaculoMedio.h
+        src/Entidade/Obstaculo/PlataformaMovel.cpp
+        includes/Entidade/Obstaculo/PlataformaMovel.h
+        src/Entidade/Obstaculo/PlataformaGiratoria.cpp
+        includes/Entidade/Obstaculo/PlataformaGiratoria.h
+        src/Fase/Torre.cpp
+        includes/Fase/Torre.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE

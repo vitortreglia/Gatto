@@ -6,13 +6,17 @@
 namespace Fase {
     class Fase {
     protected:
-        Lista::ListaEntidades listaPersonagens;
+        Lista::ListaEntidades listaEnt;
         Gerenciador::GerenciadorColisoes* pGColisoes;
     public:
         Fase();
         ~Fase();
-        void criarFase();
         void executar();
+    protected:
+        void criarFase();
+        void criarPlataformas();
+        void criarCenario();
+        //virtual void criarObstaculo() = 0;
     };
 }
 #endif //FASE_H

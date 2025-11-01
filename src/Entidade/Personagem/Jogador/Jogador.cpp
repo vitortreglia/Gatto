@@ -5,7 +5,7 @@
 namespace Entidade {
     namespace Personagem {
         Jogador::Jogador():
-        Personagem(1000.0f) {
+        Personagem(1000.0f, sf::Vector2f(100, 100), 500, 600) {
             Gerenciador::GerenciadorEvento::setJogador(this);
         }
 
@@ -13,6 +13,7 @@ namespace Entidade {
 
         void Jogador::executar() {
             atualizarPos();
+            pGGrafico->moveCamera(x, y);
             desenhar();
         }
 

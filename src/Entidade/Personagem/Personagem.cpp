@@ -2,16 +2,16 @@
 
 namespace Entidade {
     namespace Personagem {
-        Personagem::Personagem(float vel):
-        Entidade(sf::Vector2f(100.0f, 100.0f), 400.0f, 200.0f),
+        Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas):
+        Entidade(tam, px, py),
         velocidade(sf::Vector2f(0.0f, 0.0f)),
         vMax(sf::Vector2f(vel, 1000.0f)),
         aceleracao(sf::Vector2f(2000.0f, 10000.0f)),
         direita(true),
         andando(false),
         noChao(false),
-        dt(0.0f),
-        deltaS(sf::Vector2f(0.0f, 0.0f)) {
+        numVidas(vidas)
+        {
             corpo.setFillColor(sf::Color::Red);
         }
 
@@ -39,22 +39,20 @@ namespace Entidade {
 
         void Personagem::calculaVelocidade() {
             if (andando) {
-                direita ? velocidade.x += (aceleracao.x * dt * dt) / 2 : velocidade.x += -(aceleracao.x * dt * dt) / 2;
+                direita ? velocidade.x += (aceleracao.x * tempoFrame * tempoFrame) / 2 : velocidade.x += -(aceleracao.x * tempoFrame * tempoFrame) / 2;
             } else {
                 velocidade.x = 0.0f;
             }
-            if (velocidade.x > vMax.x * dt) {
-                velocidade.x = vMax.x * dt;
-            } else if (velocidade.x < -vMax.x * dt) {
-                velocidade.x = -vMax.x * dt;
+            if (velocidade.x > vMax.x * tempoFrame) {
+                velocidade.x = vMax.x * tempoFrame;
+            } else if (velocidade.x < -vMax.x * tempoFrame) {
+                velocidade.x = -vMax.x * tempoFrame;
             }
-            velocidade.y += ((aceleracao.y * dt * dt) / 2);
+            velocidade.y += ((aceleracao.y * tempoFrame * tempoFrame) / 2);
             //velocidade.y = vMax.y * dt;
         }
 
         void Personagem::atualizarPos() {
-            dt = pGGrafico->getTempo();
-            //cout << velocidade.x << endl;
             setPosicao(sf::Vector2f(getPosicao().x + velocidade.x, getPosicao().y + velocidade.y));
             calculaVelocidade();
         }
@@ -69,7 +67,6 @@ namespace Entidade {
 
 
         void Personagem::colisao(sf::Vector2f colisao) {
-            cout << colisao.x << " " << colisao.y << endl;
             if (colisao.y != 0.0f) {
                 if (colisao.y < 0.0f) {
                     estaNoChao(true);

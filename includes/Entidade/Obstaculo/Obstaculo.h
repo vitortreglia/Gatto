@@ -8,10 +8,10 @@ namespace Entidade {
         protected:
             bool danoso;
         public:
-            Obstaculo();
+            Obstaculo(bool dano, sf::Vector2f tamanho, float x, float y);
             ~Obstaculo();
-            //virtual void obstaculizar() = 0;
-            virtual void executar();
+            virtual void obstaculizar() = 0;
+            virtual void executar() = 0;
             virtual void colisao();
         };
     }
