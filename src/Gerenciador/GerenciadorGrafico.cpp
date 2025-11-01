@@ -70,16 +70,17 @@ namespace Gerenciador {
 
     void GerenciadorGrafico::moveCamera(float x, float y) {
         cameraX += 5 * (x - cameraX) * tempo;
-        if (y < cameraY - 200 || y > cameraY + 100)
-            cameraY += 3 * (y - cameraY) * tempo;
+
         if (cameraX < limitesCamera.left + TELA_X / 2) {
             cameraX = TELA_X/2;
         } else if (cameraX > limitesCamera.width - TELA_X / 2) {
             cameraX = limitesCamera.width - TELA_X / 2;
         }
-        if (y < limitesCamera.top + TELA_Y / 2) {
+        if (y < cameraY - 100 || y > cameraY + 100)
+            cameraY += 3 * (y - cameraY) * tempo;
+        if (cameraY < limitesCamera.top + TELA_Y / 2) {
             cameraY = limitesCamera.top + TELA_Y / 2;
-        } else if (y > limitesCamera.height - TELA_Y / 2) {
+        } else if (cameraY > limitesCamera.height - TELA_Y / 2) {
             cameraY = limitesCamera.height - TELA_Y / 2;
         }
 

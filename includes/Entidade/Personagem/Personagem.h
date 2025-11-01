@@ -7,6 +7,7 @@ namespace Entidade {
         class Personagem : public Entidade {
         protected:
             int numVidas;
+            bool vivo;
             sf::Vector2f velocidade;
             sf::Vector2f vMax;
             sf::Vector2f aceleracao;
@@ -25,6 +26,7 @@ namespace Entidade {
             void atualizarPos();
             void estaNoChao(bool c);
             void colisao(sf::Vector2f colisao);
+            virtual void verificaVidas() = 0;
             virtual void mover() = 0;
             virtual void executar() = 0;
         };

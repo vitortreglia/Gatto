@@ -13,16 +13,9 @@ namespace Entidade {
 
         Jogador::~Jogador() {}
 
-        void Jogador::executar() {
-            atualizarPos();
-            pGGrafico->moveCamera(x, y);
-            desenhar();
-        }
-
         void Jogador::liberaPulo() {
             podePular = true;
         }
-
 
         void Jogador::pular() {
             if (noChao && podePular) {
@@ -32,10 +25,21 @@ namespace Entidade {
             }
         }
 
+        void Jogador::verificaVidas() {
+
+        }
+
+
         void Jogador::mover() {
 
         }
 
+        void Jogador::executar() {
+            verificaVidas();
+            atualizarPos();
+            pGGrafico->moveCamera(x, y);
+            desenhar();
+        }
 
     }
 }

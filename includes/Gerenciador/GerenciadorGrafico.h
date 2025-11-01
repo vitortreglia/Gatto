@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 #define TELA_X 1280.0f
 #define TELA_Y 720.0f

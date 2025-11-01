@@ -3,7 +3,6 @@
 #include "Lista/ListaEntidades.h"
 #include <vector>
 #include <utility>
-#include <cmath>
 
 using namespace std;
 namespace Gerenciador {

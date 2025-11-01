@@ -10,7 +10,8 @@ namespace Entidade {
         direita(true),
         andando(false),
         noChao(false),
-        numVidas(vidas)
+        numVidas(vidas),
+        vivo(true)
         {
             corpo.setFillColor(sf::Color::Red);
         }
@@ -79,9 +80,11 @@ namespace Entidade {
                 } else {
                     velocidade.y = 0.0f;
                 }
+                if (colisao.y < -0.5f)
+                    numVidas = 0;
             } else if (colisao.y > 0.0f) {
                 velocidade.y = velocidade.y * -1;
-            } else if (colisao.x > 0.01f || colisao.x < 0.01f) {
+            } else if (colisao.x > 0.01f || colisao.x < -0.01f) {
                 velocidade.x = 0.0f;
             }
             colisao.x += getPosicao().x;
