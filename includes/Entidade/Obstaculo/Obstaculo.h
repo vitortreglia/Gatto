@@ -1,4 +1,4 @@
-#ifndef OBSTACULO_H
+    #ifndef OBSTACULO_H
 #define OBSTACULO_H
 #include "Entidade/Entidade.h"
 

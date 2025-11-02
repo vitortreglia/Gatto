@@ -19,8 +19,12 @@ namespace Entidade {
 
         void Jogador::pular() {
             if (noChao && podePular) {
+<<<<<<< Updated upstream
                 cout << "pulo" << endl;
                 deslocamento.y = -30.0f;
+=======
+                velocidade.y = -0.40f;
+>>>>>>> Stashed changes
                 estaNoChao(false);
                 podePular = false;
             }
