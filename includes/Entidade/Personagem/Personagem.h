@@ -18,6 +18,7 @@ namespace Entidade {
             virtual ~Personagem();
             void andar(const bool esq);
             void parar();
+            bool getDireita();
             void calculaVelocidade();
             void atualizarPos(sf::Vector2f pos);
             void atualizarPos();

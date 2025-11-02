@@ -38,6 +38,9 @@ namespace Gerenciador {
         } else {
             pJogador->liberaPulo();
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            pJogador->atacar();
+        }
     }
 
     void GerenciadorEvento::verificaTeclaSolta() {

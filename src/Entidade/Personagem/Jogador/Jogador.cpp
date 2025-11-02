@@ -5,11 +5,13 @@
 
 namespace Entidade {
     namespace Personagem {
-        Jogador::Jogador():
+        Jogador::Jogador(Itens::Arma* pG):
         Personagem(600.0f, sf::Vector2f(100, 100), 100, 1300, 7, IDs::IDs::Jogador1),
-        podePular(true)
+        podePular(true),
+        pGarra(pG)
         {
             Gerenciador::GerenciadorEvento::setJogador(this);
+            pG->setPersonagem(this);
         }
 
         Jogador::~Jogador() {}
@@ -26,6 +28,11 @@ namespace Entidade {
             }
         }
 
+        void Jogador::atacar() {
+            if (!pGarra->getAtacando())
+                pGarra->setAtacando(true);
+        }
+
         void Jogador::verificaVidas() {
             if (numVidas <= 0) {
                 cout << "morreu " << endl;
@@ -33,9 +40,9 @@ namespace Entidade {
             }
         }
 
-
         void Jogador::mover() {
-            atualizarPos();
+            if (!pGarra->getAtacando())
+                atualizarPos();
         }
 
         void Jogador::executar() {

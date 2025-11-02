@@ -27,6 +27,11 @@ namespace Entidade {
             andando = false;
         }
 
+        bool Personagem::getDireita() {
+            return direita;
+        }
+
+
         void Personagem::calculaVelocidade() {
             if (andando) {
                 direita ? deslocamento.x = (vMax.x * tempoFrame) : deslocamento.x = -(vMax.x * tempoFrame);

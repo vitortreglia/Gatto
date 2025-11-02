@@ -9,8 +9,10 @@ namespace Fase {
     maxInimFaceis(0),
     maxInimMedios(0)
     {
-        listaEnt.incluir(new Entidade::Personagem::Jogador());
+        Entidade::Entidade* objEntidade = new Entidade::Itens::Arma(IDs::IDs::ArmaGarra);
+        listaEnt.incluir(new Entidade::Personagem::Jogador(static_cast<Entidade::Itens::Arma*>(objEntidade)));
         pGColisoes->addJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
+        listaEnt.incluir(objEntidade);
         criarFaseTorre();
     }
 
