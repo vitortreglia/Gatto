@@ -5,7 +5,7 @@
 namespace Entidade {
     namespace Personagem {
         Jogador::Jogador():
-        Personagem(1000.0f, sf::Vector2f(100, 100), 100, 1300, 7),
+        Personagem(600.0f, sf::Vector2f(100, 100), 100, 1300, 7),
         podePular(true)
         {
             Gerenciador::GerenciadorEvento::setJogador(this);
@@ -19,14 +19,18 @@ namespace Entidade {
 
         void Jogador::pular() {
             if (noChao && podePular) {
-                velocidade.y = -0.35f;
+                cout << "pulo" << endl;
+                deslocamento.y = -30.0f;
                 estaNoChao(false);
                 podePular = false;
             }
         }
 
         void Jogador::verificaVidas() {
-
+            if (numVidas <= 0) {
+                cout << "morreu " << endl;
+                vivo = false;
+            }
         }
 
 
@@ -36,9 +40,9 @@ namespace Entidade {
 
         void Jogador::executar() {
             verificaVidas();
-            atualizarPos();
             pGGrafico->moveCamera(x, y);
             desenhar();
+            atualizarPos();
         }
 
     }

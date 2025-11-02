@@ -8,17 +8,15 @@ namespace Entidade {
         protected:
             int numVidas;
             bool vivo;
-            sf::Vector2f velocidade;
             sf::Vector2f vMax;
-            sf::Vector2f aceleracao;
+            float gravidade;
+            sf::Vector2f deslocamento;
             bool direita;
             bool andando;
             bool noChao;
         public:
             Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas);
             virtual ~Personagem();
-            void setVel(sf::Vector2f vel);
-            sf::Vector2f getVel();
             void andar(const bool esq);
             void parar();
             void calculaVelocidade();

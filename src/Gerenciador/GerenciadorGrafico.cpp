@@ -15,6 +15,7 @@ namespace Gerenciador {
             cout << "Nao foi possivel criar a janela grafica" << endl;
             exit(1);
         }
+        window->setFramerateLimit(60);
         camera.setCenter(TELA_X/2, TELA_Y/2);
         window->setView(camera);
     }
