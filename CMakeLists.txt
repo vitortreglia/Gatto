@@ -41,10 +41,6 @@ add_executable(Gatto ${SOURCES}
         includes/Entidade/Obstaculo/PlataformaGiratoria.h
         src/Fase/FaseJardim.cpp
         includes/Fase/FaseJardim.h
-        src/Entidade/Itens/Arma.cpp
-        includes/Entidade/Itens/Arma.h
-        src/Entidade/Itens/Peixe.cpp
-        includes/Entidade/Itens/Peixe.h
 )
 
 # --- Diretórios de include ---
