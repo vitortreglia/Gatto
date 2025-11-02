@@ -7,7 +7,6 @@ namespace Entidade {
         class Personagem : public Entidade {
         protected:
             int numVidas;
-            bool vivo;
             sf::Vector2f vMax;
             float gravidade;
             sf::Vector2f deslocamento;
@@ -15,7 +14,7 @@ namespace Entidade {
             bool andando;
             bool noChao;
         public:
-            Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas);
+            Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::IDs id);
             virtual ~Personagem();
             void andar(const bool esq);
             void parar();

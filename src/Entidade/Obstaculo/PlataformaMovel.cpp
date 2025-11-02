@@ -3,7 +3,7 @@
 namespace Entidade {
     namespace Obstaculo {
         PlataformaMovel::PlataformaMovel(float x, float y):
-        Obstaculo(false, sf::Vector2f(200, 50), x, y),
+        Obstaculo(false, sf::Vector2f(200, 50), x, y, IDs::IDs::PlataformaMovel),
         movimentoMax(400),
         tempoMax(4.0f),
         somaTempo(0.0f),

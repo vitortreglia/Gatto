@@ -10,6 +10,7 @@ namespace Fase {
     maxInimMedios(0)
     {
         listaEnt.incluir(new Entidade::Personagem::Jogador());
+        pGColisoes->addJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         criarFaseTorre();
     }
 
@@ -19,14 +20,18 @@ namespace Fase {
 
     void FaseJardim::criarPlataformaMovel(float x, float y) {
         Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y);
-        if (objEntidade)
+        if (objEntidade) {
             listaEnt.incluir(objEntidade);
+            pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+        }
     }
 
     void FaseJardim::criarPlataformaGiratoria(float x, float y) {
         Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaGiratoria(x, y);
-        if (objEntidade)
+        if (objEntidade) {
             listaEnt.incluir(objEntidade);
+            pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+        }
     }
 
 

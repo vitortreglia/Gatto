@@ -3,9 +3,9 @@
 namespace Entidade {
     namespace Obstaculo {
         PlataformaGiratoria::PlataformaGiratoria(float x, float y):
-        Obstaculo(false, sf::Vector2f(200, 50), x, y),
-        velocidadeGiro(100),
-        angulo(0.0001f),
+        Obstaculo(false, sf::Vector2f(200, 50), x, y, IDs::IDs::PlataformaGiratoria),
+        velocidadeGiro(2),
+        angulo(0.0f),
         tempoMax(3.0f),
         somaTempo(0.0f)
         {
@@ -25,7 +25,7 @@ namespace Entidade {
         void PlataformaGiratoria::obstaculizar() {
             somaTempo += tempoFrame;
             if (angulo < 180.0f) {
-                angulo += velocidadeGiro * tempoFrame;
+                angulo += velocidadeGiro;
                 girar();
             }
             if (somaTempo > tempoMax) {

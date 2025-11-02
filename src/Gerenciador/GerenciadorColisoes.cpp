@@ -9,6 +9,16 @@ namespace Gerenciador {
         pListaPersonagens = nullptr;
     }
 
+    void GerenciadorColisoes::addObstaculo(Entidade::Obstaculo::Obstaculo *obs) {
+        if (obs)
+            LOs.push_back(obs);
+    }
+
+    void GerenciadorColisoes::addJogador(Entidade::Personagem::Jogador* pJog) {
+        pJogador1 = pJog;
+    }
+
+
     sf::Vector2f GerenciadorColisoes::calculaNormal(const sf::Vector2f& vertice1, const sf::Vector2f& vertice2) {
         sf::Vector2f normal;
         float modulo;
@@ -78,19 +88,23 @@ namespace Gerenciador {
         return calculaSobreposicao(coordCorpo1, coordCorpo2);
     }
 
-    void GerenciadorColisoes::executar() {
+    void GerenciadorColisoes::tratarColisoesJogsObstacs() {
         Entidade::Entidade* obj1 = nullptr;
         Entidade::Entidade* obj2 = nullptr;
 
-        obj1 = pListaPersonagens->operator[](0);
+        obj1 = pJogador1;
         sf::Vector2f colisao;
-        for (int i = 1; i < pListaPersonagens->getTam(); i++) {
-            obj2 = pListaPersonagens->operator[](i);
-            colisao = verificarColisao(obj1, obj2);
+        for (list<Entidade::Obstaculo::Obstaculo*>::const_iterator it = LOs.begin(); it != LOs.end(); it++) {
+            colisao = verificarColisao(obj1, *it);
             if (colisao.x != 0.0f || colisao.y != 0.0f) {
                 obj1->colisao(colisao);
             }
         }
+    }
+
+
+    void GerenciadorColisoes::executar() {
+        tratarColisoesJogsObstacs();
     }
 
 

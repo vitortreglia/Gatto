@@ -10,9 +10,11 @@ namespace Entidade {
         float x, y;
         sf::Vector2f tam;
         static float tempoFrame;
+        bool ativo;
     public:
-        Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f);
+        Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f, IDs::IDs id = IDs::IDs::vazio);
         virtual ~Entidade();
+        const bool estaAtivo();
         void setPosicao(sf::Vector2f posicao);
         const sf::Vector2f getPosicao() const;
         void setTamanho(sf::Vector2f tamanho);

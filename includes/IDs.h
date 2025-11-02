@@ -4,12 +4,16 @@
 namespace IDs {
     enum class IDs {
         vazio = 0,
-        jogador,
-        inimigo1,
-        inimigo2,
+        Jogador1,
+        Jogador2,
+        InimigoRato,
+        InimigoCachorro,
         inimigo3,
-        fase1,
-        fase2
+        FaseJardim,
+        FaseCidade,
+        Plataforma,
+        PlataformaMovel,
+        PlataformaGiratoria
     };
 }
 

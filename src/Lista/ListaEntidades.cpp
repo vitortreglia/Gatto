@@ -15,7 +15,10 @@ namespace Lista {
     void ListaEntidades::percorrer() {
         int tam = LEs.getTam();
         for (int i = 0; i < tam; i++) {
-            LEs[i]->executar();
+            if (LEs[i]->estaAtivo())
+                LEs[i]->executar();
+            //else
+            //    apagarEntidade(i);
         }
     }
 

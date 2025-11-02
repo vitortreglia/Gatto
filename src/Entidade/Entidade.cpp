@@ -4,18 +4,24 @@
 namespace Entidade {
     float Entidade::tempoFrame(0.0f);
 
-    Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy):
-    Ente(IDs::IDs::jogador),
+    Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy, IDs::IDs id):
+    Ente(id),
     x(posx),
     y(posy),
     tam(tamanho),
-    corpo(tamanho) {
+    corpo(tamanho),
+    ativo(true)
+    {
         setPosicao(sf::Vector2f(x, y));
         corpo.setFillColor(sf::Color::Blue);
     }
 
     Entidade::~Entidade() {
         setPosicao(sf::Vector2f(0.0f, 0.0f));
+    }
+
+    const bool Entidade::estaAtivo() {
+        return ativo;
     }
 
     const sf::Vector2f Entidade::getPosicao() const {

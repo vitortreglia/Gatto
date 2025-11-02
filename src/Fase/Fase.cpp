@@ -20,8 +20,10 @@ namespace Fase {
 
     void Fase::criarPlataforma(float x, float y) {
         Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Plataforma(x, y);
-        if (objEntidade)
+        if (objEntidade) {
             listaEnt.incluir(objEntidade);
+            pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+        }
     }
 
 
@@ -35,6 +37,9 @@ namespace Fase {
         pGColisoes->executar();
 
     }
+
+
+
 
 
 }

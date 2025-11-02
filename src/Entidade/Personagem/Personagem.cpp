@@ -2,15 +2,14 @@
 
 namespace Entidade {
     namespace Personagem {
-        Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas):
-        Entidade(tam, px, py),
+        Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::IDs id):
+        Entidade(tam, px, py, id),
         vMax(sf::Vector2f(vel, 1000.0f)),
         gravidade(100.0f),
         direita(true),
         andando(false),
         noChao(false),
-        numVidas(vidas),
-        vivo(true)
+        numVidas(vidas)
         {
             corpo.setFillColor(sf::Color::Red);
         }
