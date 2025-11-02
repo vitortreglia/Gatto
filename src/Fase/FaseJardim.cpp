@@ -11,7 +11,7 @@ namespace Fase {
     {
         listaEnt.incluir(new Entidade::Personagem::Jogador());
         pGColisoes->addJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
-        criarFaseTorre();
+        criarFaseJardim();
     }
 
     FaseJardim::~FaseJardim() {
@@ -35,7 +35,7 @@ namespace Fase {
     }
 
 
-    void FaseJardim::criarFaseTorre() {
+    void FaseJardim::criarFaseJardim() {
         ifstream arquivo("Data/Fases/FaseJardim.dat");
         int espaco = 0;
         float x = 0.0f;

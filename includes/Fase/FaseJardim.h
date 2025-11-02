@@ -14,7 +14,7 @@ namespace Fase {
     private:
         void criarPlataformaMovel(float x, float y);
         void criarPlataformaGiratoria(float x, float y);
-        void criarFaseTorre();
+        void criarFaseJardim();
     };
 }
 
