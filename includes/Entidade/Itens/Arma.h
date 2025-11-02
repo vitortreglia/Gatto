@@ -12,11 +12,14 @@ namespace Entidade {
             Personagem::Personagem* pPersonagem;
             bool atacando;
         public:
-            Arma();
+            Arma(IDs::IDs id);
             ~Arma();
             void setPersonagem(Personagem::Personagem* pPersonagem);
             Personagem::Personagem* getPersonagem();
-
+            void estaAtacando(bool atk);
+            void ataque();
+            void colisao(sf::Vector2f colisao);
+            void executar();
         };
     }
 }

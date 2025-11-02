@@ -13,7 +13,8 @@ namespace IDs {
         FaseCidade,
         Plataforma,
         PlataformaMovel,
-        PlataformaGiratoria
+        PlataformaGiratoria,
+        ArmaGarra
     };
 }
 
