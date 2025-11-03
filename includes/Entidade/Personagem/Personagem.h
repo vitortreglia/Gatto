@@ -13,6 +13,7 @@ namespace Entidade {
             bool direita;
             bool andando;
             bool noChao;
+            bool vivo;
         public:
             Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::IDs id);
             virtual ~Personagem();

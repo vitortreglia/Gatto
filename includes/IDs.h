@@ -14,7 +14,8 @@ namespace IDs {
         Plataforma,
         PlataformaMovel,
         PlataformaGiratoria,
-        ArmaGarra
+        ArmaGarra,
+        InimigoGaivota
     };
 }
 

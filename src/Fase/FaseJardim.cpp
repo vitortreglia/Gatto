@@ -34,6 +34,15 @@ namespace Fase {
         }
     }
 
+    void FaseJardim::criarGaivota(float x, float y) {
+
+        float altura = y - 30.f;
+        auto* g = new Entidade::Personagem::Inimigos::Gaivota(x, altura);
+
+        if (g) {
+            listaEnt.incluir(g);
+        }
+    }
 
     void FaseJardim::criarFaseJardim() {
         ifstream arquivo("Data/Fases/FaseJardim.dat");
@@ -44,6 +53,10 @@ namespace Fase {
             cout << "Erro ao abrir o arquivo!\n";
         }
         std::string linha;
+
+        auto* g = new Entidade::Personagem::Inimigos::Gaivota(100.f, 1500.f);
+        listaEnt.incluir(g);
+
         while (getline(arquivo, linha)) {
             for (int i = 0; i < linha.size(); i++) {
                 if (linha[i] >= '0' && linha[i] <= '9') {
@@ -58,6 +71,9 @@ namespace Fase {
                     x += 200.0f;
                 } else if (linha[i] == 'g') {
                     criarPlataformaGiratoria(x, y);
+                } else if (linha[i] == 'v') {
+                    criarGaivota(x, y);
+                    x += 100.0f;
                 }
                 x += espaco * 100.0f;
                 espaco = 0;
@@ -67,6 +83,4 @@ namespace Fase {
         }
         arquivo.close();
     }
-
-
 }

@@ -18,6 +18,10 @@ namespace Gerenciador {
         pJogador1 = pJog;
     }
 
+    void GerenciadorColisoes::addInimigo(Entidade::Personagem::Inimigos::Inimigo* ini) {
+        if (ini)
+            LIs.push_back(ini);
+    }
 
     sf::Vector2f GerenciadorColisoes::calculaNormal(const sf::Vector2f& vertice1, const sf::Vector2f& vertice2) {
         sf::Vector2f normal;

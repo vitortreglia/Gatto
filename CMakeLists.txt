@@ -41,6 +41,9 @@ add_executable(Gatto ${SOURCES}
         includes/Entidade/Obstaculo/PlataformaGiratoria.h
         src/Fase/FaseJardim.cpp
         includes/Fase/FaseJardim.h
+        src/Entidade/Personagem/Inimigos/Gaivota.cpp
+        includes/Entidade/Personagem/Inimigos/inimigo.h
+        src/Entidade/Personagem/Inimigos/inimigo.cpp
 )
 
 # --- Diretórios de include ---
@@ -67,5 +70,5 @@ if(WIN32)
             COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.6.2/bin"
             "$<TARGET_FILE_DIR:Gatto>"
-    )
+                )
 endif()
