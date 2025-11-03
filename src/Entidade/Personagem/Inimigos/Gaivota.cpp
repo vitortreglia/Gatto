@@ -17,6 +17,7 @@ namespace Entidade {
                 amplitude = 30.0;
                 velocidadeHorizontal = 120.0;
                 frequencia = 5.0;
+                direcao = 1;
 
                 numVidas = 2;
                 vivo = true;
@@ -37,7 +38,7 @@ namespace Entidade {
                 tempo += dt;
 
                 sf::Vector2f pos = getPosicao();
-                pos.x += velocidadeHorizontal * dt;
+                pos.x += velocidadeHorizontal * dt * direcao;
                 pos.y = baseY + std::sin(tempo * frequencia) * amplitude;
 
                 setPosicao(pos);

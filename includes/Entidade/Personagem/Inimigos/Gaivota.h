@@ -15,6 +15,7 @@ namespace Entidade {
                 float velocidadeHorizontal;
                 float frequencia;
                 float baseY;
+                int direcao;
 
             public:
                 Gaivota(float x, float y);
