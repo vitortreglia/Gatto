@@ -54,7 +54,7 @@ namespace Entidade {
             setPosicao(sf::Vector2f(getPosicao().x + deslocamento.x, getPosicao().y + deslocamento.y));
             calculaVelocidade();
             if (getPosicao().y > pGGrafico->getLimitesCamera().height) {
-                //tomarDano(100);
+                tomarDano(100);
             }
         }
 

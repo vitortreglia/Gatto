@@ -84,7 +84,6 @@ namespace Entidade {
             } else if (sofrendoDano) {
                 tempoDano += tempoFrame;
                 if (tempoDano > 0.5f) {
-                    cout << "fim dano" << endl;
                     sofrendoDano = false;
                     tempoDano = 0.0f;
                 }
