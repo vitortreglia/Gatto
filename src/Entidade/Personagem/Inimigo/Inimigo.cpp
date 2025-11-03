@@ -1,5 +1,4 @@
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
-
 #include "Entidade/Itens/Arma.h"
 
 namespace Entidade {
@@ -10,6 +9,18 @@ namespace Entidade {
             {}
 
             Inimigo::~Inimigo() {}
+
+            void Inimigo::setJogador(Jogador* pJ) {
+                pJog = pJ;
+            }
+
+            void Inimigo::verificaDistanciaJogador(sf::Vector2f distSeguir, sf::Vector2f distAtacar) {
+                sf::Vector2f cJ = pJog->getPosicao();
+                if (cJ.x - this->getPosicao().x < distSeguir.x) {
+                    if (cJ.y - this->getPosicao().y < distSeguir.y || this->getPosicao().y)
+                }
+            }
+
 
             void Inimigo::colisao(sf::Vector2f colisao, Entidade *pEntidade) {
                 if (pEntidade->getId() == IDs::IDs::ArmaGarra) {
