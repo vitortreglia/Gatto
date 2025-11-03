@@ -5,9 +5,8 @@
 #include "Entidade/Obstaculo/Plataforma.h"
 #include "Entidade/Obstaculo/PlataformaGiratoria.h"
 #include "Entidade/Obstaculo/PlataformaMovel.h"
-#include "Entidade/Personagem/Inimigos/Inimigo.h"
 #include "Entidade/Personagem/Personagem.h"
-#include "Entidade/Personagem/Inimigos/Gaivota.h"
+#include "../../includes/Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
 namespace Fase {

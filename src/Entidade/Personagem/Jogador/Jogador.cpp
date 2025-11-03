@@ -1,6 +1,4 @@
 #include "Entidade/Personagem/Jogador/Jogador.h"
-
-#include "Gerenciador/GerenciadorColisoes.h"
 #include "Gerenciador/GerenciadorEvento.h"
 
 namespace Entidade {

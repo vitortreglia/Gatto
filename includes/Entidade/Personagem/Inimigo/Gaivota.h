@@ -1,12 +1,12 @@
 #ifndef GAIVOTA_H
 #define GAIVOTA_H
 
-#include "Entidade/Personagem/Inimigos/Inimigo.h"
-#include <cmath>
+#include "Entidade/Personagem/Inimigo/Inimigo.h"
+
 
 namespace Entidade {
     namespace Personagem {
-        namespace Inimigos {
+        namespace Inimigo {
 
             class Gaivota : public Inimigo {
             private:
@@ -15,7 +15,7 @@ namespace Entidade {
                 float velocidadeHorizontal;
                 float frequencia;
                 float baseY;
-                int direcao;
+                bool direcao;
 
             public:
                 Gaivota(float x, float y);

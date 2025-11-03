@@ -1,52 +1,47 @@
-#include "Entidade/Personagem/Inimigos/Gaivota.h"
+#include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Gerenciador/GerenciadorColisoes.h"
 #include "Gerenciador/GerenciadorEvento.h"
 #include "IDs.h"
 
 namespace Entidade {
     namespace Personagem {
-        namespace Inimigos {
-            Gaivota::Gaivota(float x, float y) {
-
-                setPosicao(sf::Vector2f(x, y));
+        namespace Inimigo {
+            Gaivota::Gaivota(float x, float y):
+            Inimigo(120.0f, {80.0f, 50.0f},x, y, 2, IDs::IDs::InimigoGaivota),
+            baseY(y),
+            amplitude(30.0f),
+            frequencia(5.0f),
+            direcao(true),
+            tempo(0.0f)
+            {
                 baseY = y;
-
-                setTamanho(sf::Vector2f(80.0, 50.0));
-
-                tempo = 0.0;
-                amplitude = 30.0;
-                velocidadeHorizontal = 120.0;
-                frequencia = 5.0;
-                direcao = 1;
-
-                numVidas = 2;
-                vivo = true;
+                andar(true);
                 corpo.setFillColor(sf::Color::White);
-                //id = IDs::IDs::InimigoGaivota
+                setVoador(true);
             }
 
             Gaivota::~Gaivota(){}
 
             void Gaivota::verificaVidas() {
-                if (numVidas <= 0)
+                if (numVidas <= 0) {
                     vivo = false;
+                    ativo = false;
+                }
             }
 
             void Gaivota::mover() {
-
+                atualizarPos();
                 const float dt = 0.016f;
                 tempo += dt;
-
                 sf::Vector2f pos = getPosicao();
-                pos.x += velocidadeHorizontal * dt * direcao;
                 pos.y = baseY + std::sin(tempo * frequencia) * amplitude;
 
                 setPosicao(pos);
+
                 corpo.setPosition(pos);
             }
 
             void Gaivota::executar() {
-
                 mover();
                 verificaVidas();
                 desenhar();

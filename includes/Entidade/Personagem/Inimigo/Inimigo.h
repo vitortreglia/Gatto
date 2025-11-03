@@ -8,7 +8,7 @@ namespace Entidade {
         namespace Inimigo {
             class Inimigo : public Personagem {
             public:
-                Inimigo(float px, float py);
+                Inimigo(float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::IDs id);
                 ~Inimigo();
                 void colisao(sf::Vector2f colisao, Entidade *pEntidade) override;
                 void verificaVidas();

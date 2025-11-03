@@ -16,10 +16,11 @@ namespace Entidade {
             bool sofrendoDano;
             float tempoDano;
             bool vivo;
+            bool voador;
         public:
             Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::IDs id);
             virtual ~Personagem();
-            void andar(const bool esq);
+            void andar(const bool dir);
             void parar();
             bool getDireita();
             void calculaVelocidade();
@@ -27,6 +28,7 @@ namespace Entidade {
             void atualizarPos();
             void estaNoChao(bool c);
             void tomarDano(int dano);
+            void setVoador(bool voador);
             void colisao(sf::Vector2f colisao, Entidade* pEntidade) = 0;
             virtual void verificaVidas() = 0;
             virtual void mover() = 0;

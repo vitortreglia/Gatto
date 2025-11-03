@@ -5,8 +5,8 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
-            Inimigo::Inimigo(float px, float py) :
-            Personagem(100.0f, {100.0f, 100.0f}, px, py, 5, IDs::IDs::InimigoRato)
+            Inimigo::Inimigo(float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::IDs id) :
+            Personagem(vel, tam, px, py, vidas, id)
             {}
 
             Inimigo::~Inimigo() {}

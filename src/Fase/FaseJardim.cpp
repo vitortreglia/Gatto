@@ -2,6 +2,7 @@
 #include "Entidade/Obstaculo/Obstaculo.h"
 #include "Entidade/Obstaculo/PlataformaGiratoria.h"
 #include "Entidade/Obstaculo/PlataformaMovel.h"
+#include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
 namespace Fase {

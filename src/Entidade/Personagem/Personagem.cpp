@@ -21,8 +21,8 @@ namespace Entidade {
             andando = false;
         }
 
-        void Personagem::andar(const bool esq) {
-            direita = esq;
+        void Personagem::andar(const bool dir) {
+            direita = dir;
             andando = true;
         }
 
@@ -44,10 +44,11 @@ namespace Entidade {
                     deslocamento.x = 0.0f;
                 }
             }
-            deslocamento.y += gravidade * tempoFrame;
-            if (deslocamento.y > vMax.y * tempoFrame)
-                deslocamento.y = vMax.y * tempoFrame;
-            //velocidade.y = vMax.y * dt;
+            if (!voador) {
+                deslocamento.y += gravidade * tempoFrame;
+                if (deslocamento.y > vMax.y * tempoFrame)
+                    deslocamento.y = vMax.y * tempoFrame;
+            }
         }
 
         void Personagem::atualizarPos() {
@@ -73,6 +74,11 @@ namespace Entidade {
                 cout << "dano em " << (int)ID << endl;
             }
         }
+
+        void Personagem::setVoador(bool voador) {
+            this->voador = voador;
+        }
+
 
     }
 }
