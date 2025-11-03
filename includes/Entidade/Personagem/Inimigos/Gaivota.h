@@ -1,7 +1,7 @@
 #ifndef GAIVOTA_H
 #define GAIVOTA_H
 
-    #include "Entidade/Personagem/Inimigos/Inimigo.h"
+#include "Entidade/Personagem/Inimigos/Inimigo.h"
 #include <cmath>
 
 namespace Entidade {
