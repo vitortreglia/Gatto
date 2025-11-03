@@ -1,6 +1,6 @@
 #ifndef ENTIDADE_H
 #define ENTIDADE_H
-#include "../Ente.h"
+#include "Ente.h"
 
 
 namespace Entidade {
@@ -15,6 +15,7 @@ namespace Entidade {
         Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f, IDs::IDs id = IDs::IDs::vazio);
         virtual ~Entidade();
         const bool estaAtivo();
+        void setAtivo(bool at);
         void setPosicao(sf::Vector2f posicao);
         const sf::Vector2f getPosicao() const;
         void setTamanho(sf::Vector2f tamanho);
@@ -23,7 +24,7 @@ namespace Entidade {
         static void getTempoFrame();
         virtual void desenhar();
         virtual void executar() = 0;
-        virtual void colisao(sf::Vector2f colisao);
+        virtual void colisao(sf::Vector2f colisao, Entidade* pEntidade) = 0;
     };
 }
 

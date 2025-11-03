@@ -4,6 +4,7 @@ Principal::Principal():
 pGGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico()),
 pGEvento(Gerenciador::GerenciadorEvento::getGerenciadorEvento())
 {
+    pGGrafico->setLimitesCamera(fase.getLimitesFase());
     executar();
 }
 

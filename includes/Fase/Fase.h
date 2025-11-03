@@ -10,13 +10,16 @@ namespace Fase {
     protected:
         Lista::ListaEntidades listaEnt;
         Gerenciador::GerenciadorColisoes* pGColisoes;
+        sf::FloatRect limitesFase;
     public:
         Fase();
         ~Fase();
         void executar();
+        sf::FloatRect getLimitesFase();
     protected:
         void criarFase();
         void criarPlataforma(float x, float y);
+        void criarPeixe(float x, float y);
         void criarCenario();
         //virtual void criarObstaculo() = 0;
     };

@@ -16,6 +16,8 @@ namespace Gerenciador {
     private:
         sf::RenderWindow* window;
         sf::View camera;
+        sf::RenderTexture uiBuffer;
+        sf::Sprite uiSprite;
         sf::Clock relogio;
         float tempo;
         static GerenciadorGrafico* pGGrafico;
@@ -30,6 +32,7 @@ namespace Gerenciador {
         static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
         void desenharEnte(sf::RectangleShape corpo);
+        void desenharTexto(sf::Text texto);
         void mostraElementos();
         void fecharJanela();
         void limpaJanela();
@@ -37,6 +40,7 @@ namespace Gerenciador {
         void resetaRelogio();
         void moveCamera(float x, float y);
         void setLimitesCamera(sf::FloatRect limites);
+        sf::FloatRect getLimitesCamera();
     };
 }
 

@@ -6,8 +6,8 @@ namespace Gerenciador {
 
     GerenciadorGrafico::GerenciadorGrafico():
     window(new sf::RenderWindow(sf::VideoMode(TELA_X, TELA_Y), "Gatto")),
-    camera(sf::FloatRect(0, 0, 1280, 720)),
-    limitesCamera({0.0f, 0.0f, 3300.0f, 2000.0f}),
+    camera({0, 0, 1280, 720}),
+    limitesCamera({0.0f, 0.0f, 0.0f, 0.0f}),
     cameraX(TELA_X/2),
     cameraY(TELA_Y/2)
     {
@@ -15,6 +15,7 @@ namespace Gerenciador {
             cout << "Nao foi possivel criar a janela grafica" << endl;
             exit(1);
         }
+        uiBuffer.create(1280, 720);
         window->setFramerateLimit(60);
         camera.setCenter(TELA_X/2, TELA_Y/2);
         window->setView(camera);
@@ -42,7 +43,16 @@ namespace Gerenciador {
         window->draw(corpo);
     }
 
+    void GerenciadorGrafico::desenharTexto(sf::Text texto) {
+        uiBuffer.draw(texto);
+        uiBuffer.display();
+    }
+
+
     void GerenciadorGrafico::mostraElementos() {
+        uiSprite.setTexture(uiBuffer.getTexture());
+        window->setView(window->getDefaultView());
+        window->draw(uiSprite);
         window->display();
     }
 
@@ -57,7 +67,9 @@ namespace Gerenciador {
     }
 
     void GerenciadorGrafico::limpaJanela() {
+        uiBuffer.clear(sf::Color::Transparent);
         window->clear();
+        window->setView(camera);
     }
 
     float GerenciadorGrafico::getTempo() {
@@ -94,6 +106,9 @@ namespace Gerenciador {
         limitesCamera = limites;
     }
 
+    sf::FloatRect GerenciadorGrafico::getLimitesCamera() {
+        return limitesCamera;
+    }
 
 
 }

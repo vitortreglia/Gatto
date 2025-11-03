@@ -9,10 +9,11 @@ namespace Fase {
     maxInimFaceis(0),
     maxInimMedios(0)
     {
-        Entidade::Entidade* objEntidade = new Entidade::Itens::Arma(IDs::IDs::ArmaGarra);
+        Entidade::Entidade* objEntidade = new Entidade::Itens::Arma(IDs::IDs::ArmaGarra, 1);
         listaEnt.incluir(new Entidade::Personagem::Jogador(static_cast<Entidade::Itens::Arma*>(objEntidade)));
         pGColisoes->addJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         listaEnt.incluir(objEntidade);
+        pGColisoes->addHitBox(static_cast<Entidade::Itens::Arma*>(objEntidade));
         criarFaseTorre();
     }
 
@@ -36,6 +37,13 @@ namespace Fase {
         }
     }
 
+    void FaseJardim::criarInimigoRato(float x, float y) {
+        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Inimigo(x, y);
+        if (objEntidade) {
+            listaEnt.incluir(objEntidade);
+            pGColisoes->addInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+        }
+    }
 
     void FaseJardim::criarFaseTorre() {
         ifstream arquivo("Data/Fases/FaseJardim.dat");
@@ -60,13 +68,23 @@ namespace Fase {
                     x += 200.0f;
                 } else if (linha[i] == 'g') {
                     criarPlataformaGiratoria(x, y);
+                    x += 200.0f;
+                } else if (linha[i] == 'r') {
+                    criarInimigoRato(x, y);
+                    x += 100.0f;
+                } else if (linha[i] == 'f') {
+                    criarPeixe(x, y);
+                    x += 100.0f;
                 }
                 x += espaco * 100.0f;
                 espaco = 0;
             }
+            if (x > limitesFase.width)
+                limitesFase.width = x;
             y += 100.0f;
             x = 0.0f;
         }
+        limitesFase.height = y;
         arquivo.close();
     }
 

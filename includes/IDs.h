@@ -8,13 +8,17 @@ namespace IDs {
         Jogador2,
         InimigoRato,
         InimigoCachorro,
-        inimigo3,
+        Inimigo3,
+        Espinhos,
+        Projetil,
         FaseJardim,
         FaseCidade,
         Plataforma,
         PlataformaMovel,
         PlataformaGiratoria,
-        ArmaGarra
+        ArmaGarra,
+        ItemPeixe,
+        Texto
     };
 }
 

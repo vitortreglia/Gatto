@@ -12,7 +12,7 @@ namespace Entidade {
             ~Obstaculo();
             virtual void obstaculizar() = 0;
             virtual void executar() = 0;
-            virtual void colisao();
+            virtual void colisao(sf::Vector2f colisao, Entidade* pEntidade);
         };
     }
 }

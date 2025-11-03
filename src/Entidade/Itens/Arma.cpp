@@ -2,9 +2,9 @@
 
 namespace Entidade {
     namespace Itens {
-        Arma::Arma(IDs::IDs id):
-        Entidade({30.0f, 100.0f}, -1000.0f, -1000.0f, id),
-        dano(1),
+        Arma::Arma(IDs::IDs id, int forca):
+        Entidade({50.0f, 100.0f}, -1000.0f, -1000.0f, id),
+        dano(forca),
         tempoAtaque(0.0f),
         tMaxAtaque(0.5f) {
             corpo.setFillColor(sf::Color::White);
@@ -19,6 +19,11 @@ namespace Entidade {
         Personagem::Personagem* Arma::getPersonagem() {
             return pPersonagem;
         }
+
+        int Arma::getForca() {
+            return dano;
+        }
+
 
         void Arma::setAtacando(bool atk) {
             atacando = atk;
@@ -49,8 +54,8 @@ namespace Entidade {
             }
         }
 
-        void Arma::colisao(sf::Vector2f colisao) {
-
+        void Arma::colisao(sf::Vector2f colisao, Entidade *pEntidade) {
+            pEntidade->colisao({0.0f, 0.0f}, this);
         }
 
         void Arma::executar() {

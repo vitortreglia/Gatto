@@ -45,6 +45,10 @@ add_executable(Gatto ${SOURCES}
         includes/Entidade/Itens/Arma.h
         src/Entidade/Itens/Peixe.cpp
         includes/Entidade/Itens/Peixe.h
+        src/Entidade/Personagem/Inimigo/Inimigo.cpp
+        includes/Entidade/Personagem/Inimigo/Inimigo.h
+        src/Entidade/Texto.cpp
+        includes/Entidade/Texto.h
 )
 
 # --- Diretórios de include ---

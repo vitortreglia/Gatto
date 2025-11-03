@@ -1,6 +1,7 @@
 #ifndef JOGADOR_H
 #define JOGADOR_H
 #include "../Personagem.h"
+#include "Entidade/Texto.h"
 #include "Entidade/Itens/Arma.h"
 
 namespace Entidade {
@@ -9,12 +10,15 @@ namespace Entidade {
         private:
             bool podePular;
             Itens::Arma* pGarra;
+            int peixes;
+            Texto interface;
         public:
             Jogador(Itens::Arma* pG);
             ~Jogador();
             void liberaPulo();
-            void pular();
+            void pular(float multiplicador);
             void atacar();
+            void colisao(sf::Vector2f colisao, Entidade *pEntidade);
             void verificaVidas();
             void mover();
             void executar();

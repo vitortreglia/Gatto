@@ -18,6 +18,18 @@ namespace Gerenciador {
         pJogador1 = pJog;
     }
 
+    void GerenciadorColisoes::addInimigo(Entidade::Personagem::Inimigo::Inimigo *pIni) {
+        LIs.push_back(pIni);
+    }
+
+    void GerenciadorColisoes::addHitBox(Entidade::Itens::Arma *pH) {
+        LHs.push_back(pH);
+    }
+
+    void GerenciadorColisoes::addPeixe(Entidade::Itens::Peixe *pPeixe) {
+        LPs.push_back(pPeixe);
+    }
+
 
     sf::Vector2f GerenciadorColisoes::calculaNormal(const sf::Vector2f& vertice1, const sf::Vector2f& vertice2) {
         sf::Vector2f normal;
@@ -89,15 +101,68 @@ namespace Gerenciador {
     }
 
     void GerenciadorColisoes::tratarColisoesJogsObstacs() {
-        Entidade::Entidade* obj1 = nullptr;
-        Entidade::Entidade* obj2 = nullptr;
-
-        obj1 = pJogador1;
         sf::Vector2f colisao;
         for (list<Entidade::Obstaculo::Obstaculo*>::const_iterator it = LOs.begin(); it != LOs.end(); it++) {
-            colisao = verificarColisao(obj1, *it);
+            colisao = verificarColisao(pJogador1, *it);
             if (colisao.x != 0.0f || colisao.y != 0.0f) {
-                obj1->colisao(colisao);
+                pJogador1->colisao(colisao, *it);
+            }
+        }
+    }
+
+    void GerenciadorColisoes::tratarColisoesJogsInimigs() {
+        sf::Vector2f colisao;
+        for (vector<Entidade::Personagem::Inimigo::Inimigo*>::const_iterator it = LIs.begin(); it != LIs.end(); it++) {
+            if ((*it)->estaAtivo())
+                colisao = verificarColisao(pJogador1, *it);
+            if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                pJogador1->colisao(colisao, *it);
+            }
+        }
+    }
+
+    void GerenciadorColisoes::tratarColisoesInimigsObstacs() {
+
+
+        sf::Vector2f colisao;
+        for (vector<Entidade::Personagem::Inimigo::Inimigo*>::const_iterator it = LIs.begin(); it != LIs.end(); it++) {
+            for (list<Entidade::Obstaculo::Obstaculo*>::const_iterator it2 = LOs.begin(); it2 != LOs.end(); it2++) {
+                colisao = verificarColisao(*it, *it2);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                   (*it)->colisao(colisao, *it2);
+                }
+            }
+        }
+    }
+
+    void GerenciadorColisoes::tratarColisoesAtaque() {
+        sf::Vector2f colisao;
+        if (LHs[0]->getAtacando()) {
+            for (vector<Entidade::Personagem::Inimigo::Inimigo*>::const_iterator it = LIs.begin(); it != LIs.end(); it++) {
+                if ((*it)->estaAtivo())
+                    colisao = verificarColisao(LHs[0], *it);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    LHs[0]->colisao(colisao, *it);
+                }
+            }
+        }
+        for (vector<Entidade::Itens::Arma*>::const_iterator it = LHs.begin() + 1; it != LHs.end(); it++) {
+            if ((*it)->getAtacando())
+                colisao = verificarColisao(*it, pJogador1);
+            if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                (*it)->colisao(colisao, pJogador1);
+            }
+        }
+    }
+
+    void GerenciadorColisoes::tratarColisoesEventos() {
+        sf::Vector2f colisao;
+        for (vector<Entidade::Itens::Peixe*>::const_iterator it = LPs.begin(); it != LPs.end(); it++) {
+            if ((*it)->estaAtivo()) {
+                colisao = verificarColisao(*it, pJogador1);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    (*it)->colisao(colisao, pJogador1);
+                }
             }
         }
     }
@@ -105,6 +170,10 @@ namespace Gerenciador {
 
     void GerenciadorColisoes::executar() {
         tratarColisoesJogsObstacs();
+        tratarColisoesJogsInimigs();
+        tratarColisoesInimigsObstacs();
+        tratarColisoesAtaque();
+        tratarColisoesEventos();
     }
 
 

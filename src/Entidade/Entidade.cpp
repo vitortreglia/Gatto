@@ -24,6 +24,11 @@ namespace Entidade {
         return ativo;
     }
 
+    void Entidade::setAtivo(bool at) {
+        ativo = at;
+    }
+
+
     const sf::Vector2f Entidade::getPosicao() const {
         return corpo.getPosition();
     }
@@ -64,8 +69,6 @@ namespace Entidade {
         pGGrafico->desenharEnte(corpo);
     }
 
-    void Entidade::colisao(sf::Vector2f colisao) {
 
-    }
 
 }

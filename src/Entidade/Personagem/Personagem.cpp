@@ -9,7 +9,10 @@ namespace Entidade {
         direita(true),
         andando(false),
         noChao(false),
-        numVidas(vidas)
+        numVidas(vidas),
+        sofrendoDano(false),
+        tempoDano(0.0f),
+        deslocamento({0.0f, 0.0f})
         {
             corpo.setFillColor(sf::Color::Red);
         }
@@ -33,11 +36,13 @@ namespace Entidade {
 
 
         void Personagem::calculaVelocidade() {
-            if (andando) {
-                direita ? deslocamento.x = (vMax.x * tempoFrame) : deslocamento.x = -(vMax.x * tempoFrame);
+            if (!sofrendoDano) {
+                if (andando) {
+                    direita ? deslocamento.x = (vMax.x * tempoFrame) : deslocamento.x = -(vMax.x * tempoFrame);
 
-            } else {
-                deslocamento.x = 0.0f;
+                } else {
+                    deslocamento.x = 0.0f;
+                }
             }
             deslocamento.y += gravidade * tempoFrame;
             if (deslocamento.y > vMax.y * tempoFrame)
@@ -46,13 +51,11 @@ namespace Entidade {
         }
 
         void Personagem::atualizarPos() {
-            //if (noChao)
-            //    setPosicao(sf::Vector2f(getPosicao().x + deslocamento.x, getPosicao().y));
-            //else
-
             setPosicao(sf::Vector2f(getPosicao().x + deslocamento.x, getPosicao().y + deslocamento.y));
             calculaVelocidade();
-
+            if (getPosicao().y > pGGrafico->getLimitesCamera().height) {
+                //tomarDano(100);
+            }
         }
 
         void Personagem::atualizarPos(sf::Vector2f pos) {
@@ -63,31 +66,13 @@ namespace Entidade {
             noChao = c;
         }
 
-
-        void Personagem::colisao(sf::Vector2f colisao) {
-            if (colisao.y < 0.0f) {
-                estaNoChao(true);
-                if (colisao.x != 0.0f) {
-                    float tg;
-                    tg = colisao.x / colisao.y;
-                    if (tg >= -1 && tg <= 1 && deslocamento.y > 0.0f) {
-                        deslocamento.y = 0.0f;
-                    }
-                } else if (deslocamento.y > 0.0f) {
-                    deslocamento.y = 0.0f;
-                }
-                if (colisao.y < -30.0f)
-                    numVidas = 0;
-            } else if (colisao.y > 0.0f) {
-                deslocamento.y = deslocamento.y * -1;
-            } else if (colisao.x != 0.0f) {//(colisao.x > 0.02f || colisao.x < -0.02f) {
-                deslocamento.x = 0.0f;
+        void Personagem::tomarDano(int dano) {
+            if (!sofrendoDano) {
+                sofrendoDano = true;
+                numVidas -= dano;
+                cout << "dano em " << (int)ID << endl;
             }
-            colisao.x += getPosicao().x;
-            colisao.y += getPosicao().y;
-            atualizarPos(colisao);
         }
-
 
     }
 }
