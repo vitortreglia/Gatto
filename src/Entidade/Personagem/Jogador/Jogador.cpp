@@ -20,7 +20,10 @@ namespace Entidade {
 
         void Jogador::pular() {
             if (noChao && podePular) {
+
+                cout << "pulo" << endl;
                 deslocamento.y = -30.0f;
+                //velocidade.y = -0.40f;
                 estaNoChao(false);
                 podePular = false;
             }
