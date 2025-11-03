@@ -4,7 +4,6 @@
 #include "Lista/ListaEntidades.h"
 #include <vector>
 #include <utility>
-
 #include "Entidade/Itens/Peixe.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
 #include "Entidade/Personagem/Inimigo/Inimigo.h"

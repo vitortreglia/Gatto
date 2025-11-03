@@ -14,7 +14,7 @@ namespace Fase {
         pGColisoes->addJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         listaEnt.incluir(objEntidade);
         pGColisoes->addHitBox(static_cast<Entidade::Itens::Arma*>(objEntidade));
-        criarFaseTorre();
+        criarFaseJardim();
     }
 
     FaseJardim::~FaseJardim() {
@@ -37,15 +37,15 @@ namespace Fase {
         }
     }
 
-    void FaseJardim::criarInimigoRato(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Inimigo(x, y);
+    void FaseJardim::criarInimigoGaivota(float x, float y) {
+        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Gaivota(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->addInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
         }
     }
 
-    void FaseJardim::criarFaseTorre() {
+    void FaseJardim::criarFaseJardim() {
         ifstream arquivo("Data/Fases/FaseJardim.dat");
         int espaco = 0;
         float x = 0.0f;
@@ -69,8 +69,8 @@ namespace Fase {
                 } else if (linha[i] == 'g') {
                     criarPlataformaGiratoria(x, y);
                     x += 200.0f;
-                } else if (linha[i] == 'r') {
-                    criarInimigoRato(x, y);
+                } else if (linha[i] == 'v') {
+                    criarInimigoGaivota(x, y);
                     x += 100.0f;
                 } else if (linha[i] == 'f') {
                     criarPeixe(x, y);
@@ -87,6 +87,4 @@ namespace Fase {
         limitesFase.height = y;
         arquivo.close();
     }
-
-
 }
