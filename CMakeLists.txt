@@ -46,7 +46,6 @@ add_executable(Gatto ${SOURCES}
         src/Entidade/Personagem/Inimigos/inimigo.cpp
 
         src/main.cpp
-        includes/Entidade/Personagem/Jogador/Gaivota.h
 )
 
 # --- Diretórios de include ---
