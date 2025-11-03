@@ -40,7 +40,7 @@ namespace Entidade {
             }
             if (colisao.y < 0.0f) {
                 estaNoChao(true);
-                if (pEntidade->getId() >= IDs::IDs::InimigoRato && pEntidade->getId() <= IDs::IDs::Projetil) {
+                if (pEntidade->getId() >= IDs::IDs::InimigoGaivota && pEntidade->getId() <= IDs::IDs::Projetil) {
                     pEntidade->colisao({colisao.x * -1, colisao.y * -1}, this);
                     pular(1);
                 } else {
@@ -57,11 +57,11 @@ namespace Entidade {
                         tomarDano(100);
                 }
             } else if (colisao.y > 0.0f) {
-                if (pEntidade->getId() >= IDs::IDs::InimigoRato && pEntidade->getId() <= IDs::IDs::Projetil && !sofrendoDano)
+                if (pEntidade->getId() >= IDs::IDs::InimigoGaivota && pEntidade->getId() <= IDs::IDs::Projetil && !sofrendoDano)
                     tomarDano(1);
                 deslocamento.y = deslocamento.y * -1;
             } else if (colisao.x != 0.0f) {
-                if (pEntidade->getId() >= IDs::IDs::InimigoRato && pEntidade->getId() <= IDs::IDs::Projetil && !sofrendoDano) {
+                if (pEntidade->getId() >= IDs::IDs::InimigoGaivota && pEntidade->getId() <= IDs::IDs::Projetil && !sofrendoDano) {
                     tomarDano(1);
                     deslocamento.x = deslocamento.x * -1;
                     pular(0.5);

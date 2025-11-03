@@ -11,8 +11,7 @@ namespace Entidade {
             baseY(y),
             amplitude(30.0f),
             frequencia(5.0f),
-            direcao(true),
-            tempo(0.0f)
+            tempoMovimento(0.0f)
             {
                 baseY = y;
                 andar(true);
@@ -22,23 +21,20 @@ namespace Entidade {
 
             Gaivota::~Gaivota(){}
 
-            void Gaivota::verificaVidas() {
+            /*void Gaivota::verificaVidas() {
                 if (numVidas <= 0) {
                     vivo = false;
                     ativo = false;
                 }
-            }
+            }*/
 
             void Gaivota::mover() {
                 atualizarPos();
                 const float dt = 0.016f;
-                tempo += dt;
+                tempoMovimento += dt;
                 sf::Vector2f pos = getPosicao();
-                pos.y = baseY + std::sin(tempo * frequencia) * amplitude;
-
-                setPosicao(pos);
-
-                corpo.setPosition(pos);
+                pos.y = baseY + std::sin(tempoMovimento * frequencia) * amplitude;
+                atualizarPos(pos);
             }
 
             void Gaivota::executar() {

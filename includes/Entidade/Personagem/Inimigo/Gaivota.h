@@ -10,18 +10,15 @@ namespace Entidade {
 
             class Gaivota : public Inimigo {
             private:
-                float tempo;
+                float tempoMovimento;
                 float amplitude;
-                float velocidadeHorizontal;
                 float frequencia;
                 float baseY;
-                bool direcao;
-
             public:
                 Gaivota(float x, float y);
                 ~Gaivota();
 
-                void verificaVidas();
+                //void verificaVidas();
                 void mover();
                 void executar();
             };
