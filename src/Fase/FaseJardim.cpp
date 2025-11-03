@@ -15,6 +15,7 @@ namespace Fase {
         pGColisoes->addJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         listaEnt.incluir(objEntidade);
         pGColisoes->addHitBox(static_cast<Entidade::Itens::Arma*>(objEntidade));
+        Entidade::Personagem::Inimigo::Inimigo::setJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         criarFaseJardim();
     }
 

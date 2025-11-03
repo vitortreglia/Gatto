@@ -4,6 +4,8 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
+            Jogador* Inimigo::pJog(nullptr);
+
             Inimigo::Inimigo(float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::IDs id) :
             Personagem(vel, tam, px, py, vidas, id)
             {}
@@ -17,7 +19,7 @@ namespace Entidade {
             void Inimigo::verificaDistanciaJogador(sf::Vector2f distSeguir, sf::Vector2f distAtacar) {
                 sf::Vector2f cJ = pJog->getPosicao();
                 if (cJ.x - this->getPosicao().x < distSeguir.x) {
-                    if (cJ.y - this->getPosicao().y < distSeguir.y || this->getPosicao().y)
+                    //if (cJ.y - this->getPosicao().y < distSeguir.y || this->getPosicao().y)
                 }
             }
 
