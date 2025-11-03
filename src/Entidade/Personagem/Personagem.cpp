@@ -39,7 +39,6 @@ namespace Entidade {
             if (!sofrendoDano) {
                 if (andando) {
                     direita ? deslocamento.x = (vMax.x * tempoFrame) : deslocamento.x = -(vMax.x * tempoFrame);
-
                 } else {
                     deslocamento.x = 0.0f;
                 }

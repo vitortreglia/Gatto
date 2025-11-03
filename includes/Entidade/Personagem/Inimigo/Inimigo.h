@@ -10,10 +10,10 @@ namespace Entidade {
             public:
                 Inimigo(float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::IDs id);
                 ~Inimigo();
-                void colisao(sf::Vector2f colisao, Entidade *pEntidade) override;
+                void colisao(sf::Vector2f colisao, Entidade *pEntidade);
                 void verificaVidas();
-                void mover();
-                void executar();
+                virtual void mover();
+                virtual void executar();
             };
         }
     }

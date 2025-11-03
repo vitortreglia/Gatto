@@ -9,7 +9,7 @@ namespace Entidade {
             Gaivota::Gaivota(float x, float y):
             Inimigo(120.0f, {80.0f, 50.0f},x, y, 2, IDs::IDs::InimigoGaivota),
             baseY(y),
-            amplitude(30.0f),
+            amplitude(3.0f),
             frequencia(5.0f),
             tempoMovimento(0.0f)
             {
@@ -21,20 +21,15 @@ namespace Entidade {
 
             Gaivota::~Gaivota(){}
 
-            /*void Gaivota::verificaVidas() {
-                if (numVidas <= 0) {
-                    vivo = false;
-                    ativo = false;
-                }
-            }*/
-
             void Gaivota::mover() {
+                deslocamento.y = std::sin(tempoMovimento * frequencia) * amplitude;
                 atualizarPos();
-                const float dt = 0.016f;
-                tempoMovimento += dt;
-                sf::Vector2f pos = getPosicao();
-                pos.y = baseY + std::sin(tempoMovimento * frequencia) * amplitude;
-                atualizarPos(pos);
+                tempoMovimento += tempoFrame;
+                if (tempoMovimento > 4.0f) {
+                    parar();
+                    andar(!direita);
+                    tempoMovimento = 0.0f;
+                }
             }
 
             void Gaivota::executar() {
