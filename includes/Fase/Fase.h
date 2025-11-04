@@ -20,7 +20,7 @@ namespace Fase {
         void criarFase();
         void criarPlataforma(float x, float y);
         void criarPeixe(float x, float y);
-        void criarRato(float x, float y);
+        void criarInimigoRato(float x, float y);
         void criarProjetil(float x, float y, bool direita);
         void criarCenario();
         void atualizarEntidades();

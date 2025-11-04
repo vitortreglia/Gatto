@@ -79,6 +79,9 @@ namespace Fase {
                 } else if (linha[i] == 'f') {
                     criarPeixe(x, y);
                     x += 100.0f;
+                } else if (linha[i] == 'r') {
+                    criarInimigoRato(x, y);
+                    x += 100.0f;
                 }
                 x += espaco * 100.0f;
                 espaco = 0;

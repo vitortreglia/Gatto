@@ -12,7 +12,8 @@ namespace Entidade {
         numVidas(vidas),
         sofrendoDano(false),
         tempoDano(0.0f),
-        deslocamento({0.0f, 0.0f})
+        deslocamento({0.0f, 0.0f}),
+        voador(false)
         {
             corpo.setFillColor(sf::Color::Red);
         }

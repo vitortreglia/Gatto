@@ -7,7 +7,8 @@ namespace Entidade {
             Inimigo(400.0f, {80.0f, 80.0f}, x, y, 2, IDs::IDs::InimigoRato),
             atirouProjetil(false),
             podeAtirar(true),
-            tempoAtirar(0.0f)
+            tempoAtirar(0.0f),
+            tempoAndar(0.0f)
             {}
 
             Rato::~Rato() {}
@@ -34,11 +35,20 @@ namespace Entidade {
             }
 
             void Rato::mover() {
-
+                if (tempoAndar < 3.0f) {
+                    tempoAndar += tempoFrame;
+                    andar(getDireita());
+                } else {
+                    tempoAndar = 0.0f;
+                    andar(!getDireita());
+                }
             }
 
             void Rato::executar() {
-
+                atirar();
+                verificaVidas();
+                desenhar();
+                atualizarPos();
             }
         }
     }

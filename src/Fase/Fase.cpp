@@ -45,10 +45,18 @@ namespace Fase {
         }
     }
 
+    void Fase::criarInimigoRato(float x, float y) {
+        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
+        if (objEntidade) {
+            listaEnt.incluir(objEntidade);
+            pGColisoes->addInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+        }
+    }
+
+
     void Fase::criarProjetil(float x, float y, bool direita) {
-        y -= 80;
         if (direita) {
-            x += 80;
+            x += 80.0f;
         }
         Entidade::Entidade* objEntidade = new Entidade::Itens::Projetil(x, y, direita);
         if (objEntidade) {
@@ -70,7 +78,8 @@ namespace Fase {
                     criarProjetil(listaEnt[i]->getPosicao().x, listaEnt[i]->getPosicao().y, static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getDireita());
                 }
             }
-            listaEnt[i]->executar();
+            if (listaEnt[i]->estaAtivo())
+                listaEnt[i]->executar();
         }
     }
 

@@ -48,12 +48,14 @@ namespace Entidade {
                             tomarDano(100);
                     }
                 } else if (colisao.y > 0.0f) {
+                    cout << (int)pEntidade->getId() << endl;
                     if (pEntidade->getId() == IDs::IDs::Jogador1)
                         tomarDano(1);
                     deslocamento.y = deslocamento.y * -1;
                 } else if (colisao.x != 0.0f) {
                     deslocamento.x = 0.0f;
                 }
+
                 colisao.x += getPosicao().x;
                 colisao.y += getPosicao().y;
                 atualizarPos(colisao);
