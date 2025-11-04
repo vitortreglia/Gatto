@@ -14,7 +14,7 @@ namespace Entidade {
             bool direcao;
 
         public:
-            PlataformaMovel(float x = 100, float y = 100);
+            PlataformaMovel(float x = 100, float y = 100, bool direcao = false);
             ~PlataformaMovel();
             void mover();
             void executar();

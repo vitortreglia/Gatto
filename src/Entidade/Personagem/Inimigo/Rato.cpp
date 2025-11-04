@@ -4,12 +4,13 @@ namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Rato::Rato(float x, float y):
-            Inimigo(400.0f, {80.0f, 80.0f}, x, y, 2, IDs::IDs::InimigoRato),
+            Inimigo(200.0f, {80.0f, 80.0f}, x, y, 2, IDs::IDs::InimigoRato),
             atirouProjetil(false),
             podeAtirar(true),
             tempoAtirar(0.0f),
-            tempoAndar(0.0f)
-            {}
+            tempoAndar(0.0f) {
+                corpo.setFillColor(sf::Color::Yellow);
+            }
 
             Rato::~Rato() {}
 
@@ -35,7 +36,7 @@ namespace Entidade {
             }
 
             void Rato::mover() {
-                if (tempoAndar < 3.0f) {
+                if (tempoAndar < 2.0f) {
                     tempoAndar += tempoFrame;
                     andar(getDireita());
                 } else {
@@ -47,6 +48,7 @@ namespace Entidade {
             void Rato::executar() {
                 atirar();
                 verificaVidas();
+                mover();
                 desenhar();
                 atualizarPos();
             }

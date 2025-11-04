@@ -25,8 +25,8 @@ namespace Fase {
 
     }
 
-    void FaseJardim::criarPlataformaMovel(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y);
+    void FaseJardim::criarPlataformaMovel(float x, float y, bool direcao) {
+        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y, direcao);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
@@ -68,7 +68,10 @@ namespace Fase {
                     criarPlataforma(x, y);
                     x += 100.0f;
                 } else if (linha[i] == 'm') {
-                    criarPlataformaMovel(x, y);
+                    criarPlataformaMovel(x, y, false);
+                    x += 200.0f;
+                } else if (linha[i] == 'n') {
+                    criarPlataformaMovel(x, y, true);
                     x += 200.0f;
                 } else if (linha[i] == 'g') {
                     criarPlataformaGiratoria(x, y);

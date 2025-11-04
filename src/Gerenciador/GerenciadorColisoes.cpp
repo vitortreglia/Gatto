@@ -177,6 +177,7 @@ namespace Gerenciador {
             if ((*it)->estaAtivo()) {
                 colisao = verificarColisao(*it, pJogador1);
                 if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    (*it)->setAtivo(false);
                     pJogador1->colisao(colisao, *it);
                 }
             }
@@ -190,6 +191,7 @@ namespace Gerenciador {
         tratarColisoesInimigsObstacs();
         tratarColisoesAtaque();
         tratarColisoesEventos();
+        tratarColisoesProjeteis();
     }
 
 

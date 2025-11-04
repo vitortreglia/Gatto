@@ -4,7 +4,7 @@
 namespace Entidade {
     namespace Personagem {
         Jogador::Jogador(Itens::Arma* pG):
-        Personagem(600.0f, sf::Vector2f(100, 100), 100, 1700, 7, IDs::IDs::Jogador1),
+        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, IDs::IDs::Jogador1),
         podePular(true),
         pGarra(pG),
         peixes(0),
