@@ -22,7 +22,7 @@ namespace Entidade {
             void setAtacando(bool atk);
             bool getAtacando();
             void ataque();
-            virtual void atacar();
+            void atacar();
             void colisao(sf::Vector2f colisao, Entidade *pEntidade);
             void executar();
         };

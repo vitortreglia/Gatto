@@ -1,6 +1,6 @@
 #include "Entidade/Itens/ArmaInimigo.h"
 
-#include "Entidade/Itens/Arma.h"
+//#include "Entidade/Itens/Arma.h"
 
 namespace Entidade {
     namespace Itens {
@@ -16,6 +16,7 @@ namespace Entidade {
         void ArmaInimigo::atacar() {
 
             desenhar();
+
             if (tempoAtaque == 0.0) {
                 ataque();
             }
@@ -27,6 +28,10 @@ namespace Entidade {
                 tempoAtaque = 0.0;
                 setPosicao ({-1000.0, -1000.0});
             }
+        }
+
+        void ArmaInimigo::colisao(sf::Vector2f colisao, Entidade *pEntidade) {
+            pEntidade->colisao({0.0f, 0.0f}, this);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Entidade {
             ~ArmaInimigo();
             void executar();
             void atacar();
+            void colisao(sf::Vector2f, Entidade*);
         };
     }
 }
