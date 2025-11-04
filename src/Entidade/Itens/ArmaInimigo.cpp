@@ -7,6 +7,11 @@ namespace Entidade {
         ArmaInimigo::ArmaInimigo(IDs::IDs id, int forca) : Arma(id, forca) {
 
         }
+
+        ArmaInimigo::~ArmaInimigo() {
+
+        }
+
         void ArmaInimigo::executar(){
 
             if (getAtacando())
