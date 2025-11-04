@@ -98,7 +98,10 @@ namespace Entidade {
             pGGrafico->moveCamera(x, y);
             desenhar();
             mover();
-            interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
+            if (peixes < 3)
+                interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
+            else
+                interface.setTexto("Venceu");
             interface.executar();
         }
 
