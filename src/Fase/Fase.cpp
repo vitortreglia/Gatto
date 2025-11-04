@@ -1,12 +1,14 @@
 #include "Fase/Fase.h"
 
 #include "Entidade/Itens/Peixe.h"
+#include "Entidade/Itens/Projetil.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
 #include "Entidade/Obstaculo/Plataforma.h"
 #include "Entidade/Obstaculo/PlataformaGiratoria.h"
 #include "Entidade/Obstaculo/PlataformaMovel.h"
 #include "Entidade/Personagem/Personagem.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
+#include "Entidade/Personagem/Inimigo/Rato.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
 namespace Fase {
@@ -43,19 +45,40 @@ namespace Fase {
         }
     }
 
+    void Fase::criarProjetil(float x, float y, bool direita) {
+        y -= 80;
+        if (direita) {
+            x += 80;
+        }
+        Entidade::Entidade* objEntidade = new Entidade::Itens::Projetil(x, y, direita);
+        if (objEntidade) {
+            listaEnt.incluir(objEntidade);
+            pGColisoes->addProjetil(static_cast<Entidade::Itens::Projetil*>(objEntidade));
+        }
+    }
+
 
     void Fase::criarFase() {
 
     }
 
-    void Fase::executar() {
-        Entidade::Entidade::getTempoFrame();
-        listaEnt.percorrer();
-        pGColisoes->executar();
+    void Fase::atualizarEntidades() {
+        for (int i = 0; i < listaEnt.getTam(); i++) {
+            if (listaEnt[i]->getId() == IDs::IDs::InimigoRato) {
+                if (static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getAtirou()) {
+                    static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->setAtirou(false);
+                    criarProjetil(listaEnt[i]->getPosicao().x, listaEnt[i]->getPosicao().y, static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getDireita());
+                }
+            }
+            listaEnt[i]->executar();
+        }
     }
 
 
-
-
-
+    void Fase::executar() {
+        Entidade::Entidade::getTempoFrame();
+        atualizarEntidades();
+        //listaEnt.percorrer();
+        pGColisoes->executar();
+    }
 }

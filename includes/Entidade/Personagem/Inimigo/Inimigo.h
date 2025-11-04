@@ -17,8 +17,8 @@ namespace Entidade {
                 void verificaDistanciaJogador(sf::Vector2f distSeguir, sf::Vector2f distAtacar);
                 void colisao(sf::Vector2f colisao, Entidade *pEntidade);
                 void verificaVidas();
-                virtual void mover();
-                virtual void executar();
+                virtual void mover() = 0;
+                virtual void executar() = 0;
             };
         }
     }

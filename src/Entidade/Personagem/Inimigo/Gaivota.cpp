@@ -13,7 +13,6 @@ namespace Entidade {
             frequencia(5.0f),
             tempoMovimento(0.0f)
             {
-                baseY = y;
                 andar(true);
                 corpo.setFillColor(sf::Color::White);
                 setVoador(true);

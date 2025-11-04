@@ -9,7 +9,8 @@ namespace Gerenciador {
     camera({0, 0, 1280, 720}),
     limitesCamera({0.0f, 0.0f, 0.0f, 0.0f}),
     cameraX(TELA_X/2),
-    cameraY(TELA_Y/2)
+    cameraY(TELA_Y/2),
+    tempo(0.0f)
     {
         if (window == nullptr) {
             cout << "Nao foi possivel criar a janela grafica" << endl;
@@ -89,7 +90,9 @@ namespace Gerenciador {
         } else if (cameraX > limitesCamera.width - TELA_X / 2) {
             cameraX = limitesCamera.width - TELA_X / 2;
         }
-        if (y < cameraY - 100 || y > cameraY + 100)
+        if (y < cameraY - 360 || y > cameraY + 360)
+            cameraY = y;
+        else if (y < cameraY - 100 || y > cameraY + 100)
             cameraY += 3 * (y - cameraY) * tempo;
         if (cameraY < limitesCamera.top + TELA_Y / 2) {
             cameraY = limitesCamera.top + TELA_Y / 2;

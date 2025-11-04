@@ -65,15 +65,11 @@ namespace Entidade {
                     setAtivo(false);
                 } else if (sofrendoDano) {
                     tempoDano += tempoFrame;
-                    if (tempoDano > 0.3f) {
+                    if (tempoDano > 1.0f) {
                         sofrendoDano = false;
                         tempoDano = 0.0f;
                     }
                 }
-            }
-
-            void Inimigo::mover() {
-
             }
 
             void Inimigo::executar() {

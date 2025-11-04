@@ -1,4 +1,6 @@
 #include "Fase/FaseJardim.h"
+
+#include "Entidade/Itens/Projetil.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
 #include "Entidade/Obstaculo/PlataformaGiratoria.h"
 #include "Entidade/Obstaculo/PlataformaMovel.h"

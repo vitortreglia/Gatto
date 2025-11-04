@@ -5,6 +5,7 @@
 #include <vector>
 #include <utility>
 #include "Entidade/Itens/Peixe.h"
+#include "Entidade/Itens/Projetil.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
@@ -19,6 +20,7 @@ namespace Gerenciador {
         Entidade::Personagem::Jogador* pJogador1;
         vector<Entidade::Itens::Arma*> LHs;
         vector<Entidade::Itens::Peixe*> LPs;
+        list<Entidade::Itens::Projetil*> LPrs;
     public:
         GerenciadorColisoes(Lista::ListaEntidades* pLPersonagens);
         ~GerenciadorColisoes();
@@ -27,6 +29,7 @@ namespace Gerenciador {
         void addInimigo(Entidade::Personagem::Inimigo::Inimigo* pIni);
         void addHitBox(Entidade::Itens::Arma* pH);
         void addPeixe(Entidade::Itens::Peixe* pPeixe);
+        void addProjetil(Entidade::Itens::Projetil* pProjetil);
         sf::Vector2f calculaNormal(const sf::Vector2f& vertice1, const sf::Vector2f& vertice2);
         vector<pair<float, float>> calculaProjecao(const vector<sf::Vector2f>& vertices, const vector<sf::Vector2f>& normal);
         sf::Vector2f calculaSobreposicao(vector<sf::Vector2f> coordCorpo1, vector<sf::Vector2f> coordCorpo2);
@@ -36,6 +39,7 @@ namespace Gerenciador {
         void tratarColisoesInimigsObstacs();
         void tratarColisoesAtaque();
         void tratarColisoesEventos();
+        void tratarColisoesProjeteis();
         void executar();
     };
 }

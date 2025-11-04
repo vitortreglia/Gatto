@@ -30,6 +30,10 @@ namespace Gerenciador {
         LPs.push_back(pPeixe);
     }
 
+    void GerenciadorColisoes::addProjetil(Entidade::Itens::Projetil *pProjetil) {
+        LPrs.push_back(pProjetil);
+    }
+
 
     sf::Vector2f GerenciadorColisoes::calculaNormal(const sf::Vector2f& vertice1, const sf::Vector2f& vertice2) {
         sf::Vector2f normal;
@@ -162,6 +166,18 @@ namespace Gerenciador {
                 colisao = verificarColisao(*it, pJogador1);
                 if (colisao.x != 0.0f || colisao.y != 0.0f) {
                     (*it)->colisao(colisao, pJogador1);
+                }
+            }
+        }
+    }
+
+    void GerenciadorColisoes::tratarColisoesProjeteis() {
+        sf::Vector2f colisao;
+        for (list<Entidade::Itens::Projetil*>::const_iterator it = LPrs.begin(); it != LPrs.end(); it++) {
+            if ((*it)->estaAtivo()) {
+                colisao = verificarColisao(*it, pJogador1);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    pJogador1->colisao(colisao, *it);
                 }
             }
         }
