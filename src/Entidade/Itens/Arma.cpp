@@ -24,7 +24,6 @@ namespace Entidade {
             return dano;
         }
 
-
         void Arma::setAtacando(bool atk) {
             atacando = atk;
         }

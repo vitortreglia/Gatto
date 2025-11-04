@@ -17,10 +17,10 @@ namespace Entidade {
             }
 
             void Inimigo::verificaDistanciaJogador(sf::Vector2f distSeguir, sf::Vector2f distAtacar) {
-                sf::Vector2f cJ = pJog->getPosicao();
-                if (cJ.x - this->getPosicao().x < distSeguir.x) {
+                sf::Vector2f cJ ->getPosicao().x < distSeguir.x) {
                     //if (cJ.y - this->getPosicao().y < distSeguir.y || this->getPosicao().y)
-                }
+                }= pJog->getPosicao();
+                if (cJ.x - this
             }
 
 

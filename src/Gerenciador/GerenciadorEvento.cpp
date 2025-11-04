@@ -10,9 +10,8 @@ namespace Gerenciador {
 
     GerenciadorEvento::~GerenciadorEvento() {
         pGEvento = nullptr;
-        pJogador = nullptr;
+        //pJogador = nullptr;
     }
-
 
     GerenciadorEvento* GerenciadorEvento::getGerenciadorEvento() {
         if (!pGEvento) {
@@ -61,6 +60,7 @@ namespace Gerenciador {
         }
         verificaTeclaPressionada();
     }
+
 
 
 }
