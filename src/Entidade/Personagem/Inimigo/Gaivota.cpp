@@ -9,7 +9,9 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
-            Gaivota::Gaivota(float x, float y) {
+            Gaivota::Gaivota(float x, float y):
+            Inimigo(0, {80, 50}, x, y, 2, IDs::IDs::InimigoGaivota)
+            {
                 setPosicao(sf::Vector2f(x, y));
                 baseY = y;
 
@@ -133,8 +135,9 @@ namespace Entidade {
             void Gaivota::mover() {
                 const float dt = 0.016f;
 
-                pJog = Gerenciador::GerenciadorEvento::getJogador();
-                sf::Vector2f posJog = pJog ? pJog->getPosicao() : sf::Vector2f(getPosicao().x, baseY);
+                //pJog
+                sf::Vector2f posJog;
+                pJog ? posJog = pJog->getPosicao() : posJog = sf::Vector2f(getPosicao().x, baseY);
 
                 decidirEstado(posJog);
 
@@ -154,6 +157,7 @@ namespace Entidade {
                 mover();
                 verificaVidas();
                 desenhar();
+                cout << pJog->getPosicao().x << endl;
             }
 
 
