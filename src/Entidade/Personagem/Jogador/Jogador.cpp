@@ -47,7 +47,7 @@ namespace Entidade {
                     if (colisao.x != 0.0f) {
                         float tg;
                         tg = colisao.x / colisao.y;
-                        if (tg >= -1 && tg <= 1 && deslocamento.y > 0.0f) {
+                        if (tg >= -0.6f && tg <= 0.6f && deslocamento.y > 0.0f) {
                             deslocamento.y = 0.0f;
                         }
                     } else if (deslocamento.y > 0.0f) {

@@ -48,8 +48,10 @@ namespace Entidade {
                             tomarDano(100);
                     }
                 } else if (colisao.y > 0.0f) {
-                    if (pEntidade->getId() == IDs::IDs::Jogador1)
+                    if (pEntidade->getId() == IDs::IDs::Jogador1) {
+                        cout << "dano inimigo" << endl;
                         tomarDano(1);
+                    }
                     deslocamento.y = deslocamento.y * -1;
                 } else if (colisao.x != 0.0f) {
                     deslocamento.x = 0.0f;
@@ -66,7 +68,7 @@ namespace Entidade {
                     setAtivo(false);
                 } else if (sofrendoDano) {
                     tempoDano += tempoFrame;
-                    if (tempoDano > 1.0f) {
+                    if (tempoDano > 0.5f) {
                         sofrendoDano = false;
                         tempoDano = 0.0f;
                     }
