@@ -12,6 +12,8 @@ namespace Entidade {
         texto.setFont(fonte);
     }
 
+    Texto::~Texto() {}
+
     void Texto::setTexto(std::string txt) {
         texto.setString(txt);
     }

@@ -11,6 +11,7 @@ namespace Entidade {
         sf::Font fonte;
     public:
         Texto(std::string conteudo, int tamanho, float x, float y);
+        ~Texto();
         void setTexto(std::string txt);
         void desenhar();
         void executar();
