@@ -1,6 +1,7 @@
 #ifndef GAIVOTA_H
 #define GAIVOTA_H
 
+#include "EstadoRasante.h"
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
 #include "Entidade/Itens/ArmaInimigo.h"
 
@@ -8,6 +9,7 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
+        class EstadoGaivota;
 
             class Gaivota : public Inimigo {
             private:
@@ -18,7 +20,8 @@ namespace Entidade {
                 float baseY;
                 int direcao;
 
-                int estado;
+                EstadoGaivota* estado;
+
                 float raioPercepcaoX;
                 float raioPercepcaoY;
                 float raioAtaque;
@@ -29,23 +32,23 @@ namespace Entidade {
                 bool possuiPeixe;
 
                 Itens::ArmaInimigo* pArma;
-                void patrulhar(float dt);
-                void fazerRasante(float dt, const sf::Vector2f& posJog);
-                void fazerAtaque(float dt);
-                void decidirEstado(const sf::Vector2f& posJog);
-                void virarPara(const sf::Vector2f& posJog);
+
+                //void fazerRasante(float dt, const sf::Vector2f& posJog);
+                //void virarPara(const sf::Vector2f& posJog);
 
             public:
                 Gaivota(float x, float y);
                 ~Gaivota();
 
                 //void verificaVidas();
-                void mover();
+                //void mover();
                 void verificaVidas();
                 void executar();
-
-                void setArma(Itens::ArmaInimigo* arma);
-                void pegarPeixe();
+                void setEstado(EstadoGaivota* pEstado);
+                bool patrulhar(float dt);
+                bool fazerAtaque(float dt);
+                //void setArma(Itens::ArmaInimigo* arma);
+                //void pegarPeixe();
             };
         }
     }

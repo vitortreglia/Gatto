@@ -5,12 +5,13 @@
 #include "Entidade/Itens/Arma.h"
 #include "Entidade/Itens/ArmaInimigo.h"
 #include "IDs.h"
+#include "Entidade/Personagem/Inimigo/EstadoPatrulha.h"
 
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Gaivota::Gaivota(float x, float y):
-            Inimigo(0, {80, 50}, x, y, 2, IDs::IDs::InimigoGaivota)
+            Inimigo(120.0f, {80, 50}, x, y, 2, IDs::IDs::InimigoGaivota)
             {
                 setPosicao(sf::Vector2f(x, y));
                 baseY = y;
@@ -18,16 +19,16 @@ namespace Entidade {
                 setTamanho(sf::Vector2f(80.0f, 50.0f));
 
                 tempo = 0.0f;
-                amplitude = 30.0f;
-                velocidadeHorizontal = 120.0f;
+                amplitude = 30.0;
                 frequencia = 5.0f;
                 direcao = 1;
+
+                setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
 
                 numVidas = 2;
                 vivo = true;
                 corpo.setFillColor(sf::Color::White);
-                //setVoador(true);
-                estado = 0;
+                setVoador(true);
 
                 raioPercepcaoX   = 280.0f;
                 raioPercepcaoY = 80.0f;
@@ -46,7 +47,7 @@ namespace Entidade {
                     vivo = false;
             }
 
-            void Gaivota::virarPara(const sf::Vector2f& posJog) {
+            /*void Gaivota::virarPara(const sf::Vector2f& posJog) {
                 float dx = posJog.x - getPosicao().x;
                 if (dx > 0) {
                     direcao = 1;
@@ -72,19 +73,30 @@ namespace Entidade {
 
                 setPosicao(pos);
                 corpo.setPosition(pos);
-            }
+            }*/
 
-            void Gaivota::patrulhar(float dt) {
+            bool Gaivota::patrulhar(float dt) {
                 tempo += dt;
                 sf::Vector2f pos = getPosicao();
-                pos.x += velocidadeHorizontal * dt * (float)direcao;
+                pos.x += vMax.x * dt * (float)direcao;
                 pos.y = baseY + std::sin(tempo * frequencia) * amplitude;
                 setPosicao(pos);
                 corpo.setPosition(pos);
+                //return false;
+
+                const sf::Vector2f& posJog = pJog->getPosicao();
+                sf::Vector2f posicao = getPosicao();
+                float dx = posJog.x - posicao.x;
+                float dy = posJog.y - posicao.y;
+                float adx = std::fabs(dx);
+                float ady = std::fabs(dy);
+
+                bool dentroRasante = (adx < raioPercepcaoX) && (ady < raioPercepcaoY);
+                return dentroRasante;
             }
 
-            void Gaivota::fazerAtaque(float dt) {
-                sf::Vector2f pos = getPosicao();
+            bool Gaivota::fazerAtaque(float dt) {
+               /* sf::Vector2f pos = getPosicao();
                 sf::Vector2f dir = alvoAtaque - pos;
 
                 float dist = std::sqrt(dir.x*dir.x + dir.y*dir.y);
@@ -93,7 +105,7 @@ namespace Entidade {
                     estado = 0;
                     if (pArma)
                         pArma->setAtacando(false);
-                    return;
+                    //return false;
                 }
 
                 dir.x /= dist;
@@ -106,9 +118,10 @@ namespace Entidade {
                 corpo.setPosition(pos);
 
                 if (pArma && !pArma->getAtacando())
-                    pArma->setAtacando(true);
+                    pArma->setAtacando(true);*/
+                return false;
             }
-
+            /*
             void Gaivota::decidirEstado(const sf::Vector2f& posJog) {
                 sf::Vector2f pos = getPosicao();
                 float dx = posJog.x - pos.x;
@@ -151,13 +164,24 @@ namespace Entidade {
 
                 if (pArma)
                     pArma->executar();
+                }*/
+
+            void Gaivota::setEstado(EstadoGaivota *pEstado) {
+                if (pEstado) {
+                    estado = pEstado;
                 }
+            }
+
 
             void Gaivota::executar() {
-                mover();
+                /*mover();
                 verificaVidas();
                 desenhar();
-                cout << pJog->getPosicao().x << endl;
+                cout << pJog->getPosicao().x << endl;*/
+
+                estado->executar(tempoFrame);
+                desenhar();
+                //verificaVidas();
             }
 
 

@@ -32,7 +32,13 @@ file(GLOB_RECURSE SOURCES
 # --- Cria o executável ---
 add_executable(Gatto ${SOURCES}
         src/Entidade/Itens/ArmaInimigo.cpp
-        includes/Entidade/Itens/ArmaInimigo.h)
+        includes/Entidade/Itens/ArmaInimigo.h
+        src/Entidade/Personagem/Inimigo/EstadoGaivota.cpp
+        includes/Entidade/Personagem/Inimigo/EstadoGaivota.h
+        includes/Entidade/Personagem/Inimigo/EstadoPatrulha.h
+        includes/Entidade/Personagem/Inimigo/EstadoRasante.h
+        src/Entidade/Personagem/Inimigo/EstadoPatrulha.cpp
+        src/Entidade/Personagem/Inimigo/EstadoRasante.cpp)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE
