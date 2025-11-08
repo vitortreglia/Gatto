@@ -13,7 +13,6 @@ namespace Entidade {
             Projetil(float x, float y, bool direita);
             ~Projetil();
             void mover();
-            void colisao(sf::Vector2f colisao, Entidade *pEntidade);
             void executar();
         };
     }

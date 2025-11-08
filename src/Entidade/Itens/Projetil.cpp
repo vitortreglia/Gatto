@@ -24,10 +24,6 @@ namespace Entidade {
             }
         }
 
-        void Projetil::colisao(sf::Vector2f colisao, Entidade *pEntidade) {
-
-        }
-
         void Projetil::executar() {
             mover();
             desenhar();

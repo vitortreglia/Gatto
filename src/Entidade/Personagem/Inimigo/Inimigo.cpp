@@ -1,5 +1,4 @@
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
-#include "../../../../includes/Entidade/Personagem/Ataque.h"
 
 namespace Entidade {
     namespace Personagem {

@@ -4,6 +4,7 @@
 #include "Entidade/Texto.h"
 #include "../Ataque.h"
 #include "Entidade/Itens/Peixe.h"
+#include "Entidade/Itens/Projetil.h"
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
 
 namespace Entidade {
@@ -21,6 +22,7 @@ namespace Entidade {
             void pular(float multiplicador);
             void coletarPeixe(Itens::Peixe* pPeixe);
             void colidir(Inimigo::Inimigo* pInimigo, sf::Vector2f colisao);
+            void colidir(sf::Vector2f colisao);
             void verificaVidas();
             void mover();
             void executar();

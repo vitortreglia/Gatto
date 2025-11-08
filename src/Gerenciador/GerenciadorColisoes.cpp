@@ -174,10 +174,10 @@ namespace Gerenciador {
         sf::Vector2f colisao;
         for (set<Entidade::Itens::Projetil*>::const_iterator it = LPs.begin(); it != LPs.end(); it++) {
             if ((*it)->estaAtivo()) {
-                colisao = verificarColisao(*it, pJogador1);
+                colisao = verificarColisao(pJogador1, *it);
                 if (colisao.x != 0.0f || colisao.y != 0.0f) {
                     (*it)->setAtivo(false);
-                    //pJogador1->colidir(*it, colisao);
+                    pJogador1->colidir(colisao);
                 }
             }
         }

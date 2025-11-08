@@ -21,6 +21,7 @@ namespace Entidade {
             Gaivota::~Gaivota(){}
 
             void Gaivota::danificar(Jogador *pJ) {
+                nivelMaldade++;
 
             }
 

@@ -35,7 +35,7 @@ namespace Entidade {
 
         void Jogador::colidir(Inimigo::Inimigo* pInimigo, sf::Vector2f colisao) {
             if (colisao.y < 0.0f) {
-                pular(0.8f);
+                pular(1.0f);
                 pInimigo->tomarDano(1);
             } else if (getAtacando()) {
                 if (getDireita()) {
@@ -50,9 +50,26 @@ namespace Entidade {
                     pInimigo->danificar(this);
                 }
             } else {
+                if (colisao.x < 0.0f) {
+                    deslocamento.x = -5.0f;
+                } else {
+                    deslocamento.x = 5.0f;
+                }
+                pular(0.5f);
                 pInimigo->danificar(this);
             }
         }
+
+        void Jogador::colidir(sf::Vector2f colisao) {
+            if (colisao.x < 0.0f) {
+                deslocamento.x = -5.0f;
+            } else {
+                deslocamento.x = 5.0f;
+            }
+            pular(0.5f);
+            tomarDano(1);
+        }
+
 
         void Jogador::verificaVidas() {
             if (numVidas <= 0) {
@@ -62,6 +79,7 @@ namespace Entidade {
                 tempoDano += tempoFrame;
                 if (tempoDano > 0.5f) {
                     sofrendoDano = false;
+                    deslocamento.x = 0.0f;
                     tempoDano = 0.0f;
                 }
             }
