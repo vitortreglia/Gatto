@@ -38,7 +38,7 @@ namespace Entidade {
 
         void PlataformaMovel::executar() {
             obstaculizar();
-            desenhar();
+            //desenhar();
         }
 
     }

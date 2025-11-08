@@ -1,6 +1,6 @@
 #ifndef PERSONAGEM_H
 #define PERSONAGEM_H
-#include"../Entidade.h"
+#include"Entidade/Entidade.h"
 
 namespace Entidade {
     namespace Personagem {
@@ -22,14 +22,15 @@ namespace Entidade {
             virtual ~Personagem();
             void andar(const bool dir);
             void parar();
-            bool getDireita();
+            const bool getDireita() const;
             void calculaVelocidade();
+            sf::Vector2f getDeslocamento();
+            void setDeslocamento(sf::Vector2f desl);
             void atualizarPos(sf::Vector2f pos);
             void atualizarPos();
             void estaNoChao(bool c);
             void tomarDano(int dano);
             void setVoador(bool voador);
-            void colisao(sf::Vector2f colisao, Entidade* pEntidade) = 0;
             virtual void verificaVidas() = 0;
             virtual void mover() = 0;
             virtual void executar() = 0;

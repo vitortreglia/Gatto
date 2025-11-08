@@ -5,11 +5,11 @@ namespace Entidade {
     float Entidade::tempoFrame(0.0f);
 
     Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy, IDs::IDs id):
-    Ente(id),
+    Ente(id, &corpo),
     x(posx),
     y(posy),
     tam(tamanho),
-    corpo(tamanho),
+    corpo(tam),
     ativo(true)
     {
         setPosicao(sf::Vector2f(x, y));
@@ -28,11 +28,9 @@ namespace Entidade {
         ativo = at;
     }
 
-
     const sf::Vector2f Entidade::getPosicao() const {
         return corpo.getPosition();
     }
-
 
     void Entidade::setPosicao(sf::Vector2f posicao) {
         x = posicao.x;
@@ -63,12 +61,5 @@ namespace Entidade {
     void Entidade::getTempoFrame() {
         tempoFrame = pGGrafico->getTempo();
     }
-
-
-    void Entidade::desenhar() {
-        pGGrafico->desenharEnte(corpo);
-    }
-
-
 
 }

@@ -8,11 +8,12 @@ class Ente {
 protected:
     IDs::IDs ID; //identificacao do ente
     static Gerenciador::GerenciadorGrafico* pGGrafico;
+    sf::RectangleShape* pFig;
 public:
-    Ente(IDs::IDs id);
+    Ente(IDs::IDs id, sf::RectangleShape* pF);
     virtual ~Ente();
     const IDs::IDs getId() const;
-    virtual void desenhar() = 0;
+    void desenhar();
     virtual void executar() = 0;
 };
 

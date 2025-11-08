@@ -33,7 +33,7 @@ namespace Fase {
         Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Plataforma(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
         }
     }
 
@@ -41,7 +41,7 @@ namespace Fase {
         Entidade::Entidade* objEntidade = new Entidade::Itens::Peixe(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addPeixe(static_cast<Entidade::Itens::Peixe*>(objEntidade));
+            pGColisoes->incluirPeixe(static_cast<Entidade::Itens::Peixe*>(objEntidade));
         }
     }
 
@@ -49,7 +49,7 @@ namespace Fase {
         Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+            pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
         }
     }
 
@@ -61,7 +61,7 @@ namespace Fase {
         Entidade::Entidade* objEntidade = new Entidade::Itens::Projetil(x, y, direita);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addProjetil(static_cast<Entidade::Itens::Projetil*>(objEntidade));
+            pGColisoes->incluirProjetil(static_cast<Entidade::Itens::Projetil*>(objEntidade));
         }
     }
 
@@ -81,13 +81,22 @@ namespace Fase {
             if (listaEnt[i]->estaAtivo())
                 listaEnt[i]->executar();
         }
+        pGColisoes->executar();
+        for (int i = 0; i < listaEnt.getTam(); i++) {
+            if (listaEnt[i]->getId() == IDs::IDs::InimigoRato) {
+                if (static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getAtirou()) {
+                    static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->setAtirou(false);
+                    criarProjetil(listaEnt[i]->getPosicao().x, listaEnt[i]->getPosicao().y, static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getDireita());
+                }
+            }
+            if (listaEnt[i]->estaAtivo())
+                listaEnt[i]->desenhar();
+        }
     }
 
 
     void Fase::executar() {
         Entidade::Entidade::getTempoFrame();
         atualizarEntidades();
-        //listaEnt.percorrer();
-        pGColisoes->executar();
     }
 }

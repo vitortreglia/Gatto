@@ -12,12 +12,8 @@ namespace Fase {
     maxInimFaceis(0),
     maxInimMedios(0)
     {
-        Entidade::Entidade* objEntidade = new Entidade::Itens::Arma(IDs::IDs::ArmaGarra, 1);
-        listaEnt.incluir(new Entidade::Personagem::Jogador(static_cast<Entidade::Itens::Arma*>(objEntidade)));
-        pGColisoes->addJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
-        listaEnt.incluir(objEntidade);
-        pGColisoes->addHitBox(static_cast<Entidade::Itens::Arma*>(objEntidade));
-        Entidade::Personagem::Inimigo::Inimigo::setJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
+        listaEnt.incluir(new Entidade::Personagem::Jogador());
+        pGColisoes->incluirJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         criarFaseJardim();
     }
 
@@ -29,7 +25,7 @@ namespace Fase {
         Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y, direcao);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
         }
     }
 
@@ -37,7 +33,7 @@ namespace Fase {
         Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaGiratoria(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
         }
     }
 
@@ -45,7 +41,7 @@ namespace Fase {
         Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Gaivota(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+            pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
         }
     }
 

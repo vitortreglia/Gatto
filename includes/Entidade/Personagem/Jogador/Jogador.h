@@ -1,24 +1,26 @@
 #ifndef JOGADOR_H
 #define JOGADOR_H
-#include "../Personagem.h"
+#include "Entidade/Personagem/Personagem.h"
 #include "Entidade/Texto.h"
-#include "Entidade/Itens/Arma.h"
+#include "../Ataque.h"
+#include "Entidade/Itens/Peixe.h"
+#include "Entidade/Personagem/Inimigo/Inimigo.h"
 
 namespace Entidade {
     namespace Personagem {
-        class Jogador : public Personagem {
+        class Jogador : public Personagem, public Ataque {
         private:
             bool podePular;
-            Itens::Arma* pGarra;
             int peixes;
+            int deslocAtaque;
             Texto interface;
         public:
-            Jogador(Itens::Arma* pG);
+            Jogador();
             ~Jogador();
             void liberaPulo();
             void pular(float multiplicador);
-            void atacar();
-            void colisao(sf::Vector2f colisao, Entidade *pEntidade);
+            void coletarPeixe(Itens::Peixe* pPeixe);
+            void colidir(Inimigo::Inimigo* pInimigo, sf::Vector2f colisao);
             void verificaVidas();
             void mover();
             void executar();

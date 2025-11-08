@@ -19,6 +19,7 @@ namespace Entidade {
                 ~Gaivota();
 
                 //void verificaVidas();
+                void danificar(Jogador *pJ);
                 void mover();
                 void executar();
             };

@@ -36,7 +36,7 @@ namespace Entidade {
 
         void PlataformaGiratoria::executar() {
             obstaculizar();
-            desenhar();
+            //desenhar();
         }
 
     }

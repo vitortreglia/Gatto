@@ -13,9 +13,5 @@ namespace Entidade {
             desenhar();
         }
 
-        void Obstaculo::colisao(sf::Vector2f colisao, Entidade* pEntidade) {
-
-        }
-
     }
 }

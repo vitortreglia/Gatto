@@ -31,10 +31,17 @@ namespace Entidade {
             andando = false;
         }
 
-        bool Personagem::getDireita() {
+        const bool Personagem::getDireita() const {
             return direita;
         }
 
+        sf::Vector2f Personagem::getDeslocamento() {
+            return deslocamento;
+        }
+
+        void Personagem::setDeslocamento(sf::Vector2f desl) {
+            deslocamento = desl;
+        }
 
         void Personagem::calculaVelocidade() {
             if (!sofrendoDano) {

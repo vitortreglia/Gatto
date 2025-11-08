@@ -1,10 +1,12 @@
 #include "Entidade/Personagem/Inimigo/Rato.h"
 
+#include "Entidade/Personagem/Jogador/Jogador.h"
+
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Rato::Rato(float x, float y):
-            Inimigo(200.0f, {80.0f, 80.0f}, x, y, 2, IDs::IDs::InimigoRato),
+            Inimigo(2, 200.0f, {80.0f, 80.0f}, x, y, 2, IDs::IDs::InimigoRato),
             atirouProjetil(false),
             podeAtirar(true),
             tempoAtirar(0.0f),
@@ -33,6 +35,10 @@ namespace Entidade {
                         podeAtirar = true;
                     }
                 }
+            }
+
+            void Rato::danificar(Jogador *pJ) {
+                pJ->tomarDano(nivelMaldade);
             }
 
             void Rato::mover() {

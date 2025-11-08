@@ -15,7 +15,7 @@ namespace Entidade {
         }
 
         void Plataforma::executar() {
-            desenhar();
+            //desenhar();
         }
 
 

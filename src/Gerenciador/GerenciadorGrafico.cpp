@@ -40,8 +40,8 @@ namespace Gerenciador {
         return window;
     }
 
-    void GerenciadorGrafico::desenharEnte(sf::RectangleShape corpo) {
-        window->draw(corpo);
+    void GerenciadorGrafico::desenharEnte(sf::RectangleShape* corpo) {
+        window->draw(*corpo);
     }
 
     void GerenciadorGrafico::desenharTexto(sf::Text texto) {
