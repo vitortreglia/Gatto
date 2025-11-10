@@ -31,8 +31,8 @@ namespace Entidade {
                 setVoador(true);
 
                 raioPercepcaoX   = 280.0f;
-                raioPercepcaoY = 80.0f;
-                raioAtaque       = 120.0f;
+                raioPercepcaoY = 400.0f;
+                raioAtaque       = 400.0f;
                 velocidadeRasante = 220.0f;
                 velocidadeAtaque  = 380.0f;
 
@@ -75,6 +75,14 @@ namespace Entidade {
                 corpo.setPosition(pos);
             }*/
 
+
+            Jogador* Gaivota::getJogador() {
+                return pJog;
+            }
+
+            sf::RectangleShape* Gaivota::getCorpo() {
+                return &corpo;
+            }
             bool Gaivota::patrulhar(float dt) {
                 tempo += dt;
                 sf::Vector2f pos = getPosicao();
@@ -96,10 +104,7 @@ namespace Entidade {
             }
 
             bool Gaivota::fazerAtaque(float dt) {
-                sf::Vector2f vetorAtaque = pJog->getPosicao() - getPosicao();
-                
-                corpo.move(sf::Vector2f{vetorAtaque.x * dt, vetorAtaque.y * dt});
-                 /*sf::Vector2f dir = alvoAtaque - pos;
+                /*sf::Vector2f dir = alvoAtaque - pos;
 
                 float dist = std::sqrt(dir.x*dir.x + dir.y*dir.y);
                 if (dist < 8.0f) {
@@ -183,7 +188,7 @@ namespace Entidade {
 
                 estado->executar(tempoFrame);
                 desenhar();
-                //verificaVidas();
+                verificaVidas();
             }
 
 

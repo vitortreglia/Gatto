@@ -42,6 +42,8 @@ namespace Entidade {
 
                 //void verificaVidas();
                 //void mover();
+                Jogador* getJogador();
+                sf::RectangleShape* getCorpo();
                 void verificaVidas();
                 void executar();
                 void setEstado(EstadoGaivota* pEstado);
