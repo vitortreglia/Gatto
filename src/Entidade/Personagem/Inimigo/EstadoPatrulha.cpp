@@ -14,8 +14,6 @@ namespace Entidade {
 
             void EstadoPatrulha::executar(float dt) {
                 if (pGaivota) {
-                    //pGaivota->patrulhar(dt);
-
                     if (pGaivota->patrulhar(dt)) {
                         pGaivota->setEstado(dynamic_cast<EstadoGaivota*>(new EstadoRasante (pGaivota)));
                     }

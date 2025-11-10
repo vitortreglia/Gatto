@@ -96,8 +96,10 @@ namespace Entidade {
             }
 
             bool Gaivota::fazerAtaque(float dt) {
-               /* sf::Vector2f pos = getPosicao();
-                sf::Vector2f dir = alvoAtaque - pos;
+                sf::Vector2f vetorAtaque = pJog->getPosicao() - getPosicao();
+                
+                corpo.move(sf::Vector2f{vetorAtaque.x * dt, vetorAtaque.y * dt});
+                 /*sf::Vector2f dir = alvoAtaque - pos;
 
                 float dist = std::sqrt(dir.x*dir.x + dir.y*dir.y);
                 if (dist < 8.0f) {
