@@ -39,7 +39,9 @@ namespace Gerenciador {
             pJogador->liberaPulo();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            pJogador->setAtacando(true);
+            pJogador->atacar();
+        } else {
+            pJogador->liberaAtaque();
         }
     }
 

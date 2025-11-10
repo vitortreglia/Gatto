@@ -6,12 +6,13 @@ namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Rato::Rato(float x, float y):
-            Inimigo(2, 200.0f, {80.0f, 80.0f}, x, y, 2, IDs::IDs::InimigoRato),
+            Inimigo(2, 150.0f, {80.0f, 80.0f}, x, y, 2, IDs::IDs::InimigoRato),
             atirouProjetil(false),
             podeAtirar(true),
             tempoAtirar(0.0f),
             tempoAndar(0.0f) {
                 corpo.setFillColor(sf::Color::Yellow);
+                andar(getDireita());
             }
 
             Rato::~Rato() {}
@@ -41,22 +42,34 @@ namespace Entidade {
                 pJ->tomarDano(nivelMaldade);
             }
 
-            void Rato::mover() {
-                if (tempoAndar < 2.0f) {
-                    tempoAndar += tempoFrame;
-                    andar(getDireita());
-                } else {
-                    tempoAndar = 0.0f;
-                    andar(!getDireita());
+            void Rato::tomarDano(int dano) {
+                if (!sofrendoDano) {
+                    sofrendoDano = true;
+                    deslocamento.y = -10.0f;
+                    deslocamento.x = 0.0f;
+                    tempoAndar -= tempoFrame;
+                    numVidas -= dano;
+                    cout << "oiii dano em " << (int)ID << endl;
                 }
             }
 
+            void Rato::mover() {
+                if (!sofrendoDano) {
+                    if (tempoAndar < 2.0f && andando) {
+                        tempoAndar += tempoFrame;
+                    } else {
+                        tempoAndar = 0.0f;
+                        andar(!getDireita());
+                    }
+                }
+                atualizarPos();
+            }
+
             void Rato::executar() {
-                atirar();
+                //atirar();
                 verificaVidas();
                 mover();
                 desenhar();
-                atualizarPos();
             }
         }
     }

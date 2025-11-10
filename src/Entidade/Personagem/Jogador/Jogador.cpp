@@ -37,7 +37,8 @@ namespace Entidade {
             if (colisao.y < 0.0f) {
                 pular(1.0f);
                 pInimigo->tomarDano(1);
-            } else if (getAtacando()) {
+            } else if (getAtacando() || deslocAtaque != 0.0f) {
+                cout << "atacou" << endl;
                 if (getDireita()) {
                     if (colisao.x < 0.0f) {
                         pInimigo->tomarDano(getDano());
@@ -56,6 +57,7 @@ namespace Entidade {
                     deslocamento.x = 5.0f;
                 }
                 pular(0.5f);
+                cout << "danificou aqui" << endl;
                 pInimigo->danificar(this);
             }
         }
@@ -87,17 +89,16 @@ namespace Entidade {
 
         void Jogador::mover() {
             if (getAtacando()) {
-                ataque(tempoFrame);
                 if (getDireita()) {
                     deslocamento.x = 10.0;
                 } else {
                     deslocamento.x = -10.0;
                 }
-                deslocAtaque++;
-            }
-            if (deslocAtaque != 0 && !getAtacando()) {
-                getDireita() ? deslocamento.x = -10.0f : deslocamento.x = 10.0f;
-                deslocAtaque--;
+                deslocAtaque += deslocamento.x;
+                ataque(tempoFrame);
+            } else if (deslocAtaque != 0) {
+                deslocamento.x = deslocAtaque * -1;
+                deslocAtaque = 0.0f;
             }
             atualizarPos();
         }

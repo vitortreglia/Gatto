@@ -29,7 +29,7 @@ namespace Entidade {
             void atualizarPos(sf::Vector2f pos);
             void atualizarPos();
             void estaNoChao(bool c);
-            void tomarDano(int dano);
+            virtual void tomarDano(int dano);
             void setVoador(bool voador);
             virtual void verificaVidas() = 0;
             virtual void mover() = 0;

@@ -19,6 +19,7 @@ namespace Entidade {
                 void setAtirou(bool at);
                 void atirar();
                 void danificar(Jogador *pJ);
+                void tomarDano(int dano);
                 void mover();
                 void executar();
             };

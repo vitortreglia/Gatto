@@ -6,17 +6,19 @@
 
 namespace Entidade {
         class Ataque {
-        private:
+        protected:
             int dano;
             bool atacando;
+            bool podeAtacar;
             float tempoAtaque;
             float tMaxAtaque;
         public:
             Ataque(int forca);
             ~Ataque();
             int getForca();
-            void setAtacando(bool atk);
+            void atacar();
             bool getAtacando();
+            void liberaAtaque();
             int getDano();
             void ataque(float tempoFrame);
         };

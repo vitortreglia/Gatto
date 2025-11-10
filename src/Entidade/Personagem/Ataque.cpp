@@ -3,6 +3,7 @@
 namespace Entidade {
     Ataque::Ataque(int forca):
     dano(forca),
+    podeAtacar(true),
     tempoAtaque(0.0f),
     tMaxAtaque(0.1f)
     {}
@@ -13,12 +14,19 @@ namespace Entidade {
         return dano;
     }
 
-    void Ataque::setAtacando(bool atk) {
-        atacando = atk;
+    void Ataque::atacar() {
+        if (podeAtacar) {
+            podeAtacar = false;
+            atacando = true;
+        }
     }
 
     bool Ataque::getAtacando() {
         return atacando;
+    }
+
+    void Ataque::liberaAtaque() {
+        podeAtacar = true;
     }
 
     int Ataque::getDano() {
@@ -28,8 +36,8 @@ namespace Entidade {
     void Ataque::ataque(float tempoFrame) {
         tempoAtaque += tempoFrame;
         if (tempoAtaque > tMaxAtaque) {
-            setAtacando(false);
             tempoAtaque = 0.0f;
+            atacando = false;
         }
     }
 

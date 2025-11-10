@@ -13,7 +13,7 @@ namespace Entidade {
         private:
             bool podePular;
             int peixes;
-            int deslocAtaque;
+            float deslocAtaque;
             Texto interface;
         public:
             Jogador();
