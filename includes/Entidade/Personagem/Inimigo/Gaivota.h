@@ -49,7 +49,6 @@ namespace Entidade {
                 void setEstado(EstadoGaivota* pEstado);
                 bool patrulhar(float dt);
                 bool fazerAtaque(float dt);
-                //void setArma(Itens::ArmaInimigo* arma);
                 //void pegarPeixe();
             };
         }
