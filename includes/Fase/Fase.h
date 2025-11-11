@@ -6,13 +6,14 @@
 #include <string>
 
 namespace Fase {
-    class Fase {
+    class Fase : public Ente {
     protected:
         Lista::ListaEntidades listaEnt;
         Gerenciador::GerenciadorColisoes* pGColisoes;
+        sf::RectangleShape fundo;
         sf::FloatRect limitesFase;
     public:
-        Fase();
+        Fase(IDs::Ente_IDs id);
         ~Fase();
         void executar();
         sf::FloatRect getLimitesFase();

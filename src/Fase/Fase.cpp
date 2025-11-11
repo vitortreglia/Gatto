@@ -12,9 +12,11 @@
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
 namespace Fase {
-    Fase::Fase():
+    Fase::Fase(IDs::Ente_IDs id):
+    Ente(id, &fundo),
     pGColisoes(nullptr),
-    limitesFase({0,0,0,0})
+    limitesFase({0,0,0,0}),
+    fundo({1280, 720})
     {
         pGColisoes = new Gerenciador::GerenciadorColisoes(&listaEnt);
         //criarFase();

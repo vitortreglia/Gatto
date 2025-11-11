@@ -51,7 +51,6 @@ namespace Gerenciador {
         } else if (tecla == sf::Keyboard::D) {
             pJogador->parar();
         }*/
-
     }
 
     void GerenciadorEvento::executar() {

@@ -9,6 +9,7 @@
 
 namespace Fase {
     FaseJardim::FaseJardim():
+    Fase(IDs::Ente_IDs::FaseJardim),
     maxInimFaceis(0),
     maxInimMedios(0)
     {
@@ -92,5 +93,6 @@ namespace Fase {
         }
         limitesFase.height = y;
         arquivo.close();
+        pGGrafico->setLimitesCamera(limitesFase);
     }
 }
