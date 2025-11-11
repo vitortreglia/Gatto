@@ -4,7 +4,7 @@
 namespace Entidade {
     float Entidade::tempoFrame(0.0f);
 
-    Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy, IDs::IDs id):
+    Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy, IDs::Ente_IDs id):
     Ente(id, &corpo),
     x(posx),
     y(posy),

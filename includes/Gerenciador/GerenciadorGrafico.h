@@ -38,7 +38,7 @@ namespace Gerenciador {
         void limpaJanela();
         float getTempo();
         void resetaRelogio();
-        void moveCamera(float x, float y);
+        void moveCamera(sf::Vector2f coord);
         void setLimitesCamera(sf::FloatRect limites);
         sf::FloatRect getLimitesCamera();
     };

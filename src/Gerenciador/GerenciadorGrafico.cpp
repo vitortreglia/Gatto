@@ -82,18 +82,18 @@ namespace Gerenciador {
         relogio.restart();
     }
 
-    void GerenciadorGrafico::moveCamera(float x, float y) {
-        cameraX += 5 * (x - cameraX) * tempo;
+    void GerenciadorGrafico::moveCamera(sf::Vector2f coord) {
+        cameraX += 5 * (coord.x - cameraX) * tempo;
 
         if (cameraX < limitesCamera.left + TELA_X / 2) {
             cameraX = TELA_X/2;
         } else if (cameraX > limitesCamera.width - TELA_X / 2) {
             cameraX = limitesCamera.width - TELA_X / 2;
         }
-        if (y < cameraY - 360 || y > cameraY + 360)
-            cameraY = y;
-        else if (y < cameraY - 100 || y > cameraY + 100)
-            cameraY += 3 * (y - cameraY) * tempo;
+        if (coord.y < cameraY - 360 || coord.y > cameraY + 360)
+            cameraY = coord.y;
+        else if (coord.y < cameraY - 100 || coord.y > cameraY + 100)
+            cameraY += 3 * (coord.y - cameraY) * tempo;
         if (cameraY < limitesCamera.top + TELA_Y / 2) {
             cameraY = limitesCamera.top + TELA_Y / 2;
         } else if (cameraY > limitesCamera.height - TELA_Y / 2) {

@@ -2,16 +2,16 @@
 
 Gerenciador::GerenciadorGrafico* Ente::pGGrafico(pGGrafico->getGerenciadorGrafico());
 
-Ente::Ente(IDs::IDs id, sf::RectangleShape* pF):
+Ente::Ente(IDs::Ente_IDs id, sf::RectangleShape* pF):
 ID(id),
 pFig(pF)
 {}
 
 Ente::~Ente() {
-    ID = IDs::IDs::vazio;
+    ID = IDs::Ente_IDs::vazio;
 }
 
-const IDs::IDs Ente::getId() const{
+const IDs::Ente_IDs Ente::getId() const{
     return ID;
 }
 

@@ -4,7 +4,7 @@
 namespace Entidade {
     namespace Personagem {
         Jogador::Jogador():
-        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, IDs::IDs::Jogador1),
+        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, IDs::Ente_IDs::Jogador1),
         Ataque(1),
         podePular(true),
         peixes(0),
@@ -38,7 +38,6 @@ namespace Entidade {
                 pular(1.0f);
                 pInimigo->tomarDano(1);
             } else if (getAtacando() || deslocAtaque != 0.0f) {
-                cout << "atacou" << endl;
                 if (getDireita()) {
                     if (colisao.x < 0.0f) {
                         pInimigo->tomarDano(getDano());
@@ -57,7 +56,6 @@ namespace Entidade {
                     deslocamento.x = 5.0f;
                 }
                 pular(0.5f);
-                cout << "danificou aqui" << endl;
                 pInimigo->danificar(this);
             }
         }
@@ -105,7 +103,7 @@ namespace Entidade {
 
         void Jogador::executar() {
             verificaVidas();
-            pGGrafico->moveCamera(x, y);
+            pGGrafico->moveCamera(getPosicao());
             mover();
             if (peixes < 3)
                 interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");

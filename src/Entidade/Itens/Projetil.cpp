@@ -3,7 +3,7 @@
 namespace Entidade {
     namespace Itens {
         Projetil::Projetil(float x, float y, bool direita) :
-        Entidade({20.0f, 20.0f}, x, y, IDs::IDs::Projetil),
+        Entidade({20.0f, 20.0f}, x, y, IDs::Ente_IDs::Projetil),
         tempoLancamento(0.0f)
         {
             this->direita = direita;

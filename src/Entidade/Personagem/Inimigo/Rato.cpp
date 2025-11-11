@@ -6,7 +6,7 @@ namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Rato::Rato(float x, float y):
-            Inimigo(2, 150.0f, {80.0f, 80.0f}, x, y, 2, IDs::IDs::InimigoRato),
+            Inimigo(2, 150.0f, {80.0f, 80.0f}, x, y, 2, IDs::Ente_IDs::InimigoRato),
             atirouProjetil(false),
             podeAtirar(true),
             tempoAtirar(0.0f),

@@ -12,7 +12,7 @@ namespace Entidade {
         static float tempoFrame;
         bool ativo;
     public:
-        Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f, IDs::IDs id = IDs::IDs::vazio);
+        Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f, IDs::Ente_IDs id = IDs::Ente_IDs::vazio);
         virtual ~Entidade();
         const bool estaAtivo();
         void setAtivo(bool at);

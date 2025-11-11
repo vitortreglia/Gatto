@@ -1,13 +1,13 @@
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Gerenciador/GerenciadorColisoes.h"
 #include "Gerenciador/GerenciadorEvento.h"
-#include "IDs.h"
+#include "Ente_IDs.h"
 
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Gaivota::Gaivota(float x, float y):
-            Inimigo(1, 120.0f, {80.0f, 50.0f},x, y, 2, IDs::IDs::InimigoGaivota),
+            Inimigo(1, 120.0f, {80.0f, 50.0f},x, y, 2, IDs::Ente_IDs::InimigoGaivota),
             baseY(y),
             amplitude(3.0f),
             frequencia(5.0f),

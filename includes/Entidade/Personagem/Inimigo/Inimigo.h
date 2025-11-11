@@ -12,7 +12,7 @@ namespace Entidade {
             protected:
                 int nivelMaldade;
             public:
-                Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::IDs id);
+                Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id);
                 ~Inimigo();
                 static void setJogador(Jogador* pJ);
                 void verificaDistanciaJogador(sf::Vector2f distSeguir, sf::Vector2f distAtacar);

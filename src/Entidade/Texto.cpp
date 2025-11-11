@@ -2,7 +2,7 @@
 
 namespace Entidade {
     Texto::Texto(std::string conteudo, int tamanho, float x, float y):
-    Ente(IDs::IDs::Texto, nullptr)
+    Ente(IDs::Ente_IDs::Texto, nullptr)
     {
         fonte.loadFromFile("Data/Fontes/Roboto-Medium.ttf");
         texto.setString(conteudo);

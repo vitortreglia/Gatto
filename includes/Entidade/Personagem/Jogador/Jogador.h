@@ -21,6 +21,7 @@ namespace Entidade {
             void liberaPulo();
             void pular(float multiplicador);
             void coletarPeixe(Itens::Peixe* pPeixe);
+            void perderPeixe();
             void colidir(Inimigo::Inimigo* pInimigo, sf::Vector2f colisao);
             void colidir(sf::Vector2f colisao);
             void verificaVidas();

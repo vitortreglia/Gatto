@@ -72,7 +72,7 @@ namespace Fase {
 
     void Fase::atualizarEntidades() {
         for (int i = 0; i < listaEnt.getTam(); i++) {
-            if (listaEnt[i]->getId() == IDs::IDs::InimigoRato) {
+            if (listaEnt[i]->getId() == IDs::Ente_IDs::InimigoRato) {
                 if (static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getAtirou()) {
                     static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->setAtirou(false);
                     criarProjetil(listaEnt[i]->getPosicao().x, listaEnt[i]->getPosicao().y, static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getDireita());
@@ -83,7 +83,7 @@ namespace Fase {
         }
         pGColisoes->executar();
         for (int i = 0; i < listaEnt.getTam(); i++) {
-            if (listaEnt[i]->getId() == IDs::IDs::InimigoRato) {
+            if (listaEnt[i]->getId() == IDs::Ente_IDs::InimigoRato) {
                 if (static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getAtirou()) {
                     static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->setAtirou(false);
                     criarProjetil(listaEnt[i]->getPosicao().x, listaEnt[i]->getPosicao().y, static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getDireita());
