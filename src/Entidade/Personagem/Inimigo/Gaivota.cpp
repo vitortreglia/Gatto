@@ -2,6 +2,7 @@
 #include "Gerenciador/GerenciadorColisoes.h"
 #include "Gerenciador/GerenciadorEvento.h"
 #include "Ente_IDs.h"
+#include "Entidade/Personagem/Inimigo/EstadoPatrulha.h"
 
 namespace Entidade {
     namespace Personagem {
@@ -48,16 +49,16 @@ namespace Entidade {
 
             }
 
-            /*void Gaivota::mover() {
-                deslocamento.y = std::sin(tempoMovimento * frequencia) * amplitude;
+            void Gaivota::mover() {
+                deslocamento.y = std::sin(tempo * frequencia) * amplitude;
                 atualizarPos();
-                tempoMovimento += tempoFrame;
-                if (tempoMovimento > 4.0f) {
+                tempo += tempoFrame;
+                if (tempo > 4.0f) {
                     parar();
                     andar(!direita);
-                    tempoMovimento = 0.0f;
+                    tempo = 0.0f;
                 }
-            }*/
+            }
 
             //Jogador* Gaivota::getJogador() {
             //    return pJog;

@@ -2,13 +2,14 @@
 
 #include "Entidade/Personagem/Inimigo/EstadoPatrulha.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
+#include "Entidade/Personagem/Jogador/Jogador.h"
 
 
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             EstadoRasante::EstadoRasante(Gaivota* pGav): EstadoGaivota(pGav) {
-                vetorAtaque = pGaivota->getJogador()->getPosicao() - pGaivota->getPosicao();
+                vetorAtaque = Inimigo::getJogador()->getPosicao() - pGaivota->getPosicao();
                 tempo = 0;
             }
             

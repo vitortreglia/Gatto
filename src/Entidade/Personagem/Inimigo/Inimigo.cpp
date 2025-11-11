@@ -3,6 +3,7 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
+            Jogador* Inimigo::pJog(nullptr);
 
             Inimigo::Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id) :
             Personagem(vel, tam, px, py, vidas, id),
@@ -10,6 +11,14 @@ namespace Entidade {
             {}
 
             Inimigo::~Inimigo() {}
+
+            void Inimigo::setJogador(Jogador *pJ) {
+                pJog = pJ;
+            }
+
+            Jogador *Inimigo::getJogador() {
+                return pJog;
+            }
 
 
             void Inimigo::verificaDistanciaJogador(sf::Vector2f distSeguir, sf::Vector2f distAtacar) {
