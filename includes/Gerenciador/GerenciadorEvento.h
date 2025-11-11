@@ -18,6 +18,7 @@ namespace Gerenciador {
         void verificaTeclaPressionada();
         void verificaTeclaSolta();
         void executar();
+        //static Entidade::Personagem::Jogador* getJogador() { return pJogador; }
     };
 }
 

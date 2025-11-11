@@ -1,19 +1,38 @@
 #ifndef GAIVOTA_H
 #define GAIVOTA_H
 
+#include "EstadoRasante.h"
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
 
 
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
+        class EstadoGaivota;
 
             class Gaivota : public Inimigo {
             private:
-                float tempoMovimento;
+                float tempo;
                 float amplitude;
+                float velocidadeHorizontal;
                 float frequencia;
                 float baseY;
+                int direcao;
+
+                EstadoGaivota* estado;
+
+                float raioPercepcaoX;
+                float raioPercepcaoY;
+                float raioAtaque;
+                float velocidadeAtaque;
+                float velocidadeRasante;
+
+                sf::Vector2f alvoAtaque;
+                bool possuiPeixe;
+
+                //void fazerRasante(float dt, const sf::Vector2f& posJog);
+                //void virarPara(const sf::Vector2f& posJog);
+
             public:
                 Gaivota(float x, float y);
                 ~Gaivota();
@@ -21,7 +40,14 @@ namespace Entidade {
                 //void verificaVidas();
                 void danificar(Jogador *pJ);
                 void mover();
+                Jogador* getJogador();
+                sf::RectangleShape* getCorpo();
                 void executar();
+                void setEstado(EstadoGaivota* pEstado);
+                bool patrulhar(float dt);
+                bool fazerAtaque(float dt);
+                //void setArma(Itens::ArmaInimigo* arma);
+                //void pegarPeixe();
             };
         }
     }
