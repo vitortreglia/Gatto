@@ -49,7 +49,6 @@ namespace Entidade {
                     deslocamento.x = 0.0f;
                     tempoAndar -= tempoFrame;
                     numVidas -= dano;
-                    cout << "oiii dano em " << (int)ID << endl;
                 }
             }
 

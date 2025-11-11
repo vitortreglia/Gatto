@@ -42,11 +42,13 @@ namespace Entidade {
                     if (colisao.x < 0.0f) {
                         pInimigo->tomarDano(getDano());
                     } else {
+                        cout << "danificou no ataque" << endl;
                         pInimigo->danificar(this);
                     }
                 } else if (colisao.x > 0.0f) {
                         pInimigo->tomarDano(getDano());
                 } else {
+                    cout << "danificou no ataque" << endl;
                     pInimigo->danificar(this);
                 }
             } else {
@@ -56,6 +58,7 @@ namespace Entidade {
                     deslocamento.x = 5.0f;
                 }
                 pular(0.5f);
+                cout << "danificou fora do ataque" << endl;
                 pInimigo->danificar(this);
             }
         }

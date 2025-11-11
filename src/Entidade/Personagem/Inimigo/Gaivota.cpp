@@ -23,7 +23,7 @@ namespace Entidade {
                 //tempo = 0.0f;
                 //amplitude = 30.0;
                 //frequencia = 5.0f;
-                //direcao = 1;
+                direcao = 1;
 
                 setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
 
@@ -33,7 +33,7 @@ namespace Entidade {
                 setVoador(true);
 
                 raioPercepcaoX   = 280.0f;
-                raioPercepcaoY = 400.0f;
+                raioPercepcaoY = 200.0f;
                 raioAtaque       = 400.0f;
                 velocidadeRasante = 220.0f;
                 velocidadeAtaque  = 380.0f;
@@ -46,7 +46,7 @@ namespace Entidade {
 
             void Gaivota::danificar(Jogador *pJ) {
                 nivelMaldade++;
-
+                pJ->tomarDano(nivelMaldade);
             }
 
             void Gaivota::mover() {

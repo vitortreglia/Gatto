@@ -24,7 +24,7 @@ namespace Entidade {
                         pGaivota->getCorpo()->move(sf::Vector2f{vetorAtaque.x * dt, vetorAtaque.y * dt});
 
                     }else {
-                        pGaivota->getCorpo()->move(sf::Vector2f{vetorAtaque.x * dt, -vetorAtaque.y * dt});
+                        pGaivota->getCorpo()->move(sf::Vector2f{-vetorAtaque.x * dt, -vetorAtaque.y * dt});
                     }
 
                     if (tempo >= 2) {
