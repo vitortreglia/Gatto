@@ -13,7 +13,7 @@ namespace Entidade {
             float tempoAtaque;
             float tMaxAtaque;
         public:
-            Ataque(int forca);
+            Ataque(int forca, float tMaxAtk);
             ~Ataque();
             int getForca();
             void atacar();

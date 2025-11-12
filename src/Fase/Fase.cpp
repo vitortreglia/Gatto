@@ -19,11 +19,20 @@ namespace Fase {
     fundo({1280, 720})
     {
         pGColisoes = new Gerenciador::GerenciadorColisoes(&listaEnt);
+        Entidade::Personagem::Jogador::setGerenciadorEvento();
         //criarFase();
     }
 
     Fase::~Fase() {
         delete pGColisoes;
+    }
+
+    void Fase::inscreverObservadores() {
+        static_cast<Entidade::Personagem::Jogador*>(listaEnt[0])->observarEntrada();
+    }
+
+    void Fase::desinscreverObservadores() {
+        static_cast<Entidade::Personagem::Jogador*>(listaEnt[0])->ignorarEntrada();
     }
 
     sf::FloatRect Fase::getLimitesFase() {

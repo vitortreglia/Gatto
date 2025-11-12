@@ -2,6 +2,7 @@
 #define GAIVOTA_H
 
 #include "EstadoRasante.h"
+#include "Entidade/Personagem/Ataque.h"
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
 
 
@@ -11,6 +12,8 @@ namespace Entidade {
         class EstadoGaivota;
 
             class Gaivota : public Inimigo {
+            public:
+                Ataque ataque;
             private:
                 float tempo;
                 float amplitude;
@@ -45,7 +48,7 @@ namespace Entidade {
                 void executar();
                 void setEstado(EstadoGaivota* pEstado);
                 bool patrulhar(float dt);
-                bool fazerAtaque(float dt);
+                //bool fazerAtaque(float dt);
                 //void setArma(Itens::ArmaInimigo* arma);
                 //void pegarPeixe();
             };

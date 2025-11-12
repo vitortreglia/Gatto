@@ -1,24 +1,26 @@
 #ifndef GERENCIADOREVENTOS_H
 #define GERENCIADOREVENTOS_H
-
 #include "GerenciadorGrafico.h"
-#include "Entidade/Personagem/Jogador/Jogador.h"
+#include "Observer/Subject.h"
+#include <set>
+
 namespace Gerenciador {
-    class GerenciadorEvento {
+    class GerenciadorEvento: public Subject {
     private:
-        GerenciadorGrafico* pGGrafico;
-        static Entidade::Personagem::Jogador* pJogador;
         static GerenciadorEvento* pGEvento;
+        GerenciadorGrafico* pGGrafico;
+        std::set<sf::Keyboard::Key> teclasAtivas;
+        std::set<sf::Keyboard::Key> teclasSoltas;
     private:
         GerenciadorEvento();
     public:
         ~GerenciadorEvento();
         static GerenciadorEvento* getGerenciadorEvento();
-        static void setJogador(Entidade::Personagem::Jogador* pJ);
-        void verificaTeclaPressionada();
+        std::set<sf::Keyboard::Key> getTeclasPressionadas();
+        std::set<sf::Keyboard::Key> getTeclasSoltas();
+        void verificaTeclasPressionadas(sf::Event evento);
         void verificaTeclaSolta();
         void executar();
-        //static Entidade::Personagem::Jogador* getJogador() { return pJogador; }
     };
 }
 

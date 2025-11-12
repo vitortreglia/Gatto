@@ -136,12 +136,14 @@ namespace Gerenciador {
 
     void GerenciadorColisoes::tratarColisoesJogsInimigs() {
         sf::Vector2f colisao;
-        for (vector<Entidade::Personagem::Inimigo::Inimigo*>::const_iterator it = LIs.begin(); it != LIs.end(); it++) {
-            if ((*it)->estaAtivo())
-                colisao = verificarColisao(pJogador1, *it);
-            if (colisao.x != 0.0f || colisao.y != 0.0f) {
-                corrigirColisao(pJogador1, colisao);
-                pJogador1->colidir(*it, colisao);
+        if (!pJogador1->getImunidadeDano()) {
+            for (vector<Entidade::Personagem::Inimigo::Inimigo*>::const_iterator it = LIs.begin(); it != LIs.end(); it++) {
+                if ((*it)->estaAtivo())
+                    colisao = verificarColisao(pJogador1, *it);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    corrigirColisao(pJogador1, colisao);
+                    pJogador1->colidir(*it, colisao);
+                }
             }
         }
     }

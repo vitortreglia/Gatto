@@ -15,6 +15,7 @@ namespace Estados {
         static EstadoJogo* getEstadoJogo(void* args);
         void iniciar(void* args);
         void sair(void* args);
+        void tratarEventos();
         void atualizar();
         void desenhar();
     };

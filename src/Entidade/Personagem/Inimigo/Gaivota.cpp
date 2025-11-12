@@ -8,27 +8,19 @@ namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Gaivota::Gaivota(float x, float y):
-            Inimigo(1, 120.0f, {80.0f, 50.0f},x, y, 2, IDs::Ente_IDs::InimigoGaivota),
+            ataque(1, 1.0f),
+            Inimigo(0, 120.0f, {80.0f, 50.0f},x, y, 2, IDs::Ente_IDs::InimigoGaivota),
             baseY(y),
-            amplitude(30.0f),
-            frequencia(5.0f),
-            tempo(0.0f)
+            amplitude(10.0f),
+            frequencia(6.0f),
+            tempo(0.0f),
+            possuiPeixe(false),
+            estado(nullptr)
             {
                 andar(true);
-                //setPosicao(sf::Vector2f(x, y));
-                //baseY = y;
-
-                //setTamanho(sf::Vector2f(80.0f, 50.0f));
-
-                //tempo = 0.0f;
-                //amplitude = 30.0;
-                //frequencia = 5.0f;
-                direcao = 1;
 
                 setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
 
-                //numVidas = 2;
-                //vivo = true;
                 corpo.setFillColor(sf::Color::White);
                 setVoador(true);
 
@@ -38,43 +30,43 @@ namespace Entidade {
                 velocidadeRasante = 220.0f;
                 velocidadeAtaque  = 380.0f;
 
-                //pArma = nullptr;
-                possuiPeixe = false;
             }
 
             Gaivota::~Gaivota(){}
 
             void Gaivota::danificar(Jogador *pJ) {
-                nivelMaldade++;
-                pJ->tomarDano(nivelMaldade);
+                if (!pJ->getImunidadeDano())
+                    nivelMaldade++;
+                if (nivelMaldade > 1 && !possuiPeixe && ataque.getAtacando()) {
+                    possuiPeixe = pJ->perderPeixe();
+                }
+                pJ->tomarDano(1);
             }
 
             void Gaivota::mover() {
-                deslocamento.y = std::sin(tempo * frequencia) * amplitude;
+                deslocamento.y = std::sin(tempo * frequencia * M_PI) * amplitude;
                 atualizarPos();
                 tempo += tempoFrame;
-                if (tempo > 4.0f) {
+                if (tempo > 3.0f) {
                     parar();
                     andar(!direita);
                     tempo = 0.0f;
                 }
             }
 
-            //Jogador* Gaivota::getJogador() {
-            //    return pJog;
-            //}
-
             sf::RectangleShape* Gaivota::getCorpo() {
                 return &corpo;
             }
+
             bool Gaivota::patrulhar(float dt) {
-                tempo += dt;
+                /*tempo += dt;
                 sf::Vector2f pos = getPosicao();
                 pos.x += vMax.x * dt * (float)direcao;
                 pos.y = baseY + std::sin(tempo * frequencia) * amplitude;
                 setPosicao(pos);
                 corpo.setPosition(pos);
-                //return false;
+                //return false;*/
+                mover();
 
                 const sf::Vector2f& posJog = pJog->getPosicao();
                 sf::Vector2f posicao = getPosicao();
@@ -87,31 +79,6 @@ namespace Entidade {
                 return dentroRasante;
             }
 
-            bool Gaivota::fazerAtaque(float dt) {
-                /*sf::Vector2f dir = alvoAtaque - pos;
-
-                float dist = std::sqrt(dir.x*dir.x + dir.y*dir.y);
-                if (dist < 8.0f) {
-
-                    estado = 0;
-                    if (pArma)
-                        pArma->setAtacando(false);
-                    //return false;
-                }
-
-                dir.x /= dist;
-                dir.y /= dist;
-
-                pos.x += dir.x * velocidadeAtaque * dt;
-                pos.y += dir.y * velocidadeAtaque * dt;
-
-                setPosicao(pos);
-                corpo.setPosition(pos);
-
-                if (pArma && !pArma->getAtacando())
-                    pArma->setAtacando(true);*/
-                return false;
-            }
             /*
             void Gaivota::decidirEstado(const sf::Vector2f& posJog) {
                 sf::Vector2f pos = getPosicao();
@@ -161,6 +128,7 @@ namespace Entidade {
                 if (pEstado) {
                     estado = pEstado;
                 }
+
             }
 
 

@@ -1,6 +1,7 @@
 #ifndef GERENCIADORESTADOS_H
 #define GERENCIADORESTADOS_H
 #include "Estado/EstadoJogo.h"
+#include "Observer/Observer.h"
 
 
 namespace Gerenciador {
@@ -13,6 +14,7 @@ namespace Gerenciador {
         ~GerenciadorEstados();
 
         //void setLimitesCamera();
+        void iniciar();
 
         void atualizar();
         void desenhar();

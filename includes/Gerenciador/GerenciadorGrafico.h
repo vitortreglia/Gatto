@@ -32,7 +32,8 @@ namespace Gerenciador {
         static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
         void desenharEnte(sf::RectangleShape* corpo);
-        void desenharTexto(sf::Text texto);
+        void desenharUI(sf::RectangleShape* corpo);
+        void desenharUI(sf::Text* texto);
         void mostraElementos();
         void fecharJanela();
         void limpaJanela();

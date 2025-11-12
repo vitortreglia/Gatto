@@ -1,8 +1,8 @@
-#include "Entidade/Texto.h"
+#include "Texto.h"
 
-namespace Entidade {
+
     Texto::Texto(std::string conteudo, int tamanho, float x, float y):
-    Ente(IDs::Ente_IDs::Texto, nullptr)
+    Ente(IDs::Ente_IDs::Texto, &texto)
     {
         fonte.loadFromFile("Data/Fontes/Roboto-Medium.ttf");
         texto.setString(conteudo);
@@ -18,15 +18,16 @@ namespace Entidade {
         texto.setString(txt);
     }
 
-
-    void Texto::desenhar() {
-        pGGrafico->desenharTexto(texto);
+    void Texto::setTamanho(int tam) {
+        texto.setCharacterSize(tam);
     }
 
+    void Texto::setPosicao(float x, float y) {
+        texto.setPosition(x, y);
+    }
 
     void Texto::executar() {
         desenhar();
     }
 
 
-}

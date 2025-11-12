@@ -6,12 +6,12 @@ pGEvento(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
 pGEstados(new Gerenciador::GerenciadorEstados())
 {
     //pGGrafico->setLimitesCamera(fase.getLimitesFase());
-    executar();
 }
 
 Principal::~Principal() {}
 
 void Principal::executar() {
+    pGEstados->iniciar();
     while (pGGrafico->verificaJanelaAberta()) {
         pGGrafico->limpaJanela();
         pGEvento->executar();

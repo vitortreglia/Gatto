@@ -18,7 +18,10 @@ namespace IDs {
         PlataformaGiratoria,
         ArmaGarra,
         ItemPeixe,
-        Texto
+        Texto,
+        Botao,
+        MenuPausa,
+        MenuPrincipal
     };
 }
 

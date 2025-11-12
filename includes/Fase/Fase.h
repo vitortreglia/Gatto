@@ -26,6 +26,9 @@ namespace Fase {
         void criarCenario();
         void atualizarEntidades();
         //virtual void criarObstaculo() = 0;
+    public:
+        void inscreverObservadores();
+        void desinscreverObservadores();
     };
 }
 #endif //FASE_H

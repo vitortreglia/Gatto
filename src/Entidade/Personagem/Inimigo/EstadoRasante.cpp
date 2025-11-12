@@ -19,15 +19,19 @@ namespace Entidade {
 
             void EstadoRasante::executar(float dt) {
                 if (pGaivota) {
+                    pGaivota->ataque.ataque(dt);
                     tempo += dt;
                     if (tempo <= 1) {
-                        pGaivota->getCorpo()->move(sf::Vector2f{vetorAtaque.x * dt, vetorAtaque.y * dt});
+                        //pGaivota->getCorpo()->move(sf::Vector2f{vetorAtaque.x * dt, vetorAtaque.y * dt});
+                        pGaivota->atualizarPos({pGaivota->getPosicao().x + vetorAtaque.x * dt, pGaivota->getPosicao().y +vetorAtaque.y * dt});
 
                     }else {
-                        pGaivota->getCorpo()->move(sf::Vector2f{-vetorAtaque.x * dt, -vetorAtaque.y * dt});
+                        //pGaivota->getCorpo()->move(sf::Vector2f{-vetorAtaque.x * dt, -vetorAtaque.y * dt});
+                        pGaivota->atualizarPos({pGaivota->getPosicao().x - vetorAtaque.x * dt, pGaivota->getPosicao().y - vetorAtaque.y * dt});
                     }
 
                     if (tempo >= 2) {
+                        pGaivota->ataque.liberaAtaque();
                         pGaivota->setEstado(dynamic_cast<EstadoGaivota*>(new EstadoPatrulha (pGaivota)));
                     }
                 }

@@ -68,7 +68,6 @@ namespace Entidade {
                 //atirar();
                 verificaVidas();
                 mover();
-                desenhar();
             }
         }
     }

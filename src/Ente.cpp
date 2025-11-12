@@ -4,9 +4,15 @@ Gerenciador::GerenciadorGrafico* Ente::pGGrafico(pGGrafico->getGerenciadorGrafic
 
 Ente::Ente(IDs::Ente_IDs id, sf::RectangleShape* pF):
 ID(id),
-pFig(pF)
+pFig(pF),
+pTxt(nullptr)
 {}
 
+Ente::Ente(IDs::Ente_IDs id, sf::Text* pT):
+ID(id),
+pFig(nullptr),
+pTxt(pT)
+{}
 Ente::~Ente() {
     ID = IDs::Ente_IDs::vazio;
 }
@@ -16,7 +22,10 @@ const IDs::Ente_IDs Ente::getId() const{
 }
 
 void Ente::desenhar() {
-    pGGrafico->desenharEnte(pFig);
+    if (pFig)
+        pGGrafico->desenharEnte(pFig);
+    else
+        pGGrafico->desenharUI(pTxt);
 }
 
 

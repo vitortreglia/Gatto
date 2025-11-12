@@ -44,8 +44,13 @@ namespace Gerenciador {
         window->draw(*corpo);
     }
 
-    void GerenciadorGrafico::desenharTexto(sf::Text texto) {
-        uiBuffer.draw(texto);
+    void GerenciadorGrafico::desenharUI(sf::RectangleShape* corpo) {
+        uiBuffer.draw(*corpo);
+        uiBuffer.display();
+    }
+
+    void GerenciadorGrafico::desenharUI(sf::Text* texto) {
+        uiBuffer.draw(*texto);
         uiBuffer.display();
     }
 

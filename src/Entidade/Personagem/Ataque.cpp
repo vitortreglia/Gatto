@@ -1,11 +1,11 @@
 #include "Entidade/Personagem/Ataque.h"
 
 namespace Entidade {
-    Ataque::Ataque(int forca):
+    Ataque::Ataque(int forca, float tMaxAtk):
     dano(forca),
     podeAtacar(true),
     tempoAtaque(0.0f),
-    tMaxAtaque(0.1f)
+    tMaxAtaque(tMaxAtk)
     {}
 
     Ataque::~Ataque() {}
@@ -34,10 +34,12 @@ namespace Entidade {
     }
 
     void Ataque::ataque(float tempoFrame) {
-        tempoAtaque += tempoFrame;
-        if (tempoAtaque > tMaxAtaque) {
-            tempoAtaque = 0.0f;
-            atacando = false;
+        if (atacando) {
+            tempoAtaque += tempoFrame;
+            if (tempoAtaque > tMaxAtaque) {
+                tempoAtaque = 0.0f;
+                atacando = false;
+            }
         }
     }
 

@@ -15,7 +15,7 @@ namespace Entidade {
             bool noChao;
             bool sofrendoDano;
             float tempoDano;
-            bool vivo;
+            //bool vivo;
             bool voador;
         public:
             Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id);

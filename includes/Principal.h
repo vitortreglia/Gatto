@@ -9,8 +9,8 @@
 
 class Principal {
 private:
-    Gerenciador::GerenciadorGrafico* pGGrafico;
     Gerenciador::GerenciadorEvento* pGEvento;
+    Gerenciador::GerenciadorGrafico* pGGrafico;
     Gerenciador::GerenciadorEstados* pGEstados;
 public:
     Principal();

@@ -5,4 +5,5 @@
 
 int main() {
     Principal objPrincipal;
+    objPrincipal.executar();
 }

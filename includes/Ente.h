@@ -9,11 +9,13 @@ protected:
     IDs::Ente_IDs ID; //identificacao do ente
     static Gerenciador::GerenciadorGrafico* pGGrafico;
     sf::RectangleShape* pFig;
+    sf::Text* pTxt;
 public:
     Ente(IDs::Ente_IDs id, sf::RectangleShape* pF);
+    Ente(IDs::Ente_IDs id, sf::Text* pT);
     virtual ~Ente();
     const IDs::Ente_IDs getId() const;
-    void desenhar();
+    virtual void desenhar();
     virtual void executar() = 0;
 };
 

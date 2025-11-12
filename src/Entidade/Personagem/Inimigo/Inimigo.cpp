@@ -41,11 +41,6 @@ namespace Entidade {
                 }
             }
 
-            void Inimigo::executar() {
-                verificaVidas();
-                atualizarPos();
-            }
-
         }
     }
 }
