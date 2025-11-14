@@ -7,7 +7,9 @@ namespace Estados {
     EstadoJogo* EstadoJogo::pEstadoJogo(nullptr);
 
     EstadoJogo::EstadoJogo():
-    pFase(nullptr)
+    pFase(nullptr),
+    pJog1(nullptr),
+    pJog2(nullptr)
     {}
 
     EstadoJogo *EstadoJogo::getEstadoJogo(void* args) {
@@ -20,17 +22,31 @@ namespace Estados {
     }
 
     //args:
-    //[0]: 1 = novo jogo 2 = carregar jogo
-    //[1]: 1 = fase jardim 2 = fase cidade
-    //[2]: num jogs (1 ou 2)
+    //[0]: num jogs (1 ou 2)
+    //[1]: 1 = novo jogo 2 = carregar jogo
+    //[2]: 1 = fase jardim 2 = fase cidade
     void EstadoJogo::iniciar(void *args) {
         if (args) {
             int* arg = (int*)args;
-            if (arg[0] == 1) {
+
+            if (pJog1) {
+                delete pJog1;
+                pJog1 = nullptr;
+            }
+            if (pJog2) {
+                delete pJog2;
+                pJog2 = nullptr;
+            }
+
+            pJog1 = new Entidade::Personagem::Jogador(1);
+            if (arg[0] == 2) {
+                pJog2 = new Entidade::Personagem::Jogador(2);
+            }
+            if (arg[1] == 1) {
                 if (pFase)
                     delete pFase;
                 if (arg[1] == 1) {
-                    pFase = new Fase::FaseJardim();
+                    pFase = new Fase::FaseJardim(pJog1, pJog2);
                 }
             }
         }

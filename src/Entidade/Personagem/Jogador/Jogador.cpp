@@ -5,8 +5,9 @@ namespace Entidade {
     namespace Personagem {
         Gerenciador::GerenciadorEvento* Jogador::pGEvento(nullptr);
 
-        Jogador::Jogador():
-        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, IDs::Ente_IDs::Jogador1),
+        Jogador::Jogador(int nJog):
+        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, nJog == 1 ? IDs::Ente_IDs::Jogador1 : IDs::Ente_IDs::Jogador2),
+        numJog(nJog),
         ataque(1, 0.1f),
         podePular(true),
         peixes(0),

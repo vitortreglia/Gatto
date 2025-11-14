@@ -18,11 +18,9 @@ namespace Fase {
         void executar();
         sf::FloatRect getLimitesFase();
     protected:
-        void criarFase();
         void criarPlataforma(float x, float y);
         void criarPeixe(float x, float y);
-        void criarInimigoRato(float x, float y);
-        void criarProjetil(float x, float y, bool direita);
+        void criarInimigoGaivota(float x, float y);
         void criarCenario();
         void atualizarEntidades();
         //virtual void criarObstaculo() = 0;

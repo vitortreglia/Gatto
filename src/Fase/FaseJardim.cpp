@@ -5,15 +5,16 @@
 #include "Entidade/Obstaculo/PlataformaGiratoria.h"
 #include "Entidade/Obstaculo/PlataformaMovel.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
+#include "Entidade/Personagem/Inimigo/Rato.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
 namespace Fase {
-    FaseJardim::FaseJardim():
+    FaseJardim::FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2):
     Fase(IDs::Ente_IDs::FaseJardim),
-    maxInimFaceis(0),
-    maxInimMedios(0)
+    maxInimRato(8),
+    maxInimGaivota(5)
     {
-        listaEnt.incluir(new Entidade::Personagem::Jogador());
+        listaEnt.incluir(new Entidade::Personagem::Jogador(1));
         pGColisoes->incluirJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         Entidade::Personagem::Inimigo::Inimigo::setJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         criarFaseJardim();
@@ -39,8 +40,8 @@ namespace Fase {
         }
     }
 
-    void FaseJardim::criarInimigoGaivota(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Gaivota(x, y);
+    void FaseJardim::criarInimigoRato(float x, float y) {
+        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));

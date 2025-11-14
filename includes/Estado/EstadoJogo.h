@@ -9,6 +9,8 @@ namespace Estados {
     private:
         static EstadoJogo* pEstadoJogo;
         Fase::Fase* pFase;
+        Entidade::Personagem::Jogador* pJog1;
+        Entidade::Personagem::Jogador* pJog2;
     private:
         EstadoJogo();
     public:
