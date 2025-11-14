@@ -1,12 +1,13 @@
 #include "Gerenciador/GerenciadorGrafico.h"
 
 namespace Gerenciador {
-
     GerenciadorGrafico* GerenciadorGrafico::pGGrafico(nullptr);
 
     GerenciadorGrafico::GerenciadorGrafico():
     window(new sf::RenderWindow(sf::VideoMode(TELA_X, TELA_Y), "Gatto")),
-    camera({0, 0, 1280, 720}),
+    camera({0, 0, TELA_X, TELA_Y}),
+    viewP1({0, 0, TELA_X/2, TELA_Y}),
+    viewP2({0, 0, TELA_X/2, TELA_Y}),
     limitesCamera({0.0f, 0.0f, 0.0f, 0.0f}),
     cameraX(TELA_X/2),
     cameraY(TELA_Y/2),
@@ -18,7 +19,11 @@ namespace Gerenciador {
         }
         uiBuffer.create(1280, 720);
         window->setFramerateLimit(60);
-        camera.setCenter(TELA_X/2, TELA_Y/2);
+        //camera.setCenter(TELA_X/2, TELA_Y/2);
+        viewP1.setViewport({0, 0, 0.5f, 1.0f});
+        viewP1.zoom(1.5f);
+        viewP2.setViewport({0.5f, 0, 0.5f, 1.0f});
+        viewP2.zoom(1.5f);
         window->setView(camera);
     }
 
@@ -41,7 +46,10 @@ namespace Gerenciador {
     }
 
     void GerenciadorGrafico::desenharEnte(sf::RectangleShape* corpo) {
+        //window->setView(viewP1);
         window->draw(*corpo);
+        //window->setView(viewP2);
+        //window->draw(*corpo);
     }
 
     void GerenciadorGrafico::desenharUI(sf::RectangleShape* corpo) {
@@ -106,8 +114,10 @@ namespace Gerenciador {
         }
 
         camera.setCenter(cameraX, cameraY);
+        //viewP1.setCenter(cameraX, cameraY);
+        //viewP2.setCenter(cameraX, cameraY);
 
-        window->setView(camera);
+        //window->setView(camera);
     }
 
     void GerenciadorGrafico::setLimitesCamera(sf::FloatRect limites) {

@@ -12,13 +12,13 @@ namespace Menu {
 
     }
 
-    void Menu::incluirBotao(Botao *pB) {
+    void Menu::incluirBotao(Entidade::Botao *pB) {
         botoes.push_back(pB);
     }
 
     void Menu::executar() {
         pGGrafico->desenharUI(&fundo);
-        for (std::vector<Botao*>::const_iterator it = botoes.begin(); it != botoes.end(); it++) {
+        for (std::vector<Entidade::Botao*>::const_iterator it = botoes.begin(); it != botoes.end(); it++) {
             (*it)->executar();
         }
     }

@@ -16,6 +16,8 @@ namespace Gerenciador {
     private:
         sf::RenderWindow* window;
         sf::View camera;
+        sf::View viewP1;
+        sf::View viewP2;
         sf::RenderTexture uiBuffer;
         sf::Sprite uiSprite;
         sf::Clock relogio;

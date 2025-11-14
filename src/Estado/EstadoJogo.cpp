@@ -37,26 +37,29 @@ namespace Estados {
                 delete pJog2;
                 pJog2 = nullptr;
             }
-
+            Entidade::Personagem::Jogador::setGerenciadorEvento();
             pJog1 = new Entidade::Personagem::Jogador(1);
+            pJog1->observarEntrada();
             if (arg[0] == 2) {
                 pJog2 = new Entidade::Personagem::Jogador(2);
+                pJog2->observarEntrada();
             }
-            if (arg[1] == 1) {
+            if (arg[2] == 1) {
                 if (pFase)
                     delete pFase;
-                if (arg[1] == 1) {
-                    pFase = new Fase::FaseJardim(pJog1, pJog2);
-                }
+                pFase = new Fase::FaseJardim(pJog1, pJog2);
             }
         }
         pGEvento->inscrever(this);
-        pFase->inscreverObservadores();
+        //pFase->inscreverObservadores();
     }
 
     void EstadoJogo::sair(void *args) {
         pGEvento->desinscrever(this);
-        pFase->desinscreverObservadores();
+        pJog1->ignorarEntrada();
+        if (pJog2)
+            pJog2->ignorarEntrada();
+        //pFase->desinscreverObservadores();
         mudarEstado(EstadoPausa::getEstadoPausa(NULL));
     }
 

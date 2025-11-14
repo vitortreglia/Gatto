@@ -1,7 +1,10 @@
  #include "Gerenciador/GerenciadorColisoes.h"
 
 namespace Gerenciador {
-    GerenciadorColisoes::GerenciadorColisoes(Lista::ListaEntidades *pLPersonagens) {
+    GerenciadorColisoes::GerenciadorColisoes(Lista::ListaEntidades *pLPersonagens):
+    pJogador1(nullptr),
+    pJogador2(nullptr)
+    {
         pListaPersonagens = pLPersonagens;
     }
 
@@ -14,8 +17,10 @@ namespace Gerenciador {
             LOs.push_back(obs);
     }
 
-    void GerenciadorColisoes::incluirJogador(Entidade::Personagem::Jogador* pJog) {
-        pJogador1 = pJog;
+    void GerenciadorColisoes::incluirJogadores(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2) {
+        pJogador1 = pJog1;
+        if (pJog2)
+            pJogador2 = pJog2;
     }
 
     void GerenciadorColisoes::incluirInimigo(Entidade::Personagem::Inimigo::Inimigo *pIni) {

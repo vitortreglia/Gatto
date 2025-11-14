@@ -1,9 +1,7 @@
 #include "Fase/FaseJardim.h"
 
-#include "Entidade/Itens/Projetil.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
-#include "Entidade/Obstaculo/PlataformaGiratoria.h"
-#include "Entidade/Obstaculo/PlataformaMovel.h"
+#include "Entidade/Obstaculo/GiraGira.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Inimigo/Rato.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
@@ -14,8 +12,10 @@ namespace Fase {
     maxInimRato(8),
     maxInimGaivota(5)
     {
-        listaEnt.incluir(new Entidade::Personagem::Jogador(1));
-        pGColisoes->incluirJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
+        listaEnt.incluir(pJog1);
+        if (pJog2)
+            listaEnt.incluir(pJog2);
+        pGColisoes->incluirJogadores(pJog1, pJog2);
         Entidade::Personagem::Inimigo::Inimigo::setJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         criarFaseJardim();
     }
@@ -24,16 +24,8 @@ namespace Fase {
 
     }
 
-    void FaseJardim::criarPlataformaMovel(float x, float y, bool direcao) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y, direcao);
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
-        }
-    }
-
-    void FaseJardim::criarPlataformaGiratoria(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaGiratoria(x, y);
+    void FaseJardim::criarGiraGira(float x, float y) {
+        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::GiraGira(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
@@ -73,7 +65,7 @@ namespace Fase {
                     criarPlataformaMovel(x, y, true);
                     x += 200.0f;
                 } else if (linha[i] == 'g') {
-                    criarPlataformaGiratoria(x, y);
+                    criarGiraGira(x, y);
                     x += 200.0f;
                 } else if (linha[i] == 'v') {
                     criarInimigoGaivota(x, y);

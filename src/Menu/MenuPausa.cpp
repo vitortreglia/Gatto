@@ -12,7 +12,7 @@ namespace Menu {
     }
 
     void MenuPausa::criarBotoesPausa() {
-        Botao* pBotao = new Botao("Pausa");
+        Entidade::Botao* pBotao = new Entidade::Botao("Pausa");
         incluirBotao(pBotao);
     }
 

@@ -12,7 +12,7 @@ namespace Menu {
     }
 
     void MenuPrincipal::criarBotoesMenuPrincipal() {
-        Botao* pBotao = new Botao("PRESSIONE ENTER PARA COMEÇAR");
+        Entidade::Botao* pBotao = new Entidade::Botao("PRESSIONE ENTER PARA COMEÇAR");
         incluirBotao(pBotao);
     }
 }

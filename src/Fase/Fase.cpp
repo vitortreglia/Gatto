@@ -1,12 +1,9 @@
 #include "Fase/Fase.h"
 
 #include "Entidade/Itens/Peixe.h"
-#include "Entidade/Itens/Projetil.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
 #include "Entidade/Obstaculo/Plataforma.h"
-#include "Entidade/Obstaculo/PlataformaGiratoria.h"
 #include "Entidade/Obstaculo/PlataformaMovel.h"
-#include "Entidade/Personagem/Personagem.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
@@ -18,7 +15,6 @@ namespace Fase {
     fundo({1280, 720})
     {
         pGColisoes = new Gerenciador::GerenciadorColisoes(&listaEnt);
-        Entidade::Personagem::Jogador::setGerenciadorEvento();
         //criarFase();
     }
 
@@ -26,21 +22,20 @@ namespace Fase {
         delete pGColisoes;
     }
 
-    void Fase::inscreverObservadores() {
-        static_cast<Entidade::Personagem::Jogador*>(listaEnt[0])->observarEntrada();
-    }
-
-    void Fase::desinscreverObservadores() {
-        static_cast<Entidade::Personagem::Jogador*>(listaEnt[0])->ignorarEntrada();
-    }
-
     sf::FloatRect Fase::getLimitesFase() {
         return limitesFase;
     }
 
-
     void Fase::criarPlataforma(float x, float y) {
         Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Plataforma(x, y);
+        if (objEntidade) {
+            listaEnt.incluir(objEntidade);
+            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+        }
+    }
+
+    void Fase::criarPlataformaMovel(float x, float y, bool direcao) {
+        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y, direcao);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
@@ -86,7 +81,6 @@ namespace Fase {
                 listaEnt[i]->desenhar();
         }
     }
-
 
     void Fase::executar() {
         Entidade::Entidade::getTempoFrame();

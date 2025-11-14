@@ -19,14 +19,12 @@ namespace Fase {
         sf::FloatRect getLimitesFase();
     protected:
         void criarPlataforma(float x, float y);
+        void criarPlataformaMovel(float x, float y, bool direcao);
         void criarPeixe(float x, float y);
         void criarInimigoGaivota(float x, float y);
-        void criarCenario();
+        //void criarCenario();
         void atualizarEntidades();
         //virtual void criarObstaculo() = 0;
-    public:
-        void inscreverObservadores();
-        void desinscreverObservadores();
     };
 }
 #endif //FASE_H

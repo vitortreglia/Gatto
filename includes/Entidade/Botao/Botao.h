@@ -3,7 +3,7 @@
 #include "Texto.h"
 #include "Entidade/Entidade.h"
 
-namespace Menu {
+namespace Entidade {
     class Botao : public Entidade::Entidade {
     private:
         Texto textoBotao;
