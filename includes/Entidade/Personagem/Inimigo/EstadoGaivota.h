@@ -13,7 +13,7 @@ namespace Entidade {
                 public:
                     EstadoGaivota(Gaivota* pGav);
                     ~EstadoGaivota();
-                    virtual void executar(float dt)=0;
+                    virtual void executar(float dt) = 0;
             };
         }
     }

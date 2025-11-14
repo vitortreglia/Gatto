@@ -2,7 +2,6 @@
 
 namespace Gerenciador {
     GerenciadorEvento* GerenciadorEvento::pGEvento(nullptr);
-    Entidade::Personagem::Jogador* GerenciadorEvento::pJogador(nullptr);
 
     GerenciadorEvento::GerenciadorEvento():
     pGGrafico(GerenciadorGrafico::getGerenciadorGrafico())
@@ -20,26 +19,43 @@ namespace Gerenciador {
         return pGEvento;
     }
 
-    void GerenciadorEvento::setJogador(Entidade::Personagem::Jogador *pJ) {
-        pJogador = pJ;
+    std::set<sf::Keyboard::Key> GerenciadorEvento::getTeclasPressionadas() {
+        return teclasAtivas;
     }
 
-    void GerenciadorEvento::verificaTeclaPressionada() {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            pJogador->andar(false);
+    std::set<sf::Keyboard::Key> GerenciadorEvento::getTeclasSoltas() {
+        return teclasSoltas;
+    }
+
+    void GerenciadorEvento::verificaTeclasPressionadas(sf::Event evento) {
+        if (evento.type == sf::Event::KeyPressed) {
+            teclasAtivas.insert(evento.key.code);
+        }
+        if (evento.type == sf::Event::KeyReleased) {
+            teclasAtivas.erase(evento.key.code);
+            teclasSoltas.insert(evento.key.code);
+        }
+
+        /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            //pJogador->andar(false);
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            pJogador->andar(true);
+            //pJogador->andar(true);
         } else {
-            pJogador->parar();
+            //pJogador->parar();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            pJogador->pular(1);
+            //pJogador->pular(1);
         } else {
-            pJogador->liberaPulo();
+            //pJogador->liberaPulo();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            pJogador->atacar();
+            //pJogador->atacar();
+        } else {
+            //pJogador->liberaAtaque();
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
+            pGEstados->sair();
+        }*/
     }
 
     void GerenciadorEvento::verificaTeclaSolta() {
@@ -48,7 +64,6 @@ namespace Gerenciador {
         } else if (tecla == sf::Keyboard::D) {
             pJogador->parar();
         }*/
-
     }
 
     void GerenciadorEvento::executar() {
@@ -57,8 +72,12 @@ namespace Gerenciador {
             if (evento.type == sf::Event::Closed) {
                 pGGrafico->fecharJanela();
             }
+            verificaTeclasPressionadas(evento);
         }
-        verificaTeclaPressionada();
+        if (!teclasAtivas.empty() || !teclasSoltas.empty()) {
+            notificar();
+            teclasSoltas.clear();
+        }
     }
 
 

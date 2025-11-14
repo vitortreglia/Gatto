@@ -6,13 +6,13 @@
 namespace Entidade {
     class Entidade : public Ente {
     protected:
+        sf::Vector2f tam;
         sf::RectangleShape corpo;
         float x, y;
-        sf::Vector2f tam;
         static float tempoFrame;
         bool ativo;
     public:
-        Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f, IDs::IDs id = IDs::IDs::vazio);
+        Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f, IDs::Ente_IDs id = IDs::Ente_IDs::vazio);
         virtual ~Entidade();
         const bool estaAtivo();
         void setAtivo(bool at);
@@ -22,9 +22,7 @@ namespace Entidade {
         const sf::Vector2f getTamanho() const;
         vector<sf::Vector2f> getCoordenadas();
         static void getTempoFrame();
-        virtual void desenhar();
         virtual void executar() = 0;
-        virtual void colisao(sf::Vector2f colisao, Entidade* pEntidade) = 0;
     };
 }
 

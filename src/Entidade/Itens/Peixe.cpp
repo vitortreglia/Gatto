@@ -1,9 +1,11 @@
 #include "Entidade/Itens/Peixe.h"
 
+#include "Entidade/Personagem/Jogador/Jogador.h"
+
 namespace Entidade {
     namespace Itens {
         Peixe::Peixe(float x, float y):
-        Entidade({50, 50}, x, y, IDs::IDs::ItemPeixe),
+        Entidade({50, 50}, x, y, IDs::Ente_IDs::ItemPeixe),
         movimento(60),
         sentido(true)
         {}
@@ -23,13 +25,8 @@ namespace Entidade {
             }
         }
 
-        void Peixe::colisao(sf::Vector2f colisao, Entidade *pEntidade) {
-            pEntidade->colisao({0, 0}, this);
-        }
-
         void Peixe::executar() {
             mover();
-            desenhar();
         }
 
 

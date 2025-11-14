@@ -2,12 +2,12 @@
 
 namespace Entidade {
     namespace Obstaculo {
-        PlataformaMovel::PlataformaMovel(float x, float y):
-        Obstaculo(false, sf::Vector2f(200, 50), x, y, IDs::IDs::PlataformaMovel),
+        PlataformaMovel::PlataformaMovel(float x, float y, bool direcao):
+        Obstaculo(false, sf::Vector2f(200, 50), x, y, IDs::Ente_IDs::PlataformaMovel),
         movimentoMax(400),
         tempoMax(4.0f),
         somaTempo(0.0f),
-        direcao(false),
+        direcao(direcao),
         somaMovimento(0.0f) {
             corpo.setFillColor(sf::Color::Green);
         }
@@ -38,7 +38,7 @@ namespace Entidade {
 
         void PlataformaMovel::executar() {
             obstaculizar();
-            desenhar();
+            //desenhar();
         }
 
     }

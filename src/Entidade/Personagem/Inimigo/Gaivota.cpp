@@ -1,96 +1,72 @@
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Gerenciador/GerenciadorColisoes.h"
 #include "Gerenciador/GerenciadorEvento.h"
-#include "Entidade/Personagem/Jogador/Jogador.h"
-#include "Entidade/Itens/Arma.h"
-#include "Entidade/Itens/ArmaInimigo.h"
-#include "IDs.h"
+#include "Ente_IDs.h"
 #include "Entidade/Personagem/Inimigo/EstadoPatrulha.h"
 
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Gaivota::Gaivota(float x, float y):
-            Inimigo(120.0f, {80, 50}, x, y, 2, IDs::IDs::InimigoGaivota)
+            ataque(1, 1.0f),
+            Inimigo(0, 120.0f, {80.0f, 50.0f},x, y, 2, IDs::Ente_IDs::InimigoGaivota),
+            baseY(y),
+            amplitude(10.0f),
+            frequencia(6.0f),
+            tempo(0.0f),
+            possuiPeixe(false),
+            estado(nullptr)
             {
-                setPosicao(sf::Vector2f(x, y));
-                baseY = y;
-
-                setTamanho(sf::Vector2f(80.0f, 50.0f));
-
-                tempo = 0.0f;
-                amplitude = 30.0;
-                frequencia = 5.0f;
-                direcao = 1;
+                andar(true);
 
                 setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
 
-                numVidas = 2;
-                vivo = true;
                 corpo.setFillColor(sf::Color::White);
                 setVoador(true);
 
                 raioPercepcaoX   = 280.0f;
-                raioPercepcaoY = 400.0f;
+                raioPercepcaoY = 200.0f;
                 raioAtaque       = 400.0f;
                 velocidadeRasante = 220.0f;
                 velocidadeAtaque  = 380.0f;
 
-                pArma = nullptr;
-                possuiPeixe = false;
             }
 
             Gaivota::~Gaivota(){}
 
-            void Gaivota::verificaVidas() {
-                if (numVidas <= 0)
-                    vivo = false;
-            }
-
-            /*void Gaivota::virarPara(const sf::Vector2f& posJog) {
-                float dx = posJog.x - getPosicao().x;
-                if (dx > 0) {
-                    direcao = 1;
-                    andar(true);
-                } else {
-                    direcao = -1;
-                    andar(false);
+            void Gaivota::danificar(Jogador *pJ) {
+                if (!pJ->getImunidadeDano())
+                    nivelMaldade++;
+                if (nivelMaldade > 1 && !possuiPeixe && ataque.getAtacando()) {
+                    possuiPeixe = pJ->perderPeixe();
                 }
+                pJ->tomarDano(1);
             }
 
-            void Gaivota::fazerRasante(float dt, const sf::Vector2f& posJog) {
-                virarPara(posJog);
+            void Gaivota::mover() {
+                deslocamento.y = std::sin(tempo * frequencia * M_PI) * amplitude;
                 atualizarPos();
-
-                sf::Vector2f pos = getPosicao();
-                float dy = posJog.y - pos.y;
-                float passoY = velocidadeRasante * dt;
-
-                if (std::fabs(dy) < passoY)
-                    pos.y = posJog.y;
-                else
-                    pos.y += (dy > 0 ? passoY : -passoY);
-
-                setPosicao(pos);
-                corpo.setPosition(pos);
-            }*/
-
-
-            Jogador* Gaivota::getJogador() {
-                return pJog;
+                tempo += tempoFrame;
+                if (tempo > 3.0f) {
+                    parar();
+                    andar(!direita);
+                    tempo = 0.0f;
+                }
             }
 
             sf::RectangleShape* Gaivota::getCorpo() {
                 return &corpo;
             }
+
             bool Gaivota::patrulhar(float dt) {
-                tempo += dt;
+                /*tempo += dt;
                 sf::Vector2f pos = getPosicao();
                 pos.x += vMax.x * dt * (float)direcao;
                 pos.y = baseY + std::sin(tempo * frequencia) * amplitude;
                 setPosicao(pos);
                 corpo.setPosition(pos);
-                //return false;
+                //return false;*/
+                mover();
 
                 const sf::Vector2f& posJog = pJog->getPosicao();
                 sf::Vector2f posicao = getPosicao();
@@ -103,31 +79,6 @@ namespace Entidade {
                 return dentroRasante;
             }
 
-            bool Gaivota::fazerAtaque(float dt) {
-                /*sf::Vector2f dir = alvoAtaque - pos;
-
-                float dist = std::sqrt(dir.x*dir.x + dir.y*dir.y);
-                if (dist < 8.0f) {
-
-                    estado = 0;
-                    if (pArma)
-                        pArma->setAtacando(false);
-                    //return false;
-                }
-
-                dir.x /= dist;
-                dir.y /= dist;
-
-                pos.x += dir.x * velocidadeAtaque * dt;
-                pos.y += dir.y * velocidadeAtaque * dt;
-
-                setPosicao(pos);
-                corpo.setPosition(pos);
-
-                if (pArma && !pArma->getAtacando())
-                    pArma->setAtacando(true);*/
-                return false;
-            }
             /*
             void Gaivota::decidirEstado(const sf::Vector2f& posJog) {
                 sf::Vector2f pos = getPosicao();
@@ -177,21 +128,15 @@ namespace Entidade {
                 if (pEstado) {
                     estado = pEstado;
                 }
+
             }
 
 
             void Gaivota::executar() {
-                /*mover();
+                //mover();
                 verificaVidas();
-                desenhar();
-                cout << pJog->getPosicao().x << endl;*/
-
                 estado->executar(tempoFrame);
-                desenhar();
-                verificaVidas();
             }
-
-
         }
     }
 }

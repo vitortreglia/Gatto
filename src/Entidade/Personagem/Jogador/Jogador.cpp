@@ -3,18 +3,32 @@
 
 namespace Entidade {
     namespace Personagem {
-        Jogador::Jogador(Itens::Arma* pG):
-        Personagem(600.0f, sf::Vector2f(100, 100), 100, 1300, 7, IDs::IDs::Jogador1),
+        Gerenciador::GerenciadorEvento* Jogador::pGEvento(nullptr);
+
+        Jogador::Jogador(int nJog):
+        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, nJog == 1 ? IDs::Ente_IDs::Jogador1 : IDs::Ente_IDs::Jogador2),
+        numJog(nJog),
+        ataque(1, 0.1f),
         podePular(true),
-        pGarra(pG),
         peixes(0),
-        interface("oiii", 30, 20, 50)
-        {
-            Gerenciador::GerenciadorEvento::setJogador(this);
-            pG->setPersonagem(this);
-        }
+        deslocAtaque(0.0f),
+        interface("oiii", 30, 20, 50),
+        imunidadeDano(false)
+        {}
 
         Jogador::~Jogador() {}
+
+        void Jogador::setGerenciadorEvento() {
+            pGEvento = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
+        }
+
+        void Jogador::observarEntrada() {
+            pGEvento->inscrever(this);
+        }
+
+        void Jogador::ignorarEntrada() {
+            pGEvento->desinscrever(this);
+        }
 
         void Jogador::liberaPulo() {
             podePular = true;
@@ -28,79 +42,139 @@ namespace Entidade {
             }
         }
 
-        void Jogador::atacar() {
-            if (!pGarra->getAtacando())
-                pGarra->setAtacando(true);
+        void Jogador::coletarPeixe(Itens::Peixe *pPeixe) {
+            pPeixe->setAtivo(false);
+            peixes++;
         }
 
-        void Jogador::colisao(sf::Vector2f colisao, Entidade *pEntidade) {
-            if (pEntidade->getId() == IDs::IDs::ItemPeixe && peixes < 3) {
-                pEntidade->setAtivo(false);
-                peixes++;
+        bool Jogador::perderPeixe() {
+            if (peixes > 0) {
+                peixes--;
+                return true;
             }
+            return false;
+        }
+
+        bool Jogador::getImunidadeDano() {
+            return imunidadeDano;
+        }
+
+        void Jogador::colidir(Inimigo::Inimigo* pInimigo, sf::Vector2f colisao) {
             if (colisao.y < 0.0f) {
-                estaNoChao(true);
-                if (pEntidade->getId() >= IDs::IDs::InimigoGaivota && pEntidade->getId() <= IDs::IDs::Projetil) {
-                    pEntidade->colisao({colisao.x * -1, colisao.y * -1}, this);
-                    pular(1);
-                } else {
-                    if (colisao.x != 0.0f) {
-                        float tg;
-                        tg = colisao.x / colisao.y;
-                        if (tg >= -1 && tg <= 1 && deslocamento.y > 0.0f) {
-                            deslocamento.y = 0.0f;
-                        }
-                    } else if (deslocamento.y > 0.0f) {
-                        deslocamento.y = 0.0f;
+                pular(1.0f);
+                pInimigo->tomarDano(1);
+            } else if (ataque.getAtacando() || deslocAtaque != 0.0f) {
+                if (getDireita()) {
+                    if (colisao.x < 0.0f) {
+                        pInimigo->tomarDano(ataque.getDano());
+                    } else {
+                        pInimigo->danificar(this);
                     }
-                    if (colisao.y < -30.0f)
-                        tomarDano(100);
-                }
-            } else if (colisao.y > 0.0f) {
-                if (pEntidade->getId() >= IDs::IDs::InimigoGaivota && pEntidade->getId() <= IDs::IDs::Projetil && !sofrendoDano)
-                    tomarDano(1);
-                deslocamento.y = deslocamento.y * -1;
-            } else if (colisao.x != 0.0f) {
-                if (pEntidade->getId() >= IDs::IDs::InimigoGaivota && pEntidade->getId() <= IDs::IDs::Projetil && !sofrendoDano) {
-                    tomarDano(1);
-                    deslocamento.x = deslocamento.x * -1;
-                    pular(0.5);
+                } else if (colisao.x > 0.0f) {
+                        pInimigo->tomarDano(ataque.getDano());
                 } else {
-                    deslocamento.x = 0.0f;
+                    pInimigo->danificar(this);
                 }
+            } else {
+                if (colisao.x < 0.0f) {
+                    deslocamento.x = -5.0f;
+                } else {
+                    deslocamento.x = 5.0f;
+                }
+                pular(0.5f);
+                pInimigo->danificar(this);
             }
-            colisao.x += getPosicao().x;
-            colisao.y += getPosicao().y;
-            atualizarPos(colisao);
         }
 
+        void Jogador::colidir(sf::Vector2f colisao) {
+            if (colisao.x < 0.0f) {
+                deslocamento.x = -5.0f;
+            } else {
+                deslocamento.x = 5.0f;
+            }
+            pular(0.5f);
+            tomarDano(1);
+        }
+
+        void Jogador::tomarDano(int dano) {
+            if (!imunidadeDano) {
+                sofrendoDano = true;
+                imunidadeDano = true;
+                numVidas -= dano;
+                cout << "dano em " << (int)ID << endl;
+            }
+        }
 
         void Jogador::verificaVidas() {
             if (numVidas <= 0) {
                 cout << "morreu " << endl;
                 setAtivo(false);
-            } else if (sofrendoDano) {
+            } else if (imunidadeDano) {
                 tempoDano += tempoFrame;
                 if (tempoDano > 0.5f) {
                     sofrendoDano = false;
+                }
+                if (tempoDano > 1.0f) {
+                    deslocamento.x = 0.0f;
                     tempoDano = 0.0f;
+                    imunidadeDano = false;
                 }
             }
+
         }
 
         void Jogador::mover() {
-            if (!pGarra->getAtacando())
-                atualizarPos();
+            if (ataque.getAtacando()) {
+                if (getDireita()) {
+                    deslocamento.x = 15.0;
+                } else {
+                    deslocamento.x = -15.0;
+                }
+                deslocAtaque += deslocamento.x;
+                ataque.ataque(tempoFrame);
+            } else if (deslocAtaque != 0 && !sofrendoDano) {
+                deslocamento.x = deslocAtaque * -1;
+                deslocAtaque = 0.0f;
+                ataque.liberaAtaque();
+            }
+            atualizarPos();
         }
 
         void Jogador::executar() {
             verificaVidas();
-            pGGrafico->moveCamera(x, y);
-            desenhar();
+            pGGrafico->moveCamera(getPosicao());
             mover();
-            interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
+            if (peixes < 3)
+                interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
+            else
+                interface.setTexto("Venceu");
             interface.executar();
+            //cout << deslocamento.x << endl;
         }
 
+        void Jogador::tratarEventos() {
+            set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
+            set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
+            if (teclasPressionadas.count(sf::Keyboard::A)) {
+                andar(false);
+            } else if (teclasPressionadas.count(sf::Keyboard::D)) {
+                andar(true);
+            } else {
+                parar();
+            }
+            if (teclasPressionadas.count(sf::Keyboard::W)) {
+                pular(1.0f);
+            }
+            if (teclasSoltas.count(sf::Keyboard::W)) {
+                liberaPulo();
+            }
+            if (teclasSoltas.count(sf::Keyboard::Space)) {
+                ataque.atacar();
+            }
+        }
+
+        void Jogador::notificar() {
+            tratarEventos();
+        }
     }
 }

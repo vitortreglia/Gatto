@@ -4,18 +4,20 @@
 #include "Ente.h"
 
 
-namespace Entidade {
+
     class Texto : public Ente{
     private:
         sf::Text texto;
         sf::Font fonte;
     public:
         Texto(std::string conteudo, int tamanho, float x, float y);
+        ~Texto();
         void setTexto(std::string txt);
-        void desenhar();
+        void setTamanho(int tam);
+        void setPosicao(float x, float y);
         void executar();
     };
-}
+
 
 
 #endif //TEXTO_H

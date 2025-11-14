@@ -1,24 +1,27 @@
 #ifndef INIMIGO_H
 #define INIMIGO_H
 #include "Entidade/Personagem/Personagem.h"
-#include "Entidade/Personagem/Jogador/Jogador.h"
-
 
 namespace Entidade {
     namespace Personagem {
+
+        class Jogador;
+
         namespace Inimigo {
             class Inimigo : public Personagem {
             protected:
                 static Jogador* pJog;
+                int nivelMaldade;
             public:
-                Inimigo(float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::IDs id);
+                Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id);
                 ~Inimigo();
                 static void setJogador(Jogador* pJ);
+                static Jogador* getJogador();
                 void verificaDistanciaJogador(sf::Vector2f distSeguir, sf::Vector2f distAtacar);
-                void colisao(sf::Vector2f colisao, Entidade *pEntidade);
                 void verificaVidas();
-                virtual void mover();
-                virtual void executar();
+                virtual void danificar(Jogador* pJ) = 0;
+                virtual void mover() = 0;
+                virtual void executar() = 0;
             };
         }
     }

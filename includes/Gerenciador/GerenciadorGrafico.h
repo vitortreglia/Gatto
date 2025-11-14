@@ -31,14 +31,15 @@ namespace Gerenciador {
         const bool verificaJanelaAberta();
         static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
-        void desenharEnte(sf::RectangleShape corpo);
-        void desenharTexto(sf::Text texto);
+        void desenharEnte(sf::RectangleShape* corpo);
+        void desenharUI(sf::RectangleShape* corpo);
+        void desenharUI(sf::Text* texto);
         void mostraElementos();
         void fecharJanela();
         void limpaJanela();
         float getTempo();
         void resetaRelogio();
-        void moveCamera(float x, float y);
+        void moveCamera(sf::Vector2f coord);
         void setLimitesCamera(sf::FloatRect limites);
         sf::FloatRect getLimitesCamera();
     };

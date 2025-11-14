@@ -1,6 +1,6 @@
 #ifndef PERSONAGEM_H
 #define PERSONAGEM_H
-#include"../Entidade.h"
+#include"Entidade/Entidade.h"
 
 namespace Entidade {
     namespace Personagem {
@@ -15,22 +15,22 @@ namespace Entidade {
             bool noChao;
             bool sofrendoDano;
             float tempoDano;
-            bool vivo;
+            //bool vivo;
             bool voador;
-
         public:
-            Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::IDs id);
+            Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id);
             virtual ~Personagem();
             void andar(const bool dir);
             void parar();
-            bool getDireita();
+            const bool getDireita() const;
             void calculaVelocidade();
+            sf::Vector2f getDeslocamento();
+            void setDeslocamento(sf::Vector2f desl);
             void atualizarPos(sf::Vector2f pos);
             void atualizarPos();
             void estaNoChao(bool c);
-            void tomarDano(int dano);
+            virtual void tomarDano(int dano);
             void setVoador(bool voador);
-            void colisao(sf::Vector2f colisao, Entidade* pEntidade) = 0;
             virtual void verificaVidas() = 0;
             virtual void mover() = 0;
             virtual void executar() = 0;

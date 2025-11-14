@@ -8,11 +8,10 @@ namespace Entidade {
         protected:
             bool danoso;
         public:
-            Obstaculo(bool dano, sf::Vector2f tamanho, float x, float y, IDs::IDs id);
+            Obstaculo(bool dano, sf::Vector2f tamanho, float x, float y, IDs::Ente_IDs id);
             ~Obstaculo();
             virtual void obstaculizar() = 0;
             virtual void executar() = 0;
-            virtual void colisao(sf::Vector2f colisao, Entidade* pEntidade);
         };
     }
 }

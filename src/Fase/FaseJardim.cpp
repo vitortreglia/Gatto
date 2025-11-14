@@ -1,20 +1,21 @@
 #include "Fase/FaseJardim.h"
+
+#include "Entidade/Itens/Projetil.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
 #include "Entidade/Obstaculo/PlataformaGiratoria.h"
 #include "Entidade/Obstaculo/PlataformaMovel.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
+#include "Entidade/Personagem/Inimigo/Rato.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
 namespace Fase {
-    FaseJardim::FaseJardim():
-    maxInimFaceis(0),
-    maxInimMedios(0)
+    FaseJardim::FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2):
+    Fase(IDs::Ente_IDs::FaseJardim),
+    maxInimRato(8),
+    maxInimGaivota(5)
     {
-        Entidade::Entidade* objEntidade = new Entidade::Itens::Arma(IDs::IDs::ArmaGarra, 1);
-        listaEnt.incluir(new Entidade::Personagem::Jogador(static_cast<Entidade::Itens::Arma*>(objEntidade)));
-        pGColisoes->addJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
-        listaEnt.incluir(objEntidade);
-        pGColisoes->addHitBox(static_cast<Entidade::Itens::Arma*>(objEntidade));
+        listaEnt.incluir(new Entidade::Personagem::Jogador(1));
+        pGColisoes->incluirJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         Entidade::Personagem::Inimigo::Inimigo::setJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         criarFaseJardim();
     }
@@ -23,11 +24,11 @@ namespace Fase {
 
     }
 
-    void FaseJardim::criarPlataformaMovel(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y);
+    void FaseJardim::criarPlataformaMovel(float x, float y, bool direcao) {
+        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y, direcao);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
         }
     }
 
@@ -35,15 +36,15 @@ namespace Fase {
         Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaGiratoria(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
         }
     }
 
-    void FaseJardim::criarInimigoGaivota(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Gaivota(x, y);
+    void FaseJardim::criarInimigoRato(float x, float y) {
+        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->addInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+            pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
         }
     }
 
@@ -66,7 +67,10 @@ namespace Fase {
                     criarPlataforma(x, y);
                     x += 100.0f;
                 } else if (linha[i] == 'm') {
-                    criarPlataformaMovel(x, y);
+                    criarPlataformaMovel(x, y, false);
+                    x += 200.0f;
+                } else if (linha[i] == 'n') {
+                    criarPlataformaMovel(x, y, true);
                     x += 200.0f;
                 } else if (linha[i] == 'g') {
                     criarPlataformaGiratoria(x, y);
@@ -76,6 +80,9 @@ namespace Fase {
                     x += 100.0f;
                 } else if (linha[i] == 'f') {
                     criarPeixe(x, y);
+                    x += 100.0f;
+                } else if (linha[i] == 'r') {
+                    criarInimigoRato(x, y);
                     x += 100.0f;
                 }
                 x += espaco * 100.0f;
@@ -88,5 +95,6 @@ namespace Fase {
         }
         limitesFase.height = y;
         arquivo.close();
+        pGGrafico->setLimitesCamera(limitesFase);
     }
 }

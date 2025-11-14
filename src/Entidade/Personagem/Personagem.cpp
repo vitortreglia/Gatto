@@ -1,8 +1,8 @@
-#include "../../../includes/Entidade/Personagem/Personagem.h"
+#include "Entidade/Personagem/Personagem.h"
 
 namespace Entidade {
     namespace Personagem {
-        Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::IDs id):
+        Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id):
         Entidade(tam, px, py, id),
         vMax(sf::Vector2f(vel, 1000.0f)),
         gravidade(100.0f),
@@ -12,7 +12,8 @@ namespace Entidade {
         numVidas(vidas),
         sofrendoDano(false),
         tempoDano(0.0f),
-        deslocamento({0.0f, 0.0f})
+        deslocamento({0.0f, 0.0f}),
+        voador(false)
         {
             corpo.setFillColor(sf::Color::Red);
         }
@@ -30,10 +31,17 @@ namespace Entidade {
             andando = false;
         }
 
-        bool Personagem::getDireita() {
+        const bool Personagem::getDireita() const {
             return direita;
         }
 
+        sf::Vector2f Personagem::getDeslocamento() {
+            return deslocamento;
+        }
+
+        void Personagem::setDeslocamento(sf::Vector2f desl) {
+            deslocamento = desl;
+        }
 
         void Personagem::calculaVelocidade() {
             if (!sofrendoDano) {

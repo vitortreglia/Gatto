@@ -2,7 +2,7 @@
 #define IDS_H
 
 namespace IDs {
-    enum class IDs {
+    enum class Ente_IDs {
         vazio = 0,
         Jogador1,
         Jogador2,
@@ -18,7 +18,10 @@ namespace IDs {
         PlataformaGiratoria,
         ArmaGarra,
         ItemPeixe,
-        Texto
+        Texto,
+        Botao,
+        MenuPausa,
+        MenuPrincipal
     };
 }
 
