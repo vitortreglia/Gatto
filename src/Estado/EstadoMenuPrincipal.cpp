@@ -23,7 +23,7 @@ namespace Estados {
 
     void EstadoMenuPrincipal::sair(void *args) {
         pGEvento->desinscrever(this);
-        int arg[] = {1, 1, 1};
+        int arg[] = {2, 1, 1};
         mudarEstado(static_cast<Estado*>(EstadoJogo::getEstadoJogo(static_cast<void*>(arg))));
     }
 

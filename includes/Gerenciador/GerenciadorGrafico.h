@@ -23,13 +23,15 @@ namespace Gerenciador {
         sf::Clock relogio;
         float tempo;
         static GerenciadorGrafico* pGGrafico;
-        float cameraX;
-        float cameraY;
+        float cameraX, viewP1X, viewP2X;
+        float cameraY, viewP1Y, viewP2Y;
+        bool multiplayer;
         sf::FloatRect limitesCamera;
     private:
         GerenciadorGrafico();
     public:
         ~GerenciadorGrafico();
+        void setMultiplayer(bool mult);
         const bool verificaJanelaAberta();
         static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
@@ -41,7 +43,7 @@ namespace Gerenciador {
         void limpaJanela();
         float getTempo();
         void resetaRelogio();
-        void moveCamera(sf::Vector2f coord);
+        void moveCamera(sf::Vector2f coord, int jog);
         void setLimitesCamera(sf::FloatRect limites);
         sf::FloatRect getLimitesCamera();
     };

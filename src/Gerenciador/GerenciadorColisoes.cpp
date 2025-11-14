@@ -136,6 +136,10 @@ namespace Gerenciador {
             if (colisao.x != 0.0f || colisao.y != 0.0f) {
                 corrigirColisao(pJogador1, colisao);
             }
+            colisao = verificarColisao(pJogador2, *it);
+            if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                corrigirColisao(pJogador2, colisao);
+            }
         }
     }
 
@@ -148,6 +152,12 @@ namespace Gerenciador {
                 if (colisao.x != 0.0f || colisao.y != 0.0f) {
                     corrigirColisao(pJogador1, colisao);
                     pJogador1->colidir(*it, colisao);
+                }
+                if ((*it)->estaAtivo())
+                    colisao = verificarColisao(pJogador2, *it);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    corrigirColisao(pJogador2, colisao);
+                    pJogador2->colidir(*it, colisao);
                 }
             }
         }
@@ -173,6 +183,10 @@ namespace Gerenciador {
                 if (colisao.x != 0.0f || colisao.y != 0.0f) {
                     pJogador1->coletarPeixe(*it);
                 }
+                colisao = verificarColisao(*it, pJogador2);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    pJogador2->coletarPeixe(*it);
+                }
             }
         }
     }
@@ -185,6 +199,11 @@ namespace Gerenciador {
                 if (colisao.x != 0.0f || colisao.y != 0.0f) {
                     (*it)->setAtivo(false);
                     pJogador1->colidir(colisao);
+                }
+                colisao = verificarColisao(pJogador2, *it);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    (*it)->setAtivo(false);
+                    pJogador2->colidir(colisao);
                 }
             }
         }

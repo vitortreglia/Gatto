@@ -11,7 +11,8 @@ namespace Gerenciador {
     limitesCamera({0.0f, 0.0f, 0.0f, 0.0f}),
     cameraX(TELA_X/2),
     cameraY(TELA_Y/2),
-    tempo(0.0f)
+    tempo(0.0f),
+    multiplayer(false)
     {
         if (window == nullptr) {
             cout << "Nao foi possivel criar a janela grafica" << endl;
@@ -34,6 +35,10 @@ namespace Gerenciador {
         }
     }
 
+    void GerenciadorGrafico::setMultiplayer(bool mult) {
+        multiplayer = mult;
+    }
+
     GerenciadorGrafico* GerenciadorGrafico::getGerenciadorGrafico() {
         if (!pGGrafico) {
             pGGrafico = new GerenciadorGrafico();
@@ -46,10 +51,15 @@ namespace Gerenciador {
     }
 
     void GerenciadorGrafico::desenharEnte(sf::RectangleShape* corpo) {
-        //window->setView(viewP1);
-        window->draw(*corpo);
-        //window->setView(viewP2);
-        //window->draw(*corpo);
+        if (multiplayer) {
+            window->setView(viewP1);
+            window->draw(*corpo);
+            window->setView(viewP2);
+            window->draw(*corpo);
+        } else {
+            window->setView(camera);
+            window->draw(*corpo);
+        }
     }
 
     void GerenciadorGrafico::desenharUI(sf::RectangleShape* corpo) {
@@ -95,29 +105,69 @@ namespace Gerenciador {
         relogio.restart();
     }
 
-    void GerenciadorGrafico::moveCamera(sf::Vector2f coord) {
-        cameraX += 5 * (coord.x - cameraX) * tempo;
+    void GerenciadorGrafico::moveCamera(sf::Vector2f coord, int jog) {
+        if (multiplayer) {
+            if (jog == 1) {
+                viewP1X += 5 * (coord.x - viewP1X) * tempo;
 
-        if (cameraX < limitesCamera.left + TELA_X / 2) {
-            cameraX = TELA_X/2;
-        } else if (cameraX > limitesCamera.width - TELA_X / 2) {
-            cameraX = limitesCamera.width - TELA_X / 2;
+                if (viewP1X < limitesCamera.left + TELA_X / 4) {
+                    viewP1X = TELA_X/4;
+                } else if (viewP1X > limitesCamera.width - TELA_X / 4) {
+                    viewP1X = limitesCamera.width - TELA_X / 4;
+                }
+                if (coord.y < viewP1Y - 180 || coord.y > viewP1Y + 180)
+                    viewP1Y = coord.y;
+                else if (coord.y < viewP1Y - 100 || coord.y > viewP1Y + 100)
+                    viewP1Y += 3 * (coord.y - viewP1Y) * tempo;
+                if (viewP1Y < limitesCamera.top + TELA_Y / 2) {
+                    viewP1Y = limitesCamera.top + TELA_Y / 2;
+                } else if (viewP1Y > limitesCamera.height - TELA_Y / 2) {
+                    viewP1Y = limitesCamera.height - TELA_Y / 2;
+                }
+                viewP1.setCenter(viewP1X, viewP1Y);
+
+            } else {
+                viewP2X += 5 * (coord.x - viewP2X) * tempo;
+
+                if (viewP2X < limitesCamera.left + TELA_X / 4) {
+                    viewP2X = TELA_X/4;
+                } else if (viewP2X > limitesCamera.width - TELA_X / 4) {
+                    viewP2X = limitesCamera.width - TELA_X / 4;
+                }
+                if (coord.y < viewP2Y - 360 || coord.y > viewP2Y + 360)
+                    viewP2Y = coord.y;
+                else if (coord.y < viewP2Y - 100 || coord.y > viewP2Y + 100)
+                    viewP2Y += 3 * (coord.y - viewP2Y) * tempo;
+                if (viewP2Y < limitesCamera.top + TELA_Y / 2) {
+                    viewP2Y = limitesCamera.top + TELA_Y / 2;
+                } else if (viewP2Y > limitesCamera.height - TELA_Y / 2) {
+                    viewP2Y = limitesCamera.height - TELA_Y / 2;
+                }
+                viewP2.setCenter(viewP2X, viewP2Y);
+
+            }
+        } else {
+            cameraX += 5 * (coord.x - cameraX) * tempo;
+
+            if (cameraX < limitesCamera.left + TELA_X / 2) {
+                cameraX = TELA_X/2;
+            } else if (cameraX > limitesCamera.width - TELA_X / 2) {
+                cameraX = limitesCamera.width - TELA_X / 2;
+            }
+            if (coord.y < cameraY - 360 || coord.y > cameraY + 360)
+                cameraY = coord.y;
+            else if (coord.y < cameraY - 100 || coord.y > cameraY + 100)
+                cameraY += 3 * (coord.y - cameraY) * tempo;
+            if (cameraY < limitesCamera.top + TELA_Y / 2) {
+                cameraY = limitesCamera.top + TELA_Y / 2;
+            } else if (cameraY > limitesCamera.height - TELA_Y / 2) {
+                cameraY = limitesCamera.height - TELA_Y / 2;
+            }
+
+            camera.setCenter(cameraX, cameraY);
         }
-        if (coord.y < cameraY - 360 || coord.y > cameraY + 360)
-            cameraY = coord.y;
-        else if (coord.y < cameraY - 100 || coord.y > cameraY + 100)
-            cameraY += 3 * (coord.y - cameraY) * tempo;
-        if (cameraY < limitesCamera.top + TELA_Y / 2) {
-            cameraY = limitesCamera.top + TELA_Y / 2;
-        } else if (cameraY > limitesCamera.height - TELA_Y / 2) {
-            cameraY = limitesCamera.height - TELA_Y / 2;
-        }
 
-        camera.setCenter(cameraX, cameraY);
-        //viewP1.setCenter(cameraX, cameraY);
-        //viewP2.setCenter(cameraX, cameraY);
 
-        //window->setView(camera);
     }
 
     void GerenciadorGrafico::setLimitesCamera(sf::FloatRect limites) {

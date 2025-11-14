@@ -12,9 +12,13 @@ namespace Fase {
     maxInimRato(8),
     maxInimGaivota(5)
     {
+        pJog1->setPosicao({1600, 4600});
         listaEnt.incluir(pJog1);
-        if (pJog2)
+        if (pJog2) {
+            pGGrafico->setMultiplayer(true);
+            pJog2->setPosicao({2000, 4600});
             listaEnt.incluir(pJog2);
+        }
         pGColisoes->incluirJogadores(pJog1, pJog2);
         Entidade::Personagem::Inimigo::Inimigo::setJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         criarFaseJardim();

@@ -13,8 +13,11 @@ namespace Entidade {
         peixes(0),
         deslocAtaque(0.0f),
         interface("oiii", 30, 20, 50),
-        imunidadeDano(false)
-        {}
+        imunidadeDano(false) {
+            if (numJog == 2) {
+                interface.setPosicao(660, 50);
+            }
+        }
 
         Jogador::~Jogador() {}
 
@@ -109,6 +112,7 @@ namespace Entidade {
             if (numVidas <= 0) {
                 cout << "morreu " << endl;
                 setAtivo(false);
+                pGGrafico->setMultiplayer(false);
             } else if (imunidadeDano) {
                 tempoDano += tempoFrame;
                 if (tempoDano > 0.5f) {
@@ -142,7 +146,7 @@ namespace Entidade {
 
         void Jogador::executar() {
             verificaVidas();
-            pGGrafico->moveCamera(getPosicao());
+            pGGrafico->moveCamera(getPosicao(), numJog);
             mover();
             if (peixes < 3)
                 interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
@@ -155,21 +159,40 @@ namespace Entidade {
         void Jogador::tratarEventos() {
             set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
             set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
-            if (teclasPressionadas.count(sf::Keyboard::A)) {
-                andar(false);
-            } else if (teclasPressionadas.count(sf::Keyboard::D)) {
-                andar(true);
+            if (numJog == 1) {
+                if (teclasPressionadas.count(sf::Keyboard::A)) {
+                    andar(false);
+                } else if (teclasPressionadas.count(sf::Keyboard::D)) {
+                    andar(true);
+                } else {
+                    parar();
+                }
+                if (teclasPressionadas.count(sf::Keyboard::W)) {
+                    pular(1.0f);
+                }
+                if (teclasSoltas.count(sf::Keyboard::W)) {
+                    liberaPulo();
+                }
+                if (teclasSoltas.count(sf::Keyboard::Space)) {
+                    ataque.atacar();
+                }
             } else {
-                parar();
-            }
-            if (teclasPressionadas.count(sf::Keyboard::W)) {
-                pular(1.0f);
-            }
-            if (teclasSoltas.count(sf::Keyboard::W)) {
-                liberaPulo();
-            }
-            if (teclasSoltas.count(sf::Keyboard::Space)) {
-                ataque.atacar();
+                if (teclasPressionadas.count(sf::Keyboard::Left)) {
+                    andar(false);
+                } else if (teclasPressionadas.count(sf::Keyboard::Right)) {
+                    andar(true);
+                } else {
+                    parar();
+                }
+                if (teclasPressionadas.count(sf::Keyboard::Up)) {
+                    pular(1.0f);
+                }
+                if (teclasSoltas.count(sf::Keyboard::Up)) {
+                    liberaPulo();
+                }
+                if (teclasSoltas.count(sf::Keyboard::Down)) {
+                    ataque.atacar();
+                }
             }
         }
 
