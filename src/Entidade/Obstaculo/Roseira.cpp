@@ -22,6 +22,7 @@ namespace Entidade {
         void Roseira::obstaculizar(Personagem::Jogador* pJog) {
             if (danoso) {
                 pJog->tomarDano(1);
+                pJog->pular(0.5);
             }
         }
 

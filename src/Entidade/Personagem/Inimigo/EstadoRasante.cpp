@@ -11,6 +11,11 @@ namespace Entidade {
             EstadoRasante::EstadoRasante(Gaivota* pGav, Jogador* pJog): EstadoGaivota(pGav) {
                 vetorAtaque = pJog->getPosicao() - pGaivota->getPosicao();
                 tempo = 0;
+                if (vetorAtaque.x > 0) {
+                    pGaivota->atualizarAnimacao({80, 0, -80, 50});
+                } else {
+                    pGaivota->atualizarAnimacao({0, 0, 80, 50});
+                }
             }
             
             EstadoRasante::~EstadoRasante() {
@@ -22,11 +27,14 @@ namespace Entidade {
                     pGaivota->ataque.ataque(dt);
                     tempo += dt;
                     if (tempo <= 1) {
-                        //pGaivota->getCorpo()->move(sf::Vector2f{vetorAtaque.x * dt, vetorAtaque.y * dt});
                         pGaivota->atualizarPos({pGaivota->getPosicao().x + vetorAtaque.x * dt, pGaivota->getPosicao().y +vetorAtaque.y * dt});
 
                     }else {
-                        //pGaivota->getCorpo()->move(sf::Vector2f{-vetorAtaque.x * dt, -vetorAtaque.y * dt});
+                        if (vetorAtaque.x < 0) {
+                            pGaivota->atualizarAnimacao({80, 0, -80, 50});
+                        } else {
+                            pGaivota->atualizarAnimacao({0, 0, 80, 50});
+                        }
                         pGaivota->atualizarPos({pGaivota->getPosicao().x - vetorAtaque.x * dt, pGaivota->getPosicao().y - vetorAtaque.y * dt});
                     }
 

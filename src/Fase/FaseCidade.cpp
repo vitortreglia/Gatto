@@ -10,11 +10,11 @@ namespace Fase {
     maxChefoes(5),
     maxInimGaivota(8)
     {
-        pJog1->setPosicao({1600, 4600});
+        pJog1->setPosicao({1500, 2200});
         listaEnt.incluir(pJog1);
         if (pJog2) {
             pGGrafico->setMultiplayer(true);
-            pJog2->setPosicao({2000, 4600});
+            pJog2->setPosicao({2700, 2200});
             listaEnt.incluir(pJog2);
         }
         Entidade::Personagem::Inimigo::Gaivota::setJogadores(pJog1, pJog2);
@@ -54,7 +54,7 @@ namespace Fase {
     }
 
     void FaseCidade::criarFaseCidade() {
-        ifstream arquivo("Data/Fases/FaseJardim.dat");
+        ifstream arquivo("Data/Fases/FaseCidade.dat");
         int espaco = 0;
         float x = 0.0f;
         float y = 100.0f;
@@ -77,8 +77,11 @@ namespace Fase {
                 } else if (linha[i] == 'n') {
                     criarPlataformaMovel(x, y, true);
                     x += 200.0f;
-                } else if (linha[i] == 'g') {
+                } else if (linha[i] == 'r') {
                     criarRoseira(x, y, true);
+                    x += 200.0f;
+                } else if (linha[i] == 'R') {
+                    criarRoseira(x, y, false);
                     x += 200.0f;
                 } else if (linha[i] == 'v') {
                     criarInimigoGaivota(x, y);
@@ -86,7 +89,7 @@ namespace Fase {
                 } else if (linha[i] == 'f') {
                     criarPeixe(x, y);
                     x += 100.0f;
-                } else if (linha[i] == 'r') {
+                } else if (linha[i] == 'c') {
                     criarChefao(x, y);
                     x += 100.0f;
                 }

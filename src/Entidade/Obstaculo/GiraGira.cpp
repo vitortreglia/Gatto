@@ -23,7 +23,7 @@ namespace Entidade {
         }
 
         void GiraGira::obstaculizar(Personagem::Jogador* pJog) {
-            pJog->pular(1.0f);
+            
         }
 
         void GiraGira::executar() {

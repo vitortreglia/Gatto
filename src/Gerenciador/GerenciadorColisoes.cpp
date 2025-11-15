@@ -148,11 +148,13 @@ namespace Gerenciador {
             colisao = verificarColisao(pJogador1, *it);
             if (colisao.x != 0.0f || colisao.y != 0.0f) {
                 corrigirColisao(pJogador1, colisao);
+                (*it)->obstaculizar(pJogador1);
             }
             if (pJogador2) {
                 colisao = verificarColisao(pJogador2, *it);
                 if (colisao.x != 0.0f || colisao.y != 0.0f) {
                     corrigirColisao(pJogador2, colisao);
+                    (*it)->obstaculizar(pJogador2);
                 }
             }
         }

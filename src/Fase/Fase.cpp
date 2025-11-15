@@ -30,7 +30,7 @@ namespace Fase {
     }
 
     void Fase::criarPlataforma(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Plataforma(x, y);
+        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Plataforma(x, y+50);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
@@ -38,7 +38,7 @@ namespace Fase {
     }
 
     void Fase::criarPlataformaMovel(float x, float y, bool direcao) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y, direcao);
+        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y+50, direcao);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));

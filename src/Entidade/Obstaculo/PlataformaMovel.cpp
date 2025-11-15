@@ -27,7 +27,7 @@ namespace Entidade {
 
 
         void PlataformaMovel::obstaculizar(Personagem::Jogador* pJog) {
-
+            pJog->pular(1.0f);
         }
 
         void PlataformaMovel::executar() {
