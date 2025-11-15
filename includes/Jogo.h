@@ -7,14 +7,14 @@
 #include "Gerenciador/GerenciadorGrafico.h"
 
 
-class Principal {
+class Jogo {
 private:
     Gerenciador::GerenciadorEvento* pGEvento;
     Gerenciador::GerenciadorGrafico* pGGrafico;
     Gerenciador::GerenciadorEstados* pGEstados;
 public:
-    Principal();
-    ~Principal();
+    Jogo();
+    ~Jogo();
     void executar();
 };
 

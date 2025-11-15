@@ -46,7 +46,9 @@ add_executable(Gatto ${SOURCES}
         src/Estado/EstadoMenuPrincipal.cpp
         includes/Estado/EstadoMenuPrincipal.h
         src/Fase/FaseCidade.cpp
-        includes/Fase/FaseCidade.h)
+        includes/Fase/FaseCidade.h
+        src/Animacao/Animacao.cpp
+        includes/Animacao/Animacao.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE

@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 
-#include "Principal.h"
+#include "Jogo.h"
 
 
 int main() {
-    Principal objPrincipal;
+    Jogo objPrincipal;
     objPrincipal.executar();
 }

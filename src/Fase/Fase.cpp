@@ -8,13 +8,16 @@
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
 namespace Fase {
-    Fase::Fase(IDs::Ente_IDs id):
+    Fase::Fase(IDs::Ente_IDs id, string caminhoTextura):
+    texturaFundo(caminhoTextura),
     Ente(id, &fundo),
     pGColisoes(nullptr),
     limitesFase({0,0,0,0}),
     fundo({1280, 720})
     {
         pGColisoes = new Gerenciador::GerenciadorColisoes(&listaEnt);
+        pGGrafico->setFundo(&texturaFundo);
+        pGGrafico->resetaRelogio();
         //criarFase();
     }
 
@@ -60,23 +63,11 @@ namespace Fase {
 
     void Fase::atualizarEntidades() {
         for (int i = 0; i < listaEnt.getTam(); i++) {
-            if (listaEnt[i]->getId() == IDs::Ente_IDs::InimigoRato) {
-                /*if (static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getAtirou()) {
-                    static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->setAtirou(false);
-                    criarProjetil(listaEnt[i]->getPosicao().x, listaEnt[i]->getPosicao().y, static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getDireita());
-                }*/
-            }
             if (listaEnt[i]->estaAtivo())
                 listaEnt[i]->executar();
         }
         pGColisoes->executar();
         for (int i = 0; i < listaEnt.getTam(); i++) {
-            if (listaEnt[i]->getId() == IDs::Ente_IDs::InimigoRato) {
-                /*if (static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getAtirou()) {
-                    static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->setAtirou(false);
-                    criarProjetil(listaEnt[i]->getPosicao().x, listaEnt[i]->getPosicao().y, static_cast<Entidade::Personagem::Inimigo::Rato*>(listaEnt[i])->getDireita());
-                }*/
-            }
             if (listaEnt[i]->estaAtivo())
                 listaEnt[i]->desenhar();
         }

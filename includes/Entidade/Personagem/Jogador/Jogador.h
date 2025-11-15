@@ -20,9 +20,11 @@ namespace Entidade {
             float deslocAtaque;
             Texto interface;
             bool imunidadeDano;
+            bool vencedor;
         public:
             Jogador(int nJog);
             ~Jogador();
+            bool getVencedor();
             static void setGerenciadorEvento();
             void observarEntrada();
             void ignorarEntrada();

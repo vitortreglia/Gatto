@@ -11,6 +11,7 @@ namespace Estados {
         Fase::Fase* pFase;
         Entidade::Personagem::Jogador* pJog1;
         Entidade::Personagem::Jogador* pJog2;
+        int arg[3];
     private:
         EstadoJogo();
     public:

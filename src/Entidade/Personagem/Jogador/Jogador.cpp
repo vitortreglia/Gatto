@@ -8,6 +8,7 @@ namespace Entidade {
         Jogador::Jogador(int nJog):
         Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, nJog == 1 ? IDs::Ente_IDs::Jogador1 : IDs::Ente_IDs::Jogador2),
         numJog(nJog),
+        vencedor(false),
         ataque(1, 0.1f),
         podePular(true),
         peixes(0),
@@ -15,11 +16,17 @@ namespace Entidade {
         interface("oiii", 30, 20, 50),
         imunidadeDano(false) {
             if (numJog == 2) {
-                interface.setPosicao(660, 50);
+                interface.setPosicao(1020, 50);
             }
         }
 
-        Jogador::~Jogador() {}
+        Jogador::~Jogador() {
+            ignorarEntrada();
+        }
+
+        bool Jogador::getVencedor() {
+            return vencedor;
+        }
 
         void Jogador::setGerenciadorEvento() {
             pGEvento = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
@@ -38,10 +45,9 @@ namespace Entidade {
         }
 
         void Jogador::pular(float multiplicador) {
-            if (noChao && podePular) {
+            if (noChao) {
                 deslocamento.y = -30.0f * multiplicador;
                 estaNoChao(false);
-                podePular = false;
             }
         }
 
@@ -150,8 +156,10 @@ namespace Entidade {
             mover();
             if (peixes < 3)
                 interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
-            else
+            else {
                 interface.setTexto("Venceu");
+                vencedor = true;
+            }
             interface.executar();
             //cout << deslocamento.x << endl;
         }
@@ -168,7 +176,10 @@ namespace Entidade {
                     parar();
                 }
                 if (teclasPressionadas.count(sf::Keyboard::W)) {
-                    pular(1.0f);
+                    if (podePular) {
+                        pular(1.0f);
+                        podePular = false;
+                    }
                 }
                 if (teclasSoltas.count(sf::Keyboard::W)) {
                     liberaPulo();
@@ -185,7 +196,10 @@ namespace Entidade {
                     parar();
                 }
                 if (teclasPressionadas.count(sf::Keyboard::Up)) {
-                    pular(1.0f);
+                    if (podePular) {
+                        pular(1.0f);
+                        podePular = false;
+                    }
                 }
                 if (teclasSoltas.count(sf::Keyboard::Up)) {
                     liberaPulo();

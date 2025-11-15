@@ -150,7 +150,7 @@ namespace Lista {
             aux1 = aux2;
             aux2 = aux1->getProx();
             if (aux1) {
-                delete (aux1->getElemento());
+                //delete (aux1->getElemento());
                 delete aux1;
             }
         }

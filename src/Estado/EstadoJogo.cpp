@@ -1,6 +1,7 @@
 #include "Estado/EstadoJogo.h"
 
 #include "Estado/EstadoPausa.h"
+#include "Fase/FaseCidade.h"
 #include "Fase/FaseJardim.h"
 
 namespace Estados {
@@ -27,8 +28,10 @@ namespace Estados {
     //[2]: 1 = fase jardim 2 = fase cidade
     void EstadoJogo::iniciar(void *args) {
         if (args) {
-            int* arg = (int*)args;
-
+            int* a = (int*)args;
+            for (int i = 0; i < 3; i++)
+                arg[i] = a[i];
+            cout << arg[0] << arg[1] << arg[2] << endl;
             if (pJog1) {
                 delete pJog1;
                 pJog1 = nullptr;
@@ -39,19 +42,21 @@ namespace Estados {
             }
             Entidade::Personagem::Jogador::setGerenciadorEvento();
             pJog1 = new Entidade::Personagem::Jogador(1);
-            pJog1->observarEntrada();
             if (arg[0] == 2) {
                 pJog2 = new Entidade::Personagem::Jogador(2);
-                pJog2->observarEntrada();
             }
+            if (pFase)
+                delete pFase;
             if (arg[2] == 1) {
-                if (pFase)
-                    delete pFase;
                 pFase = new Fase::FaseJardim(pJog1, pJog2);
+            } else if (arg[2] == 2) {
+                pFase = new Fase::FaseCidade(pJog1, pJog2);
             }
         }
         pGEvento->inscrever(this);
-        //pFase->inscreverObservadores();
+        pJog1->observarEntrada();
+        if (pJog2)
+            pJog2->observarEntrada();
     }
 
     void EstadoJogo::sair(void *args) {
@@ -59,7 +64,6 @@ namespace Estados {
         pJog1->ignorarEntrada();
         if (pJog2)
             pJog2->ignorarEntrada();
-        //pFase->desinscreverObservadores();
         mudarEstado(EstadoPausa::getEstadoPausa(NULL));
     }
 
@@ -74,6 +78,19 @@ namespace Estados {
 
     void EstadoJogo::atualizar() {
         pFase->executar();
+        if (pJog1->getVencedor()) {
+            arg[2] = 2;
+            cout << arg[0] << arg[1] << arg[2] << endl;
+            sf::sleep(sf::seconds(2));
+            iniciar(arg);
+        }
+        if (pJog2) {
+            if (pJog2->getVencedor()) {
+                arg[2] = 2;
+                sf::sleep(sf::seconds(2));
+                iniciar(arg);
+            }
+        }
     }
 
     void EstadoJogo::desenhar() {

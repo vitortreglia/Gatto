@@ -15,6 +15,7 @@ namespace Fase {
         void criarProjetil(float x, float y, bool direita);
         void criarChefao(float x, float y);
         void criarRoseira(float x, float y);
+        void criarFaseCidade();
     };
 }
 

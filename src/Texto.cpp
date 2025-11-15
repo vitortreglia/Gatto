@@ -8,7 +8,7 @@
         texto.setString(conteudo);
         texto.setCharacterSize(tamanho);
         texto.setPosition(x, y);
-        texto.setColor(sf::Color::White);
+        texto.setColor(sf::Color::Black);
         texto.setFont(fonte);
     }
 

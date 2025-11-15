@@ -14,9 +14,10 @@ namespace Entidade {
 
             void EstadoPatrulha::executar(float dt) {
                 if (pGaivota) {
-                    if (pGaivota->patrulhar(dt)) {
+                    Jogador* pJog = pGaivota->patrulhar(dt);
+                    if (pJog) {
                         pGaivota->ataque.atacar();
-                        pGaivota->setEstado(dynamic_cast<EstadoGaivota*>(new EstadoRasante (pGaivota)));
+                        pGaivota->setEstado(dynamic_cast<EstadoGaivota*>(new EstadoRasante (pGaivota, pJog)));
                     }
                 }
             }

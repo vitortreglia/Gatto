@@ -8,8 +8,8 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
-            EstadoRasante::EstadoRasante(Gaivota* pGav): EstadoGaivota(pGav) {
-                vetorAtaque = Inimigo::getJogador()->getPosicao() - pGaivota->getPosicao();
+            EstadoRasante::EstadoRasante(Gaivota* pGav, Jogador* pJog): EstadoGaivota(pGav) {
+                vetorAtaque = pJog->getPosicao() - pGaivota->getPosicao();
                 tempo = 0;
             }
             

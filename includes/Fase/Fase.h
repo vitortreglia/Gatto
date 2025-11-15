@@ -11,9 +11,10 @@ namespace Fase {
         Lista::ListaEntidades listaEnt;
         Gerenciador::GerenciadorColisoes* pGColisoes;
         sf::RectangleShape fundo;
+        Animacao texturaFundo;
         sf::FloatRect limitesFase;
     public:
-        Fase(IDs::Ente_IDs id);
+        Fase(IDs::Ente_IDs id, string caminhoTextura);
         ~Fase();
         void executar();
         sf::FloatRect getLimitesFase();

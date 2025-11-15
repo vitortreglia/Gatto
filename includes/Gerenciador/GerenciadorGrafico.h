@@ -6,6 +6,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "Animacao/Animacao.h"
+
 #define TELA_X 1280.0f
 #define TELA_Y 720.0f
 
@@ -19,6 +21,7 @@ namespace Gerenciador {
         sf::View viewP1;
         sf::View viewP2;
         sf::RenderTexture uiBuffer;
+        sf::Sprite fundo;
         sf::Sprite uiSprite;
         sf::Clock relogio;
         float tempo;
@@ -35,6 +38,7 @@ namespace Gerenciador {
         const bool verificaJanelaAberta();
         static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
+        void setFundo(Animacao* fundo);
         void desenharEnte(sf::RectangleShape* corpo);
         void desenharUI(sf::RectangleShape* corpo);
         void desenharUI(sf::Text* texto);
