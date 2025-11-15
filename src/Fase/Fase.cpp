@@ -16,7 +16,7 @@ namespace Fase {
     fundo({1280, 720}),
     numFase(nFase),
     maxInimGaivota(5),
-    maxPMovel(8),
+    maxPMovel(15),
     numInimGaivota(0),
     numPMovel(0)
     {

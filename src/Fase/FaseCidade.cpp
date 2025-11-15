@@ -7,7 +7,7 @@ namespace Fase {
     FaseCidade::FaseCidade(Entidade::Personagem::Jogador *pJog1, Entidade::Personagem::Jogador *pJog2):
     Fase(IDs::Ente_IDs::FaseCidade, "Data/Imagens/fundoJardim.jpg", 2),
     maxChefoes(5),
-    maxRoseiras(10),
+    maxRoseiras(20),
     numRoseira(0),
     numInimChefao(0)
     {
