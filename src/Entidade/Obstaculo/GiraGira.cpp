@@ -23,6 +23,12 @@ namespace Entidade {
         }
 
         void GiraGira::obstaculizar(Personagem::Jogador* pJog) {
+            pJog->pular(1.0f);
+        }
+
+        void GiraGira::executar() {
+            //obstaculizar();
+            //desenhar();
             somaTempo += tempoFrame;
             if (angulo < 180.0f) {
                 angulo += velocidadeGiro;
@@ -32,11 +38,6 @@ namespace Entidade {
                 angulo = 0.0f;
                 somaTempo = 0.0f;
             }
-        }
-
-        void GiraGira::executar() {
-            //obstaculizar();
-            //desenhar();
         }
 
     }

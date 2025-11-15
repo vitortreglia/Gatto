@@ -14,9 +14,9 @@ namespace Entidade {
 
         void Roseira::atualizarTextura() {
             if (danoso)
-                Entidade::atualizarTextura({200, 0, 200, 100});
+                atualizarAnimacao({200, 0, 200, 100});
             else
-                Entidade::atualizarTextura({0, 0, 200, 100});
+                atualizarAnimacao({0, 0, 200, 100});
         }
 
         void Roseira::obstaculizar(Personagem::Jogador* pJog) {

@@ -67,7 +67,7 @@ namespace Entidade {
         corpo.setFillColor(sf::Color::White);
     }
 
-    void Entidade::atualizarTextura(sf::IntRect rect) {
+    void Entidade::atualizarAnimacao(sf::IntRect rect) {
         corpo.setTextureRect(rect);
     }
 

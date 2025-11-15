@@ -14,10 +14,17 @@ namespace Entidade {
         peixes(0),
         deslocAtaque(0.0f),
         interface("oiii", 30, 20, 50),
-        imunidadeDano(false) {
+        imunidadeDano(false),
+        imgGato1("Data/Imagens/Gato_01.png"),
+        imgGato2("Data/Imagens/Gato_02.png")
+        {
             if (numJog == 2) {
+                textura.setTextura(imgGato2);
                 interface.setPosicao(1020, 50);
+            } else {
+                textura.setTextura(imgGato1);
             }
+            setTextura(&textura);
         }
 
         Jogador::~Jogador() {
@@ -134,6 +141,11 @@ namespace Entidade {
         }
 
         void Jogador::mover() {
+            if (getDireita()) {
+                atualizarAnimacao({100, 0, -100, 100});
+            } else {
+                atualizarAnimacao({0, 0, 100, 100});
+            }
             if (ataque.getAtacando()) {
                 if (getDireita()) {
                     deslocamento.x = 15.0;

@@ -5,7 +5,7 @@ namespace Entidade {
     textoBotao(rotulo, 42, 600.0f, 140.0f)
     {
         textura.setTextura("Data/Imagens/botao.png");
-        textoBotao.setFonte("Data/Fontes/Barriecito-Regular.ttf");
+        textoBotao.setFonte("Data/Fontes/KirangHaerang-Regular.ttf");
         textoBotao.setCor(242, 237, 203, 255);
         setTextura(&textura);
     }

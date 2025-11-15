@@ -12,6 +12,7 @@ namespace Entidade {
                 bool podeAtirar;
                 float tempoAtirar;
                 float tempoAndar;
+                string imgRato;
             public:
                 Rato(float x, float y);
                 ~Rato();

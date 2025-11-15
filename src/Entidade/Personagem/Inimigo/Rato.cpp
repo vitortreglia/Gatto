@@ -10,8 +10,11 @@ namespace Entidade {
             atirouProjetil(false),
             podeAtirar(true),
             tempoAtirar(0.0f),
-            tempoAndar(0.0f) {
-                corpo.setFillColor(sf::Color::Yellow);
+            tempoAndar(0.0f),
+            imgRato("Data/Imagens/Rato.png")
+            {
+                textura.setTextura(imgRato);
+                setTextura(&textura);
                 andar(getDireita());
             }
 
@@ -53,6 +56,11 @@ namespace Entidade {
             }
 
             void Rato::mover() {
+                if (getDireita()) {
+                    atualizarAnimacao({80, 0, -80, 80});
+                } else {
+                    atualizarAnimacao({0, 0, 80, 80});
+                }
                 if (!sofrendoDano) {
                     if (tempoAndar < 2.0f && andando) {
                         tempoAndar += tempoFrame;

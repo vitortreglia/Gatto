@@ -24,7 +24,7 @@ namespace Entidade {
         vector<sf::Vector2f> getCoordenadas();
         static void getTempoFrame();
         void setTextura(Animacao* textura);
-        void atualizarTextura(sf::IntRect rect);
+        void atualizarAnimacao(sf::IntRect rect);
         virtual void executar() = 0;
     };
 }

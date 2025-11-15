@@ -18,13 +18,13 @@ namespace Entidade {
             frequencia(6.0f),
             tempo(0.0f),
             possuiPeixe(false),
-            estado(nullptr)
+            estado(nullptr),
+            imgGaivota("Data/Imagens/Gaivota.png")
             {
+                textura.setTextura(imgGaivota);
+                setTextura(&textura);
                 andar(true);
-
                 setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
-
-                corpo.setFillColor(sf::Color::White);
                 setVoador(true);
 
                 raioPercepcaoX   = 280.0f;
@@ -53,6 +53,11 @@ namespace Entidade {
             }
 
             void Gaivota::mover() {
+                if (getDireita()) {
+                    atualizarAnimacao({80, 0, -80, 50});
+                } else {
+                    atualizarAnimacao({0, 0, 80, 50});
+                }
                 deslocamento.y = std::sin(tempo * frequencia * M_PI) * amplitude;
                 atualizarPos();
                 tempo += tempoFrame;
