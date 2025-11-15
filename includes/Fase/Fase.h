@@ -13,12 +13,19 @@ namespace Fase {
         sf::RectangleShape fundo;
         Animacao texturaFundo;
         sf::FloatRect limitesFase;
+        int numFase;
+        const int maxPMovel;
+        const int maxInimGaivota;
+        int numInimGaivota;
+        int numPMovel;
     public:
-        Fase(IDs::Ente_IDs id, string caminhoTextura);
+        Fase(IDs::Ente_IDs id, string caminhoTextura, int nFase);
         ~Fase();
         void executar();
         sf::FloatRect getLimitesFase();
+        int getFase();
     protected:
+        int semearRand();
         void criarPlataforma(float x, float y);
         void criarPlataformaMovel(float x, float y, bool direcao);
         void criarPeixe(float x, float y);

@@ -13,6 +13,7 @@ namespace Menu {
 
     void MenuPausa::criarBotoesPausa() {
         Entidade::Botao* pBotao = new Entidade::Botao("Pausa");
+        pBotao->setPosicao({390, 300});
         incluirBotao(pBotao);
     }
 

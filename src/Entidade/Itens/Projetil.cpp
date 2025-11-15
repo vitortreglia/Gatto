@@ -2,14 +2,18 @@
 
 namespace Entidade {
     namespace Itens {
-        Projetil::Projetil(float x, float y, bool direita) :
-        Entidade({20.0f, 20.0f}, x, y, IDs::Ente_IDs::Projetil),
+        Projetil::Projetil() :
+        Entidade({20.0f, 20.0f}, 0, 0, IDs::Ente_IDs::Projetil),
         tempoLancamento(0.0f)
         {
-            this->direita = direita;
+            setAtivo(false);
         }
 
         Projetil::~Projetil() {}
+
+        void Projetil::setDirecao(bool dir) {
+            direita = dir;
+        }
 
         void Projetil::mover() {
             tempoLancamento += tempoFrame;

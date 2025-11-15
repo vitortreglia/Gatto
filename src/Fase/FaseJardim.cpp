@@ -1,5 +1,4 @@
 #include "Fase/FaseJardim.h"
-
 #include "Entidade/Obstaculo/Obstaculo.h"
 #include "Entidade/Obstaculo/GiraGira.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
@@ -8,9 +7,11 @@
 
 namespace Fase {
     FaseJardim::FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2):
-    Fase(IDs::Ente_IDs::FaseJardim, "Data/Imagens/fundoJardim.jpg"),
+    Fase(IDs::Ente_IDs::FaseJardim, "Data/Imagens/fundoJardim.jpg", 1),
     maxInimRato(8),
-    maxInimGaivota(5)
+    maxGiraGira(8),
+    numInimRato(0),
+    numGiraGira(0)
     {
         pJog1->setPosicao({1600, 4600});
         listaEnt.incluir(pJog1);
@@ -29,18 +30,24 @@ namespace Fase {
     }
 
     void FaseJardim::criarGiraGira(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::GiraGira(x, y);
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+        if ((rand()%10 < 9 || numGiraGira < 3) && numGiraGira < maxGiraGira) {
+            Entidade::Entidade* objEntidade = new Entidade::Obstaculo::GiraGira(x, y);
+            if (objEntidade) {
+                listaEnt.incluir(objEntidade);
+                pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+                numGiraGira++;
+            }
         }
     }
 
     void FaseJardim::criarInimigoRato(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+        if ((rand()%10 < 9 || numInimRato < 3) && numInimRato < maxInimRato) {
+            Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
+            if (objEntidade) {
+                listaEnt.incluir(objEntidade);
+                pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+                numInimRato++;
+            }
         }
     }
 

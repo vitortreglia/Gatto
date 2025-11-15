@@ -1,5 +1,6 @@
 #include "Estado/EstadoJogo.h"
 
+#include "Estado/EstadoMenuPrincipal.h"
 #include "Estado/EstadoPausa.h"
 #include "Fase/FaseCidade.h"
 #include "Fase/FaseJardim.h"
@@ -31,7 +32,6 @@ namespace Estados {
             int* a = (int*)args;
             for (int i = 0; i < 3; i++)
                 arg[i] = a[i];
-            cout << arg[0] << arg[1] << arg[2] << endl;
             if (pJog1) {
                 delete pJog1;
                 pJog1 = nullptr;
@@ -60,11 +60,19 @@ namespace Estados {
     }
 
     void EstadoJogo::sair(void *args) {
+        int* a = static_cast<int*>(args);
         pGEvento->desinscrever(this);
         pJog1->ignorarEntrada();
         if (pJog2)
             pJog2->ignorarEntrada();
-        mudarEstado(EstadoPausa::getEstadoPausa(NULL));
+        switch (*a) {
+            case 1:
+                mudarEstado(EstadoPausa::getEstadoPausa(NULL));
+                break;
+            case 2:
+                mudarEstado(EstadoMenuPrincipal::getEstadoMenuPrincipal(NULL));
+                break;
+        }
     }
 
     void EstadoJogo::tratarEventos() {
@@ -72,7 +80,8 @@ namespace Estados {
         set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
 
         if (teclasSoltas.count(sf::Keyboard::P)) {
-            sair(NULL);
+            int a = 1;
+            sair(&a);
         }
     }
 
@@ -81,12 +90,20 @@ namespace Estados {
         if (pJog1->getVencedor()) {
             arg[2] = 2;
             sf::sleep(sf::seconds(2));
+            if (pFase->getFase() == 2) {
+                int a = 2;
+                sair(&a);
+            }
             iniciar(arg);
         }
         if (pJog2) {
             if (pJog2->getVencedor()) {
                 arg[2] = 2;
                 sf::sleep(sf::seconds(2));
+                if (pFase->getFase() == 2) {
+                    int a = 2;
+                    sair(&a);
+                }
                 iniciar(arg);
             }
         }

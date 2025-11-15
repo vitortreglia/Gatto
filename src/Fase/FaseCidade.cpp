@@ -1,14 +1,15 @@
 #include "Fase/FaseCidade.h"
-
 #include "Entidade/Obstaculo/Roseira.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Inimigo/Rato.h"
 
 namespace Fase {
     FaseCidade::FaseCidade(Entidade::Personagem::Jogador *pJog1, Entidade::Personagem::Jogador *pJog2):
-    Fase(IDs::Ente_IDs::FaseCidade, "Data/Imagens/fundoJardim.jpg"),
+    Fase(IDs::Ente_IDs::FaseCidade, "Data/Imagens/fundoJardim.jpg", 2),
     maxChefoes(5),
-    maxInimGaivota(8)
+    maxRoseiras(10),
+    numRoseira(0),
+    numInimChefao(0)
     {
         pJog1->setPosicao({1500, 2200});
         listaEnt.incluir(pJog1);
@@ -30,7 +31,7 @@ namespace Fase {
         if (direita) {
             x += 80.0f;
         }
-        Entidade::Entidade* objEntidade = new Entidade::Itens::Projetil(x, y, direita);
+        Entidade::Entidade* objEntidade = new Entidade::Itens::Projetil();
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirProjetil(static_cast<Entidade::Itens::Projetil*>(objEntidade));
@@ -38,18 +39,24 @@ namespace Fase {
     }
 
     void FaseCidade::criarChefao(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+        if ((rand()%10 < 9 || numInimChefao < 3) && numInimChefao < maxChefoes) {
+            Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
+            if (objEntidade) {
+                listaEnt.incluir(objEntidade);
+                pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+                numInimChefao++;
+            }
         }
     }
 
     void FaseCidade::criarRoseira(float x, float y, bool danoso) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Roseira(danoso, x, y);
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+        if ((rand()%10 < 9 || numRoseira < 3) && numRoseira < maxRoseiras) {
+            Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Roseira(danoso, x, y);
+            if (objEntidade) {
+                listaEnt.incluir(objEntidade);
+                pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+                numRoseira++;
+            }
         }
     }
 

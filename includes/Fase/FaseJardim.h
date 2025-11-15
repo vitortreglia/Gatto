@@ -6,8 +6,10 @@
 namespace Fase {
     class FaseJardim : public Fase{
     private:
-        const int maxInimGaivota;
         const int maxInimRato;
+        const int maxGiraGira;
+        int numInimRato;
+        int numGiraGira;
     public:
         FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2);
         ~FaseJardim();

@@ -16,10 +16,12 @@ namespace Entidade {
                     cout << "inimigo morreu" << endl;
                     setAtivo(false);
                 } else if (sofrendoDano) {
+                    corpo.setFillColor(sf::Color::Red);
                     tempoDano += tempoFrame;
                     if (tempoDano > 0.5f) {
                         sofrendoDano = false;
                         tempoDano = 0.0f;
+                        corpo.setFillColor(sf::Color::White);
                     }
                 }
             }

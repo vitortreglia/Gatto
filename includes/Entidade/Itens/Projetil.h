@@ -10,8 +10,9 @@ namespace Entidade {
             float tempoLancamento;
             bool direita;
         public:
-            Projetil(float x, float y, bool direita);
+            Projetil();
             ~Projetil();
+            void setDirecao(bool dir);
             void mover();
             void executar();
         };
