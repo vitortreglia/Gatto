@@ -10,7 +10,7 @@ namespace Entidade {
 
         }
 
-        void Plataforma::obstaculizar() {
+        void Plataforma::obstaculizar(Personagem::Jogador* pJog) {
 
         }
 

@@ -9,12 +9,12 @@
 
 namespace Fase {
     Fase::Fase(IDs::Ente_IDs id, string caminhoTextura):
-    texturaFundo(caminhoTextura),
     Ente(id, &fundo),
     pGColisoes(nullptr),
     limitesFase({0,0,0,0}),
     fundo({1280, 720})
     {
+        texturaFundo.setTextura(caminhoTextura);
         pGColisoes = new Gerenciador::GerenciadorColisoes(&listaEnt);
         pGGrafico->setFundo(&texturaFundo);
         pGGrafico->resetaRelogio();

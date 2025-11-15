@@ -48,7 +48,9 @@ add_executable(Gatto ${SOURCES}
         src/Fase/FaseCidade.cpp
         includes/Fase/FaseCidade.h
         src/Animacao/Animacao.cpp
-        includes/Animacao/Animacao.h)
+        includes/Animacao/Animacao.h
+        src/Entidade/Obstaculo/Roseira.cpp
+        includes/Entidade/Obstaculo/Roseira.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE

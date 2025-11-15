@@ -9,7 +9,7 @@ namespace IDs {
         InimigoGaivota,
         InimigoRato,
         Inimigo3,
-        Espinhos,
+        Roseira,
         Projetil,
         FaseJardim,
         FaseCidade,

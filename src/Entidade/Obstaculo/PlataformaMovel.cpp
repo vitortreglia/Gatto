@@ -26,7 +26,7 @@ namespace Entidade {
         }
 
 
-        void PlataformaMovel::obstaculizar() {
+        void PlataformaMovel::obstaculizar(Personagem::Jogador* pJog) {
             somaTempo += tempoFrame;
             if (somaTempo > tempoMax) {
                 somaTempo = 0.0f;
@@ -37,7 +37,7 @@ namespace Entidade {
         }
 
         void PlataformaMovel::executar() {
-            obstaculizar();
+            //obstaculizar();
             //desenhar();
         }
 

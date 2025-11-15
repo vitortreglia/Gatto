@@ -11,6 +11,7 @@ namespace Entidade {
         float x, y;
         static float tempoFrame;
         bool ativo;
+        Animacao textura;
     public:
         Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f, IDs::Ente_IDs id = IDs::Ente_IDs::vazio);
         virtual ~Entidade();
@@ -22,6 +23,8 @@ namespace Entidade {
         const sf::Vector2f getTamanho() const;
         vector<sf::Vector2f> getCoordenadas();
         static void getTempoFrame();
+        void setTextura(Animacao* textura);
+        void atualizarTextura(sf::IntRect rect);
         virtual void executar() = 0;
     };
 }

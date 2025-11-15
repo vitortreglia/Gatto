@@ -22,7 +22,7 @@ namespace Entidade {
             corpo.setRotation(angulo);
         }
 
-        void GiraGira::obstaculizar() {
+        void GiraGira::obstaculizar(Personagem::Jogador* pJog) {
             somaTempo += tempoFrame;
             if (angulo < 180.0f) {
                 angulo += velocidadeGiro;
@@ -35,7 +35,7 @@ namespace Entidade {
         }
 
         void GiraGira::executar() {
-            obstaculizar();
+            //obstaculizar();
             //desenhar();
         }
 

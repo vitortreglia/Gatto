@@ -8,10 +8,12 @@ namespace Menu {
     private:
         sf::RectangleShape fundo;
         std::vector<Entidade::Botao*> botoes;
+        std::vector<Texto*> textos;
     public:
         Menu(IDs::Ente_IDs id);
         ~Menu();
         void incluirBotao(Entidade::Botao* pB);
+        void incluirTexto(Texto* pT);
         void executar();
     };
 }

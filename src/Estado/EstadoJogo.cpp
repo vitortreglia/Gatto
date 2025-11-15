@@ -80,7 +80,6 @@ namespace Estados {
         pFase->executar();
         if (pJog1->getVencedor()) {
             arg[2] = 2;
-            cout << arg[0] << arg[1] << arg[2] << endl;
             sf::sleep(sf::seconds(2));
             iniciar(arg);
         }

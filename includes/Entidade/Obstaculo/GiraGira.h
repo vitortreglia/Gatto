@@ -17,7 +17,7 @@ namespace Entidade {
             ~GiraGira();
             void girar();
             void executar();
-            void obstaculizar();
+            void obstaculizar(Personagem::Jogador* pJog);
         };
     }
 }

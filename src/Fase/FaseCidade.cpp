@@ -1,6 +1,6 @@
 #include "Fase/FaseCidade.h"
 
-#include "Entidade/Obstaculo/GiraGira.h"
+#include "Entidade/Obstaculo/Roseira.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Inimigo/Rato.h"
 
@@ -45,8 +45,8 @@ namespace Fase {
         }
     }
 
-    void FaseCidade::criarRoseira(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::GiraGira(x, y);
+    void FaseCidade::criarRoseira(float x, float y, bool danoso) {
+        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Roseira(danoso, x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
@@ -78,7 +78,7 @@ namespace Fase {
                     criarPlataformaMovel(x, y, true);
                     x += 200.0f;
                 } else if (linha[i] == 'g') {
-                    criarRoseira(x, y);
+                    criarRoseira(x, y, true);
                     x += 200.0f;
                 } else if (linha[i] == 'v') {
                     criarInimigoGaivota(x, y);

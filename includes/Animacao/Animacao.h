@@ -7,7 +7,7 @@ class Animacao {
 private:
     sf::Texture textura;
 public:
-    Animacao(std::string caminho);
+    Animacao();
     ~Animacao();
     void setTextura(std::string caminho);
     sf::Texture* getTextura();

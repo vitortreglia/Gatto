@@ -1,8 +1,6 @@
 #include "Animacao/Animacao.h"
 
-Animacao::Animacao(std::string caminho) {
-    setTextura(caminho);
-}
+Animacao::Animacao() {}
 
 Animacao::~Animacao() {
 

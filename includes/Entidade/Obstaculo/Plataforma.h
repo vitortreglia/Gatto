@@ -9,7 +9,7 @@ namespace Entidade {
             Plataforma(float x, float y);
             ~Plataforma();
             void executar();
-            void obstaculizar();
+            void obstaculizar(Personagem::Jogador* pJog);
         };
     }
 }

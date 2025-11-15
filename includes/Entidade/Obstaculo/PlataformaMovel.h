@@ -18,7 +18,7 @@ namespace Entidade {
             ~PlataformaMovel();
             void mover();
             void executar();
-            void obstaculizar();
+            void obstaculizar(Personagem::Jogador* pJog);
         };
     }
 }

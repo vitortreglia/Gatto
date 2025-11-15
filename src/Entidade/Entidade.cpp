@@ -62,4 +62,13 @@ namespace Entidade {
         tempoFrame = pGGrafico->getTempo();
     }
 
+    void Entidade::setTextura(Animacao *textura) {
+        corpo.setTexture(textura->getTextura());
+        corpo.setFillColor(sf::Color::White);
+    }
+
+    void Entidade::atualizarTextura(sf::IntRect rect) {
+        corpo.setTextureRect(rect);
+    }
+
 }
