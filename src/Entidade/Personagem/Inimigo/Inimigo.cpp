@@ -3,6 +3,8 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
+            Jogador* Inimigo::pJog1(nullptr);
+            Jogador* Inimigo::pJog2(nullptr);
 
             Inimigo::Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas) :
             Personagem(vel, tam, px, py, vidas),
@@ -10,6 +12,12 @@ namespace Entidade {
             {}
 
             Inimigo::~Inimigo() {}
+
+            void Inimigo::setJogadores(Jogador *pJ1, Jogador *pJ2) {
+                pJog1 = pJ1;
+                if (pJ2)
+                    pJog2 = pJ2;
+            }
 
             void Inimigo::verificaVidas() {
                 if (numVidas <= 0) {

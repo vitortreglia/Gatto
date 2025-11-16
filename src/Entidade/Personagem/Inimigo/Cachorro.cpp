@@ -10,7 +10,7 @@ namespace Entidade {
 
             Cachorro::Cachorro(float x, float y) :
             ataque(1, 0.8f),
-            Inimigo(0, 150.0f, {200.0f, 300.0f}, x, y, 8, IDs::Ente_IDs::InimigoCachorro),
+            Inimigo(0, 150.0f, {200.0f, 300.0f}, x, y, 8),
             raioPercepcaoX(300.0f),
             raioAtaque(230.0f),
             velocidade(150.0f)
@@ -56,19 +56,19 @@ namespace Entidade {
                 }
             }
             void Cachorro::perseguir() {
-                if (!pJog)
+                if (!pJog1)
                     return;
 
-                sf::Vector2f posJog = pJog->getPosicao();
+                sf::Vector2f posJog = pJog1->getPosicao();
                 sf::Vector2f pos = getPosicao();
                 float dx = posJog.x - pos.x;
 
                 andar(dx > 0.0f);
 
-                if (posJog.y + 40.0f < pos.y && NoChao) {
-                    deslocamento.y = -30.0f;
-                    estaNoChao(false);
-                }
+                //if (posJog.y + 40.0f < pos.y && NoChao) {
+               //     deslocamento.y = -30.0f;
+                //    estaNoChao(false);
+                //}
             }
             void Cachorro::criarOsso() {
 
@@ -83,7 +83,7 @@ namespace Entidade {
 
                 float posY = pos.y + tam.y / 2.0f;
 
-                Itens::Projetil* osso = new Itens::Projetil(posX, posY, direita);
+                //Itens::Projetil* osso = new Itens::Projetil(posX, posY, direita);
             }
 
             void Cachorro::atirarOsso() {

@@ -15,8 +15,6 @@ namespace Entidade {
             public:
                 Ataque ataque;
             private:
-                static Jogador* pJog1;
-                static Jogador* pJog2;
                 float tempo;
                 float amplitude;
                 float velocidadeHorizontal;
@@ -39,7 +37,6 @@ namespace Entidade {
             public:
                 Gaivota(float x, float y);
                 ~Gaivota();
-                static void setJogadores(Jogador* pJ1, Jogador* pJ2);
                 //void verificaVidas();
                 void danificar(Jogador *pJ);
                 void mover();

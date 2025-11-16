@@ -18,7 +18,7 @@ namespace Fase {
             pJog2->setPosicao({2700, 2200});
             listaEnt.incluir(pJog2);
         }
-        Entidade::Personagem::Inimigo::Gaivota::setJogadores(pJog1, pJog2);
+        Entidade::Personagem::Inimigo::Inimigo::setJogadores(pJog1, pJog2);
         pGColisoes->incluirJogadores(pJog1, pJog2);
         criarFaseCidade();
     }

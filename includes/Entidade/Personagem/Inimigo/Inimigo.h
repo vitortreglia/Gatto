@@ -10,10 +10,12 @@ namespace Entidade {
             class Inimigo : public Personagem {
             protected:
                 int nivelMaldade;
+                static Jogador* pJog1;
+                static Jogador* pJog2;
             public:
                 Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas);
                 ~Inimigo();
-
+                static void setJogadores(Jogador* pJ1, Jogador* pJ2);
                 void verificaVidas();
                 virtual void danificar(Jogador* pJ) = 0;
                 virtual void mover() = 0;

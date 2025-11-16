@@ -7,8 +7,7 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
-            Jogador* Gaivota::pJog1(nullptr);
-            Jogador* Gaivota::pJog2(nullptr);
+
 
             Gaivota::Gaivota(float x, float y):
             ataque(1, 1.0f),
@@ -36,12 +35,6 @@ namespace Entidade {
             }
 
             Gaivota::~Gaivota(){}
-
-            void Gaivota::setJogadores(Jogador *pJ1, Jogador *pJ2) {
-                pJog1 = pJ1;
-                if (pJ2)
-                    pJog2 = pJ2;
-            }
 
             void Gaivota::danificar(Jogador *pJ) {
                 if (!pJ->getImunidadeDano())
