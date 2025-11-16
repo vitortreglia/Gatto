@@ -64,11 +64,15 @@ namespace Entidade {
                 float dx = posJog.x - pos.x;
 
                 andar(dx > 0.0f);
-
+                
                 //if (posJog.y + 40.0f < pos.y && NoChao) {
                //     deslocamento.y = -30.0f;
                 //    estaNoChao(false);
                 //}
+                if (posJog.y + 40.0f < pos.y && noChao) {
+                    deslocamento.y = -30.0f;
+                    estaNoChao(false);
+                }
             }
             void Cachorro::criarOsso() {
 
