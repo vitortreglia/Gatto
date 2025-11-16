@@ -65,7 +65,7 @@ namespace Entidade {
 
                 andar(dx > 0.0f);
 
-                if (posJog.y + 40.0f < pos.y && estaNoChao()) {
+                if (posJog.y + 40.0f < pos.y && NoChao) {
                     deslocamento.y = -30.0f;
                     estaNoChao(false);
                 }
