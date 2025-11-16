@@ -8,7 +8,7 @@ namespace IDs {
         Jogador2,
         InimigoGaivota,
         InimigoRato,
-        Inimigo3,
+        InimigoCachorro,
         Espinhos,
         Projetil,
         FaseJardim,
