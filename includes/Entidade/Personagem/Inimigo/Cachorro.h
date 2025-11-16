@@ -27,7 +27,7 @@ namespace Entidade {
                 void danificar(Jogador *pJ);
                 void atualizaMaldade();
                 void patrulhar();
-
+                void perseguir();
 
 
 

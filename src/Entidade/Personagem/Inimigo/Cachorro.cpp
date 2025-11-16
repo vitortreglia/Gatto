@@ -29,25 +29,21 @@ namespace Entidade {
 
                 if (nivelMaldade <= 0) {
                     fatorFuria = 1.0f;
-                    furioso = false;
                     raioPercepcaoX = 300.0f;
                     raioAtaque = 230.0f;
                 }
                 else if (nivelMaldade == 1) {
                     fatorFuria = 1.25;
-                    furioso = false;
                     raioPercepcaoX = 350.0f;
                     raioAtaque = 270.0f;
                 }
                 else if (nivelMaldade == 2) {
                     fatorFuria = 1.5;
-                    furioso = true;
                     raioPercepcaoX = 400.0f;
                     raioAtaque = 300.0f;
                 }
                 else {
                     fatorFuria = 2.0f;
-                    furioso = true;
                     raioPercepcaoX = 450.0f;
                     raioAtaque = 350.0f;
                 }
@@ -55,12 +51,31 @@ namespace Entidade {
             }
 
             void Cachorro::patrulhar() {
-
-                if (std::rand() % 180 == 0) {
+                if (std::rand() % 150 == 0) {
                     andar(!direita);
                 }
-
             }
+            void Cachorro::perseguir() {
+                if (!pJog)
+                    return;
+
+                sf::Vector2f posJog = pJog->getPosicao();
+                sf::Vector2f pos = getPosicao();
+                float dx = posJog.x - pos.x;
+
+                andar(dx > 0.0f);
+
+                if (posJog.y + 40.0f < pos.y && estaNoChao()) {
+                    deslocamento.y = -30.0f;
+                    estaNoChao(false);
+                }
+            }
+
+            void Cachorro::executar() {
+                mover();
+                verificaVidas();
+            }
+
         }
     }
 }
