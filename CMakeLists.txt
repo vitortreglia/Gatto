@@ -45,10 +45,12 @@ add_executable(Gatto ${SOURCES}
         includes/Menu/MenuPrincipal.h
         src/Estado/EstadoMenuPrincipal.cpp
         includes/Estado/EstadoMenuPrincipal.h
-        includes/Entidade/Personagem/Inimigo/Cachorro.h
-        includes/Fase/FaseCidade.h
         src/Fase/FaseCidade.cpp
-        src/Entidade/Personagem/Inimigo/Cachorro.cpp)
+        includes/Fase/FaseCidade.h
+        src/Animacao/Animacao.cpp
+        includes/Animacao/Animacao.h
+        src/Entidade/Obstaculo/Roseira.cpp
+        includes/Entidade/Obstaculo/Roseira.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE

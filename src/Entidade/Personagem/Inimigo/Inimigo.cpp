@@ -3,40 +3,25 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
-            Jogador* Inimigo::pJog(nullptr);
 
-            Inimigo::Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id) :
-            Personagem(vel, tam, px, py, vidas, id),
+            Inimigo::Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas) :
+            Personagem(vel, tam, px, py, vidas),
             nivelMaldade(nMaldade)
             {}
 
             Inimigo::~Inimigo() {}
-
-            void Inimigo::setJogador(Jogador *pJ) {
-                pJog = pJ;
-            }
-
-            Jogador *Inimigo::getJogador() {
-                return pJog;
-            }
-
-
-            void Inimigo::verificaDistanciaJogador(sf::Vector2f distSeguir, sf::Vector2f distAtacar) {
-                //sf::Vector2f cJ = pJog->getPosicao();
-                /*if (cJ.x - this->getPosicao().x < distSeguir.x) {
-                    //if (cJ.y - this->getPosicao().y < distSeguir.y || this->getPosicao().y)
-                }*/
-            }
 
             void Inimigo::verificaVidas() {
                 if (numVidas <= 0) {
                     cout << "inimigo morreu" << endl;
                     setAtivo(false);
                 } else if (sofrendoDano) {
+                    corpo.setFillColor(sf::Color::Red);
                     tempoDano += tempoFrame;
                     if (tempoDano > 0.5f) {
                         sofrendoDano = false;
                         tempoDano = 0.0f;
+                        corpo.setFillColor(sf::Color::White);
                     }
                 }
             }

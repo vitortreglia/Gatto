@@ -1,6 +1,6 @@
-#include "Principal.h"
+#include "Jogo.h"
 
-Principal::Principal():
+Jogo::Jogo():
 pGGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico()),
 pGEvento(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
 pGEstados(new Gerenciador::GerenciadorEstados())
@@ -8,9 +8,9 @@ pGEstados(new Gerenciador::GerenciadorEstados())
     //pGGrafico->setLimitesCamera(fase.getLimitesFase());
 }
 
-Principal::~Principal() {}
+Jogo::~Jogo() {}
 
-void Principal::executar() {
+void Jogo::executar() {
     pGEstados->iniciar();
     while (pGGrafico->verificaJanelaAberta()) {
         pGGrafico->limpaJanela();

@@ -2,9 +2,13 @@
 
 namespace Menu {
     MenuPrincipal::MenuPrincipal():
-    Menu(IDs::Ente_IDs::MenuPrincipal)
+    titulo("Gatto", 128, 433, 100),
+    Menu()
     {
+        fundo.setTextura("Data/Imagens/fundoJardim.jpg"),
+        titulo.setFonte("Data/Fontes/RubikBubbles-Regular.ttf");
         criarBotoesMenuPrincipal();
+        pGGrafico->setFundo(&fundo);
     }
 
     MenuPrincipal::~MenuPrincipal() {
@@ -12,7 +16,9 @@ namespace Menu {
     }
 
     void MenuPrincipal::criarBotoesMenuPrincipal() {
-        Botao* pBotao = new Botao("PRESSIONE ENTER PARA COMEÇAR");
+        incluirTexto(&titulo);
+        Entidade::Botao* pBotao = new Entidade::Botao("INICIAR");
+        pBotao->setPosicao({390, 300});
         incluirBotao(pBotao);
     }
 }

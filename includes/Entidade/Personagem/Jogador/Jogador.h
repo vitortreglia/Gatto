@@ -1,8 +1,8 @@
 #ifndef JOGADOR_H
 #define JOGADOR_H
 #include "Entidade/Personagem/Personagem.h"
-#include "../../../Texto.h"
-#include "../Ataque.h"
+#include "Texto.h"
+#include "Entidade/Personagem/Ataque.h"
 #include "Entidade/Itens/Peixe.h"
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
 #include "Gerenciador/GerenciadorEvento.h"
@@ -13,23 +13,28 @@ namespace Entidade {
         class Jogador : public Personagem, public Observer {
         private:
             static Gerenciador::GerenciadorEvento* pGEvento;
+            int numJog;
             Ataque ataque;
             bool podePular;
             int peixes;
             float deslocAtaque;
             Texto interface;
             bool imunidadeDano;
+            bool vencedor;
+            string imgGato1;
+            string imgGato2;
         public:
-            Jogador();
+            Jogador(int nJog);
             ~Jogador();
+            bool getVencedor();
             static void setGerenciadorEvento();
             void observarEntrada();
             void ignorarEntrada();
             void liberaPulo();
             void pular(float multiplicador);
             void coletarPeixe(Itens::Peixe* pPeixe);
-            bool perderPeixe();
-            bool getImunidadeDano();
+            const bool perderPeixe();
+            const bool getImunidadeDano() const;
             void colidir(Inimigo::Inimigo* pInimigo, sf::Vector2f colisao);
             void colidir(sf::Vector2f colisao);
             void tomarDano(int dano);

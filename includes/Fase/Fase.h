@@ -11,24 +11,29 @@ namespace Fase {
         Lista::ListaEntidades listaEnt;
         Gerenciador::GerenciadorColisoes* pGColisoes;
         sf::RectangleShape fundo;
+        Animacao texturaFundo;
         sf::FloatRect limitesFase;
+        const int numFase;
+        const int maxPMovel;
+        const int maxInimGaivota;
+        int numInimGaivota;
+        int numPMovel;
     public:
-        Fase(IDs::Ente_IDs id);
+        Fase(string caminhoTextura, int nFase);
         ~Fase();
-        void executar();
+        virtual void executar();
         sf::FloatRect getLimitesFase();
+        const int getFase() const;
     protected:
-        void criarFase();
+        void semearRand();
         void criarPlataforma(float x, float y);
+        void criarPlataformaMovel(float x, float y, bool direcao);
         void criarPeixe(float x, float y);
-        void criarInimigoRato(float x, float y);
-        void criarProjetil(float x, float y, bool direita);
+        void criarInimigoGaivota(float x, float y);
+        //virtual void criarObstaculos() = 0;
+        //virtual void criarInimigos() = 0;
         void criarCenario();
         void atualizarEntidades();
-        //virtual void criarObstaculo() = 0;
-    public:
-        void inscreverObservadores();
-        void desinscreverObservadores();
     };
 }
 #endif //FASE_H

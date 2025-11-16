@@ -5,17 +5,35 @@ namespace Entidade {
     namespace Personagem {
         Gerenciador::GerenciadorEvento* Jogador::pGEvento(nullptr);
 
-        Jogador::Jogador():
-        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, IDs::Ente_IDs::Jogador1),
+        Jogador::Jogador(int nJog):
+        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7),
+        numJog(nJog),
+        vencedor(false),
         ataque(1, 0.1f),
         podePular(true),
         peixes(0),
         deslocAtaque(0.0f),
         interface("oiii", 30, 20, 50),
-        imunidadeDano(false)
-        {}
+        imunidadeDano(false),
+        imgGato1("Data/Imagens/Gato_01.png"),
+        imgGato2("Data/Imagens/Gato_02.png")
+        {
+            if (numJog == 2) {
+                textura.setTextura(imgGato2);
+                interface.setPosicao(1020, 50);
+            } else {
+                textura.setTextura(imgGato1);
+            }
+            setTextura(&textura);
+        }
 
-        Jogador::~Jogador() {}
+        Jogador::~Jogador() {
+            ignorarEntrada();
+        }
+
+        bool Jogador::getVencedor() {
+            return vencedor;
+        }
 
         void Jogador::setGerenciadorEvento() {
             pGEvento = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
@@ -34,10 +52,9 @@ namespace Entidade {
         }
 
         void Jogador::pular(float multiplicador) {
-            if (noChao && podePular) {
+            if (noChao) {
                 deslocamento.y = -30.0f * multiplicador;
                 estaNoChao(false);
-                podePular = false;
             }
         }
 
@@ -46,7 +63,7 @@ namespace Entidade {
             peixes++;
         }
 
-        bool Jogador::perderPeixe() {
+        const bool Jogador::perderPeixe() {
             if (peixes > 0) {
                 peixes--;
                 return true;
@@ -54,7 +71,7 @@ namespace Entidade {
             return false;
         }
 
-        bool Jogador::getImunidadeDano() {
+        const bool Jogador::getImunidadeDano() const {
             return imunidadeDano;
         }
 
@@ -108,6 +125,7 @@ namespace Entidade {
             if (numVidas <= 0) {
                 cout << "morreu " << endl;
                 setAtivo(false);
+                pGGrafico->setMultiplayer(false);
             } else if (imunidadeDano) {
                 tempoDano += tempoFrame;
                 if (tempoDano > 0.5f) {
@@ -123,6 +141,11 @@ namespace Entidade {
         }
 
         void Jogador::mover() {
+            if (getDireita()) {
+                atualizarAnimacao({100, 0, -100, 100});
+            } else {
+                atualizarAnimacao({0, 0, 100, 100});
+            }
             if (ataque.getAtacando()) {
                 if (getDireita()) {
                     deslocamento.x = 15.0;
@@ -141,12 +164,14 @@ namespace Entidade {
 
         void Jogador::executar() {
             verificaVidas();
-            pGGrafico->moveCamera(getPosicao());
+            pGGrafico->moveCamera(getPosicao(), numJog);
             mover();
             if (peixes < 3)
                 interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
-            else
+            else {
                 interface.setTexto("Venceu");
+                vencedor = true;
+            }
             interface.executar();
             //cout << deslocamento.x << endl;
         }
@@ -154,21 +179,46 @@ namespace Entidade {
         void Jogador::tratarEventos() {
             set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
             set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
-            if (teclasPressionadas.count(sf::Keyboard::A)) {
-                andar(false);
-            } else if (teclasPressionadas.count(sf::Keyboard::D)) {
-                andar(true);
+            if (numJog == 1) {
+                if (teclasPressionadas.count(sf::Keyboard::A)) {
+                    andar(false);
+                } else if (teclasPressionadas.count(sf::Keyboard::D)) {
+                    andar(true);
+                } else {
+                    parar();
+                }
+                if (teclasPressionadas.count(sf::Keyboard::W)) {
+                    if (podePular) {
+                        pular(1.0f);
+                        podePular = false;
+                    }
+                }
+                if (teclasSoltas.count(sf::Keyboard::W)) {
+                    liberaPulo();
+                }
+                if (teclasSoltas.count(sf::Keyboard::Space)) {
+                    ataque.atacar();
+                }
             } else {
-                parar();
-            }
-            if (teclasPressionadas.count(sf::Keyboard::W)) {
-                pular(1.0f);
-            }
-            if (teclasSoltas.count(sf::Keyboard::W)) {
-                liberaPulo();
-            }
-            if (teclasSoltas.count(sf::Keyboard::Space)) {
-                ataque.atacar();
+                if (teclasPressionadas.count(sf::Keyboard::Left)) {
+                    andar(false);
+                } else if (teclasPressionadas.count(sf::Keyboard::Right)) {
+                    andar(true);
+                } else {
+                    parar();
+                }
+                if (teclasPressionadas.count(sf::Keyboard::Up)) {
+                    if (podePular) {
+                        pular(1.0f);
+                        podePular = false;
+                    }
+                }
+                if (teclasSoltas.count(sf::Keyboard::Up)) {
+                    liberaPulo();
+                }
+                if (teclasSoltas.count(sf::Keyboard::Down)) {
+                    ataque.atacar();
+                }
             }
         }
 

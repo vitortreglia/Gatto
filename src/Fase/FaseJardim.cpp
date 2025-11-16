@@ -1,22 +1,28 @@
 #include "Fase/FaseJardim.h"
-
-#include "Entidade/Itens/Projetil.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
-#include "Entidade/Obstaculo/PlataformaGiratoria.h"
-#include "Entidade/Obstaculo/PlataformaMovel.h"
+#include "Entidade/Obstaculo/GiraGira.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
+#include "Entidade/Personagem/Inimigo/Rato.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
 #include "Entidade/Personagem/Inimigo/Cachorro.h"
 
 namespace Fase {
-    FaseJardim::FaseJardim():
-    Fase(IDs::Ente_IDs::FaseJardim),
-    maxInimFaceis(0),
-    maxInimMedios(0)
+    FaseJardim::FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2):
+    Fase("Data/Imagens/fundoJardim.jpg", 1),
+    maxInimRato(8),
+    maxGiraGira(8),
+    numInimRato(0),
+    numGiraGira(0)
     {
-        listaEnt.incluir(new Entidade::Personagem::Jogador());
-        pGColisoes->incluirJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
-        Entidade::Personagem::Inimigo::Inimigo::setJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
+        pJog1->setPosicao({1600, 4600});
+        listaEnt.incluir(pJog1);
+        if (pJog2) {
+            pGGrafico->setMultiplayer(true);
+            pJog2->setPosicao({2000, 4600});
+            listaEnt.incluir(pJog2);
+        }
+        Entidade::Personagem::Inimigo::Gaivota::setJogadores(pJog1, pJog2);
+        pGColisoes->incluirJogadores(pJog1, pJog2);
         criarFaseJardim();
 
         Entidade::Entidade* dog =
@@ -27,27 +33,25 @@ namespace Fase {
 
     }
 
-    void FaseJardim::criarPlataformaMovel(float x, float y, bool direcao) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y, direcao);
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+    void FaseJardim::criarGiraGira(float x, float y) {
+        if ((rand()%10 < 9 || numGiraGira < 3) && numGiraGira < maxGiraGira) {
+            Entidade::Entidade* objEntidade = new Entidade::Obstaculo::GiraGira(x, y);
+            if (objEntidade) {
+                listaEnt.incluir(objEntidade);
+                pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+                numGiraGira++;
+            }
         }
     }
 
-    void FaseJardim::criarPlataformaGiratoria(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaGiratoria(x, y);
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
-        }
-    }
-
-    void FaseJardim::criarInimigoGaivota(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Gaivota(x, y);
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+    void FaseJardim::criarInimigoRato(float x, float y) {
+        if ((rand()%10 < 9 || numInimRato < 3) && numInimRato < maxInimRato) {
+            Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
+            if (objEntidade) {
+                listaEnt.incluir(objEntidade);
+                pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+                numInimRato++;
+            }
         }
     }
 
@@ -76,7 +80,7 @@ namespace Fase {
                     criarPlataformaMovel(x, y, true);
                     x += 200.0f;
                 } else if (linha[i] == 'g') {
-                    criarPlataformaGiratoria(x, y);
+                    criarGiraGira(x, y);
                     x += 200.0f;
                 } else if (linha[i] == 'v') {
                     criarInimigoGaivota(x, y);

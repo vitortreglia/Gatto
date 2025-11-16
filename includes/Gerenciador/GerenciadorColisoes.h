@@ -19,13 +19,14 @@ namespace Gerenciador {
         list<Entidade::Obstaculo::Obstaculo*> LOs;
         vector<Entidade::Personagem::Inimigo::Inimigo*> LIs;
         Entidade::Personagem::Jogador* pJogador1;
+        Entidade::Personagem::Jogador* pJogador2;
         vector<Entidade::Itens::Peixe*> LPxs;
         set<Entidade::Itens::Projetil*> LPs;
     public:
         GerenciadorColisoes(Lista::ListaEntidades* pLPersonagens);
         ~GerenciadorColisoes();
         void incluirObstaculo(Entidade::Obstaculo::Obstaculo* obs);
-        void incluirJogador(Entidade::Personagem::Jogador* pJog);
+        void incluirJogadores(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2);
         void incluirInimigo(Entidade::Personagem::Inimigo::Inimigo* pIni);
         void incluirPeixe(Entidade::Itens::Peixe* pPeixe);
         void incluirProjetil(Entidade::Itens::Projetil* pProjetil);

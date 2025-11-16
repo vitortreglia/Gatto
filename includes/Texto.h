@@ -15,6 +15,9 @@
         void setTexto(std::string txt);
         void setTamanho(int tam);
         void setPosicao(float x, float y);
+        void setFonte(string caminho);
+        void setCor(sf::Uint8 r, sf::Uint8 g, sf::Uint8 b, sf::Uint8 a);
+        sf::FloatRect getDimensoesTexto();
         void executar();
     };
 

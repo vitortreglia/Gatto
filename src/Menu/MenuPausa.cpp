@@ -1,8 +1,7 @@
 #include "Menu/MenuPausa.h"
 
 namespace Menu {
-    MenuPausa::MenuPausa():
-    Menu(IDs::Ente_IDs::MenuPausa)
+    MenuPausa::MenuPausa()
     {
         criarBotoesPausa();
     }
@@ -12,7 +11,8 @@ namespace Menu {
     }
 
     void MenuPausa::criarBotoesPausa() {
-        Botao* pBotao = new Botao("Pausa");
+        Entidade::Botao* pBotao = new Entidade::Botao("Pausa");
+        pBotao->setPosicao({390, 300});
         incluirBotao(pBotao);
     }
 

@@ -1,5 +1,6 @@
 #include "Estado/EstadoPausa.h"
 #include "Estado/EstadoJogo.h"
+#include "Estado/EstadoMenuPrincipal.h"
 
 namespace Estados {
     EstadoPausa* EstadoPausa::pEstadoPausa(nullptr);
@@ -22,16 +23,28 @@ namespace Estados {
     }
 
     void EstadoPausa::sair(void *args) {
+        int* arg = static_cast<int*>(args);
         pGEvento->desinscrever(this);
-        mudarEstado(EstadoJogo::getEstadoJogo(NULL));
+        switch (*arg) {
+            case 1:
+                mudarEstado(EstadoJogo::getEstadoJogo(NULL));
+                break;
+            case 2:
+                mudarEstado(EstadoMenuPrincipal::getEstadoMenuPrincipal(NULL));
+                break;
+        }
     }
 
     void EstadoPausa::tratarEventos() {
         set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
         set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
-
+        int arg;
         if (teclasSoltas.count(sf::Keyboard::P)) {
-            sair(NULL);
+            arg = 1;
+            sair(&arg);
+        } else if (teclasSoltas.count(sf::Keyboard::Q)) {
+            arg = 2;
+            sair(&arg);
         }
     }
 

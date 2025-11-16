@@ -5,7 +5,7 @@
 
 namespace Entidade {
     namespace Obstaculo {
-        class PlataformaGiratoria : public Obstaculo {
+        class GiraGira : public Obstaculo {
         private:
             float velocidadeGiro;
             float angulo;
@@ -13,11 +13,11 @@ namespace Entidade {
             float somaTempo;
             sf::Vector2f posInicial;
         public:
-            PlataformaGiratoria(float x, float y);
-            ~PlataformaGiratoria();
+            GiraGira(float x, float y);
+            ~GiraGira();
             void girar();
             void executar();
-            void obstaculizar();
+            void obstaculizar(Personagem::Jogador* pJog);
         };
     }
 }

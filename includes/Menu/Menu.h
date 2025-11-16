@@ -7,11 +7,13 @@ namespace Menu {
     class Menu : public Ente{
     private:
         sf::RectangleShape fundo;
-        std::vector<Botao*> botoes;
+        std::vector<Entidade::Botao*> botoes;
+        std::vector<Texto*> textos;
     public:
-        Menu(IDs::Ente_IDs id);
+        Menu();
         ~Menu();
-        void incluirBotao(Botao* pB);
+        void incluirBotao(Entidade::Botao* pB);
+        void incluirTexto(Texto* pT);
         void executar();
     };
 }

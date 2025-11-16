@@ -6,6 +6,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "Animacao/Animacao.h"
+
 #define TELA_X 1280.0f
 #define TELA_Y 720.0f
 
@@ -16,21 +18,27 @@ namespace Gerenciador {
     private:
         sf::RenderWindow* window;
         sf::View camera;
+        sf::View viewP1;
+        sf::View viewP2;
         sf::RenderTexture uiBuffer;
+        sf::Sprite fundo;
         sf::Sprite uiSprite;
         sf::Clock relogio;
         float tempo;
         static GerenciadorGrafico* pGGrafico;
-        float cameraX;
-        float cameraY;
+        float cameraX, viewP1X, viewP2X;
+        float cameraY, viewP1Y, viewP2Y;
+        bool multiplayer;
         sf::FloatRect limitesCamera;
     private:
         GerenciadorGrafico();
     public:
         ~GerenciadorGrafico();
+        void setMultiplayer(bool mult);
         const bool verificaJanelaAberta();
         static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
+        void setFundo(Animacao* fundo);
         void desenharEnte(sf::RectangleShape* corpo);
         void desenharUI(sf::RectangleShape* corpo);
         void desenharUI(sf::Text* texto);
@@ -39,7 +47,7 @@ namespace Gerenciador {
         void limpaJanela();
         float getTempo();
         void resetaRelogio();
-        void moveCamera(sf::Vector2f coord);
+        void moveCamera(sf::Vector2f coord, int jog);
         void setLimitesCamera(sf::FloatRect limites);
         sf::FloatRect getLimitesCamera();
     };

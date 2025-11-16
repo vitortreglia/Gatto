@@ -5,7 +5,7 @@
 namespace Entidade {
     namespace Itens {
         Peixe::Peixe(float x, float y):
-        Entidade({50, 50}, x, y, IDs::Ente_IDs::ItemPeixe),
+        Entidade({50, 50}, x, y),
         movimento(60),
         sentido(true)
         {}

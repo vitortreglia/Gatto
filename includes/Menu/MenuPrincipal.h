@@ -5,6 +5,9 @@
 
 namespace Menu {
     class MenuPrincipal: public Menu {
+    private:
+        Animacao fundo;
+        Texto titulo;
     public:
         MenuPrincipal();
         ~MenuPrincipal();

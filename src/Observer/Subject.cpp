@@ -16,13 +16,13 @@ void Subject::desinscrever(Observer *pO) {
 }
 
 void Subject::notificar() {
-    for (std::list<Observer*>::const_iterator it = observers.begin(); it != observers.end(); it++) {
-        (*it)->notificar();
-    }
     for (std::list<Observer*>::const_iterator it = remover.begin(); it != remover.end(); it++) {
         observers.remove(*it);
     }
+    remover.clear();
+    for (std::list<Observer*>::const_iterator it = observers.begin(); it != observers.end(); it++) {
+        (*it)->notificar();
+    }
     observers.merge(adicionar);
     adicionar.clear();
-    remover.clear();
 }

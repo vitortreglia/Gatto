@@ -1,23 +1,24 @@
 #include "Ente.h"
 
+int Ente::nID(0);
 Gerenciador::GerenciadorGrafico* Ente::pGGrafico(pGGrafico->getGerenciadorGrafico());
 
-Ente::Ente(IDs::Ente_IDs id, sf::RectangleShape* pF):
-ID(id),
+Ente::Ente(sf::RectangleShape* pF):
+ID(nID),
 pFig(pF),
-pTxt(nullptr)
-{}
-
-Ente::Ente(IDs::Ente_IDs id, sf::Text* pT):
-ID(id),
-pFig(nullptr),
-pTxt(pT)
-{}
-Ente::~Ente() {
-    ID = IDs::Ente_IDs::vazio;
+pTxt(nullptr) {
+    nID++;
 }
 
-const IDs::Ente_IDs Ente::getId() const{
+Ente::Ente(sf::Text* pT):
+ID(nID),
+pFig(nullptr),
+pTxt(pT) {
+    nID++;
+}
+Ente::~Ente() {}
+
+const int Ente::getId() const{
     return ID;
 }
 

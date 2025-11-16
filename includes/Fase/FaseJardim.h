@@ -6,15 +6,16 @@
 namespace Fase {
     class FaseJardim : public Fase{
     private:
-        const int maxInimMedios;
-        const int maxInimFaceis;
+        const int maxInimRato;
+        const int maxGiraGira;
+        int numInimRato;
+        int numGiraGira;
     public:
-        FaseJardim();
+        FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2);
         ~FaseJardim();
     private:
-        void criarPlataformaMovel(float x, float y, bool direcao);
-        void criarPlataformaGiratoria(float x, float y);
-        void criarInimigoGaivota(float x, float y);
+        void criarGiraGira(float x, float y);
+        void criarInimigoRato(float x, float y);
         void criarFaseJardim();
     };
 }

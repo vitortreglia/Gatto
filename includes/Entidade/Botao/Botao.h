@@ -3,14 +3,15 @@
 #include "Texto.h"
 #include "Entidade/Entidade.h"
 
-namespace Menu {
+namespace Entidade {
     class Botao : public Entidade::Entidade {
     private:
         Texto textoBotao;
     public:
         Botao(string rotulo);
         ~Botao();
-        void desenhar();
+        void setPosicao(sf::Vector2f pos);
+        void setTamanho(sf::Vector2f tam);
         void executar();
     };
 }

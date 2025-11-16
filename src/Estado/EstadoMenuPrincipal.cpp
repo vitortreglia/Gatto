@@ -23,7 +23,7 @@ namespace Estados {
 
     void EstadoMenuPrincipal::sair(void *args) {
         pGEvento->desinscrever(this);
-        int arg[] = {1, 1, 1};
+        int* arg = static_cast<int*>(args);
         mudarEstado(static_cast<Estado*>(EstadoJogo::getEstadoJogo(static_cast<void*>(arg))));
     }
 
@@ -32,7 +32,11 @@ namespace Estados {
         set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
 
         if (teclasSoltas.count(sf::Keyboard::Enter)) {
-            sair(NULL);
+            int args[] = {1, 1, 1};
+            sair(args);
+        } else if (teclasSoltas.count(sf::Keyboard::Num2)) {
+            int args[] = {2, 1, 1};
+            sair(args);
         }
     }
 
