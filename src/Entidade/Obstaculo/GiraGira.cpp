@@ -3,7 +3,7 @@
 namespace Entidade {
     namespace Obstaculo {
         GiraGira::GiraGira(float x, float y):
-        Obstaculo(false, sf::Vector2f(200, 50), x, y, IDs::Ente_IDs::PlataformaGiratoria),
+        Obstaculo(false, sf::Vector2f(200, 50), x, y),
         velocidadeGiro(2),
         angulo(0.0f),
         tempoMax(3.0f),

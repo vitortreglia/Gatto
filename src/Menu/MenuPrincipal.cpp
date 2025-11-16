@@ -3,7 +3,7 @@
 namespace Menu {
     MenuPrincipal::MenuPrincipal():
     titulo("Gatto", 128, 433, 100),
-    Menu(IDs::Ente_IDs::MenuPrincipal)
+    Menu()
     {
         fundo.setTextura("Data/Imagens/fundoJardim.jpg"),
         titulo.setFonte("Data/Fontes/RubikBubbles-Regular.ttf");

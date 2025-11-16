@@ -7,7 +7,7 @@
 
 namespace Fase {
     FaseJardim::FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2):
-    Fase(IDs::Ente_IDs::FaseJardim, "Data/Imagens/fundoJardim.jpg", 1),
+    Fase("Data/Imagens/fundoJardim.jpg", 1),
     maxInimRato(8),
     maxGiraGira(8),
     numInimRato(0),

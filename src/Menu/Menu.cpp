@@ -1,8 +1,8 @@
 #include "Menu/Menu.h"
 
 namespace Menu {
-    Menu::Menu(IDs::Ente_IDs id):
-    Ente(id, &fundo)
+    Menu::Menu():
+    Ente(&fundo)
     {
         //fundo.setFillColor(sf::Color::White);
         fundo.setSize({1280, 720});

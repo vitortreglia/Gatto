@@ -9,8 +9,8 @@
 #include <time.h>
 
 namespace Fase {
-    Fase::Fase(IDs::Ente_IDs id, string caminhoTextura, int nFase):
-    Ente(id, &fundo),
+    Fase::Fase(string caminhoTextura, int nFase):
+    Ente(&fundo),
     pGColisoes(nullptr),
     limitesFase({0,0,0,0}),
     fundo({1280, 720}),
@@ -32,7 +32,7 @@ namespace Fase {
         delete pGColisoes;
     }
 
-    int Fase::semearRand() {
+    void Fase::semearRand() {
         srand(time(0));
     }
 
@@ -90,7 +90,7 @@ namespace Fase {
         }
     }
 
-    int Fase::getFase() {
+    const int Fase::getFase() const {
         return numFase;
     }
 

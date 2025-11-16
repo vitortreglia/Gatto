@@ -12,7 +12,7 @@ namespace Entidade {
 
             Gaivota::Gaivota(float x, float y):
             ataque(1, 1.0f),
-            Inimigo(0, 120.0f, {80.0f, 50.0f},x, y, 2, IDs::Ente_IDs::InimigoGaivota),
+            Inimigo(0, 120.0f, {80.0f, 50.0f},x, y, 2),
             baseY(y),
             amplitude(10.0f),
             frequencia(6.0f),
