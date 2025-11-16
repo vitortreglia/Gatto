@@ -30,8 +30,8 @@ namespace Fase {
         void criarPlataformaMovel(float x, float y, bool direcao);
         void criarPeixe(float x, float y);
         void criarInimigoGaivota(float x, float y);
-        virtual void criarObstaculos() = 0;
-        virtual void criarInimigos() = 0;
+        //virtual void criarObstaculos() = 0;
+        //virtual void criarInimigos() = 0;
         void criarCenario();
         void atualizarEntidades();
     };

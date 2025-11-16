@@ -2,7 +2,7 @@
 
 
     Texto::Texto(std::string conteudo, int tamanho, float x, float y):
-    Ente(IDs::Ente_IDs::Texto, &texto)
+    Ente(&texto)
     {
         fonte.loadFromFile("Data/Fontes/RubikBubbles-Regular.ttf");
         texto.setString(conteudo);
