@@ -27,25 +27,38 @@ namespace Fase {
 
     }
 
-    void FaseCidade::criarProjetil(float x, float y, bool direita) {
-        if (direita) {
-            x += 80.0f;
-        }
-        Entidade::Entidade* objEntidade = new Entidade::Itens::Projetil();
-        if (objEntidade) {
-            listaEnt.incluir(objEntidade);
-            pGColisoes->incluirProjetil(static_cast<Entidade::Itens::Projetil*>(objEntidade));
+    void FaseCidade::criarProjetil(float x, float y, bool direita,
+        Entidade::Personagem::Inimigo::Cachorro* pCachorro) {
+
+        if (!pCachorro)
+            return;
+
+        sf::Vector2f pos = pCachorro->getPosicao();
+
+        Entidade::Itens::Projetil* proj = new Entidade::Itens::Projetil();
+
+        if (proj) {
+            proj->setAtivo(false);
+            proj->setDirecao(direita);
+            proj->setPosicao(pos);
+
+            listaEnt.incluir(proj);
+            pGColisoes->incluirProjetil(proj);
+
+            pCachorro->setProjetil(proj);
         }
     }
 
     void FaseCidade::criarChefao(float x, float y) {
         if ((rand()%10 < 9 || numInimChefao < 3) && numInimChefao < maxChefoes) {
-            Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
-            if (objEntidade) {
-                listaEnt.incluir(objEntidade);
-                pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
+            auto* cachorro = new Entidade::Personagem::Inimigo::Cachorro(x, y);
+            if (cachorro) {
+                listaEnt.incluir(cachorro);
+                pGColisoes->incluirInimigo(
+                    static_cast<Entidade::Personagem::Inimigo::Inimigo*>(cachorro)
+                );
                 numInimChefao++;
-            }
+                criarProjetil(x, y, true, cachorro);
         }
     }
 

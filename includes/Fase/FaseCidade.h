@@ -1,7 +1,8 @@
 #ifndef FASECIDADE_H
 #define FASECIDADE_H
 #include "Fase.h"
-
+#include "Entidade/Itens/Projetil.h"
+#include "Entidade/Personagem/Inimigo/Cachorro.h"
 
 namespace Fase {
     class FaseCidade : public Fase {
@@ -14,7 +15,8 @@ namespace Fase {
         FaseCidade(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2);
         ~FaseCidade();
     protected:
-        void criarProjetil(float x, float y, bool direita);
+        void criarProjetil(float x, float y, bool direita,
+                   Entidade::Personagem::Inimigo::Cachorro* pCachorro);
         void criarChefao(float x, float y);
         void criarRoseira(float x, float y, bool danoso);
         void criarFaseCidade();
