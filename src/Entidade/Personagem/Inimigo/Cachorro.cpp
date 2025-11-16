@@ -13,7 +13,7 @@ namespace Entidade {
             Inimigo(0, 150.0f, {200.0f, 300.0f}, x, y, 8, IDs::Ente_IDs::InimigoCachorro),
             raioPercepcaoX(300.0f),
             raioAtaque(230.0f),
-            velocidade(150.0f);
+            velocidade(150.0f)
 
 
             {
@@ -65,10 +65,29 @@ namespace Entidade {
 
                 andar(dx > 0.0f);
 
-                if (posJog.y + 40.0f < pos.y && estaNoChao()) {
+                if (posJog.y + 40.0f < pos.y && estaNoChao) {
                     deslocamento.y = -30.0f;
                     estaNoChao(false);
                 }
+            }
+            void Cachorro::criarOsso() {
+
+                sf::Vector2f tam = getTamanho();
+                sf::Vector2f pos = getPosicao();
+
+                float posX;
+                if (posX = direita)
+                    pos.x + tam.x;
+                else
+                    pos.x - 20.0f;
+
+                float posY = pos.y + tam.y / 2.0f;
+
+                Itens::Projetil* osso = new Itens::Projetil(posX, posY, direita);
+            }
+
+            void Cachorro::atirarOsso() {
+                // fazer else/if pra ir ver o nivel de maldade e decidir quantos osso atacar
             }
 
             void Cachorro::executar() {

@@ -8,7 +8,6 @@
 namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
-
             class Cachorro : public Inimigo {
             public:
 
@@ -28,9 +27,11 @@ namespace Entidade {
                 void atualizaMaldade();
                 void patrulhar();
                 void perseguir();
-
-
-
-
+                void criarOsso();
+                void atirarOsso();
+            };
+        }
+    }
+}
 
 #endif //GATTO_CACHORRO_H

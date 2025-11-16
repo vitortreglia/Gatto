@@ -6,6 +6,7 @@
 #include "Entidade/Obstaculo/PlataformaMovel.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
+#include "Entidade/Personagem/Inimigo/Cachorro.h"
 
 namespace Fase {
     FaseJardim::FaseJardim():
@@ -17,6 +18,9 @@ namespace Fase {
         pGColisoes->incluirJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         Entidade::Personagem::Inimigo::Inimigo::setJogador(static_cast<Entidade::Personagem::Jogador*>(listaEnt[0]));
         criarFaseJardim();
+
+        Entidade::Entidade* dog =
+        new Entidade::Personagem::Inimigo::Cachorro(800.0f, 400.0f);
     }
 
     FaseJardim::~FaseJardim() {
