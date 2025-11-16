@@ -6,10 +6,7 @@ namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Rato::Rato(float x, float y):
-            Inimigo(0, 150.0f, {80.0f, 80.0f}, x, y, 2, IDs::Ente_IDs::InimigoRato),
-            atirouProjetil(false),
-            podeAtirar(true),
-            tempoAtirar(0.0f),
+            Inimigo(0, 150.0f, {80.0f, 80.0f}, x, y, 2),
             tempoAndar(0.0f),
             imgRato("Data/Imagens/Rato.png")
             {
@@ -19,27 +16,6 @@ namespace Entidade {
             }
 
             Rato::~Rato() {}
-
-            bool Rato::getAtirou() {
-                return atirouProjetil;
-            }
-
-            void Rato::setAtirou(bool at) {
-                atirouProjetil = at;
-            }
-
-            void Rato::atirar() {
-                if (podeAtirar) {
-                    podeAtirar = false;
-                    setAtirou(true);
-                } else {
-                    tempoAtirar += tempoFrame;
-                    if (tempoAtirar > 3.0f) {
-                        tempoAtirar = 0.0f;
-                        podeAtirar = true;
-                    }
-                }
-            }
 
             void Rato::danificar(Jogador *pJ) {
                 nivelMaldade++;
@@ -74,7 +50,6 @@ namespace Entidade {
             }
 
             void Rato::executar() {
-                //atirar();
                 verificaVidas();
                 mover();
             }

@@ -13,9 +13,9 @@ namespace Entidade {
         bool ativo;
         Animacao textura;
     public:
-        Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f, IDs::Ente_IDs id = IDs::Ente_IDs::vazio);
+        Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f);
         virtual ~Entidade();
-        const bool estaAtivo();
+        const bool estaAtivo() const;
         void setAtivo(bool at);
         void setPosicao(sf::Vector2f posicao);
         const sf::Vector2f getPosicao() const;

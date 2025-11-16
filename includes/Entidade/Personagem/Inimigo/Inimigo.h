@@ -11,7 +11,7 @@ namespace Entidade {
             protected:
                 int nivelMaldade;
             public:
-                Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id);
+                Inimigo(int nMaldade, float vel, sf:: Vector2f tam, float px, float py, int vidas);
                 ~Inimigo();
 
                 void verificaVidas();

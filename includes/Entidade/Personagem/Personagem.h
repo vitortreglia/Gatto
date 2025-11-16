@@ -8,7 +8,7 @@ namespace Entidade {
         protected:
             int numVidas;
             sf::Vector2f vMax;
-            float gravidade;
+            const float gravidade;
             sf::Vector2f deslocamento;
             bool direita;
             bool andando;
@@ -18,13 +18,13 @@ namespace Entidade {
             //bool vivo;
             bool voador;
         public:
-            Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id);
-            virtual ~Personagem();
+            Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas);
+            ~Personagem();
             void andar(const bool dir);
             void parar();
             const bool getDireita() const;
             void calculaVelocidade();
-            sf::Vector2f getDeslocamento();
+            const sf::Vector2f getDeslocamento() const;
             void setDeslocamento(sf::Vector2f desl);
             void atualizarPos(sf::Vector2f pos);
             void atualizarPos();

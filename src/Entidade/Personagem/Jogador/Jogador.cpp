@@ -6,7 +6,7 @@ namespace Entidade {
         Gerenciador::GerenciadorEvento* Jogador::pGEvento(nullptr);
 
         Jogador::Jogador(int nJog):
-        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, nJog == 1 ? IDs::Ente_IDs::Jogador1 : IDs::Ente_IDs::Jogador2),
+        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7),
         numJog(nJog),
         vencedor(false),
         ataque(1, 0.1f),
@@ -63,7 +63,7 @@ namespace Entidade {
             peixes++;
         }
 
-        bool Jogador::perderPeixe() {
+        const bool Jogador::perderPeixe() {
             if (peixes > 0) {
                 peixes--;
                 return true;
@@ -71,7 +71,7 @@ namespace Entidade {
             return false;
         }
 
-        bool Jogador::getImunidadeDano() {
+        const bool Jogador::getImunidadeDano() const {
             return imunidadeDano;
         }
 

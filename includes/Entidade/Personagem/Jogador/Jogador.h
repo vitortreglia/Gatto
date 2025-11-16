@@ -33,8 +33,8 @@ namespace Entidade {
             void liberaPulo();
             void pular(float multiplicador);
             void coletarPeixe(Itens::Peixe* pPeixe);
-            bool perderPeixe();
-            bool getImunidadeDano();
+            const bool perderPeixe();
+            const bool getImunidadeDano() const;
             void colidir(Inimigo::Inimigo* pInimigo, sf::Vector2f colisao);
             void colidir(sf::Vector2f colisao);
             void tomarDano(int dano);

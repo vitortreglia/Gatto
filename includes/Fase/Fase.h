@@ -21,7 +21,7 @@ namespace Fase {
     public:
         Fase(IDs::Ente_IDs id, string caminhoTextura, int nFase);
         ~Fase();
-        void executar();
+        virtual void executar();
         sf::FloatRect getLimitesFase();
         int getFase();
     protected:
@@ -30,9 +30,10 @@ namespace Fase {
         void criarPlataformaMovel(float x, float y, bool direcao);
         void criarPeixe(float x, float y);
         void criarInimigoGaivota(float x, float y);
-        //void criarCenario();
+        virtual void criarObstaculos() = 0;
+        virtual void criarInimigos() = 0;
+        void criarCenario();
         void atualizarEntidades();
-        //virtual void criarObstaculo() = 0;
     };
 }
 #endif //FASE_H

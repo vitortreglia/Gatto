@@ -4,8 +4,8 @@
 namespace Entidade {
     float Entidade::tempoFrame(0.0f);
 
-    Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy, IDs::Ente_IDs id):
-    Ente(id, &corpo),
+    Entidade::Entidade(sf::Vector2f tamanho, float posx, float posy):
+    Ente(&corpo),
     x(posx),
     y(posy),
     tam(tamanho),
@@ -20,7 +20,7 @@ namespace Entidade {
         setPosicao(sf::Vector2f(0.0f, 0.0f));
     }
 
-    const bool Entidade::estaAtivo() {
+    const bool Entidade::estaAtivo() const {
         return ativo;
     }
 

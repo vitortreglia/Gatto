@@ -3,7 +3,7 @@
 namespace Entidade {
     namespace Obstaculo {
         Roseira::Roseira(bool dano, float x, float y):
-        Obstaculo(dano, {200, 100}, x, y, IDs::Ente_IDs::Roseira),
+        Obstaculo(dano, {200, 100}, x, y),
         tempo(0.0f) {
             textura.setTextura("Data/Imagens/roseira.png");
             setTextura(&textura);
