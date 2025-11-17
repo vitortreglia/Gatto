@@ -59,71 +59,72 @@ namespace Fase {
                 );
                 numInimChefao++;
                 criarProjetil(x, y, true, cachorro);
-        }
-    }
-
-    void FaseCidade::criarRoseira(float x, float y, bool danoso) {
-        if ((rand()%10 < 9 || numRoseira < 3) && numRoseira < maxRoseiras) {
-            Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Roseira(danoso, x, y);
-            if (objEntidade) {
-                listaEnt.incluir(objEntidade);
-                pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
-                numRoseira++;
             }
         }
-    }
 
-    void FaseCidade::criarFaseCidade() {
-        ifstream arquivo("Data/Fases/FaseCidade.dat");
-        int espaco = 0;
-        float x = 0.0f;
-        float y = 100.0f;
-        if (!arquivo.is_open()) {
-            cout << "Erro ao abrir o arquivo!\n";
-        }
-        std::string linha;
-        while (getline(arquivo, linha)) {
-            for (int i = 0; i < linha.size(); i++) {
-                if (linha[i] >= '0' && linha[i] <= '9') {
-                    espaco = linha[i] - '0';
-                } else if (linha[i] >= 'A' && linha[i] <= 'F') {
-                    espaco = 10 + (linha[i] - 'A');
-                } else if (linha[i] == 'p') {
-                    criarPlataforma(x, y);
-                    x += 100.0f;
-                } else if (linha[i] == 'm') {
-                    criarPlataformaMovel(x, y, false);
-                    x += 200.0f;
-                } else if (linha[i] == 'n') {
-                    criarPlataformaMovel(x, y, true);
-                    x += 200.0f;
-                } else if (linha[i] == 'r') {
-                    criarRoseira(x, y, true);
-                    x += 200.0f;
-                } else if (linha[i] == 'R') {
-                    criarRoseira(x, y, false);
-                    x += 200.0f;
-                } else if (linha[i] == 'v') {
-                    criarInimigoGaivota(x, y);
-                    x += 100.0f;
-                } else if (linha[i] == 'f') {
-                    criarPeixe(x, y);
-                    x += 100.0f;
-                } else if (linha[i] == 'c') {
-                    criarChefao(x, y);
-                    x += 100.0f;
+        void FaseCidade::criarRoseira(float x, float y, bool danoso) {
+            if ((rand()%10 < 9 || numRoseira < 3) && numRoseira < maxRoseiras) {
+                Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Roseira(danoso, x, y);
+                if (objEntidade) {
+                    listaEnt.incluir(objEntidade);
+                    pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+                    numRoseira++;
                 }
-                x += espaco * 100.0f;
-                espaco = 0;
             }
-            if (x > limitesFase.width)
-                limitesFase.width = x;
-            y += 100.0f;
-            x = 0.0f;
         }
-        limitesFase.height = y;
-        arquivo.close();
-        pGGrafico->setLimitesCamera(limitesFase);
-    }
 
+        void FaseCidade::criarFaseCidade() {
+            ifstream arquivo("Data/Fases/FaseCidade.dat");
+            int espaco = 0;
+            float x = 0.0f;
+            float y = 100.0f;
+            if (!arquivo.is_open()) {
+                cout << "Erro ao abrir o arquivo!\n";
+            }
+            std::string linha;
+            while (getline(arquivo, linha)) {
+                for (int i = 0; i < linha.size(); i++) {
+                    if (linha[i] >= '0' && linha[i] <= '9') {
+                        espaco = linha[i] - '0';
+                    } else if (linha[i] >= 'A' && linha[i] <= 'F') {
+                        espaco = 10 + (linha[i] - 'A');
+                    } else if (linha[i] == 'p') {
+                        criarPlataforma(x, y);
+                        x += 100.0f;
+                    } else if (linha[i] == 'm') {
+                        criarPlataformaMovel(x, y, false);
+                        x += 200.0f;
+                    } else if (linha[i] == 'n') {
+                        criarPlataformaMovel(x, y, true);
+                        x += 200.0f;
+                    } else if (linha[i] == 'r') {
+                        criarRoseira(x, y, true);
+                        x += 200.0f;
+                    } else if (linha[i] == 'R') {
+                        criarRoseira(x, y, false);
+                        x += 200.0f;
+                    } else if (linha[i] == 'v') {
+                        criarInimigoGaivota(x, y);
+                        x += 100.0f;
+                    } else if (linha[i] == 'f') {
+                        criarPeixe(x, y);
+                        x += 100.0f;
+                    } else if (linha[i] == 'c') {
+                        criarChefao(x, y);
+                        x += 100.0f;
+                    }
+                    x += espaco * 100.0f;
+                    espaco = 0;
+                }
+                if (x > limitesFase.width)
+                    limitesFase.width = x;
+                y += 100.0f;
+                x = 0.0f;
+            }
+            limitesFase.height = y;
+            arquivo.close();
+            pGGrafico->setLimitesCamera(limitesFase);
+        }
+
+    }
 }
