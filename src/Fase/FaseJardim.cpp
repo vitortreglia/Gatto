@@ -23,7 +23,6 @@ namespace Fase {
         Entidade::Personagem::Inimigo::Gaivota::setJogadores(pJog1, pJog2);
         pGColisoes->incluirJogadores(pJog1, pJog2);
         criarCenario("Data/Fases/FaseJardim.dat");
-        //criarFaseJardim();
     }
 
     FaseJardim::~FaseJardim() {

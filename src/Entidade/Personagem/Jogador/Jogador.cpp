@@ -164,7 +164,7 @@ namespace Entidade {
 
         void Jogador::executar() {
             verificaVidas();
-            //pGGrafico->moveCamera(getPosicao(), numJog);
+            pGGrafico->moveCamera(getPosicao(), numJog);
             mover();
             if (peixes < 3)
                 interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
@@ -172,7 +172,7 @@ namespace Entidade {
                 interface.setTexto("Venceu");
                 vencedor = true;
             }
-            //interface.executar();
+            interface.executar();
             //cout << deslocamento.x << endl;
         }
 

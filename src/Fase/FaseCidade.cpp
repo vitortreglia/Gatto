@@ -11,17 +11,16 @@ namespace Fase {
     numRoseira(0),
     numInimChefao(0)
     {
-        pJog1->setPosicao({1500, 2200});
+        pJog1->setPosicao({1100, 2700});
         listaEnt.incluir(pJog1);
         if (pJog2) {
             pGGrafico->setMultiplayer(true);
-            pJog2->setPosicao({2700, 2200});
+            pJog2->setPosicao({2400, 2700});
             listaEnt.incluir(pJog2);
         }
         Entidade::Personagem::Inimigo::Gaivota::setJogadores(pJog1, pJog2);
         pGColisoes->incluirJogadores(pJog1, pJog2);
         criarCenario("Data/Fases/FaseCidade.dat");
-        //criarFaseCidade();
     }
 
     FaseCidade::~FaseCidade() {
