@@ -49,6 +49,7 @@ namespace Fase {
         }
     }
 
+
     void FaseCidade::criarChefao(float x, float y) {
         if ((rand()%10 < 9 || numInimChefao < 3) && numInimChefao < maxChefoes) {
             auto* cachorro = new Entidade::Personagem::Inimigo::Cachorro(x, y);
@@ -61,8 +62,9 @@ namespace Fase {
                 criarProjetil(x, y, true, cachorro);
             }
         }
+    }
 
-        void FaseCidade::criarRoseira(float x, float y, bool danoso) {
+        void FaseCidade::criarRoseira(float x, float y, bool danoso){
             if ((rand()%10 < 9 || numRoseira < 3) && numRoseira < maxRoseiras) {
                 Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Roseira(danoso, x, y);
                 if (objEntidade) {
@@ -72,6 +74,7 @@ namespace Fase {
                 }
             }
         }
+
 
         void FaseCidade::criarFaseCidade() {
             ifstream arquivo("Data/Fases/FaseCidade.dat");
@@ -127,4 +130,3 @@ namespace Fase {
         }
 
     }
-}
