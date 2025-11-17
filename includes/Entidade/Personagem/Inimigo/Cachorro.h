@@ -28,7 +28,6 @@ namespace Entidade {
                     void patrulhar();
 
                     void perseguir();
-                    void criarOsso();
                     void atirarOsso();
                     void setProjetil(Itens::Projetil* pProj);
                 };

@@ -83,6 +83,23 @@ namespace Entidade {
 
                 if (!pProjetil)
                     return;
+
+                if (!ataque.getAtacando()) {
+                    ataque.atacar();
+                }
+
+                int probAumentar;
+                probAumentar= 10 + nivelMaldade * 15;
+                if (probAumentar > 70)
+                    probAumentar = 70;
+
+                int sorteio;
+                sorteio = std::rand() % 100;
+                if (sorteio < probAumentar) {
+                    ++nivelMaldade;
+                    atualizaMaldade();
+                }
+
                 pProjetil->setAtivo(true);
                 pProjetil->setDirecao(direita);
 
@@ -97,6 +114,129 @@ namespace Entidade {
                 pos.y += tam.y * 0.3f;
 
                 pProjetil->setPosicao(pos);
+                }
+
+            void Cachorro::mover() {
+
+                atualizaMaldade();
+
+                Jogador* jogadorAlvo = nullptr;
+
+                if (pJog1 && pJog2) {
+                    sf::Vector2f posCao = getPosicao();
+                    sf::Vector2f posJogador1 = pJog1->getPosicao();
+                    sf::Vector2f posJogador2 = pJog2->getPosicao();
+
+                    float deltaX1 = posJogador1.x - posCao.x;
+                    float deltaY1 = posJogador1.y - posCao.y;
+                    float distancia1 = deltaX1 * deltaX1 + deltaY1 * deltaY1;
+
+                    float deltaX2 = posJogador2.x - posCao.x;
+                    float deltaY2 = posJogador2.y - posCao.y;
+                    float distancia2 = deltaX2 * deltaX2 + deltaY2 * deltaY2;
+
+                    if (distancia1 <= distancia2) {
+                        jogadorAlvo = pJog1;
+                    }
+                    else {
+                        jogadorAlvo = pJog2;
+                    }
+                }
+
+                else if (pJog1) {
+                    jogadorAlvo = pJog1;
+                }
+
+                else if (pJog2) {
+                    jogadorAlvo = pJog2;
+                }
+
+                if (!jogadorAlvo) {
+                    patrulhar();
+                    atualizarPos();
+                    return;
+                }
+
+                sf::Vector2f posJogador  = jogadorAlvo->getPosicao();
+                sf::Vector2f posCachorro = getPosicao();
+
+                float deltaX = posJogador.x - posCachorro.x;
+                float deltaY = posJogador.y - posCachorro.y;
+
+                float distanciaX;
+                if (deltaX < 0.0f) {
+                    distanciaX = -deltaX;
+                }
+                else {
+                    distanciaX = deltaX;
+                }
+
+                float distanciaY;
+
+                if (deltaY < 0.0f) {
+                    distanciaY = -deltaY;
+                }
+                else {
+                    distanciaY = deltaY;
+                }
+
+                if (distanciaX <= raioPercepcaoX) {
+
+                    if (deltaX > 10.0f) {
+                        andar(true);
+                    }
+                    else if (deltaX < -10.0f) {
+                        andar(false);
+                    } else {
+                            parar();
+                    }
+
+                    if (posJogador.y + 40.0f < posCachorro.y && noChao) {
+                        deslocamento.y = -30.0f;
+                        estaNoChao(false);
+                    }
+
+                    if (distanciaX <= raioAtaque && distanciaY <= 200.0f) {
+                    atirarOsso();
+                    }
+                }
+                else {
+                    patrulhar();
+                }
+
+                    atualizarPos();
+            }
+
+            void Cachorro::danificar(Jogador* jogador) {
+                if (!jogador)
+                    return;
+
+                if (jogador->getImunidadeDano())
+                    return;
+
+                int dano = ataque.getDano();
+
+                int chanceDanoExtra = 0;
+
+                if (nivelMaldade == 1) {
+                    chanceDanoExtra = 15;
+                }
+                else if (nivelMaldade == 2) {
+                    chanceDanoExtra = 30;
+                }
+                else if (nivelMaldade >= 3) {
+                    chanceDanoExtra = 50;
+                }
+
+                int sorteio = std::rand() % 100;
+                if (sorteio < chanceDanoExtra) {
+                    dano += 1;
+                }
+
+                jogador->tomarDano(dano);
+
+                nivelMaldade++;
+                atualizaMaldade();
             }
 
             void Cachorro::executar() {
