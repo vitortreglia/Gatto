@@ -16,7 +16,8 @@ namespace Fase {
     private:
         void criarGiraGira(float x, float y);
         void criarInimigoRato(float x, float y);
-        void criarFaseJardim();
+        void criarInimigos(multimap<char, sf::Vector2f> inimigos);
+        void criarObstaculos(multimap<char, sf::Vector2f> obstaculos);
     };
 }
 

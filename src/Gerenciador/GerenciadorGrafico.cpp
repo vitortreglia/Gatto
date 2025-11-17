@@ -186,6 +186,8 @@ namespace Gerenciador {
 
     void GerenciadorGrafico::setLimitesCamera(sf::FloatRect limites) {
         limitesCamera = limites;
+        camera.setSize({limitesCamera.width, limitesCamera.height});
+        camera.setCenter(limitesCamera.width/2, limitesCamera.height/2);
     }
 
     sf::FloatRect GerenciadorGrafico::getLimitesCamera() {

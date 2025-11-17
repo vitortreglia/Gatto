@@ -17,7 +17,8 @@ namespace Fase {
         void criarProjetil(float x, float y, bool direita);
         void criarChefao(float x, float y);
         void criarRoseira(float x, float y, bool danoso);
-        void criarFaseCidade();
+        void criarInimigos(multimap<char, sf::Vector2f> inimigos);
+        void criarObstaculos(multimap<char, sf::Vector2f> obstaculos);
     };
 }
 

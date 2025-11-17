@@ -44,12 +44,13 @@ namespace Entidade {
             }
 
             void Gaivota::danificar(Jogador *pJ) {
-                if (!pJ->getImunidadeDano())
+                if (!pJ->getImunidadeDano() && !sofrendoDano) {
                     nivelMaldade++;
-                if (nivelMaldade > 1 && !possuiPeixe && ataque.getAtacando()) {
-                    possuiPeixe = pJ->perderPeixe();
+                    if (nivelMaldade > 1 && !possuiPeixe && ataque.getAtacando()) {
+                        possuiPeixe = pJ->perderPeixe();
+                    }
+                    pJ->tomarDano(1);
                 }
-                pJ->tomarDano(1);
             }
 
             void Gaivota::mover() {
@@ -98,7 +99,6 @@ namespace Entidade {
 
                 return nullptr;
             }
-
 
             void Gaivota::setEstado(EstadoGaivota *pEstado) {
                 if (pEstado) {
