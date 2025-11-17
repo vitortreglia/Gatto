@@ -8,6 +8,8 @@ namespace Entidade {
         public:
             Plataforma(float x, float y);
             ~Plataforma();
+            string imgFaseJardim;
+            string imgFaseCidade;
             void executar();
             void obstaculizar(Personagem::Jogador* pJog);
         };

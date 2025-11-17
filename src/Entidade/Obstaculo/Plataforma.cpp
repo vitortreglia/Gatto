@@ -2,8 +2,10 @@
 namespace Entidade {
     namespace Obstaculo {
         Plataforma::Plataforma(float x, float y):
-        Obstaculo(false, sf::Vector2f(100,50), x, y) {
-            corpo.setFillColor(sf::Color::Blue);
+        Obstaculo(false, sf::Vector2f(100,50), x, y),
+        imgFaseJardim("Data/Imagens/grama.png"){
+            textura.setTextura(imgFaseJardim);
+            setTextura(&textura);
         }
 
         Plataforma::~Plataforma() {
