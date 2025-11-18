@@ -10,7 +10,7 @@ namespace Entidade {
 
             Cachorro::Cachorro(float x, float y) :
             ataque(1, 0.8f),
-            Inimigo(0, 150.0f, {200.0f, 300.0f}, x, y, 8),
+            Inimigo(0, 150.0f, {200.0f, 200.0f}, x, y-100, 8),
             raioPercepcaoX(300.0f),
             raioAtaque(230.0f),
             velocidade(150.0f),
@@ -50,7 +50,7 @@ namespace Entidade {
             }
 
             void Cachorro::patrulhar() {
-                if (std::rand() % 150 == 0) {
+                if (std::rand() % 100 < 51) {
                     andar(!direita);
                 }
             }
