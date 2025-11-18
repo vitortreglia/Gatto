@@ -10,11 +10,12 @@ namespace Entidade {
 
             Cachorro::Cachorro(float x, float y) :
             ataque(1, 0.8f),
-            Inimigo(0, 150.0f, {200.0f, 200.0f}, x, y-100, 8),
+            Inimigo(0, 150.0f, {200.0f, 180.0f}, x, y-100, 4),
             raioPercepcaoX(300.0f),
             raioAtaque(230.0f),
             velocidade(150.0f),
-            pProjetil(nullptr)
+            pProjetil(nullptr),
+            tempoPatrulha(0)
                 {
                 corpo.setFillColor(sf::Color(139, 69, 19));
                 vMax.x = velocidade;
@@ -50,7 +51,9 @@ namespace Entidade {
             }
 
             void Cachorro::patrulhar() {
-                if (std::rand() % 100 < 51) {
+                tempoPatrulha += tempoFrame;
+                if (tempoPatrulha > 2.0f) {
+                    tempoPatrulha = 0.0f;
                     andar(!direita);
                 }
             }
@@ -64,10 +67,10 @@ namespace Entidade {
 
                 andar(dx > 0.0f);
 
-                if (posJog.y + 40.0f < pos.y && noChao) {
-                    deslocamento.y = -30.0f;
-                    estaNoChao(false);
-                }
+                //if (posJog.y + 40.0f < pos.y && noChao) {
+                //    deslocamento.y = -30.0f;
+                //    estaNoChao(false);
+                //}
             }
 
             void Cachorro::setProjetil(Itens::Projetil *pProj) {
@@ -180,7 +183,7 @@ namespace Entidade {
                     distanciaY = deltaY;
                 }
 
-                if (distanciaX <= raioPercepcaoX) {
+                if (distanciaX <= raioPercepcaoX && distanciaY <= 100) {
 
                     if (deltaX > 10.0f) {
                         andar(true);
@@ -191,10 +194,10 @@ namespace Entidade {
                             parar();
                     }
 
-                    if (posJogador.y + 40.0f < posCachorro.y && noChao) {
-                        deslocamento.y = -30.0f;
-                        estaNoChao(false);
-                    }
+                    //if (posJogador.y + 40.0f < posCachorro.y && noChao) {
+                    //    deslocamento.y = -30.0f;
+                    //    estaNoChao(false);
+                    //}
 
                     if (distanciaX <= raioAtaque && distanciaY <= 200.0f) {
                     atirarOsso();

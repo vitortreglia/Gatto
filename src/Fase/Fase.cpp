@@ -6,7 +6,7 @@
 #include "Entidade/Obstaculo/PlataformaMovel.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
-#include <time.h>
+#include <ctime>
 
 namespace Fase {
     Fase::Fase(int nFase):

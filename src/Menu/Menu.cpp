@@ -2,7 +2,8 @@
 
 namespace Menu {
     Menu::Menu():
-    Ente(&fundo)
+    Ente(&fundo),
+    selecao(0)
     {
         //fundo.setFillColor(sf::Color::White);
         fundo.setSize({1280, 720});
@@ -29,5 +30,26 @@ namespace Menu {
         }
     }
 
+    void Menu::proximo() {
+        botoes[selecao]->tirarDestaque();
+        if (selecao < botoes.size() - 1)
+            selecao++;
+        else
+            selecao = 0;
+        botoes[selecao]->destacar();
+    }
+
+    void Menu::anterior() {
+        botoes[selecao]->tirarDestaque();
+        if (selecao > 0)
+            selecao--;
+        else
+            selecao = botoes.size() - 1;
+        botoes[selecao]->destacar();
+    }
+
+    int Menu::getSelecao() {
+        return selecao;
+    }
 
 }

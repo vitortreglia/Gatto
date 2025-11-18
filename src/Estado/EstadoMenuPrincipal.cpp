@@ -30,12 +30,17 @@ namespace Estados {
     void EstadoMenuPrincipal::tratarEventos() {
         set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
         set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
-
-        if (teclasSoltas.count(sf::Keyboard::Enter)) {
+        if (teclasSoltas.count(sf::Keyboard::W)) {
+            pMenu->anterior();
+        } else if (teclasSoltas.count(sf::Keyboard::S)) {
+            pMenu->proximo();
+        } else if (teclasSoltas.count(sf::Keyboard::Enter)) {
             int args[] = {1, 1, 1};
-            sair(args);
-        } else if (teclasSoltas.count(sf::Keyboard::Num2)) {
-            int args[] = {2, 1, 1};
+            if (pMenu->getSelecao() == 0) {
+                args[0] = 1;
+            } else {
+                args[0] = 2;
+            }
             sair(args);
         }
     }

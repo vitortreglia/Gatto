@@ -17,6 +17,7 @@ namespace Entidade {
                     float velocidade;
                     float fatorFuria;
                     Itens::Projetil* pProjetil;
+                    float tempoPatrulha;
 
                 public:
                     Cachorro(float x, float y);

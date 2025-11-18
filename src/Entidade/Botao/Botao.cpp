@@ -8,6 +8,7 @@ namespace Entidade {
         textoBotao.setFonte("Data/Fontes/KirangHaerang-Regular.ttf");
         textoBotao.setCor(242, 237, 203, 255);
         //setTextura(&textura);
+        corpo.setFillColor({63, 61, 61, 255});
     }
 
     Botao::~Botao() {
@@ -19,12 +20,20 @@ namespace Entidade {
         sf::FloatRect b = textoBotao.getDimensoesTexto();
         float x = getPosicao().x + (getTamanho().x / 2) - (b.width / 2);
         float y = getPosicao().y + (getTamanho().y / 2) - (b.height);
-        cout << x << y << endl;
         textoBotao.setPosicao(x, y);
     }
 
     void Botao::setTamanho(sf::Vector2f tam) {
         Entidade::setTamanho(tam);
+    }
+
+    void Botao::destacar() {
+        corpo.setOutlineColor(sf::Color::White);
+        corpo.setOutlineThickness(5);
+    }
+
+    void Botao::tirarDestaque() {
+        corpo.setOutlineThickness(0);
     }
 
     void Botao::executar() {

@@ -5,16 +5,20 @@
 
 namespace Menu {
     class Menu : public Ente{
-    private:
+    protected:
         sf::RectangleShape fundo;
         std::vector<Entidade::Botao*> botoes;
         std::vector<Texto*> textos;
+        int selecao;
     public:
         Menu();
         ~Menu();
         void incluirBotao(Entidade::Botao* pB);
         void incluirTexto(Texto* pT);
         void executar();
+        void proximo();
+        void anterior();
+        int getSelecao();
     };
 }
 #endif //MENU_H

@@ -39,12 +39,18 @@ namespace Estados {
         set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
         set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
         int arg;
-        if (teclasSoltas.count(sf::Keyboard::P)) {
-            arg = 1;
-            sair(&arg);
-        } else if (teclasSoltas.count(sf::Keyboard::Q)) {
-            arg = 2;
-            sair(&arg);
+        if (teclasSoltas.count(sf::Keyboard::W)) {
+            pMenuPausa->anterior();
+        } else if (teclasSoltas.count(sf::Keyboard::S)) {
+            pMenuPausa->proximo();
+        } else if (teclasSoltas.count(sf::Keyboard::Enter)) {
+            int args;
+            if (pMenuPausa->getSelecao() == 0) {
+                args = 1;
+            } else {
+                args = 2;
+            }
+            sair(&args);
         }
     }
 

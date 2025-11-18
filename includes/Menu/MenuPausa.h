@@ -5,6 +5,8 @@
 
 namespace Menu {
     class MenuPausa: public Menu {
+    private:
+        Texto titulo;
     public:
         MenuPausa();
         ~MenuPausa();

@@ -185,7 +185,6 @@ namespace Entidade {
                 vencedor = true;
             }
             interface.executar();
-            //cout << deslocamento.x << endl;
         }
 
         void Jogador::tratarEventos() {
