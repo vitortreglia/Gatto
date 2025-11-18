@@ -12,7 +12,9 @@ namespace Gerenciador {
     cameraX(TELA_X/2),
     cameraY(TELA_Y/2),
     tempo(0.0f),
-    multiplayer(false)
+    multiplayer(false),
+    background1P(640, 360, 1),
+    background2P(480,540, 1.2)
     {
         if (window == nullptr) {
             cout << "Nao foi possivel criar a janela grafica" << endl;
@@ -50,10 +52,14 @@ namespace Gerenciador {
         return window;
     }
 
-    void GerenciadorGrafico::setFundo(Animacao *fundo) {
-        fundo->getTextura()->setSmooth(true);
-        this->fundo.setTexture(*fundo->getTextura());
-        this->fundo.setScale(1.1f, 1.1f);
+    void GerenciadorGrafico::setFundo(string fundo, string meio, string frente) {
+        background1P.setTexturas(fundo, meio, frente);
+        background2P.setTexturas(fundo, meio, frente);
+    }
+
+    void GerenciadorGrafico::setMovimentoFundo(float fundo, float meio, float frente) {
+        background1P.setMovimento(fundo, meio, frente);
+        background2P.setMovimento(fundo, meio, frente);
     }
 
     void GerenciadorGrafico::desenharEnte(sf::RectangleShape* corpo) {
@@ -99,7 +105,9 @@ namespace Gerenciador {
         uiBuffer.clear(sf::Color::Transparent);
         window->clear();
         window->setView(camera);
-        window->draw(fundo);
+        window->draw(*background1P.getFundo());
+        window->draw(*background1P.getMeio());
+
     }
 
     float GerenciadorGrafico::getTempo() {
@@ -131,9 +139,11 @@ namespace Gerenciador {
                     viewP1Y = limitesCamera.height - TELA_Y / 2;
                 }
                 viewP1.setCenter(viewP1X, viewP1Y);
-                fundo.setPosition(viewP1X - TELA_X / 2, viewP1Y - TELA_Y);
+                //fundo.setPosition(viewP1X - TELA_X / 2, viewP1Y - TELA_Y);
+                background2P.deslocar(viewP1X, viewP1Y);
                 window->setView(viewP1);
-                window->draw(fundo);
+                window->draw(*background2P.getFundo());
+                window->draw(*background2P.getMeio());
 
             } else {
                 viewP2X += 5 * (coord.x - viewP2X) * tempo;
@@ -153,9 +163,12 @@ namespace Gerenciador {
                     viewP2Y = limitesCamera.height - TELA_Y / 2;
                 }
                 viewP2.setCenter(viewP2X, viewP2Y);
-                fundo.setPosition(viewP2X - TELA_X / 2, viewP2Y - TELA_Y);
+                //.setPosition(viewP2X - TELA_X / 2, viewP2Y - TELA_Y);
+                background2P.deslocar(viewP2X, viewP2Y);
                 window->setView(viewP2);
-                window->draw(fundo);
+                //window->draw(fundo);
+                window->draw(*background2P.getFundo());
+                window->draw(*background2P.getMeio());
 
             }
         } else {
@@ -176,9 +189,9 @@ namespace Gerenciador {
                 cameraY = limitesCamera.height - TELA_Y / 2;
             }
             camera.setCenter(cameraX, cameraY);
-            fundo.setPosition(cameraX - TELA_X / 2, cameraY - 100 - TELA_Y / 2);
+            background1P.deslocar(cameraX, cameraY);
+            //fundo.setPosition(cameraX - TELA_X / 2, cameraY - 100 - TELA_Y / 2);
             window->setView(camera);
-
         }
 
 

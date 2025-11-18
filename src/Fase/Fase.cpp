@@ -9,23 +9,19 @@
 #include <time.h>
 
 namespace Fase {
-    Fase::Fase(string caminhoTextura, int nFase):
+    Fase::Fase(int nFase):
     Ente(&fundo),
     pGColisoes(nullptr),
     limitesFase({0,0,0,0}),
-    fundo({1280, 720}),
     numFase(nFase),
     maxInimGaivota(10),
     maxPMovel(15),
     numInimGaivota(0),
     numPMovel(0)
     {
-        texturaFundo.setTextura(caminhoTextura);
         pGColisoes = new Gerenciador::GerenciadorColisoes(&listaEnt);
-        pGGrafico->setFundo(&texturaFundo);
         pGGrafico->resetaRelogio();
         semearRand();
-        //criarFase();
     }
 
     Fase::~Fase() {
@@ -41,7 +37,7 @@ namespace Fase {
     }
 
     void Fase::criarPlataforma(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Plataforma(x, y+50);
+        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Plataforma(x, y+50, numFase);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));

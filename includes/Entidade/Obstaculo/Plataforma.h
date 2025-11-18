@@ -6,7 +6,7 @@ namespace Entidade {
     namespace Obstaculo {
         class Plataforma : public Obstaculo {
         public:
-            Plataforma(float x, float y);
+            Plataforma(float x, float y, int fase);
             ~Plataforma();
             string imgFaseJardim;
             string imgFaseCidade;

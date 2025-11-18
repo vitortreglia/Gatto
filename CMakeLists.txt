@@ -30,7 +30,9 @@ file(GLOB_RECURSE SOURCES
 )
 
 # --- Cria o executável ---
-add_executable(Gatto ${SOURCES})
+add_executable(Gatto ${SOURCES}
+        src/Animacao/Parallax.cpp
+        includes/Animacao/Parallax.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE

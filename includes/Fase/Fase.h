@@ -11,7 +11,6 @@ namespace Fase {
         Lista::ListaEntidades listaEnt;
         Gerenciador::GerenciadorColisoes* pGColisoes;
         sf::RectangleShape fundo;
-        Animacao texturaFundo;
         sf::FloatRect limitesFase;
         const int numFase;
         const int maxPMovel;
@@ -19,7 +18,7 @@ namespace Fase {
         int numInimGaivota;
         int numPMovel;
     public:
-        Fase(string caminhoTextura, int nFase);
+        Fase(int nFase);
         ~Fase();
         virtual void executar();
         sf::FloatRect getLimitesFase();

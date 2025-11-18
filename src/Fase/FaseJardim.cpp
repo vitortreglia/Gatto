@@ -7,7 +7,7 @@
 
 namespace Fase {
     FaseJardim::FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2):
-    Fase("Data/Imagens/fundoJardim.jpg", 1),
+    Fase(1),
     maxInimRato(6),
     maxGiraGira(12),
     numInimRato(0),
@@ -20,6 +20,7 @@ namespace Fase {
             pJog2->setPosicao({2400, 5800});
             listaEnt.incluir(pJog2);
         }
+        pGGrafico->setFundo("Data/Imagens/fundoFaseJardim.png", "Data/Imagens/meioFaseJardim.png", "");
         Entidade::Personagem::Inimigo::Gaivota::setJogadores(pJog1, pJog2);
         pGColisoes->incluirJogadores(pJog1, pJog2);
         criarCenario("Data/Fases/FaseJardim.dat");

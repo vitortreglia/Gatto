@@ -21,8 +21,6 @@ namespace Entidade {
             Texto interface;
             bool imunidadeDano;
             bool vencedor;
-            string imgGato1;
-            string imgGato2;
         public:
             Jogador(int nJog);
             ~Jogador();
