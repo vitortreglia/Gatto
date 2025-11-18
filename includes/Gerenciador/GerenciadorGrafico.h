@@ -7,6 +7,7 @@
 #include <cmath>
 
 #include "Animacao/Animacao.h"
+#include "Animacao/Parallax.h"
 
 #define TELA_X 1280.0f
 #define TELA_Y 720.0f
@@ -21,7 +22,8 @@ namespace Gerenciador {
         sf::View viewP1;
         sf::View viewP2;
         sf::RenderTexture uiBuffer;
-        sf::Sprite fundo;
+        Parallax background1P;
+        Parallax background2P;
         sf::Sprite uiSprite;
         sf::Clock relogio;
         float tempo;
@@ -38,7 +40,8 @@ namespace Gerenciador {
         const bool verificaJanelaAberta();
         static GerenciadorGrafico* getGerenciadorGrafico();
         sf::RenderWindow* getWindow() const;
-        void setFundo(Animacao* fundo);
+        void setFundo(string fundo, string meio, string frente);
+        void setMovimentoFundo(float fundo, float meio, float frente);
         void desenharEnte(sf::RectangleShape* corpo);
         void desenharUI(sf::RectangleShape* corpo);
         void desenharUI(sf::Text* texto);

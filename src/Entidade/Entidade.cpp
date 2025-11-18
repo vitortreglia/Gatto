@@ -13,7 +13,8 @@ namespace Entidade {
     ativo(true)
     {
         setPosicao(sf::Vector2f(x, y));
-        corpo.setFillColor(sf::Color::Blue);
+        //corpo.setFillColor(sf::Color::Blue);
+        textura.setCorpo(&corpo);
     }
 
     Entidade::~Entidade() {
@@ -60,15 +61,6 @@ namespace Entidade {
 
     void Entidade::getTempoFrame() {
         tempoFrame = pGGrafico->getTempo();
-    }
-
-    void Entidade::setTextura(Animacao *textura) {
-        corpo.setTexture(textura->getTextura());
-        corpo.setFillColor(sf::Color::White);
-    }
-
-    void Entidade::atualizarAnimacao(sf::IntRect rect) {
-        corpo.setTextureRect(rect);
     }
 
 }

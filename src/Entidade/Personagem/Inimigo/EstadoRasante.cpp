@@ -11,11 +11,6 @@ namespace Entidade {
             EstadoRasante::EstadoRasante(Gaivota* pGav, Jogador* pJog): EstadoGaivota(pGav) {
                 vetorAtaque = pJog->getPosicao() - pGaivota->getPosicao();
                 tempo = 0;
-                if (vetorAtaque.x > 0) {
-                    pGaivota->atualizarAnimacao({80, 0, -80, 50});
-                } else {
-                    pGaivota->atualizarAnimacao({0, 0, 80, 50});
-                }
             }
             
             EstadoRasante::~EstadoRasante() {
@@ -30,11 +25,6 @@ namespace Entidade {
                         pGaivota->atualizarPos({pGaivota->getPosicao().x + vetorAtaque.x * dt, pGaivota->getPosicao().y +vetorAtaque.y * dt});
 
                     }else {
-                        if (vetorAtaque.x < 0) {
-                            pGaivota->atualizarAnimacao({80, 0, -80, 50});
-                        } else {
-                            pGaivota->atualizarAnimacao({0, 0, 80, 50});
-                        }
                         pGaivota->atualizarPos({pGaivota->getPosicao().x - vetorAtaque.x * dt, pGaivota->getPosicao().y - vetorAtaque.y * dt});
                     }
 

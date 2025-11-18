@@ -19,7 +19,8 @@ namespace Fase {
                    Entidade::Personagem::Inimigo::Cachorro* pCachorro);
         void criarChefao(float x, float y);
         void criarRoseira(float x, float y, bool danoso);
-        void criarFaseCidade();
+        void criarInimigos(multimap<char, sf::Vector2f> inimigos);
+        void criarObstaculos(multimap<char, sf::Vector2f> obstaculos);
     };
 }
 

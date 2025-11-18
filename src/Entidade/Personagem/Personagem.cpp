@@ -76,6 +76,7 @@ namespace Entidade {
 
         void Personagem::tomarDano(int dano) {
             if (!sofrendoDano) {
+                textura.setAnimacao("dano");
                 sofrendoDano = true;
                 numVidas -= dano;
                 cout << "dano em " << (int)ID << endl;

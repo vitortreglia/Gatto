@@ -5,8 +5,8 @@ namespace Entidade {
         Roseira::Roseira(bool dano, float x, float y):
         Obstaculo(dano, {200, 100}, x, y),
         tempo(0.0f) {
-            textura.setTextura("Data/Imagens/roseira.png");
-            setTextura(&textura);
+            textura.inserirTextura("base", "Data/Imagens/roseira.png");
+            textura.setAnimacao("base");
             atualizarTextura();
         }
 
@@ -14,9 +14,9 @@ namespace Entidade {
 
         void Roseira::atualizarTextura() {
             if (danoso)
-                atualizarAnimacao({200, 0, 200, 100});
+                corpo.setTextureRect({200, 0, 200, 100});
             else
-                atualizarAnimacao({0, 0, 200, 100});
+                corpo.setTextureRect({0, 0, 200, 100});
         }
 
         void Roseira::obstaculizar(Personagem::Jogador* pJog) {

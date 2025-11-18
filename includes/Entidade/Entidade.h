@@ -23,8 +23,6 @@ namespace Entidade {
         const sf::Vector2f getTamanho() const;
         vector<sf::Vector2f> getCoordenadas();
         static void getTempoFrame();
-        void setTextura(Animacao* textura);
-        void atualizarAnimacao(sf::IntRect rect);
         virtual void executar() = 0;
     };
 }

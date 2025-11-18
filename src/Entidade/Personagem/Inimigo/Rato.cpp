@@ -10,8 +10,8 @@ namespace Entidade {
             tempoAndar(0.0f),
             imgRato("Data/Imagens/Rato.png")
             {
-                textura.setTextura(imgRato);
-                setTextura(&textura);
+                textura.inserirTextura("andando", "Data/Imagens/Rato/andando.png");
+                textura.inserirTextura("dano", "Data/Imagens/Rato/dano.png");
                 andar(getDireita());
             }
 
@@ -24,6 +24,7 @@ namespace Entidade {
 
             void Rato::tomarDano(int dano) {
                 if (!sofrendoDano) {
+                    textura.setAnimacao("dano");
                     sofrendoDano = true;
                     deslocamento.y = -10.0f;
                     deslocamento.x = 0.0f;
@@ -33,12 +34,8 @@ namespace Entidade {
             }
 
             void Rato::mover() {
-                if (getDireita()) {
-                    atualizarAnimacao({80, 0, -80, 80});
-                } else {
-                    atualizarAnimacao({0, 0, 80, 80});
-                }
                 if (!sofrendoDano) {
+                    textura.setAnimacao("andando");
                     if (tempoAndar < 2.0f && andando) {
                         tempoAndar += tempoFrame;
                     } else {
@@ -50,6 +47,7 @@ namespace Entidade {
             }
 
             void Rato::executar() {
+                textura.animar(getDireita());
                 verificaVidas();
                 mover();
             }

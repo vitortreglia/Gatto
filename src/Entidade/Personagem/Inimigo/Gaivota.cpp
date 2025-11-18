@@ -20,8 +20,9 @@ namespace Entidade {
             estado(nullptr),
             imgGaivota("Data/Imagens/Gaivota.png")
             {
-                textura.setTextura(imgGaivota);
-                setTextura(&textura);
+                textura.inserirTextura("voando", "Data/Imagens/Gaivota/voando.png");
+                textura.inserirTextura("rasante", "Data/Imagens/Gaivota/rasante.png");
+                textura.inserirTextura("dano", "Data/Imagens/Gaivota/dano.png");
                 andar(true);
                 setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
                 setVoador(true);
@@ -31,26 +32,22 @@ namespace Entidade {
                 raioAtaque       = 400.0f;
                 velocidadeRasante = 220.0f;
                 velocidadeAtaque  = 380.0f;
-
+                textura.setAnimacao("voando");
             }
 
             Gaivota::~Gaivota(){}
 
             void Gaivota::danificar(Jogador *pJ) {
-                if (!pJ->getImunidadeDano())
+                if (!pJ->getImunidadeDano() && !sofrendoDano) {
                     nivelMaldade++;
-                if (nivelMaldade > 1 && !possuiPeixe && ataque.getAtacando()) {
-                    possuiPeixe = pJ->perderPeixe();
+                    if (nivelMaldade > 1 && !possuiPeixe && ataque.getAtacando()) {
+                        possuiPeixe = pJ->perderPeixe();
+                    }
+                    pJ->tomarDano(1);
                 }
-                pJ->tomarDano(1);
             }
 
             void Gaivota::mover() {
-                if (getDireita()) {
-                    atualizarAnimacao({80, 0, -80, 50});
-                } else {
-                    atualizarAnimacao({0, 0, 80, 50});
-                }
                 deslocamento.y = std::sin(tempo * frequencia * M_PI) * amplitude;
                 atualizarPos();
                 tempo += tempoFrame;
@@ -62,7 +59,7 @@ namespace Entidade {
             }
 
             Jogador* Gaivota::patrulhar(float dt) {
-
+                textura.setAnimacao("voando");
                 mover();
 
                 const sf::Vector2f& posJog = pJog1->getPosicao();
@@ -73,6 +70,7 @@ namespace Entidade {
                 float ady = std::fabs(dy);
 
                 if (adx < raioPercepcaoX && ady < raioPercepcaoY) {
+                    textura.setAnimacao("rasante");
                     return pJog1;
                 }
 
@@ -85,13 +83,13 @@ namespace Entidade {
                     ady = std::fabs(dy);
 
                     if (adx < raioPercepcaoX && ady < raioPercepcaoY) {
+                        textura.setAnimacao("rasante");
                         return pJog2;
                     }
                 }
 
                 return nullptr;
             }
-
 
             void Gaivota::setEstado(EstadoGaivota *pEstado) {
                 if (pEstado) {
@@ -100,6 +98,7 @@ namespace Entidade {
             }
 
             void Gaivota::executar() {
+                textura.animar(getDireita());
                 verificaVidas();
                 estado->executar(tempoFrame);
             }
