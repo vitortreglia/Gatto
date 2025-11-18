@@ -1,13 +1,13 @@
 #include "Entidade/Botao/Botao.h"
 namespace Entidade {
     Botao::Botao(string rotulo):
-    Entidade({500.0f, 100.0f}, 390, 100, IDs::Ente_IDs::Botao),
+    Entidade({500.0f, 100.0f}, 390, 100),
     textoBotao(rotulo, 42, 600.0f, 140.0f)
     {
-        textura.setTextura("Data/Imagens/botao.png");
+        //textura.setTextura("Data/Imagens/botao.png");
         textoBotao.setFonte("Data/Fontes/KirangHaerang-Regular.ttf");
         textoBotao.setCor(242, 237, 203, 255);
-        setTextura(&textura);
+        //setTextura(&textura);
     }
 
     Botao::~Botao() {
@@ -27,12 +27,8 @@ namespace Entidade {
         Entidade::setTamanho(tam);
     }
 
-    void Botao::desenhar() {
-        pGGrafico->desenharUI(&corpo);
-    }
-
     void Botao::executar() {
-        desenhar();
+        pGGrafico->desenharUI(&corpo);
         textoBotao.executar();
     }
 }

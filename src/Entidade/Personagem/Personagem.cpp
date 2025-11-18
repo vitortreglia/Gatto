@@ -2,8 +2,8 @@
 
 namespace Entidade {
     namespace Personagem {
-        Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas, IDs::Ente_IDs id):
-        Entidade(tam, px, py, id),
+        Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas):
+        Entidade(tam, px, py),
         vMax(sf::Vector2f(vel, 1000.0f)),
         gravidade(100.0f),
         direita(true),
@@ -15,7 +15,7 @@ namespace Entidade {
         deslocamento({0.0f, 0.0f}),
         voador(false)
         {
-            corpo.setFillColor(sf::Color::Red);
+
         }
 
         Personagem::~Personagem() {
@@ -35,7 +35,7 @@ namespace Entidade {
             return direita;
         }
 
-        sf::Vector2f Personagem::getDeslocamento() {
+        const sf::Vector2f Personagem::getDeslocamento() const {
             return deslocamento;
         }
 
@@ -76,6 +76,7 @@ namespace Entidade {
 
         void Personagem::tomarDano(int dano) {
             if (!sofrendoDano) {
+                textura.setAnimacao("dano");
                 sofrendoDano = true;
                 numVidas -= dano;
                 cout << "dano em " << (int)ID << endl;

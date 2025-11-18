@@ -2,9 +2,9 @@
 
 namespace Entidade {
     namespace Obstaculo {
-        Obstaculo::Obstaculo(bool dano, sf::Vector2f tamanho, float x, float y, IDs::Ente_IDs id):
+        Obstaculo::Obstaculo(bool dano, sf::Vector2f tamanho, float x, float y):
         danoso(dano),
-        Entidade(tamanho, x, y, id) {
+        Entidade(tamanho, x, y) {
             //corpo.setRotation(15);
         }
 

@@ -12,7 +12,6 @@ namespace Entidade {
         ~Botao();
         void setPosicao(sf::Vector2f pos);
         void setTamanho(sf::Vector2f tam);
-        void desenhar();
         void executar();
     };
 }

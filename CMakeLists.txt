@@ -31,26 +31,8 @@ file(GLOB_RECURSE SOURCES
 
 # --- Cria o executável ---
 add_executable(Gatto ${SOURCES}
-        src/Estado/EstadoPausa.cpp
-        includes/Estado/EstadoPausa.h
-        src/Entidade/Botao/Botao.cpp
-        includes/Entidade/Botao/Botao.h
-        src/Menu/Menu.cpp
-        includes/Menu/Menu.h
-        src/Menu/MenuPausa.cpp
-        includes/Menu/MenuPausa.h
-        src/Observer/Subject.cpp
-        includes/Observer/Subject.h
-        src/Menu/MenuPrincipal.cpp
-        includes/Menu/MenuPrincipal.h
-        src/Estado/EstadoMenuPrincipal.cpp
-        includes/Estado/EstadoMenuPrincipal.h
-        src/Fase/FaseCidade.cpp
-        includes/Fase/FaseCidade.h
-        src/Animacao/Animacao.cpp
-        includes/Animacao/Animacao.h
-        src/Entidade/Obstaculo/Roseira.cpp
-        includes/Entidade/Obstaculo/Roseira.h)
+        src/Animacao/Parallax.cpp
+        includes/Animacao/Parallax.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE

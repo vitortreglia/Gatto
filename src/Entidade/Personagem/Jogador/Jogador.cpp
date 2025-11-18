@@ -6,7 +6,7 @@ namespace Entidade {
         Gerenciador::GerenciadorEvento* Jogador::pGEvento(nullptr);
 
         Jogador::Jogador(int nJog):
-        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7, nJog == 1 ? IDs::Ente_IDs::Jogador1 : IDs::Ente_IDs::Jogador2),
+        Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7),
         numJog(nJog),
         vencedor(false),
         ataque(1, 0.1f),
@@ -14,17 +14,25 @@ namespace Entidade {
         peixes(0),
         deslocAtaque(0.0f),
         interface("oiii", 30, 20, 50),
-        imunidadeDano(false),
-        imgGato1("Data/Imagens/Gato_01.png"),
-        imgGato2("Data/Imagens/Gato_02.png")
+        imunidadeDano(false)
         {
             if (numJog == 2) {
-                textura.setTextura(imgGato2);
+                textura.inserirTextura("parado", "Data/Imagens/Gato2/parado.png");
+                textura.inserirTextura("andando", "Data/Imagens/Gato2/andando.png");
+                textura.inserirTextura("pulando", "Data/Imagens/Gato2/pulando1.png");
+                textura.inserirTextura("caindo", "Data/Imagens/Gato2/pulando2.png");
+                textura.inserirTextura("dano", "Data/Imagens/Gato2/tomandoDano.png");
+                textura.inserirTextura("atacando", "Data/Imagens/Gato2/arranhando.png");
                 interface.setPosicao(1020, 50);
             } else {
-                textura.setTextura(imgGato1);
+                textura.inserirTextura("parado", "Data/Imagens/Gato1/parado.png");
+                textura.inserirTextura("andando", "Data/Imagens/Gato1/andando.png");
+                textura.inserirTextura("pulando", "Data/Imagens/Gato1/pulando1.png");
+                textura.inserirTextura("caindo", "Data/Imagens/Gato1/pulando2.png");
+                textura.inserirTextura("dano", "Data/Imagens/Gato1/tomandoDano.png");
+                textura.inserirTextura("atacando", "Data/Imagens/Gato1/arranhando.png");
             }
-            setTextura(&textura);
+            textura.setAnimacao("parado");
         }
 
         Jogador::~Jogador() {
@@ -53,6 +61,8 @@ namespace Entidade {
 
         void Jogador::pular(float multiplicador) {
             if (noChao) {
+                if (!sofrendoDano)
+                    textura.setAnimacao("pulando");
                 deslocamento.y = -30.0f * multiplicador;
                 estaNoChao(false);
             }
@@ -63,7 +73,7 @@ namespace Entidade {
             peixes++;
         }
 
-        bool Jogador::perderPeixe() {
+        const bool Jogador::perderPeixe() {
             if (peixes > 0) {
                 peixes--;
                 return true;
@@ -71,7 +81,7 @@ namespace Entidade {
             return false;
         }
 
-        bool Jogador::getImunidadeDano() {
+        const bool Jogador::getImunidadeDano() const {
             return imunidadeDano;
         }
 
@@ -114,6 +124,7 @@ namespace Entidade {
 
         void Jogador::tomarDano(int dano) {
             if (!imunidadeDano) {
+                textura.setAnimacao("dano");
                 sofrendoDano = true;
                 imunidadeDano = true;
                 numVidas -= dano;
@@ -127,6 +138,7 @@ namespace Entidade {
                 setAtivo(false);
                 pGGrafico->setMultiplayer(false);
             } else if (imunidadeDano) {
+                textura.setAnimacao("dano");
                 tempoDano += tempoFrame;
                 if (tempoDano > 0.5f) {
                     sofrendoDano = false;
@@ -141,11 +153,6 @@ namespace Entidade {
         }
 
         void Jogador::mover() {
-            if (getDireita()) {
-                atualizarAnimacao({100, 0, -100, 100});
-            } else {
-                atualizarAnimacao({0, 0, 100, 100});
-            }
             if (ataque.getAtacando()) {
                 if (getDireita()) {
                     deslocamento.x = 15.0;
@@ -164,6 +171,11 @@ namespace Entidade {
 
         void Jogador::executar() {
             verificaVidas();
+            if (noChao && !andando && !sofrendoDano && !ataque.getAtacando())
+                textura.setAnimacao("parado");
+            else if (deslocamento.y > 0 && !noChao)
+                textura.setAnimacao("caindo");
+            textura.animar(getDireita());
             pGGrafico->moveCamera(getPosicao(), numJog);
             mover();
             if (peixes < 3)
@@ -181,14 +193,17 @@ namespace Entidade {
             set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
             if (numJog == 1) {
                 if (teclasPressionadas.count(sf::Keyboard::A)) {
+                    textura.setAnimacao("andando");
                     andar(false);
                 } else if (teclasPressionadas.count(sf::Keyboard::D)) {
+                    textura.setAnimacao("andando");
                     andar(true);
                 } else {
                     parar();
                 }
                 if (teclasPressionadas.count(sf::Keyboard::W)) {
                     if (podePular) {
+                        textura.setAnimacao("pulando");
                         pular(1.0f);
                         podePular = false;
                     }
@@ -197,18 +212,22 @@ namespace Entidade {
                     liberaPulo();
                 }
                 if (teclasSoltas.count(sf::Keyboard::Space)) {
+                    textura.setAnimacao("atacando");
                     ataque.atacar();
                 }
             } else {
                 if (teclasPressionadas.count(sf::Keyboard::Left)) {
+                    textura.setAnimacao("andando");
                     andar(false);
                 } else if (teclasPressionadas.count(sf::Keyboard::Right)) {
+                    textura.setAnimacao("andando");
                     andar(true);
                 } else {
                     parar();
                 }
                 if (teclasPressionadas.count(sf::Keyboard::Up)) {
                     if (podePular) {
+                        textura.setAnimacao("pulando");
                         pular(1.0f);
                         podePular = false;
                     }
@@ -217,6 +236,7 @@ namespace Entidade {
                     liberaPulo();
                 }
                 if (teclasSoltas.count(sf::Keyboard::Down)) {
+                    textura.setAnimacao("atacando");
                     ataque.atacar();
                 }
             }

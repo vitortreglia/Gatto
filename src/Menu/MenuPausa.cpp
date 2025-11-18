@@ -1,8 +1,7 @@
 #include "Menu/MenuPausa.h"
 
 namespace Menu {
-    MenuPausa::MenuPausa():
-    Menu(IDs::Ente_IDs::MenuPausa)
+    MenuPausa::MenuPausa()
     {
         criarBotoesPausa();
     }

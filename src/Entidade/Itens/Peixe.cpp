@@ -5,10 +5,12 @@
 namespace Entidade {
     namespace Itens {
         Peixe::Peixe(float x, float y):
-        Entidade({50, 50}, x, y, IDs::Ente_IDs::ItemPeixe),
+        Entidade({50, 50}, x, y),
         movimento(60),
-        sentido(true)
-        {}
+        sentido(true) {
+            textura.inserirTextura("base", "Data/Imagens/peixe.png");
+            textura.setAnimacao("base");
+        }
 
         Peixe::~Peixe() {}
 
@@ -26,6 +28,7 @@ namespace Entidade {
         }
 
         void Peixe::executar() {
+            textura.animar(false);
             mover();
         }
 

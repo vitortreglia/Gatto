@@ -3,7 +3,7 @@
 namespace Entidade {
     namespace Itens {
         Projetil::Projetil() :
-        Entidade({20.0f, 20.0f}, 0, 0, IDs::Ente_IDs::Projetil),
+        Entidade({20.0f, 20.0f}, 0, 0),
         tempoLancamento(0.0f)
         {
             setAtivo(false);

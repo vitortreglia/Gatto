@@ -7,22 +7,23 @@
 
 namespace Fase {
     FaseJardim::FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2):
-    Fase(IDs::Ente_IDs::FaseJardim, "Data/Imagens/fundoJardim.jpg", 1),
-    maxInimRato(8),
-    maxGiraGira(8),
+    Fase(1),
+    maxInimRato(6),
+    maxGiraGira(12),
     numInimRato(0),
     numGiraGira(0)
     {
-        pJog1->setPosicao({1600, 4600});
+        pJog1->setPosicao({1700, 5800});
         listaEnt.incluir(pJog1);
         if (pJog2) {
             pGGrafico->setMultiplayer(true);
-            pJog2->setPosicao({2000, 4600});
+            pJog2->setPosicao({2400, 5800});
             listaEnt.incluir(pJog2);
         }
+        pGGrafico->setFundo("Data/Imagens/fundoFaseJardim.png", "Data/Imagens/meioFaseJardim.png", "");
         Entidade::Personagem::Inimigo::Gaivota::setJogadores(pJog1, pJog2);
         pGColisoes->incluirJogadores(pJog1, pJog2);
-        criarFaseJardim();
+        criarCenario("Data/Fases/FaseJardim.dat");
     }
 
     FaseJardim::~FaseJardim() {
@@ -30,18 +31,21 @@ namespace Fase {
     }
 
     void FaseJardim::criarGiraGira(float x, float y) {
-        if ((rand()%10 < 9 || numGiraGira < 3) && numGiraGira < maxGiraGira) {
+        if ((rand()%10 <= 10 || numGiraGira < 3) && numGiraGira < maxGiraGira) {
             Entidade::Entidade* objEntidade = new Entidade::Obstaculo::GiraGira(x, y);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);
                 pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
                 numGiraGira++;
             }
+        } else {
+            criarPlataforma(x, y);
+            criarPlataforma(x + 100, y);
         }
     }
 
     void FaseJardim::criarInimigoRato(float x, float y) {
-        if ((rand()%10 < 9 || numInimRato < 3) && numInimRato < maxInimRato) {
+        if ((rand()%10 <= 10 || numInimRato < 3) && numInimRato < maxInimRato) {
             Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);
@@ -51,53 +55,40 @@ namespace Fase {
         }
     }
 
-    void FaseJardim::criarFaseJardim() {
-        ifstream arquivo("Data/Fases/FaseJardim.dat");
-        int espaco = 0;
-        float x = 0.0f;
-        float y = 100.0f;
-        if (!arquivo.is_open()) {
-            cout << "Erro ao abrir o arquivo!\n";
+    void FaseJardim::criarInimigos(multimap<char, sf::Vector2f> inimigos) {
+        pair<multimap<char, sf::Vector2f>::const_iterator, multimap<char, sf::Vector2f>::const_iterator> grupo =
+            inimigos.equal_range('r');
+        for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
+            criarInimigoRato((*it).second.x, (*it).second.y);
         }
-        std::string linha;
-        while (getline(arquivo, linha)) {
-            for (int i = 0; i < linha.size(); i++) {
-                if (linha[i] >= '0' && linha[i] <= '9') {
-                    espaco = linha[i] - '0';
-                } else if (linha[i] >= 'A' && linha[i] <= 'F') {
-                    espaco = 10 + (linha[i] - 'A');
-                } else if (linha[i] == 'p') {
-                    criarPlataforma(x, y);
-                    x += 100.0f;
-                } else if (linha[i] == 'm') {
-                    criarPlataformaMovel(x, y, false);
-                    x += 200.0f;
-                } else if (linha[i] == 'n') {
-                    criarPlataformaMovel(x, y, true);
-                    x += 200.0f;
-                } else if (linha[i] == 'g') {
-                    criarGiraGira(x, y);
-                    x += 200.0f;
-                } else if (linha[i] == 'v') {
-                    criarInimigoGaivota(x, y);
-                    x += 100.0f;
-                } else if (linha[i] == 'f') {
-                    criarPeixe(x, y);
-                    x += 100.0f;
-                } else if (linha[i] == 'r') {
-                    criarInimigoRato(x, y);
-                    x += 100.0f;
-                }
-                x += espaco * 100.0f;
-                espaco = 0;
-            }
-            if (x > limitesFase.width)
-                limitesFase.width = x;
-            y += 100.0f;
-            x = 0.0f;
+
+        grupo = inimigos.equal_range('v');
+        for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
+            criarInimigoGaivota((*it).second.x, (*it).second.y);
         }
-        limitesFase.height = y;
-        arquivo.close();
-        pGGrafico->setLimitesCamera(limitesFase);
     }
+
+    void FaseJardim::criarObstaculos(multimap<char, sf::Vector2f> obstaculos) {
+        pair<multimap<char, sf::Vector2f>::const_iterator, multimap<char, sf::Vector2f>::const_iterator> grupo =
+            obstaculos.equal_range('p');
+        for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
+            criarPlataforma((*it).second.x, (*it).second.y);
+        }
+
+        grupo = obstaculos.equal_range('m');
+        for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
+            criarPlataformaMovel((*it).second.x, (*it).second.y, false);
+        }
+
+        grupo = obstaculos.equal_range('n');
+        for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
+            criarPlataformaMovel((*it).second.x, (*it).second.y, true);
+        }
+
+        grupo = obstaculos.equal_range('g');
+        for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
+            criarGiraGira((*it).second.x, (*it).second.y);
+        }
+    }
+
 }

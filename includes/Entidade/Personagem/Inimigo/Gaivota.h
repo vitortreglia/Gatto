@@ -35,8 +35,6 @@ namespace Entidade {
                 sf::Vector2f alvoAtaque;
                 bool possuiPeixe;
                 string imgGaivota;
-                //void fazerRasante(float dt, const sf::Vector2f& posJog);
-                //void virarPara(const sf::Vector2f& posJog);
 
             public:
                 Gaivota(float x, float y);

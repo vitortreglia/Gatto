@@ -3,7 +3,7 @@
 namespace Entidade {
     namespace Obstaculo {
         GiraGira::GiraGira(float x, float y):
-        Obstaculo(false, sf::Vector2f(200, 50), x, y, IDs::Ente_IDs::PlataformaGiratoria),
+        Obstaculo(false, sf::Vector2f(200, 50), x, y),
         velocidadeGiro(2),
         angulo(0.0f),
         tempoMax(3.0f),
@@ -16,7 +16,7 @@ namespace Entidade {
         GiraGira::~GiraGira() {}
 
         void GiraGira::girar() {
-            float px = posInicial.x + (tam.x / 2) * -cos(angulo * (M_PI / 180)) - (tam.y / 2) * -sin(angulo * (M_PI / 180));
+            float px = posInicial.x + tam.x / 2 + (tam.x / 2) * -cos(angulo * (M_PI / 180)) - (tam.y / 2) * -sin(angulo * (M_PI / 180));
             float py = posInicial.y + (tam.x / 2) * -sin(angulo * (M_PI / 180)) + (tam.y / 2) * -cos(angulo * (M_PI / 180));
             setPosicao(sf::Vector2f(px, py));
             corpo.setRotation(angulo);

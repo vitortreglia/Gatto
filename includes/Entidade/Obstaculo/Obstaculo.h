@@ -9,7 +9,7 @@
         protected:
             bool danoso;
         public:
-            Obstaculo(bool dano, sf::Vector2f tamanho, float x, float y, IDs::Ente_IDs id);
+            Obstaculo(bool dano, sf::Vector2f tamanho, float x, float y);
             ~Obstaculo();
             virtual void obstaculizar(Personagem::Jogador* pJog) = 0;
             virtual void executar() = 0;
