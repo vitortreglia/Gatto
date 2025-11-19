@@ -18,23 +18,31 @@ namespace Gerenciador {
     }
 
     void GerenciadorColisoes::incluirJogadores(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2) {
-        pJogador1 = pJog1;
+        if (pJog1)
+            pJogador1 = pJog1;
         if (pJog2)
             pJogador2 = pJog2;
     }
 
     void GerenciadorColisoes::incluirInimigo(Entidade::Personagem::Inimigo::Inimigo *pIni) {
-        LIs.push_back(pIni);
+        if (pIni)
+            LIs.push_back(pIni);
     }
 
     void GerenciadorColisoes::incluirPeixe(Entidade::Itens::Peixe *pPeixe) {
-        LPxs.push_back(pPeixe);
+        if (pPeixe)
+            LPxs.push_back(pPeixe);
     }
 
     void GerenciadorColisoes::incluirProjetil(Entidade::Itens::Projetil *pProjetil) {
-        LPs.insert(pProjetil);
+        if (pProjetil)
+            LPs.insert(pProjetil);
     }
 
+    void GerenciadorColisoes::incluirChao(Entidade::Chao *pChao) {
+        if (pChao)
+            LCs.push_back(pChao);
+    }
 
     sf::Vector2f GerenciadorColisoes::calculaNormal(const sf::Vector2f& vertice1, const sf::Vector2f& vertice2) {
         sf::Vector2f normal;
@@ -160,6 +168,23 @@ namespace Gerenciador {
                 }
             }
         }
+
+        for (list<Entidade::Chao*>::const_iterator it = LCs.begin(); it != LCs.end(); it++) {
+            colisao = verificarColisao(pJogador1, *it);
+            if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                corrigirColisao(pJogador1, colisao);
+                if (colisao.y < 0.0f)
+                    (*it)->obstaculizar(pJogador1);
+            }
+            if (pJogador2) {
+                colisao = verificarColisao(pJogador2, *it);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    corrigirColisao(pJogador2, colisao);
+                    if (colisao.y < 0.0f)
+                        (*it)->obstaculizar(pJogador2);
+                }
+            }
+        }
     }
 
     void GerenciadorColisoes::tratarColisoesJogsInimigs() {
@@ -195,7 +220,14 @@ namespace Gerenciador {
                     corrigirColisao(*it, colisao);
                 }
             }
+            for (list<Entidade::Chao*>::const_iterator it2 = LCs.begin(); it2 != LCs.end(); it2++) {
+                colisao = verificarColisao(*it, *it2);
+                if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                    corrigirColisao(*it, colisao);
+                }
+            }
         }
+
     }
 
     void GerenciadorColisoes::tratarColisoesEventos() {

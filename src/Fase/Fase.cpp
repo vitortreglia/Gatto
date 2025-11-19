@@ -2,7 +2,7 @@
 
 #include "Entidade/Itens/Peixe.h"
 #include "Entidade/Obstaculo/Obstaculo.h"
-#include "Entidade/Obstaculo/Plataforma.h"
+#include "../../includes/Entidade/Chao.h"
 #include "Entidade/Obstaculo/PlataformaMovel.h"
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
@@ -36,11 +36,11 @@ namespace Fase {
         return limitesFase;
     }
 
-    void Fase::criarPlataforma(float x, float y) {
-        Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Plataforma(x, y+50, numFase);
+    void Fase::criarChao(float x, float y) {
+        Entidade::Entidade* objEntidade = new Entidade::Chao(x, y+50, numFase);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
-            pGColisoes->incluirObstaculo(static_cast<Entidade::Obstaculo::Obstaculo*>(objEntidade));
+            pGColisoes->incluirChao(static_cast<Entidade::Chao*>(objEntidade));
         }
     }
 
@@ -53,11 +53,11 @@ namespace Fase {
                 numPMovel++;
             }
         } else if (direcao){
-            criarPlataforma(x, y + 200);
-            criarPlataforma(x + 100, y + 200);
+            criarChao(x, y + 200);
+            criarChao(x + 100, y + 200);
         } else {
-            criarPlataforma(x, y - 200);
-            criarPlataforma(x + 100, y - 200);
+            criarChao(x, y - 200);
+            criarChao(x + 100, y - 200);
         }
     }
 

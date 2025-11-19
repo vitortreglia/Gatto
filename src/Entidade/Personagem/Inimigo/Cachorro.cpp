@@ -66,11 +66,6 @@ namespace Entidade {
                 float dx = posJog.x - pos.x;
 
                 andar(dx > 0.0f);
-
-                //if (posJog.y + 40.0f < pos.y && noChao) {
-                //    deslocamento.y = -30.0f;
-                //    estaNoChao(false);
-                //}
             }
 
             void Cachorro::setProjetil(Itens::Projetil *pProj) {
@@ -194,11 +189,6 @@ namespace Entidade {
                             parar();
                     }
 
-                    //if (posJogador.y + 40.0f < posCachorro.y && noChao) {
-                    //    deslocamento.y = -30.0f;
-                    //    estaNoChao(false);
-                    //}
-
                     if (distanciaX <= raioAtaque && distanciaY <= 200.0f) {
                     atirarOsso();
                     }
@@ -206,7 +196,6 @@ namespace Entidade {
                 else {
                     patrulhar();
                 }
-
                     atualizarPos();
             }
 

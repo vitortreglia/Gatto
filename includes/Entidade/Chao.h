@@ -1,19 +1,17 @@
 #ifndef PLATAFORMA_H
 #define PLATAFORMA_H
-#include "Obstaculo.h"
+#include "Obstaculo/Obstaculo.h"
 
 namespace Entidade {
-    namespace Obstaculo {
-        class Plataforma : public Obstaculo {
+        class Chao : public Entidade {
         public:
-            Plataforma(float x, float y, int fase);
-            ~Plataforma();
+            Chao(float x, float y, int fase);
+            ~Chao();
             string imgFaseJardim;
             string imgFaseCidade;
             void executar();
             void obstaculizar(Personagem::Jogador* pJog);
         };
-    }
 }
 
 

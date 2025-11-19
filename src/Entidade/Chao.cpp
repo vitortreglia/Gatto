@@ -1,8 +1,7 @@
-#include "Entidade/Obstaculo/Plataforma.h"
+#include "../../includes/Entidade/Chao.h"
 namespace Entidade {
-    namespace Obstaculo {
-        Plataforma::Plataforma(float x, float y, int fase):
-        Obstaculo(false, sf::Vector2f(100,50), x, y),
+        Chao::Chao(float x, float y, int fase):
+        Entidade(sf::Vector2f(100,50), x, y),
         imgFaseJardim("Data/Imagens/grama.png"),
         imgFaseCidade("Data/Imagens/parapeito.png")
         {
@@ -13,19 +12,16 @@ namespace Entidade {
             textura.setAnimacao("base");
         }
 
-        Plataforma::~Plataforma() {
+        Chao::~Chao() {
 
         }
 
-        void Plataforma::obstaculizar(Personagem::Jogador* pJog) {
+        void Chao::obstaculizar(Personagem::Jogador* pJog) {
 
         }
 
-        void Plataforma::executar() {
+        void Chao::executar() {
             //textura.animar(false);
             //desenhar();
         }
-
-
-    }
 }

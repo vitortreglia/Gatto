@@ -76,8 +76,8 @@ namespace Fase {
                 numRoseira++;
             }
         } else {
-            criarPlataforma(x, y);
-            criarPlataforma(x + 100, y);
+            criarChao(x, y);
+            criarChao(x + 100, y);
         }
     }
 
@@ -98,7 +98,7 @@ namespace Fase {
         pair<multimap<char, sf::Vector2f>::const_iterator, multimap<char, sf::Vector2f>::const_iterator> grupo =
                     obstaculos.equal_range('p');
         for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
-            criarPlataforma((*it).second.x, (*it).second.y);
+            criarChao((*it).second.x, (*it).second.y);
         }
 
         grupo = obstaculos.equal_range('m');

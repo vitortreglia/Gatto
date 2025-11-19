@@ -25,7 +25,7 @@ namespace Fase {
         const int getFase() const;
     protected:
         void semearRand();
-        void criarPlataforma(float x, float y);
+        void criarChao(float x, float y);
         void criarPlataformaMovel(float x, float y, bool direcao);
         void criarPeixe(float x, float y);
         void criarInimigoGaivota(float x, float y);
