@@ -9,3 +9,4 @@ notas.cpp
 bin/Gatto
 *.dll
 *.exe
+/bin/Data/Fases/save.txt
