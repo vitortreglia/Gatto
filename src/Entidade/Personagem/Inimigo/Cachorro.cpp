@@ -9,17 +9,19 @@ namespace Entidade {
         namespace Inimigo {
 
             Cachorro::Cachorro(float x, float y) :
-            ataque(1, 0.8f),
-            Inimigo(0, 150.0f, {200.0f, 180.0f}, x, y-100, 4),
+            ataque(1, 3.0f),
+            Inimigo(0, 150.0f, {150.0f, 100.0f}, x, y-100, 4),
             raioPercepcaoX(300.0f),
             raioAtaque(230.0f),
             velocidade(150.0f),
             pProjetil(nullptr),
             tempoPatrulha(0)
                 {
+                textura.inserirTextura("parado", "Data/Imagens/cachorro.png");
                 corpo.setFillColor(sf::Color(139, 69, 19));
                 vMax.x = velocidade;
                 andar(true);
+                textura.setAnimacao("parado");
             }
 
             Cachorro::~Cachorro() {
@@ -94,7 +96,7 @@ namespace Entidade {
                 int sorteio;
                 sorteio = std::rand() % 100;
                 if (sorteio < probAumentar) {
-                    ++nivelMaldade;
+                    nivelMaldade++;
                     atualizaMaldade();
                 }
 
@@ -112,6 +114,7 @@ namespace Entidade {
                 pos.y += tam.y * 0.3f;
 
                 pProjetil->setPosicao(pos);
+                ataque.liberaAtaque();
                 }
 
             void Cachorro::mover() {
@@ -220,7 +223,7 @@ namespace Entidade {
                     chanceDanoExtra = 50;
                 }
 
-                int sorteio = std::rand() % 100;
+                int sorteio = rand() % 100;
                 if (sorteio < chanceDanoExtra) {
                     dano += 1;
                 }
@@ -232,8 +235,30 @@ namespace Entidade {
             }
 
             void Cachorro::executar() {
+                textura.animar(getDireita());
                 mover();
                 verificaVidas();
+            }
+
+            void Cachorro::lerDataBuffer() {
+                Inimigo::lerDataBuffer();
+                entrada >> tempoPatrulha;
+            }
+
+            void Cachorro::carregar(istream &entrada) {
+                this->entrada.rdbuf(entrada.rdbuf());
+                lerDataBuffer();
+            }
+
+            void Cachorro::salvarDataBuffer() {
+                buffer << "cachorro ";
+                Inimigo::salvarDataBuffer();
+                buffer << tempoPatrulha << ' ' << pProjetil->getId() << endl;
+            }
+
+            void Cachorro::salvar(ostream &saida) {
+                buffer.rdbuf(saida.rdbuf());
+                salvarDataBuffer();
             }
 
         }

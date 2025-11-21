@@ -10,7 +10,9 @@ namespace Entidade {
     y(posy),
     tam(tamanho),
     corpo(tam),
-    ativo(true)
+    ativo(true),
+    buffer(nullptr),
+    entrada(nullptr)
     {
         setPosicao(sf::Vector2f(x, y));
         //corpo.setFillColor(sf::Color::Blue);
@@ -61,6 +63,22 @@ namespace Entidade {
 
     void Entidade::getTempoFrame() {
         tempoFrame = pGGrafico->getTempo();
+    }
+
+    void Entidade::lerDataBuffer() {
+        string ani;
+        int frame;
+        int TA;
+        entrada >> ID >>ativo >> ani >> frame >> TA >> x >> y;
+        setPosicao({x, y});
+        textura.setAnimacao(ani);
+        textura.setFrame(frame);
+        textura.setTAnimacao(TA);
+    }
+
+    void Entidade::salvarDataBuffer() {
+        buffer << ID << ' ' << ativo << ' ' << textura.getAnimacao() << ' ' << textura.getFrame() << ' '
+        << textura.getTAnimacao() << ' ' << x << ' ' << y << ' ';
     }
 
 }

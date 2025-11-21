@@ -16,6 +16,10 @@ namespace Entidade {
                 EstadoRasante(Gaivota* pGav, Jogador* pJog);
                 ~EstadoRasante();
                 void executar(float dt);
+                sf::Vector2f getVetorAtaque();
+                float getTempo();
+                void setVetorAtaque(sf::Vector2f VA);
+                void setTempo(float t);
             };
         }
     }

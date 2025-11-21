@@ -19,7 +19,12 @@ public:
     void inserirTextura(string nome, string caminho);
     void setCorpo(sf::RectangleShape* c);
     void setAnimacao(string nome);
+    string getAnimacao();
     void animar(bool dir);
+    int getTAnimacao();
+    void setTAnimacao(int t);
+    int getFrame();
+    void setFrame(int f);
 };
 
 

@@ -35,5 +35,26 @@ namespace Entidade {
             }
         }
 
+        void Roseira::lerDataBuffer() {
+            Obstaculo::lerDataBuffer();
+            entrada >> tempo;
+        }
+
+        void Roseira::carregar(istream &entrada) {
+            this->entrada.rdbuf(entrada.rdbuf());
+            lerDataBuffer();
+        }
+
+        void Roseira::salvarDataBuffer() {
+            buffer << "roseira ";
+            Obstaculo::salvarDataBuffer();
+            buffer << tempo << endl;
+        }
+
+        void Roseira::salvar(ostream &saida) {
+            buffer.rdbuf(saida.rdbuf());
+            salvarDataBuffer();
+        }
+
     }
 }

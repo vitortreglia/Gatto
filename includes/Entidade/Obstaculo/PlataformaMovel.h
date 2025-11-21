@@ -7,9 +7,9 @@ namespace Entidade {
     namespace Obstaculo {
         class PlataformaMovel : public Obstaculo {
         private:
-            float movimentoMax;
+            const float movimentoMax;
             float somaMovimento;
-            float tempoMax;
+            const float tempoMax;
             float somaTempo;
             bool direcao;
 
@@ -19,6 +19,10 @@ namespace Entidade {
             void mover();
             void executar();
             void obstaculizar(Personagem::Jogador* pJog);
+            void lerDataBuffer();
+            void carregar(istream &entrada);
+            void salvarDataBuffer();
+            void salvar(ostream &saida);
         };
     }
 }

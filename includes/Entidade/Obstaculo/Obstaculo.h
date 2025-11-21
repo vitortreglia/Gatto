@@ -13,6 +13,10 @@
             ~Obstaculo();
             virtual void obstaculizar(Personagem::Jogador* pJog) = 0;
             virtual void executar() = 0;
+            void lerDataBuffer();
+            void carregar(istream &entrada) = 0;
+            void salvarDataBuffer();
+            virtual void salvar(ostream& saida) = 0;
         };
     }
 }

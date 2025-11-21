@@ -17,7 +17,9 @@ namespace Fase {
     maxInimGaivota(10),
     maxPMovel(15),
     numInimGaivota(0),
-    numPMovel(0)
+    numPMovel(0),
+    numJogs(1),
+    buffer(nullptr)
     {
         pGColisoes = new Gerenciador::GerenciadorColisoes(&listaEnt);
         pGGrafico->resetaRelogio();
@@ -145,4 +147,20 @@ namespace Fase {
         Entidade::Entidade::getTempoFrame();
         atualizarEntidades();
     }
+
+    void Fase::salvar() {
+        ofstream salvamento("Data/Fases/save.txt", ios::out);
+        if (!salvamento) {
+            cerr << " Arquivo não pode ser aberto " << endl;
+            fflush ( stdin );
+            getchar( );
+            return;
+        }
+        salvamento << numJogs << ' ' << numFase << endl;
+        for (int i = 0; i < listaEnt.getTam(); i++) {
+            listaEnt[i]->salvar(salvamento);
+        }
+        salvamento.close();
+    }
+
 }

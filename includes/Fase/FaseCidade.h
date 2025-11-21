@@ -13,6 +13,7 @@ namespace Fase {
         int numRoseira;
     public:
         FaseCidade(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2);
+        FaseCidade(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2, istream& carregamento);
         ~FaseCidade();
     protected:
         void criarProjetil(float x, float y, bool direita,
@@ -21,6 +22,7 @@ namespace Fase {
         void criarRoseira(float x, float y, bool danoso);
         void criarInimigos(multimap<char, sf::Vector2f> inimigos);
         void criarObstaculos(multimap<char, sf::Vector2f> obstaculos);
+        void carregarFase();
     };
 }
 

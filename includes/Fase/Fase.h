@@ -17,12 +17,15 @@ namespace Fase {
         const int maxInimGaivota;
         int numInimGaivota;
         int numPMovel;
+        int numJogs;
+        istream buffer;
     public:
         Fase(int nFase);
         ~Fase();
         virtual void executar();
         sf::FloatRect getLimitesFase();
         const int getFase() const;
+        void salvar();
     protected:
         void semearRand();
         void criarChao(float x, float y);
@@ -31,6 +34,7 @@ namespace Fase {
         void criarInimigoGaivota(float x, float y);
         virtual void criarObstaculos(multimap<char, sf::Vector2f> obstaculos) = 0;
         virtual void criarInimigos(multimap<char, sf::Vector2f> inimigos) = 0;
+        virtual void carregarFase() = 0;
         void criarCenario(string caminho);
         void atualizarEntidades();
     };

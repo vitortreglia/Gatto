@@ -31,6 +31,10 @@ namespace Entidade {
             void estaNoChao(bool c);
             virtual void tomarDano(int dano);
             void setVoador(bool voador);
+            void lerDataBuffer();
+            virtual void carregar(istream &entrada) = 0;
+            void salvarDataBuffer();
+            virtual void salvar(ostream& saida) = 0;
             virtual void verificaVidas() = 0;
             virtual void mover() = 0;
             virtual void executar() = 0;

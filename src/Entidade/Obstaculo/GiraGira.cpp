@@ -7,9 +7,9 @@ namespace Entidade {
         velocidadeGiro(2),
         angulo(0.0f),
         tempoMax(3.0f),
-        somaTempo(0.0f)
+        somaTempo(0.0f),
+        posInicial({x, y})
         {
-            posInicial = {x, y};
             corpo.setFillColor(sf::Color::Magenta);
         }
 
@@ -38,6 +38,27 @@ namespace Entidade {
                 angulo = 0.0f;
                 somaTempo = 0.0f;
             }
+        }
+
+        void GiraGira::lerDataBuffer() {
+            Obstaculo::lerDataBuffer();
+            entrada >> somaTempo >> angulo;
+        }
+
+        void GiraGira::carregar(istream &entrada) {
+            this->entrada.rdbuf(entrada.rdbuf());
+            lerDataBuffer();
+        }
+
+        void GiraGira::salvarDataBuffer() {
+            buffer << "giragira ";
+            Obstaculo::salvarDataBuffer();
+            buffer << somaTempo << ' ' << angulo << endl;
+        }
+
+        void GiraGira::salvar(ostream &saida) {
+            buffer.rdbuf(saida.rdbuf());
+            salvarDataBuffer();
         }
 
     }

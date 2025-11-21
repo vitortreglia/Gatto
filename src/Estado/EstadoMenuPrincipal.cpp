@@ -39,7 +39,7 @@ namespace Estados {
             if (pMenu->getSelecao() == 0) {
                 args[0] = 1;
             } else {
-                args[0] = 2;
+                args[1] = 2;
             }
             sair(args);
         }

@@ -26,6 +26,11 @@ void Animacao::setAnimacao(string nome) {
     pCorpo->setTexture(&texturas[texturaAtual]);
 }
 
+string Animacao::getAnimacao() {
+    return texturaAtual;
+}
+
+
 void Animacao::animar(bool dir) {
     if (tempoAnimacao == 12) {
         tempoAnimacao = 0;
@@ -42,3 +47,18 @@ void Animacao::animar(bool dir) {
     tempoAnimacao++;
 }
 
+int Animacao::getTAnimacao() {
+    return tempoAnimacao;
+}
+
+int Animacao::getFrame() {
+    return frame;
+}
+
+void Animacao::setFrame(int f) {
+    frame = f;
+}
+
+void Animacao::setTAnimacao(int t) {
+    tempoAnimacao = t;
+}

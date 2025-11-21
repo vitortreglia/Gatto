@@ -9,7 +9,6 @@ namespace Entidade {
             class Rato : public Inimigo {
             private:
                 float tempoAndar;
-                string imgRato;
             public:
                 Rato(float x, float y);
                 ~Rato();
@@ -17,6 +16,10 @@ namespace Entidade {
                 void tomarDano(int dano);
                 void mover();
                 void executar();
+                void lerDataBuffer();
+                void carregar(istream &entrada);
+                void salvarDataBuffer();
+                void salvar(ostream& saida);
             };
         }
     }

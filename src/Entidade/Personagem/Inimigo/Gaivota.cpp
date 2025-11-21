@@ -12,13 +12,13 @@ namespace Entidade {
             Gaivota::Gaivota(float x, float y):
             ataque(1, 1.0f),
             Inimigo(0, 120.0f, {80.0f, 50.0f},x, y, 2),
-            baseY(y),
             amplitude(10.0f),
             frequencia(6.0f),
             tempo(0.0f),
             possuiPeixe(false),
             estado(nullptr),
-            imgGaivota("Data/Imagens/Gaivota.png")
+            raioPercepcaoX(280),
+            raioPercepcaoY(300)
             {
                 textura.inserirTextura("voando", "Data/Imagens/Gaivota/voando.png");
                 textura.inserirTextura("rasante", "Data/Imagens/Gaivota/rasante.png");
@@ -26,12 +26,6 @@ namespace Entidade {
                 andar(true);
                 setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
                 setVoador(true);
-
-                raioPercepcaoX   = 280.0f;
-                raioPercepcaoY = 300.0f;
-                raioAtaque       = 400.0f;
-                velocidadeRasante = 220.0f;
-                velocidadeAtaque  = 380.0f;
                 textura.setAnimacao("voando");
             }
 
@@ -102,6 +96,55 @@ namespace Entidade {
                 verificaVidas();
                 estado->executar(tempoFrame);
             }
+
+            void Gaivota::lerDataBuffer() {
+                Inimigo::lerDataBuffer();
+                float t;
+                float vax;
+                float vay;
+                float tatk;
+                entrada >> tempo >> possuiPeixe >> t >> vax >> vay >> tatk;
+                if (vax == 0 && vay == 0) {
+                    setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
+                } else {
+                    setEstado(dynamic_cast <EstadoGaivota*>(new EstadoRasante(this, nullptr)));
+                    if (t < 1.0f) {
+                        ataque.atacar();
+                        ataque.setTempoAtaque(tatk);
+                    }
+                    static_cast<EstadoRasante*>(estado)->setTempo(t);
+                    static_cast<EstadoRasante*>(estado)->setVetorAtaque({vax, vay});
+                }
+            }
+
+            void Gaivota::carregar(istream &entrada) {
+                this->entrada.rdbuf(entrada.rdbuf());
+                lerDataBuffer();
+            }
+
+            void Gaivota::salvarDataBuffer() {
+                buffer << "gaivota ";
+                Inimigo::salvarDataBuffer();
+                buffer << tempo << ' ' << possuiPeixe << ' ';
+                try {
+                    EstadoRasante* rasante = dynamic_cast<EstadoRasante*>(estado);
+                    if (!rasante)
+                        throw std::runtime_error("nao eh rasante");
+                    buffer << static_cast<EstadoRasante*>(estado)->getTempo() << ' ' <<
+                        static_cast<EstadoRasante*>(estado)->getVetorAtaque().x << ' ' <<
+                            static_cast<EstadoRasante*>(estado)->getVetorAtaque().y << ' '
+                                << ataque.getTempoAtaque() << endl;
+                }
+                catch (std::exception &e) {
+                    buffer << 0 << ' ' << 0 << ' ' << 0 << ' ' << 0 << endl;
+                }
+            }
+
+            void Gaivota::salvar(ostream &saida) {
+                buffer.rdbuf(saida.rdbuf());
+                salvarDataBuffer();
+            }
+
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Menu {
     void MenuPrincipal::criarBotoesMenuPrincipal() {
         //incluirTexto(&titulo);
         Entidade::Botao* pBotao = new Entidade::Botao("UM JOGADOR");
-        pBotao->setPosicao({390, 300});
+        pBotao->moverBotao({390, 300});
         incluirBotao(pBotao);
         pBotao = new Entidade::Botao("DOIS JOGADORES");
-        pBotao->setPosicao({390, 450});
+        pBotao->moverBotao({390, 450});
         incluirBotao(pBotao);
         botoes[selecao]->destacar();
     }

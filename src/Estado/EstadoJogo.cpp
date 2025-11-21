@@ -4,6 +4,7 @@
 #include "Estado/EstadoPausa.h"
 #include "Fase/FaseCidade.h"
 #include "Fase/FaseJardim.h"
+#include "Entidade/Entidade.h"
 
 namespace Estados {
     EstadoJogo* EstadoJogo::pEstadoJogo(nullptr);
@@ -11,7 +12,9 @@ namespace Estados {
     EstadoJogo::EstadoJogo():
     pFase(nullptr),
     pJog1(nullptr),
-    pJog2(nullptr)
+    pJog2(nullptr),
+    pontosP1(0),
+    pontosP2(0)
     {}
 
     EstadoJogo *EstadoJogo::getEstadoJogo(void* args) {
@@ -24,8 +27,8 @@ namespace Estados {
     }
 
     //args:
-    //[0]: num jogs (1 ou 2)
-    //[1]: 1 = novo jogo 2 = carregar jogo
+    //[0]: 1 = novo jogo 2 = carregar jogo
+    //[1]: num jogs (1 ou 2)
     //[2]: 1 = fase jardim 2 = fase cidade
     void EstadoJogo::iniciar(void *args) {
         if (args) {
@@ -41,16 +44,47 @@ namespace Estados {
                 pJog2 = nullptr;
             }
             Entidade::Personagem::Jogador::setGerenciadorEvento();
-            pJog1 = new Entidade::Personagem::Jogador(1);
             if (arg[0] == 2) {
-                pJog2 = new Entidade::Personagem::Jogador(2);
-            }
-            if (pFase)
-                delete pFase;
-            if (arg[2] == 1) {
-                pFase = new Fase::FaseJardim(pJog1, pJog2);
-            } else if (arg[2] == 2) {
-                pFase = new Fase::FaseCidade(pJog1, pJog2);
+                try {
+                    ifstream carregamento("Data/Fases/save.txt");
+
+                    if (!carregamento.is_open())
+                        throw std::runtime_error("nao ha jogo salvo");
+
+                    carregamento >> arg[1] >> arg[2];
+
+                    pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
+                    pJog1->carregar(carregamento);
+                    if (arg[1] == 2) {
+                        pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
+                        pJog2->carregar(carregamento);
+                    }
+                    if (pFase)
+                        delete pFase;
+
+                    if (arg[2] == 1) {
+                        pFase = new Fase::FaseJardim(pJog1, pJog2, carregamento);
+                    } else if (arg[2] == 2) {
+                        pFase = new Fase::FaseCidade(pJog1, pJog2, carregamento);
+                    }
+                }
+                catch (const std::runtime_error &e) {
+                    cout << e.what() << endl;
+                    *a = 2;
+                    sair(a);
+                }
+            } else {
+                pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
+                if (arg[1] == 2) {
+                    pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
+                }
+                if (pFase)
+                    delete pFase;
+                if (arg[2] == 1) {
+                    pFase = new Fase::FaseJardim(pJog1, pJog2);
+                } else if (arg[2] == 2) {
+                    pFase = new Fase::FaseCidade(pJog1, pJog2);
+                }
             }
         }
         pGEvento->inscrever(this);
@@ -82,6 +116,8 @@ namespace Estados {
         if (teclasSoltas.count(sf::Keyboard::P)) {
             int a = 1;
             sair(&a);
+        } else if (teclasSoltas.count(sf::Keyboard::K)) {
+            pFase->salvar();
         }
     }
 

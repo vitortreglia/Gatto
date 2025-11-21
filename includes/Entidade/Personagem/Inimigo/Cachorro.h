@@ -31,6 +31,10 @@ namespace Entidade {
                     void perseguir();
                     void atirarOsso();
                     void setProjetil(Itens::Projetil* pProj);
+                    void lerDataBuffer();
+                    void carregar(istream &entrada);
+                    void salvarDataBuffer();
+                    virtual void salvar(ostream& saida);
                 };
             }
         }

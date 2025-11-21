@@ -15,6 +15,10 @@ namespace Entidade {
             void setDirecao(bool dir);
             void mover();
             void executar();
+            void lerDataBuffer();
+            void carregar(istream &entrada);
+            void salvarDataBuffer();
+            void salvar(ostream& saida);
         };
     }
 }

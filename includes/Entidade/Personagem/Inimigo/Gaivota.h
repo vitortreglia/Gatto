@@ -16,33 +16,25 @@ namespace Entidade {
                 Ataque ataque;
             private:
                 float tempo;
-                float amplitude;
-                float velocidadeHorizontal;
-                float frequencia;
-                float baseY;
-                int direcao;
-
+                const float amplitude;
+                const float frequencia;
                 EstadoGaivota* estado;
-
-                float raioPercepcaoX;
-                float raioPercepcaoY;
-                float raioAtaque;
-                float velocidadeAtaque;
-                float velocidadeRasante;
-
-                sf::Vector2f alvoAtaque;
+                const float raioPercepcaoX;
+                const float raioPercepcaoY;
                 bool possuiPeixe;
-                string imgGaivota;
 
             public:
                 Gaivota(float x, float y);
                 ~Gaivota();
-                //void verificaVidas();
                 void danificar(Jogador *pJ);
                 void mover();
                 void executar();
                 void setEstado(EstadoGaivota* pEstado);
                 Jogador* patrulhar(float dt);
+                void lerDataBuffer();
+                void carregar(istream &entrada);
+                void salvarDataBuffer();
+                void salvar(ostream& saida);
             };
         }
     }

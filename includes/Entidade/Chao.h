@@ -4,6 +4,8 @@
 
 namespace Entidade {
         class Chao : public Entidade {
+        private:
+            int nFase;
         public:
             Chao(float x, float y, int fase);
             ~Chao();
@@ -11,6 +13,10 @@ namespace Entidade {
             string imgFaseCidade;
             void executar();
             void obstaculizar(Personagem::Jogador* pJog);
+            void lerDataBuffer();
+            void carregar(istream &entrada);
+            void salvarDataBuffer();
+            void salvar(ostream &saida);
         };
 }
 

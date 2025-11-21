@@ -13,6 +13,10 @@ namespace Entidade {
             void atualizarTextura();
             void obstaculizar(Personagem::Jogador* pJog);
             void executar();
+            void lerDataBuffer();
+            void carregar(istream &entrada);
+            void salvarDataBuffer();
+            void salvar(ostream &saida);
         };
     }
 }

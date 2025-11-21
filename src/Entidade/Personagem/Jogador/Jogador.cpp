@@ -5,8 +5,9 @@ namespace Entidade {
     namespace Personagem {
         Gerenciador::GerenciadorEvento* Jogador::pGEvento(nullptr);
 
-        Jogador::Jogador(int nJog):
+        Jogador::Jogador(int nJog, int p):
         Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7),
+        pontos(p),
         numJog(nJog),
         vencedor(false),
         ataque(1, 0.1f),
@@ -71,11 +72,15 @@ namespace Entidade {
         void Jogador::coletarPeixe(Itens::Peixe *pPeixe) {
             pPeixe->setAtivo(false);
             peixes++;
+            pontuar(500);
+            if (numVidas < 7)
+                numVidas++;
         }
 
         const bool Jogador::perderPeixe() {
             if (peixes > 0) {
                 peixes--;
+                pontuar(-500);
                 return true;
             }
             return false;
@@ -89,15 +94,18 @@ namespace Entidade {
             if (colisao.y < 0.0f) {
                 pular(1.0f);
                 pInimigo->tomarDano(1);
+                pInimigo->setUltimoAtacante(this);
             } else if (ataque.getAtacando() || deslocAtaque != 0.0f) {
                 if (getDireita()) {
                     if (colisao.x < 0.0f) {
                         pInimigo->tomarDano(ataque.getDano());
+                        pInimigo->setUltimoAtacante(this);
                     } else {
                         pInimigo->danificar(this);
                     }
                 } else if (colisao.x > 0.0f) {
                         pInimigo->tomarDano(ataque.getDano());
+                        pInimigo->setUltimoAtacante(this);
                 } else {
                     pInimigo->danificar(this);
                 }
@@ -124,11 +132,8 @@ namespace Entidade {
 
         void Jogador::tomarDano(int dano) {
             if (!imunidadeDano) {
-                textura.setAnimacao("dano");
-                sofrendoDano = true;
                 imunidadeDano = true;
-                numVidas -= dano;
-                cout << "dano em " << (int)ID << endl;
+                Personagem::tomarDano(dano);
             }
         }
 
@@ -150,6 +155,14 @@ namespace Entidade {
                 }
             }
 
+        }
+
+        void Jogador::pontuar(int p) {
+            pontos += p;
+        }
+
+        int Jogador::getPontuacao() {
+            return pontos;
         }
 
         void Jogador::mover() {
@@ -179,7 +192,8 @@ namespace Entidade {
             pGGrafico->moveCamera(getPosicao(), numJog);
             mover();
             if (peixes < 3)
-                interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes");
+                interface.setTexto(std::to_string(numVidas) + " vidas | " + std::to_string(peixes) + " peixes"
+                    + "\n" + std::to_string(pontos));
             else {
                 interface.setTexto("Venceu");
                 vencedor = true;
@@ -244,5 +258,27 @@ namespace Entidade {
         void Jogador::notificar() {
             tratarEventos();
         }
+
+        void Jogador::lerDataBuffer() {
+            Personagem::lerDataBuffer();
+            entrada >> pontos >> numJog >> podePular >> peixes >> imunidadeDano;
+        }
+
+        void Jogador::carregar(istream &entrada) {
+            this->entrada.rdbuf(entrada.rdbuf());
+            lerDataBuffer();
+        }
+
+        void Jogador::salvarDataBuffer() {
+            buffer << "jogador ";
+            Personagem::salvarDataBuffer();
+            buffer << pontos << ' ' << numJog << ' ' << podePular << ' ' << peixes << ' ' << imunidadeDano << endl;
+        }
+
+        void Jogador::salvar(ostream& saida) {
+            buffer.rdbuf(saida.rdbuf());
+            salvarDataBuffer();
+        }
+
     }
 }

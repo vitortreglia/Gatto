@@ -6,9 +6,8 @@ namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             Rato::Rato(float x, float y):
-            Inimigo(0, 150.0f, {80.0f, 80.0f}, x, y, 2),
-            tempoAndar(0.0f),
-            imgRato("Data/Imagens/Rato.png")
+            Inimigo(1, 150.0f, {80.0f, 80.0f}, x, y, 2),
+            tempoAndar(0.0f)
             {
                 textura.inserirTextura("andando", "Data/Imagens/Rato/andando.png");
                 textura.inserirTextura("dano", "Data/Imagens/Rato/dano.png");
@@ -18,18 +17,16 @@ namespace Entidade {
             Rato::~Rato() {}
 
             void Rato::danificar(Jogador *pJ) {
-                nivelMaldade++;
                 pJ->tomarDano(nivelMaldade);
+                nivelMaldade++;
             }
 
             void Rato::tomarDano(int dano) {
                 if (!sofrendoDano) {
-                    textura.setAnimacao("dano");
-                    sofrendoDano = true;
                     deslocamento.y = -10.0f;
                     deslocamento.x = 0.0f;
                     tempoAndar -= tempoFrame;
-                    numVidas -= dano;
+                    Personagem::tomarDano(dano);
                 }
             }
 
@@ -51,6 +48,28 @@ namespace Entidade {
                 verificaVidas();
                 mover();
             }
+
+            void Rato::lerDataBuffer() {
+                Inimigo::lerDataBuffer();
+                entrada >> tempoAndar;
+            }
+
+            void Rato::carregar(istream &entrada) {
+                this->entrada.rdbuf(entrada.rdbuf());
+                lerDataBuffer();
+            }
+
+            void Rato::salvarDataBuffer() {
+                buffer << "rato ";
+                Inimigo::salvarDataBuffer();
+                buffer << tempoAndar << endl;
+            }
+
+            void Rato::salvar(ostream &saida) {
+                buffer.rdbuf(saida.rdbuf());
+                salvarDataBuffer();
+            }
+
         }
     }
 }

@@ -12,12 +12,14 @@ namespace Fase {
         int numGiraGira;
     public:
         FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2);
+        FaseJardim(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2, istream& carregamento);
         ~FaseJardim();
     private:
         void criarGiraGira(float x, float y);
         void criarInimigoRato(float x, float y);
         void criarInimigos(multimap<char, sf::Vector2f> inimigos);
         void criarObstaculos(multimap<char, sf::Vector2f> obstaculos);
+        void carregarFase();
     };
 }
 

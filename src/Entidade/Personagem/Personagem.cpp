@@ -14,9 +14,7 @@ namespace Entidade {
         tempoDano(0.0f),
         deslocamento({0.0f, 0.0f}),
         voador(false)
-        {
-
-        }
+        {}
 
         Personagem::~Personagem() {
             andando = false;
@@ -79,7 +77,7 @@ namespace Entidade {
                 textura.setAnimacao("dano");
                 sofrendoDano = true;
                 numVidas -= dano;
-                cout << "dano em " << (int)ID << endl;
+                cout << "dano em " << ID << endl;
             }
         }
 
@@ -87,6 +85,17 @@ namespace Entidade {
             this->voador = voador;
         }
 
+        void Personagem::lerDataBuffer() {
+            Entidade::lerDataBuffer();
+            entrada >> numVidas >> deslocamento.x >> deslocamento.y >> direita >> andando >> noChao >> sofrendoDano
+            >> tempoDano >> voador;
+        }
+
+        void Personagem::salvarDataBuffer() {
+            Entidade::salvarDataBuffer();
+            buffer << numVidas << ' ' << deslocamento.x << ' ' << deslocamento.y << ' ' << direita << ' ' << andando
+            << ' ' << noChao << ' ' << sofrendoDano << ' ' << tempoDano << ' ' << voador << ' ';
+        }
 
     }
 }

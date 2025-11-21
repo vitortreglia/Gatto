@@ -13,5 +13,15 @@ namespace Entidade {
             desenhar();
         }
 
+        void Obstaculo::lerDataBuffer() {
+            Entidade::lerDataBuffer();
+            entrada >> danoso;
+        }
+
+        void Obstaculo::salvarDataBuffer() {
+            Entidade::salvarDataBuffer();
+            buffer << danoso << ' ';
+        }
+
     }
 }

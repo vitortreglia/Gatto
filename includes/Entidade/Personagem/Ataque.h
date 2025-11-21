@@ -21,6 +21,8 @@ namespace Entidade {
             void liberaAtaque();
             int getDano();
             void ataque(float tempoFrame);
+            float getTempoAtaque();
+            void setTempoAtaque(float t);
         };
 }
 

@@ -4,14 +4,14 @@
 #include "Entidade/Entidade.h"
 
 namespace Entidade {
-    class Botao : public Entidade::Entidade {
+    class Botao : public Ente {
     private:
         Texto textoBotao;
+        sf::RectangleShape corpo;
     public:
         Botao(string rotulo);
         ~Botao();
-        void setPosicao(sf::Vector2f pos);
-        void setTamanho(sf::Vector2f tam);
+        void moverBotao(sf::Vector2f pos);
         void destacar();
         void tirarDestaque();
         void executar();

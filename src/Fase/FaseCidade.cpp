@@ -17,13 +17,33 @@ namespace Fase {
             pGGrafico->setMultiplayer(true);
             pJog2->setPosicao({2400, 2700});
             listaEnt.incluir(pJog2);
+            numJogs = 2;
         }
         pGGrafico->setFundo("Data/Imagens/fundoFaseCidade.png", "", "");
         pGGrafico->setMovimentoFundo(1, 0, 0.5);
-        Entidade::Personagem::Inimigo::Gaivota::setJogadores(pJog1, pJog2);
         Entidade::Personagem::Inimigo::Inimigo::setJogadores(pJog1, pJog2);
         pGColisoes->incluirJogadores(pJog1, pJog2);
         criarCenario("Data/Fases/FaseCidade.dat");
+    }
+
+    FaseCidade::FaseCidade(Entidade::Personagem::Jogador *pJog1, Entidade::Personagem::Jogador *pJog2, istream &carregamento):
+    Fase(2),
+    maxChefoes(5),
+    maxRoseiras(20),
+    numRoseira(0),
+    numInimChefao(0)
+    {
+        listaEnt.incluir(pJog1);
+        if (pJog2) {
+            pGGrafico->setMultiplayer(true);
+            listaEnt.incluir(pJog2);
+            numJogs = 2;
+        }
+        pGGrafico->setFundo("Data/Imagens/fundoFaseCidade.png", "", "");
+        pGGrafico->setMovimentoFundo(1, 0, 0.5);
+        Entidade::Personagem::Inimigo::Inimigo::setJogadores(pJog1, pJog2);
+        pGColisoes->incluirJogadores(pJog1, pJog2);
+        carregarFase();
     }
 
     FaseCidade::~FaseCidade() {
@@ -120,6 +140,10 @@ namespace Fase {
         for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
             criarRoseira((*it).second.x, (*it).second.y, false);
         }
+    }
+
+    void FaseCidade::carregarFase() {
+
     }
 
 }

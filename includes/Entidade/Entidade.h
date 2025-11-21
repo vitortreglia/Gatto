@@ -2,7 +2,6 @@
 #define ENTIDADE_H
 #include "Ente.h"
 
-
 namespace Entidade {
     class Entidade : public Ente {
     protected:
@@ -12,6 +11,8 @@ namespace Entidade {
         static float tempoFrame;
         bool ativo;
         Animacao textura;
+        ostream buffer;
+        istream entrada;
     public:
         Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f);
         virtual ~Entidade();
@@ -23,6 +24,10 @@ namespace Entidade {
         const sf::Vector2f getTamanho() const;
         vector<sf::Vector2f> getCoordenadas();
         static void getTempoFrame();
+        void lerDataBuffer();
+        virtual void carregar(istream &entrada) = 0;
+        void salvarDataBuffer();
+        virtual void salvar(ostream& saida) = 0;
         virtual void executar() = 0;
     };
 }

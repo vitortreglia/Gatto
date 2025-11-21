@@ -13,6 +13,7 @@ namespace Entidade {
         class Jogador : public Personagem, public Observer {
         private:
             static Gerenciador::GerenciadorEvento* pGEvento;
+            int pontos;
             int numJog;
             Ataque ataque;
             bool podePular;
@@ -22,7 +23,7 @@ namespace Entidade {
             bool imunidadeDano;
             bool vencedor;
         public:
-            Jogador(int nJog);
+            Jogador(int nJog, int p);
             ~Jogador();
             bool getVencedor();
             static void setGerenciadorEvento();
@@ -37,10 +38,16 @@ namespace Entidade {
             void colidir(sf::Vector2f colisao);
             void tomarDano(int dano);
             void verificaVidas();
+            void pontuar(int p);
+            int getPontuacao();
             void mover();
             void executar();
             void tratarEventos();
             void notificar();
+            void lerDataBuffer();
+            void carregar(istream &entrada);
+            void salvar(ostream& saida);
+            void salvarDataBuffer();
         };
     }
 }

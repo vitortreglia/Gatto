@@ -3,10 +3,12 @@
 namespace Entidade {
     namespace Itens {
         Projetil::Projetil() :
-        Entidade({20.0f, 20.0f}, 0, 0),
+        Entidade({44.0f, 38.0f}, 0, 0),
         tempoLancamento(0.0f)
         {
             setAtivo(false);
+            textura.inserirTextura("base", "Data/Imagens/osso.png");
+            textura.setAnimacao("base");
         }
 
         Projetil::~Projetil() {}
@@ -31,6 +33,27 @@ namespace Entidade {
         void Projetil::executar() {
             mover();
             desenhar();
+        }
+
+        void Projetil::lerDataBuffer() {
+            Entidade::lerDataBuffer();
+            entrada >> tempoLancamento >> direita;
+        }
+
+        void Projetil::carregar(istream &entrada) {
+            this->entrada.rdbuf(entrada.rdbuf());
+            lerDataBuffer();
+        }
+
+        void Projetil::salvarDataBuffer() {
+            buffer << "projetil ";
+            Entidade::salvarDataBuffer();
+            buffer << tempoLancamento << ' ' << direita << endl;
+        }
+
+        void Projetil::salvar(ostream &saida) {
+            buffer.rdbuf(saida.rdbuf());
+            salvarDataBuffer();
         }
 
     }

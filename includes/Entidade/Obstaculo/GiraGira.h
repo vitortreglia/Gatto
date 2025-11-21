@@ -7,17 +7,21 @@ namespace Entidade {
     namespace Obstaculo {
         class GiraGira : public Obstaculo {
         private:
-            float velocidadeGiro;
+            const float velocidadeGiro;
             float angulo;
-            float tempoMax;
+            const float tempoMax;
             float somaTempo;
-            sf::Vector2f posInicial;
+            const sf::Vector2f posInicial;
         public:
             GiraGira(float x, float y);
             ~GiraGira();
             void girar();
             void executar();
             void obstaculizar(Personagem::Jogador* pJog);
+            void lerDataBuffer();
+            void carregar(istream &entrada);
+            void salvarDataBuffer();
+            void salvar(ostream &saida);
         };
     }
 }

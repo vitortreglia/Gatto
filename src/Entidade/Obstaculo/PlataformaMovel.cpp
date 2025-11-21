@@ -31,8 +31,6 @@ namespace Entidade {
         }
 
         void PlataformaMovel::executar() {
-            //obstaculizar();
-            //desenhar();
             somaTempo += tempoFrame;
             if (somaTempo > tempoMax) {
                 somaTempo = 0.0f;
@@ -40,6 +38,27 @@ namespace Entidade {
                 somaMovimento = 0.0f;
             }
             mover();
+        }
+
+        void PlataformaMovel::lerDataBuffer() {
+            Obstaculo::lerDataBuffer();
+            entrada >> somaMovimento >> somaTempo >> direcao;
+        }
+
+        void PlataformaMovel::carregar(istream &entrada) {
+            this->entrada.rdbuf(entrada.rdbuf());
+            lerDataBuffer();
+        }
+
+        void PlataformaMovel::salvarDataBuffer() {
+            buffer << "pmovel ";
+            Obstaculo::salvarDataBuffer();
+            buffer << somaMovimento << ' ' << somaTempo << ' ' << direcao << endl;
+        }
+
+        void PlataformaMovel::salvar(ostream &saida) {
+            buffer.rdbuf(saida.rdbuf());
+            salvarDataBuffer();
         }
 
     }

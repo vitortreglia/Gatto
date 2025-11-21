@@ -32,6 +32,26 @@ namespace Entidade {
             mover();
         }
 
+        void Peixe::lerDataBuffer() {
+            Entidade::lerDataBuffer();
+            entrada >> movimento >> sentido;
+        }
+
+        void Peixe::carregar(istream &entrada) {
+            this->entrada.rdbuf(entrada.rdbuf());
+            lerDataBuffer();
+        }
+
+        void Peixe::salvarDataBuffer() {
+            buffer << "peixe ";
+            Entidade::salvarDataBuffer();
+            buffer << movimento << ' ' << sentido << endl;
+        }
+
+        void Peixe::salvar(ostream &saida) {
+            buffer.rdbuf(saida.rdbuf());
+            salvarDataBuffer();
+        }
 
     }
 }

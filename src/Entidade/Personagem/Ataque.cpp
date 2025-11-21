@@ -43,5 +43,12 @@ namespace Entidade {
         }
     }
 
+    float Ataque::getTempoAtaque() {
+        return tempoAtaque;
+    }
+
+    void Ataque::setTempoAtaque(float t) {
+        tempoAtaque = t;
+    }
 
 }

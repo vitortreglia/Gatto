@@ -9,12 +9,29 @@ namespace Entidade {
     namespace Personagem {
         namespace Inimigo {
             EstadoRasante::EstadoRasante(Gaivota* pGav, Jogador* pJog): EstadoGaivota(pGav) {
-                vetorAtaque = pJog->getPosicao() - pGaivota->getPosicao();
+                if (pGav && pJog)
+                    vetorAtaque = pJog->getPosicao() - pGaivota->getPosicao();
                 tempo = 0;
             }
             
             EstadoRasante::~EstadoRasante() {
                 
+            }
+
+            float EstadoRasante::getTempo() {
+                return tempo;
+            }
+
+            sf::Vector2f EstadoRasante::getVetorAtaque() {
+                return vetorAtaque;
+            }
+
+            void EstadoRasante::setTempo(float t) {
+                tempo = t;
+            }
+
+            void EstadoRasante::setVetorAtaque(sf::Vector2f VA) {
+                vetorAtaque = VA;
             }
 
             void EstadoRasante::executar(float dt) {
@@ -30,6 +47,8 @@ namespace Entidade {
 
                     if (tempo >= 2) {
                         pGaivota->ataque.liberaAtaque();
+                        vetorAtaque = {0, 0};
+                        tempo = 0;
                         pGaivota->setEstado(dynamic_cast<EstadoGaivota*>(new EstadoPatrulha (pGaivota)));
                     }
                 }

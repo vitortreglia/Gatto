@@ -1,6 +1,8 @@
 #ifndef ENTE_H
 #define ENTE_H
 #include "Gerenciador/GerenciadorGrafico.h"
+#include <iostream>
+#include <sstream>
 using namespace std;
 
 class Ente {
