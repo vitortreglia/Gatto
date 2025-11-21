@@ -41,6 +41,7 @@ namespace Estados {
         int arg;
         if (teclasSoltas.count(sf::Keyboard::W)) {
             pMenuPausa->anterior();
+            cout << "detectou" << endl;
         } else if (teclasSoltas.count(sf::Keyboard::S)) {
             pMenuPausa->proximo();
         } else if (teclasSoltas.count(sf::Keyboard::Enter)) {

@@ -14,8 +14,9 @@ namespace Estados {
     pJog1(nullptr),
     pJog2(nullptr),
     pontosP1(0),
-    pontosP2(0)
-    {}
+    pontosP2(0) {
+        Entidade::Personagem::Jogador::setGerenciadorEvento();
+    }
 
     EstadoJogo *EstadoJogo::getEstadoJogo(void* args) {
         if (!pEstadoJogo)
@@ -43,7 +44,6 @@ namespace Estados {
                 delete pJog2;
                 pJog2 = nullptr;
             }
-            Entidade::Personagem::Jogador::setGerenciadorEvento();
             if (arg[0] == 2) {
                 try {
                     ifstream carregamento("Data/Fases/save.txt");
@@ -54,6 +54,7 @@ namespace Estados {
                     carregamento >> arg[1] >> arg[2];
 
                     pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
+
                     pJog1->carregar(carregamento);
                     if (arg[1] == 2) {
                         pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
@@ -67,6 +68,7 @@ namespace Estados {
                     } else if (arg[2] == 2) {
                         pFase = new Fase::FaseCidade(pJog1, pJog2, carregamento);
                     }
+                    carregamento.close();
                 }
                 catch (const std::runtime_error &e) {
                     cout << e.what() << endl;
@@ -130,6 +132,10 @@ namespace Estados {
                 int a = 2;
                 sair(&a);
             }
+            pJog1->ignorarEntrada();
+            if (pJog2)
+                pJog2->ignorarEntrada();
+            pGEvento->desinscrever(this);
             iniciar(arg);
         }
         if (pJog2) {
@@ -140,6 +146,9 @@ namespace Estados {
                     int a = 2;
                     sair(&a);
                 }
+                pJog1->ignorarEntrada();
+                pJog2->ignorarEntrada();
+                pGEvento->desinscrever(this);
                 iniciar(arg);
             }
         }

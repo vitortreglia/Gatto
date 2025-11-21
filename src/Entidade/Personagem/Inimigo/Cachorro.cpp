@@ -253,7 +253,7 @@ namespace Entidade {
             void Cachorro::salvarDataBuffer() {
                 buffer << "cachorro ";
                 Inimigo::salvarDataBuffer();
-                buffer << tempoPatrulha << ' ' << pProjetil->getId() << endl;
+                buffer << tempoPatrulha << endl;
             }
 
             void Cachorro::salvar(ostream &saida) {

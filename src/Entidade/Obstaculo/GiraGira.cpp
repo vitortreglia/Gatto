@@ -10,7 +10,8 @@ namespace Entidade {
         somaTempo(0.0f),
         posInicial({x, y})
         {
-            corpo.setFillColor(sf::Color::Magenta);
+            textura.inserirTextura("base", "Data/Imagens/placeholder.png");
+            textura.setAnimacao("base");
         }
 
         GiraGira::~GiraGira() {}
@@ -42,7 +43,8 @@ namespace Entidade {
 
         void GiraGira::lerDataBuffer() {
             Obstaculo::lerDataBuffer();
-            entrada >> somaTempo >> angulo;
+            entrada >> somaTempo >> angulo >> posInicial.x >> posInicial.y;
+            girar();
         }
 
         void GiraGira::carregar(istream &entrada) {
@@ -53,7 +55,7 @@ namespace Entidade {
         void GiraGira::salvarDataBuffer() {
             buffer << "giragira ";
             Obstaculo::salvarDataBuffer();
-            buffer << somaTempo << ' ' << angulo << endl;
+            buffer << somaTempo << ' ' << angulo << ' ' << posInicial.x << ' ' << posInicial.y << endl;
         }
 
         void GiraGira::salvar(ostream &saida) {

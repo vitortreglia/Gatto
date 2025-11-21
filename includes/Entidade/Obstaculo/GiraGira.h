@@ -11,7 +11,7 @@ namespace Entidade {
             float angulo;
             const float tempoMax;
             float somaTempo;
-            const sf::Vector2f posInicial;
+            sf::Vector2f posInicial;
         public:
             GiraGira(float x, float y);
             ~GiraGira();

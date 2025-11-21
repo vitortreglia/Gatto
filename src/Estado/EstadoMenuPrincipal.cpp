@@ -38,8 +38,10 @@ namespace Estados {
             int args[] = {1, 1, 1};
             if (pMenu->getSelecao() == 0) {
                 args[0] = 1;
-            } else {
+            } else if (pMenu->getSelecao() == 1){
                 args[1] = 2;
+            } else {
+                args[0] = 2;
             }
             sair(args);
         }

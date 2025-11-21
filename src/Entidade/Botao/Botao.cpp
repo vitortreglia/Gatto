@@ -3,7 +3,7 @@ namespace Entidade {
     Botao::Botao(string rotulo):
     Ente(&corpo),
     textoBotao(rotulo, 42, 600.0f, 140.0f),
-    corpo({500, 100})
+    corpo({400, 80})
     {
         //textura.setTextura("Data/Imagens/botao.png");
         textoBotao.setFonte("Data/Fontes/KirangHaerang-Regular.ttf");

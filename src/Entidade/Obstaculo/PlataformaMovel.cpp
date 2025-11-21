@@ -9,7 +9,8 @@ namespace Entidade {
         somaTempo(0.0f),
         direcao(direcao),
         somaMovimento(0.0f) {
-            corpo.setFillColor(sf::Color::Green);
+            textura.inserirTextura("base", "Data/Imagens/placeholder.png");
+            textura.setAnimacao("base");
         }
 
         PlataformaMovel::~PlataformaMovel() {}

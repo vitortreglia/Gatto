@@ -37,7 +37,6 @@ namespace Entidade {
         }
 
         Jogador::~Jogador() {
-            ignorarEntrada();
         }
 
         bool Jogador::getVencedor() {
@@ -49,11 +48,15 @@ namespace Entidade {
         }
 
         void Jogador::observarEntrada() {
-            pGEvento->inscrever(this);
+            if (pGEvento)
+                pGEvento->inscrever(this);
+            else
+                cout << "erro ao observar entrada" << endl;
         }
 
         void Jogador::ignorarEntrada() {
-            pGEvento->desinscrever(this);
+            if (pGEvento)
+                pGEvento->desinscrever(this);
         }
 
         void Jogador::liberaPulo() {
@@ -270,7 +273,6 @@ namespace Entidade {
         }
 
         void Jogador::salvarDataBuffer() {
-            buffer << "jogador ";
             Personagem::salvarDataBuffer();
             buffer << pontos << ' ' << numJog << ' ' << podePular << ' ' << peixes << ' ' << imunidadeDano << endl;
         }

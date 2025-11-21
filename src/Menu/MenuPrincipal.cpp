@@ -2,7 +2,7 @@
 
 namespace Menu {
     MenuPrincipal::MenuPrincipal():
-    titulo("Gatto", 128, 433, 100),
+    titulo("Gatto", 128, 400, 80),
     Menu()
     {
         //fundo.setTextura("Data/Imagens/fundoJardim.jpg"),
@@ -19,10 +19,13 @@ namespace Menu {
     void MenuPrincipal::criarBotoesMenuPrincipal() {
         //incluirTexto(&titulo);
         Entidade::Botao* pBotao = new Entidade::Botao("UM JOGADOR");
-        pBotao->moverBotao({390, 300});
+        pBotao->moverBotao({440, 300});
         incluirBotao(pBotao);
         pBotao = new Entidade::Botao("DOIS JOGADORES");
-        pBotao->moverBotao({390, 450});
+        pBotao->moverBotao({440, 400});
+        incluirBotao(pBotao);
+        pBotao = new Entidade::Botao("CARREGAR JOGO");
+        pBotao->moverBotao({440, 500});
         incluirBotao(pBotao);
         botoes[selecao]->destacar();
     }

@@ -31,7 +31,8 @@ namespace Entidade {
             void Inimigo::verificaVidas() {
                 if (numVidas <= 0) {
                     cout << "inimigo morreu" << endl;
-                    pUltimoAtacante->pontuar(nivelMaldade * 100 + 100);
+                    if (pUltimoAtacante)
+                        pUltimoAtacante->pontuar(nivelMaldade * 100 + 100);
                     setAtivo(false);
                 } else if (sofrendoDano) {
                     corpo.setFillColor(sf::Color::Red);

@@ -156,10 +156,11 @@ namespace Fase {
             getchar( );
             return;
         }
-        salvamento << numJogs << ' ' << numFase << endl;
+        salvamento << numJogs << ' ' << numFase << ' ' << endl;
         for (int i = 0; i < listaEnt.getTam(); i++) {
             listaEnt[i]->salvar(salvamento);
         }
+        salvamento << "limites " << limitesFase.width << ' ' << limitesFase.height << endl;
         salvamento.close();
     }
 

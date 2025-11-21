@@ -1,13 +1,13 @@
 #include "Observer/Subject.h"
 
+#include <iostream>
+
 Subject::Subject() {}
 
 void Subject::inscrever(Observer *pO) {
-    if (pO)
-        if (observers.empty())
-            observers.push_back(pO);
-        else
-            adicionar.push_back(pO);
+    if (pO) {
+        adicionar.push_back(pO);
+    }
 }
 
 void Subject::desinscrever(Observer *pO) {
@@ -23,6 +23,6 @@ void Subject::notificar() {
     for (std::list<Observer*>::const_iterator it = observers.begin(); it != observers.end(); it++) {
         (*it)->notificar();
     }
-    observers.merge(adicionar);
+    observers.splice(observers.end(), adicionar);
     adicionar.clear();
 }

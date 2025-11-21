@@ -43,6 +43,7 @@ namespace Fase {
         pGGrafico->setMovimentoFundo(1, 0, 0.5);
         Entidade::Personagem::Inimigo::Inimigo::setJogadores(pJog1, pJog2);
         pGColisoes->incluirJogadores(pJog1, pJog2);
+        buffer.rdbuf(carregamento.rdbuf());
         carregarFase();
     }
 
@@ -73,22 +74,23 @@ namespace Fase {
     }
 
 
-    void FaseCidade::criarChefao(float x, float y) {
-        if ((rand()%10 < 9 || numInimChefao < 3) && numInimChefao < maxChefoes) {
-            auto* cachorro = new Entidade::Personagem::Inimigo::Cachorro(x, y);
+    Entidade::Personagem::Inimigo::Cachorro* FaseCidade::criarChefao(float x, float y) {
+        if ((rand()%10 < 9 || numInimChefao < 3 || y == 0) && numInimChefao < maxChefoes) {
+            Entidade::Personagem::Inimigo::Cachorro* cachorro = new Entidade::Personagem::Inimigo::Cachorro(x, y);
             if (cachorro) {
                 listaEnt.incluir(cachorro);
                 pGColisoes->incluirInimigo(
                     static_cast<Entidade::Personagem::Inimigo::Inimigo*>(cachorro)
                 );
                 numInimChefao++;
-                criarProjetil(x, y, true, cachorro);
+                return cachorro;
             }
         }
+        return nullptr;
     }
 
     void FaseCidade::criarRoseira(float x, float y, bool danoso) {
-        if ((rand()%10 <= 10 || numRoseira < 3) && numRoseira < maxRoseiras) {
+        if ((rand()%10 <= 10 || numRoseira < 3 || y == 0) && numRoseira < maxRoseiras) {
             Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Roseira(danoso, x, y);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);
@@ -105,7 +107,10 @@ namespace Fase {
         pair<multimap<char, sf::Vector2f>::const_iterator, multimap<char, sf::Vector2f>::const_iterator> grupo =
                     inimigos.equal_range('c');
         for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
-            criarChefao((*it).second.x, (*it).second.y);
+            Entidade::Personagem::Inimigo::Cachorro* c = criarChefao((*it).second.x, (*it).second.y);
+            if (c)
+                criarProjetil((*it).second.x, (*it).second.y, true ,c);
+            c = nullptr;
         }
 
         grupo = inimigos.equal_range('v');
@@ -143,7 +148,33 @@ namespace Fase {
     }
 
     void FaseCidade::carregarFase() {
+        string tag;
+        Entidade::Personagem::Inimigo::Cachorro* c;
+        while (!buffer.eof()) {
+            buffer >> tag;
+            if (tag == "peixe") {
+                criarPeixe(0, 0);
+            } else if (tag == "cachorro") {
+                c = criarChefao(0, 0);
+            } else if (tag == "projetil") {
+                criarProjetil(0, 0, true, c);
+                c = nullptr;
+            } else if (tag == "gaivota") {
+                criarInimigoGaivota(0, 0);
+            } else if (tag == "chao") {
+                criarChao(0, 0);
+            } else if (tag == "pmovel") {
+                criarPlataformaMovel(0, 0, false);
+            } else if (tag == "roseira") {
+                criarRoseira(0, 0, false);
+            } else if (tag == "limites") {
+                buffer >> limitesFase.width >> limitesFase.height;
+                break;
+            }
+            listaEnt[listaEnt.getTam()-1]->carregar(buffer);
+        }
 
+        pGGrafico->setLimitesCamera(limitesFase);
     }
 
 }
