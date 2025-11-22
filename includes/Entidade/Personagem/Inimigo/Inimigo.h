@@ -18,7 +18,7 @@ namespace Entidade {
                 ~Inimigo();
                 static void setJogadores(Jogador* pJ1, Jogador* pJ2);
                 void setUltimoAtacante(Jogador* pJ);
-                void verificaVidas();
+                virtual void verificaVidas();
                 void lerDataBuffer();
                 virtual void carregar(istream &entrada) = 0;
                 void salvarDataBuffer();

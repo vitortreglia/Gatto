@@ -3,6 +3,16 @@
 namespace Gerenciador {
     GerenciadorGrafico* GerenciadorGrafico::pGGrafico(nullptr);
 
+/*
+ *      Metodo GerenciadorGrafico
+ *
+ *      Construtor privado da classe.
+ *      Chamado por getGerenciadorGrafico devido ao padrao Singleton.
+ *      Implementacao seguindo o material de referencia do entao monitor
+ *      Giovane Limas Salvi. Maiores detalhes em GerenciadorGrafico.h.
+ *
+ */
+
     GerenciadorGrafico::GerenciadorGrafico():
     window(new sf::RenderWindow(sf::VideoMode(TELA_X, TELA_Y), "Gatto")),
     camera({0, 0, TELA_X, TELA_Y}),
@@ -40,6 +50,15 @@ namespace Gerenciador {
     void GerenciadorGrafico::setMultiplayer(bool mult) {
         multiplayer = mult;
     }
+
+    /*
+     *      Metodo getGerenciadorGrafico
+     *
+     *      Metodo estatico padrao Singleton.
+     *      Implementacao seguindo o material de referencia do entao monitor
+     *      Giovane Limas Salvi. Maiores detalhes em GerenciadorGrafico.h.
+     *
+     */
 
     GerenciadorGrafico* GerenciadorGrafico::getGerenciadorGrafico() {
         if (!pGGrafico) {
@@ -121,8 +140,8 @@ namespace Gerenciador {
     }
 
     void GerenciadorGrafico::moveCamera(sf::Vector2f coord, int jog) {
-        if (multiplayer) {
-            if (jog == 1) {
+        if (multiplayer) {                                      //movimento cameras split screen
+            if (jog == 1) {                                     //movimento camera player 1
                 viewP1X += 5 * (coord.x - viewP1X) * tempo;
 
                 if (viewP1X < limitesCamera.left + TELA_X / 4) {
@@ -140,13 +159,12 @@ namespace Gerenciador {
                     viewP1Y = limitesCamera.height - TELA_Y / 2;
                 }
                 viewP1.setCenter(viewP1X, viewP1Y);
-                //fundo.setPosition(viewP1X - TELA_X / 2, viewP1Y - TELA_Y);
                 background2P.deslocar(viewP1X, viewP1Y);
                 window->setView(viewP1);
                 window->draw(*background2P.getFundo());
                 window->draw(*background2P.getMeio());
 
-            } else {
+            } else {                                            //movimento camera player 2
                 viewP2X += 5 * (coord.x - viewP2X) * tempo;
 
                 if (viewP2X < limitesCamera.left + TELA_X / 4) {
@@ -164,15 +182,13 @@ namespace Gerenciador {
                     viewP2Y = limitesCamera.height - TELA_Y / 2;
                 }
                 viewP2.setCenter(viewP2X, viewP2Y);
-                //.setPosition(viewP2X - TELA_X / 2, viewP2Y - TELA_Y);
                 background2P.deslocar(viewP2X, viewP2Y);
                 window->setView(viewP2);
-                //window->draw(fundo);
                 window->draw(*background2P.getFundo());
                 window->draw(*background2P.getMeio());
 
             }
-        } else {
+        } else {                                            //movimento camera single player
             cameraX += 5 * (coord.x - cameraX) * tempo;
 
             if (cameraX < limitesCamera.left + TELA_X / 2) {
@@ -198,7 +214,7 @@ namespace Gerenciador {
     }
 
     void GerenciadorGrafico::setLimitesCamera(sf::FloatRect limites) {
-        limitesCamera = limites;
+        limitesCamera = limites;                                        //definicao dos limites da fase
     }
 
     sf::FloatRect GerenciadorGrafico::getLimitesCamera() {

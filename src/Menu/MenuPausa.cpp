@@ -2,7 +2,7 @@
 
 namespace Menu {
     MenuPausa::MenuPausa():
-    titulo("Pausa", 128, 433, 100)
+    titulo("Pausa", 128, 504, 30)
     {
         criarBotoesPausa();
     }
@@ -14,10 +14,13 @@ namespace Menu {
     void MenuPausa::criarBotoesPausa() {
         incluirTexto(&titulo);
         Botao* pBotao = new Botao("Continuar");
-        pBotao->moverBotao({390, 300});
+        pBotao->moverBotao({440, 240});
+        incluirBotao(pBotao);
+        pBotao = new Botao("Salvar e Sair");
+        pBotao->moverBotao({440, 390});
         incluirBotao(pBotao);
         pBotao = new Botao("Sair");
-        pBotao->moverBotao({390, 450});
+        pBotao->moverBotao({440, 540});
         incluirBotao(pBotao);
         botoes[selecao]->destacar();
     }

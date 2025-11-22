@@ -2,7 +2,6 @@
 #include "Entidade/Itens/Projetil.h"
 #include "Gerenciador/GerenciadorColisoes.h"
 #include "Gerenciador/GerenciadorEvento.h"
-#include "Ente_IDs.h"
 
 namespace Entidade {
     namespace Personagem {
@@ -11,14 +10,14 @@ namespace Entidade {
             Cachorro::Cachorro(float x, float y) :
             ataque(1, 3.0f),
             Inimigo(0, 150.0f, {150.0f, 100.0f}, x, y-100, 4),
-            raioPercepcaoX(300.0f),
-            raioAtaque(230.0f),
-            velocidade(150.0f),
+            raioPercepcaoX(400.0f),
+            raioAtaque(300.0f),
+            velocidade(100.0f),
             pProjetil(nullptr),
             tempoPatrulha(0)
                 {
+
                 textura.inserirTextura("parado", "Data/Imagens/cachorro.png");
-                corpo.setFillColor(sf::Color(139, 69, 19));
                 vMax.x = velocidade;
                 andar(true);
                 textura.setAnimacao("parado");
@@ -53,6 +52,7 @@ namespace Entidade {
             }
 
             void Cachorro::patrulhar() {
+                textura.setAnimacao("parado");
                 tempoPatrulha += tempoFrame;
                 if (tempoPatrulha > 2.0f) {
                     tempoPatrulha = 0.0f;

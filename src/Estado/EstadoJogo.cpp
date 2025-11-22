@@ -26,7 +26,7 @@ namespace Estados {
     }
 
     //args:
-    //[0]: 1 = novo jogo 2 = carregar jogo
+    //[0]: 1 = novo jogo 2 = carregar jogo -1 = salvar e sair
     //[1]: num jogs (1 ou 2)
     //[2]: 1 = fase jardim 2 = fase cidade
     void EstadoJogo::iniciar(void *args) {
@@ -37,68 +37,73 @@ namespace Estados {
             for (int i = 0; i < 3; i++)
                 arg[i] = a[i];
 
-            if (pJog1) {
-                delete pJog1;
-                pJog1 = nullptr;
-            }
-            if (pJog2) {
-                delete pJog2;
-                pJog2 = nullptr;
-            }
-            if (pFase) {
-                delete pFase;
-                pFase = nullptr;
-            }
+            if (arg[0] == -1) {
+                pGEvento->desinscrever(this);
+                pFase->salvar();
+                abort = true;
+            } else {
+                if (pJog1) {
+                    delete pJog1;
+                    pJog1 = nullptr;
+                }
+                if (pJog2) {
+                    delete pJog2;
+                    pJog2 = nullptr;
+                }
+                if (pFase) {
+                    delete pFase;
+                    pFase = nullptr;
+                }
 
-            if (arg[0] == 2) {
-                try {
-                    ifstream carregamento("Data/Fases/save.txt");
+                if (arg[0] == 2) {
+                    try {
+                        ifstream carregamento("Data/Fases/save.txt");
 
-                    if (!carregamento.is_open())
-                        throw std::runtime_error("nao ha jogo salvo");
+                        if (!carregamento.is_open())
+                            throw std::runtime_error("nao ha jogo salvo");
 
-                    carregamento >> arg[1] >> arg[2];
+                        carregamento >> arg[1] >> arg[2];
 
+                        pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
+
+                        pJog1->carregar(carregamento);
+                        if (arg[1] == 2) {
+                            pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
+                            pJog2->carregar(carregamento);
+                        }
+                        if (pFase)
+                            delete pFase;
+                        if (arg[2] == 1) {
+                            pFase = new Fase::FaseJardim(pJog1, pJog2, carregamento);
+                        } else if (arg[2] == 2) {
+                            pFase = new Fase::FaseCidade(pJog1, pJog2, carregamento);
+                        }
+                        carregamento.close();
+                        if (pJog1)
+                            pJog1->observarEntrada();
+                        if (pJog2)
+                            pJog2->observarEntrada();
+                    }
+                    catch (const std::runtime_error &e) {
+                        cout << e.what() << endl;
+                        abort = true;
+                    }
+                } else {
                     pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
-
-                    pJog1->carregar(carregamento);
                     if (arg[1] == 2) {
                         pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
-                        pJog2->carregar(carregamento);
                     }
-                    if (pFase)
-                        delete pFase;
                     if (arg[2] == 1) {
-                        pFase = new Fase::FaseJardim(pJog1, pJog2, carregamento);
+                        pFase = new Fase::FaseJardim(pJog1, pJog2);
                     } else if (arg[2] == 2) {
-                        pFase = new Fase::FaseCidade(pJog1, pJog2, carregamento);
+                        pFase = new Fase::FaseCidade(pJog1, pJog2);
                     }
-                    carregamento.close();
                     if (pJog1)
                         pJog1->observarEntrada();
                     if (pJog2)
                         pJog2->observarEntrada();
                 }
-                catch (const std::runtime_error &e) {
-                    cout << e.what() << endl;
-                    abort = true;
-                }
-            } else {
-                pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
-                if (arg[1] == 2) {
-                    pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
-                }
-                if (arg[2] == 1) {
-                    pFase = new Fase::FaseJardim(pJog1, pJog2);
-                } else if (arg[2] == 2) {
-                    pFase = new Fase::FaseCidade(pJog1, pJog2);
-                }
-                if (pJog1)
-                    pJog1->observarEntrada();
-                if (pJog2)
-                    pJog2->observarEntrada();
             }
-
         } else {
             if (pJog1)
                 pJog1->observarEntrada();
@@ -112,6 +117,9 @@ namespace Estados {
         pontosP2 = 0;
         int* a = static_cast<int*>(args);
         switch (a[0]) {
+            case -1:
+                mudarEstado(EstadoMenuPrincipal::getEstadoMenuPrincipal(NULL));
+                break;
             case 1:
                 mudarEstado(EstadoPausa::getEstadoPausa(NULL));
                 break;
@@ -175,6 +183,7 @@ namespace Estados {
                     }
                     sair(arg);
                 } else {
+                    arg[0] = 1;
                     arg[2] = 2;
                     iniciar(arg);
                 }
@@ -194,15 +203,11 @@ namespace Estados {
 
     void EstadoJogo::atualizar() {
         if (abort) {
-            int a = 2;
+            int a = -1;
             sair(&a);
         }
         if (pFase)
             pFase->executar();
         verificaFimJogo();
-    }
-
-    void EstadoJogo::desenhar() {
-
     }
 }

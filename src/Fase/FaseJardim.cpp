@@ -41,7 +41,6 @@ namespace Fase {
         listaEnt.incluir(pJog1);
         if (pJog2) {
             pGGrafico->setMultiplayer(true);
-            pJog2->setPosicao({2400, 5800});
             listaEnt.incluir(pJog2);
             numJogs = 2;
             if (pJog1->estaAtivo() && pJog2->estaAtivo())
@@ -95,8 +94,13 @@ namespace Fase {
         }
 
         grupo = inimigos.equal_range('v');
+        Entidade::Personagem::Inimigo::Gaivota* pG = nullptr;
         for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
-            criarInimigoGaivota((*it).second.x, (*it).second.y);
+            pG = criarInimigoGaivota((*it).second.x, (*it).second.y);
+            if (pG) {
+                criarPeixe(0, 0, pG);
+            }
+            pG = nullptr;
         }
     }
 
@@ -125,14 +129,20 @@ namespace Fase {
 
     void FaseJardim::carregarFase() {
         string tag;
+        Entidade::Personagem::Inimigo::Gaivota* g = nullptr;
         while (!buffer.eof()) {
             buffer >> tag;
             if (tag == "peixe") {
-                criarPeixe(0, 0);
+                if (g) {
+                    criarPeixe(0, 0, g);
+                    g = nullptr;
+                } else {
+                    criarPeixe(0, 0, nullptr);
+                }
             } else if (tag == "rato") {
                 criarInimigoRato(0, 0);
             } else if (tag == "gaivota") {
-                criarInimigoGaivota(0, 0);
+                g = criarInimigoGaivota(0, 0);
             } else if (tag == "chao") {
                 criarChao(0, 0);
             } else if (tag == "pmovel") {

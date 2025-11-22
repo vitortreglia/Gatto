@@ -5,6 +5,8 @@
 #include <fstream>
 #include <string>
 
+#include "Entidade/Personagem/Inimigo/Gaivota.h"
+
 namespace Fase {
     class Fase : public Ente {
     protected:
@@ -30,8 +32,8 @@ namespace Fase {
         void semearRand();
         void criarChao(float x, float y);
         void criarPlataformaMovel(float x, float y, bool direcao);
-        void criarPeixe(float x, float y);
-        void criarInimigoGaivota(float x, float y);
+        void criarPeixe(float x, float y, Entidade::Personagem::Inimigo::Gaivota* pG);
+        Entidade::Personagem::Inimigo::Gaivota* criarInimigoGaivota(float x, float y);
         virtual void criarObstaculos(multimap<char, sf::Vector2f> obstaculos) = 0;
         virtual void criarInimigos(multimap<char, sf::Vector2f> inimigos) = 0;
         virtual void carregarFase() = 0;

@@ -17,12 +17,12 @@ namespace Estados {
     }
 
     void EstadoFimDeJogo::iniciar(void *args) {
+        pGEvento->inscrever(this);
         int* a = static_cast<int*>(args);
         if (pMenu)
             delete pMenu;
         pMenu = new Menu::MenuFimDeJogo(a[1]);
         pontVencedor = a[2];
-        pGEvento->inscrever(this);
     }
 
     void EstadoFimDeJogo::sair(void *args) {
@@ -84,10 +84,6 @@ namespace Estados {
 
     void EstadoFimDeJogo::atualizar() {
         pMenu->executar();
-    }
-
-    void EstadoFimDeJogo::desenhar() {
-
     }
 
 }

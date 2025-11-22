@@ -47,7 +47,7 @@ namespace Fase {
     }
 
     void Fase::criarPlataformaMovel(float x, float y, bool direcao) {
-        if ((rand()%10 <= 10 || numPMovel < 3) && numPMovel < maxPMovel) {
+        if ((rand()%10 <= 10 || numPMovel < 3 || y == 0) && numPMovel < maxPMovel) {
             Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y+50, direcao);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);
@@ -63,23 +63,29 @@ namespace Fase {
         }
     }
 
-    void Fase::criarPeixe(float x, float y) {
+    void Fase::criarPeixe(float x, float y, Entidade::Personagem::Inimigo::Gaivota* pG) {
         Entidade::Entidade* objEntidade = new Entidade::Itens::Peixe(x, y);
         if (objEntidade) {
             listaEnt.incluir(objEntidade);
             pGColisoes->incluirPeixe(static_cast<Entidade::Itens::Peixe*>(objEntidade));
+            if (pG) {
+                objEntidade->setAtivo(false);
+                pG->setPeixe(static_cast<Entidade::Itens::Peixe*>(objEntidade));
+            }
         }
     }
 
-    void Fase::criarInimigoGaivota(float x, float y) {
-        if ((rand()%10 <= 10 || numInimGaivota < 3) && numInimGaivota < maxInimGaivota) {
-            Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Gaivota(x, y);
+    Entidade::Personagem::Inimigo::Gaivota* Fase::criarInimigoGaivota(float x, float y) {
+        if ((rand()%10 <= 10 || numInimGaivota < 3 || y == 0) && numInimGaivota < maxInimGaivota) {
+            Entidade::Personagem::Inimigo::Gaivota* objEntidade = new Entidade::Personagem::Inimigo::Gaivota(x, y);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);
                 pGColisoes->incluirInimigo(static_cast<Entidade::Personagem::Inimigo::Inimigo*>(objEntidade));
                 numInimGaivota++;
+                return objEntidade;
             }
         }
+        return nullptr;
     }
 
     void Fase::atualizarEntidades() {
@@ -125,7 +131,7 @@ namespace Fase {
                     inimigos.insert({linha[i], {x, y}});
                     x += 200.0f;
                 } else if (linha[i] == 'f') {
-                    criarPeixe(x, y);
+                    criarPeixe(x, y, nullptr);
                     x += 100.0f;
                 }
                 x += espaco * 100.0f;

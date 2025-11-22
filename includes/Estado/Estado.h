@@ -23,7 +23,6 @@ namespace Estados {
         virtual void tratarEventos() = 0;
 
         virtual void atualizar() = 0;
-        virtual void desenhar() = 0;
         void mudarEstado(Estado* pE);
     };
 }

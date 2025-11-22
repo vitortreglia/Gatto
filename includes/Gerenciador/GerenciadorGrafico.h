@@ -14,6 +14,15 @@
 
 using namespace std;
 
+/*  Gerenciador Grafico feito usando o Padrao de Projeto Singleton
+ *
+ *      Implementacao de elementos da classe baseada no material disponibilizado
+ *      pelo então monitor Giovane Limas Salvi, no 2º semestre de 2022 em
+ *      https://www.youtube.com/watch?v=gfGE5KY1OQU e
+ *      https://github.com/Giovanenero/JogoPlataforma2D-Jungle/tree/main
+ *
+ */
+
 namespace Gerenciador {
     class GerenciadorGrafico {
     private:

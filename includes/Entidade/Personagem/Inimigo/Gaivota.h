@@ -22,12 +22,14 @@ namespace Entidade {
                 const float raioPercepcaoX;
                 const float raioPercepcaoY;
                 bool possuiPeixe;
-
+                Itens::Peixe* pPeixe;
             public:
                 Gaivota(float x, float y);
                 ~Gaivota();
+                void setPeixe(Itens::Peixe* pP);
                 void danificar(Jogador *pJ);
                 void mover();
+                void verificaVidas();
                 void executar();
                 void setEstado(EstadoGaivota* pEstado);
                 Jogador* patrulhar(float dt);

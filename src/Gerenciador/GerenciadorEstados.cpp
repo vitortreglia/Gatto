@@ -1,8 +1,6 @@
 #include "Gerenciador/GerenciadorEstados.h"
-
-#include "Estado/EstadoFimDeJogo.h"
 #include "Estado/EstadoMenuPrincipal.h"
-#include "Estado/EstadoPausa.h"
+#include "Estado/EstadoRanking.h"
 
 namespace Gerenciador {
     GerenciadorEstados::GerenciadorEstados() {
@@ -17,7 +15,6 @@ namespace Gerenciador {
         Estados::Estado::setGerenciadorEstados(this);
         mudarEstado(Estados::EstadoMenuPrincipal::getEstadoMenuPrincipal(static_cast<void*>(args)));
     }
-
 
     void GerenciadorEstados::atualizar() {
         pEstado->atualizar();

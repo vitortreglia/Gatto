@@ -4,7 +4,7 @@ namespace Menu {
     MenuFimDeJogo::MenuFimDeJogo(int i):
     titulo("", 72, 400, 80){
         if (i == 2) {
-            titulo.setTexto("Jogador 1 Venceu!");
+            titulo.setTexto("Jogador 2 Venceu!");
         } else {
             titulo.setTexto("Jogador 1 Venceu!");
         }
@@ -22,6 +22,7 @@ namespace Menu {
         Botao* pBotao = new Botao("VOLTAR AO MENU");
         pBotao->moverBotao({440, 400});
         incluirBotao(pBotao);
+        incluirTexto(&titulo);
     }
 
     bool MenuFimDeJogo::tratarCliques(sf::Vector2f c) {
@@ -62,7 +63,6 @@ namespace Menu {
     }
 
     void MenuFimDeJogo::executar() {
-        titulo.executar();
         entrada.executar();
         Menu::executar();
     }

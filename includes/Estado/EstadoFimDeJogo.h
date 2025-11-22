@@ -19,7 +19,6 @@ namespace Estados {
         void sair(void* args);
         void tratarEventos();
         void atualizar();
-        void desenhar();
     };
 }
 

@@ -62,7 +62,6 @@ namespace Fase {
 
     void FaseCidade::criarProjetil(float x, float y, bool direita,
         Entidade::Personagem::Inimigo::Cachorro* pCachorro) {
-
         if (!pCachorro)
             return;
 
@@ -123,8 +122,13 @@ namespace Fase {
         }
 
         grupo = inimigos.equal_range('v');
+        Entidade::Personagem::Inimigo::Gaivota* pG = nullptr;
         for (multimap<char, sf::Vector2f>::const_iterator it = grupo.first; it != grupo.second; it++) {
-            criarInimigoGaivota((*it).second.x, (*it).second.y);
+            pG = criarInimigoGaivota((*it).second.x, (*it).second.y);
+            if (pG) {
+                criarPeixe(0, 0, pG);
+            }
+            pG = nullptr;
         }
     }
 
@@ -158,18 +162,24 @@ namespace Fase {
 
     void FaseCidade::carregarFase() {
         string tag;
-        Entidade::Personagem::Inimigo::Cachorro* c;
+        Entidade::Personagem::Inimigo::Cachorro* c = nullptr;
+        Entidade::Personagem::Inimigo::Gaivota* g = nullptr;
         while (!buffer.eof()) {
             buffer >> tag;
             if (tag == "peixe") {
-                criarPeixe(0, 0);
+                if (g) {
+                    criarPeixe(0, 0, g);
+                    g = nullptr;
+                } else {
+                    criarPeixe(0, 0, nullptr);
+                }
             } else if (tag == "cachorro") {
                 c = criarChefao(0, 0);
             } else if (tag == "projetil") {
                 criarProjetil(0, 0, true, c);
                 c = nullptr;
             } else if (tag == "gaivota") {
-                criarInimigoGaivota(0, 0);
+                g = criarInimigoGaivota(0, 0);
             } else if (tag == "chao") {
                 criarChao(0, 0);
             } else if (tag == "pmovel") {

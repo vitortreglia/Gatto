@@ -1,7 +1,6 @@
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 #include "Gerenciador/GerenciadorColisoes.h"
 #include "Gerenciador/GerenciadorEvento.h"
-#include "Ente_IDs.h"
 #include "Entidade/Personagem/Inimigo/EstadoPatrulha.h"
 
 namespace Entidade {
@@ -18,7 +17,8 @@ namespace Entidade {
             possuiPeixe(false),
             estado(nullptr),
             raioPercepcaoX(280),
-            raioPercepcaoY(300)
+            raioPercepcaoY(300),
+            pPeixe(nullptr)
             {
                 textura.inserirTextura("voando", "Data/Imagens/Gaivota/voando.png");
                 textura.inserirTextura("rasante", "Data/Imagens/Gaivota/rasante.png");
@@ -30,6 +30,10 @@ namespace Entidade {
             }
 
             Gaivota::~Gaivota(){}
+
+            void Gaivota::setPeixe(Itens::Peixe *pP) {
+                pPeixe = pP;
+            }
 
             void Gaivota::danificar(Jogador *pJ) {
                 if (!pJ->getImunidadeDano() && !sofrendoDano) {
@@ -88,6 +92,27 @@ namespace Entidade {
             void Gaivota::setEstado(EstadoGaivota *pEstado) {
                 if (pEstado) {
                     estado = pEstado;
+                }
+            }
+
+            void Gaivota::verificaVidas() {
+                if (numVidas <= 0) {
+                    cout << "inimigo morreu" << endl;
+                    if (pUltimoAtacante)
+                        pUltimoAtacante->pontuar(nivelMaldade * 100 + 100);
+                    if (possuiPeixe) {
+                        pPeixe->setAtivo(true);
+                        pPeixe->setPosicao({x, y});
+                    }
+                    setAtivo(false);
+                } else if (sofrendoDano) {
+                    corpo.setFillColor(sf::Color::Red);
+                    tempoDano += tempoFrame;
+                    if (tempoDano > 0.5f) {
+                        sofrendoDano = false;
+                        tempoDano = 0.0f;
+                        corpo.setFillColor(sf::Color::White);
+                    }
                 }
             }
 

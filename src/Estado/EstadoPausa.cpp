@@ -30,6 +30,10 @@ namespace Estados {
                 mudarEstado(EstadoJogo::getEstadoJogo(NULL));
                 break;
             case 2:
+                *arg = -1;
+                mudarEstado(EstadoJogo::getEstadoJogo(arg));
+                break;
+            case 3:
                 mudarEstado(EstadoMenuPrincipal::getEstadoMenuPrincipal(NULL));
                 break;
         }
@@ -39,6 +43,17 @@ namespace Estados {
         set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
         set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
         int arg;
+        if (pMenuPausa->tratarCliques(pGEvento->getClique())) {
+            int args;
+            if (pMenuPausa->getSelecao() == 0) {
+                args = 1;
+            } else if (pMenuPausa->getSelecao() == 1) {
+                args = 2;
+            } else {
+                args = 3;
+            }
+            sair(&args);
+        }
         if (teclasSoltas.count(sf::Keyboard::W)) {
             pMenuPausa->anterior();
         } else if (teclasSoltas.count(sf::Keyboard::S)) {
@@ -47,8 +62,10 @@ namespace Estados {
             int args;
             if (pMenuPausa->getSelecao() == 0) {
                 args = 1;
-            } else {
+            } else if (pMenuPausa->getSelecao() == 1) {
                 args = 2;
+            } else {
+                args = 3;
             }
             sair(&args);
         }
@@ -56,10 +73,6 @@ namespace Estados {
 
     void EstadoPausa::atualizar() {
         pMenuPausa->executar();
-    }
-
-    void EstadoPausa::desenhar() {
-
     }
 
 }

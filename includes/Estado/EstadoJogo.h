@@ -24,7 +24,6 @@ namespace Estados {
         void tratarEventos();
         void verificaFimJogo();
         void atualizar();
-        void desenhar();
     };
 }
 

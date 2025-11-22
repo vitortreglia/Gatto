@@ -36,7 +36,11 @@ add_executable(Gatto ${SOURCES}
         src/UI/CaixaDeTexto.cpp
         includes/UI/CaixaDeTexto.h
         src/Estado/EstadoFimDeJogo.cpp
-        includes/Estado/EstadoFimDeJogo.h)
+        includes/Estado/EstadoFimDeJogo.h
+        src/Menu/MenuRanking.cpp
+        includes/Menu/MenuRanking.h
+        src/Estado/EstadoRanking.cpp
+        includes/Estado/EstadoRanking.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE
