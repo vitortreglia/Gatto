@@ -14,6 +14,7 @@ namespace Estados {
         int pontosP1;
         int pontosP2;
         int arg[3];
+        bool abort;
     private:
         EstadoJogo();
     public:
@@ -21,6 +22,7 @@ namespace Estados {
         void iniciar(void* args);
         void sair(void* args);
         void tratarEventos();
+        void verificaFimJogo();
         void atualizar();
         void desenhar();
     };

@@ -4,6 +4,7 @@
 
 namespace Estados {
     EstadoMenuPrincipal* EstadoMenuPrincipal::pEstadoMenu(nullptr);
+
     EstadoMenuPrincipal::EstadoMenuPrincipal():
     pMenu(nullptr)
     {}
@@ -16,15 +17,16 @@ namespace Estados {
     }
 
     void EstadoMenuPrincipal::iniciar(void *args) {
-        if (!pMenu)
-            pMenu = new Menu::MenuPrincipal();
+        if (pMenu)
+            delete pMenu;
+        pMenu = new Menu::MenuPrincipal();
         pGEvento->inscrever(this);
     }
 
     void EstadoMenuPrincipal::sair(void *args) {
         pGEvento->desinscrever(this);
         int* arg = static_cast<int*>(args);
-        mudarEstado(static_cast<Estado*>(EstadoJogo::getEstadoJogo(static_cast<void*>(arg))));
+        mudarEstado(EstadoJogo::getEstadoJogo(static_cast<void*>(arg)));
     }
 
     void EstadoMenuPrincipal::tratarEventos() {
@@ -35,7 +37,8 @@ namespace Estados {
         } else if (teclasSoltas.count(sf::Keyboard::S)) {
             pMenu->proximo();
         } else if (teclasSoltas.count(sf::Keyboard::Enter)) {
-            int args[] = {1, 1, 1};
+            cout << "enter" << endl;
+            int args[] = {0, 1, 1};
             if (pMenu->getSelecao() == 0) {
                 args[0] = 1;
             } else if (pMenu->getSelecao() == 1){

@@ -1,11 +1,11 @@
 #ifndef TEXTO_H
 #define TEXTO_H
 #include <SFML/Graphics/Text.hpp>
-#include "Ente.h"
+#include "../Ente.h"
 
 
 
-    class Texto : public Ente{
+class Texto : public Ente{
     private:
         sf::Text texto;
         sf::Font fonte;
@@ -18,6 +18,7 @@
         void setFonte(string caminho);
         void setCor(sf::Uint8 r, sf::Uint8 g, sf::Uint8 b, sf::Uint8 a);
         sf::FloatRect getDimensoesTexto();
+        string getTexto();
         void executar();
     };
 

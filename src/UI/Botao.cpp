@@ -1,14 +1,11 @@
-#include "Entidade/Botao/Botao.h"
-namespace Entidade {
-    Botao::Botao(string rotulo):
+#include "UI/Botao.h"
+Botao::Botao(string rotulo):
     Ente(&corpo),
     textoBotao(rotulo, 42, 600.0f, 140.0f),
     corpo({400, 80})
     {
-        //textura.setTextura("Data/Imagens/botao.png");
         textoBotao.setFonte("Data/Fontes/KirangHaerang-Regular.ttf");
         textoBotao.setCor(242, 237, 203, 255);
-        //setTextura(&textura);
         corpo.setFillColor({63, 61, 61, 255});
     }
 
@@ -37,4 +34,7 @@ namespace Entidade {
         pGGrafico->desenharUI(&corpo);
         textoBotao.executar();
     }
-}
+
+    sf::FloatRect Botao::getCoordBotao() {
+        return corpo.getGlobalBounds();
+    }

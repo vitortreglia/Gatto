@@ -1,7 +1,7 @@
 #ifndef JOGADOR_H
 #define JOGADOR_H
 #include "Entidade/Personagem/Personagem.h"
-#include "Texto.h"
+#include "UI/Texto.h"
 #include "Entidade/Personagem/Ataque.h"
 #include "Entidade/Itens/Peixe.h"
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
@@ -12,7 +12,6 @@ namespace Entidade {
     namespace Personagem {
         class Jogador : public Personagem, public Observer {
         private:
-            static Gerenciador::GerenciadorEvento* pGEvento;
             int pontos;
             int numJog;
             Ataque ataque;
@@ -26,7 +25,6 @@ namespace Entidade {
             Jogador(int nJog, int p);
             ~Jogador();
             bool getVencedor();
-            static void setGerenciadorEvento();
             void observarEntrada();
             void ignorarEntrada();
             void liberaPulo();

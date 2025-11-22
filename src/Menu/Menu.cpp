@@ -13,7 +13,7 @@ namespace Menu {
 
     }
 
-    void Menu::incluirBotao(Entidade::Botao *pB) {
+    void Menu::incluirBotao(Botao *pB) {
         botoes.push_back(pB);
     }
 
@@ -22,7 +22,7 @@ namespace Menu {
     }
 
     void Menu::executar() {
-        for (std::vector<Entidade::Botao*>::const_iterator it = botoes.begin(); it != botoes.end(); it++) {
+        for (std::vector<Botao*>::const_iterator it = botoes.begin(); it != botoes.end(); it++) {
             (*it)->executar();
         }
         for (std::vector<Texto*>::const_iterator it = textos.begin(); it != textos.end(); it++) {
@@ -51,5 +51,20 @@ namespace Menu {
     int Menu::getSelecao() {
         return selecao;
     }
+
+    bool Menu::tratarCliques(sf::Vector2f c) {
+        int i = 0;
+        sf::FloatRect b;
+        for (std::vector<Botao*>::const_iterator it = botoes.begin(); it != botoes.end(); it++) {
+            b = (*it)->getCoordBotao();
+            if (c.x > b.left && c.x < b.width + b.left && c.y > b.top && c.y < b.height + b.top) {
+                selecao = i;
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+
 
 }

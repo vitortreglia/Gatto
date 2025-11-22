@@ -1,9 +1,7 @@
 #ifndef ESTADO_H
 #define ESTADO_H
-#include "Ente_IDs.h"
-#include "Gerenciador/GerenciadorEvento.h"
 #include "Observer/Observer.h"
-
+#include <fstream>
 namespace Gerenciador {
     class GerenciadorEstados;
 }
@@ -11,13 +9,10 @@ namespace Gerenciador {
 
 namespace Estados {
     class Estado: public Observer {
-    protected:
-        static Gerenciador::GerenciadorEvento* pGEvento;
     private:
         static Gerenciador::GerenciadorEstados* pGE;
     public:
         static void setGerenciadorEstados(Gerenciador::GerenciadorEstados* pG);
-        static void setGerenciadorEvento();
         virtual ~Estado() = default;
 
         void notificar();

@@ -9,8 +9,8 @@ namespace Gerenciador {
     viewP1({0, 0, TELA_X/2, TELA_Y}),
     viewP2({0, 0, TELA_X/2, TELA_Y}),
     limitesCamera({0.0f, 0.0f, 0.0f, 0.0f}),
-    cameraX(TELA_X/2),
-    cameraY(TELA_Y/2),
+    cameraX(640),
+    cameraY(360),
     tempo(0.0f),
     multiplayer(false),
     background1P(640, 360, 1),
@@ -22,7 +22,7 @@ namespace Gerenciador {
         }
         uiBuffer.create(1280, 720);
         window->setFramerateLimit(60);
-        //camera.setCenter(TELA_X/2, TELA_Y/2);
+        camera.setCenter(TELA_X/2, TELA_Y/2);
         viewP1.setViewport({0, 0, 0.5f, 1.0f});
         viewP1.zoom(1.5f);
         viewP2.setViewport({0.5f, 0, 0.5f, 1.0f});
@@ -60,6 +60,7 @@ namespace Gerenciador {
     void GerenciadorGrafico::setMovimentoFundo(float fundo, float meio, float frente) {
         background1P.setMovimento(fundo, meio, frente);
         background2P.setMovimento(fundo, meio, frente);
+        background1P.deslocar(cameraX, cameraY);
     }
 
     void GerenciadorGrafico::desenharEnte(sf::RectangleShape* corpo) {
@@ -190,7 +191,6 @@ namespace Gerenciador {
             }
             camera.setCenter(cameraX, cameraY);
             background1P.deslocar(cameraX, cameraY);
-            //fundo.setPosition(cameraX - TELA_X / 2, cameraY - 100 - TELA_Y / 2);
             window->setView(camera);
         }
 

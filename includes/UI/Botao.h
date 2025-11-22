@@ -1,10 +1,8 @@
 #ifndef BOTAO_H
 #define BOTAO_H
 #include "Texto.h"
-#include "Entidade/Entidade.h"
 
-namespace Entidade {
-    class Botao : public Ente {
+class Botao : public Ente {
     private:
         Texto textoBotao;
         sf::RectangleShape corpo;
@@ -15,8 +13,8 @@ namespace Entidade {
         void destacar();
         void tirarDestaque();
         void executar();
+        sf::FloatRect getCoordBotao();
     };
-}
 
 
 #endif //BOTAO_H

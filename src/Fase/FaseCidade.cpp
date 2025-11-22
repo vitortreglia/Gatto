@@ -14,10 +14,14 @@ namespace Fase {
         pJog1->setPosicao({1100, 2700});
         listaEnt.incluir(pJog1);
         if (pJog2) {
-            pGGrafico->setMultiplayer(true);
             pJog2->setPosicao({2400, 2700});
             listaEnt.incluir(pJog2);
             numJogs = 2;
+            if (pJog1->estaAtivo() && pJog2->estaAtivo())
+                pGGrafico->setMultiplayer(true);
+            else {
+                pGGrafico->setMultiplayer(false);
+            }
         }
         pGGrafico->setFundo("Data/Imagens/fundoFaseCidade.png", "", "");
         pGGrafico->setMovimentoFundo(1, 0, 0.5);
@@ -38,6 +42,11 @@ namespace Fase {
             pGGrafico->setMultiplayer(true);
             listaEnt.incluir(pJog2);
             numJogs = 2;
+            if (pJog1->estaAtivo() && pJog2->estaAtivo())
+                pGGrafico->setMultiplayer(true);
+            else {
+                pGGrafico->setMultiplayer(false);
+            }
         }
         pGGrafico->setFundo("Data/Imagens/fundoFaseCidade.png", "", "");
         pGGrafico->setMovimentoFundo(1, 0, 0.5);

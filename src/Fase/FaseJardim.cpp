@@ -16,10 +16,14 @@ namespace Fase {
         pJog1->setPosicao({1700, 5800});
         listaEnt.incluir(pJog1);
         if (pJog2) {
-            pGGrafico->setMultiplayer(true);
             pJog2->setPosicao({2400, 5800});
             listaEnt.incluir(pJog2);
             numJogs = 2;
+            if (pJog1->estaAtivo() && pJog2->estaAtivo())
+                pGGrafico->setMultiplayer(true);
+            else {
+                pGGrafico->setMultiplayer(false);
+            }
         }
         pGGrafico->setFundo("Data/Imagens/fundoFaseJardim.png", "Data/Imagens/meioFaseJardim.png", "");
         Entidade::Personagem::Inimigo::Inimigo::setJogadores(pJog1, pJog2);
@@ -40,6 +44,11 @@ namespace Fase {
             pJog2->setPosicao({2400, 5800});
             listaEnt.incluir(pJog2);
             numJogs = 2;
+            if (pJog1->estaAtivo() && pJog2->estaAtivo())
+                pGGrafico->setMultiplayer(true);
+            else {
+                pGGrafico->setMultiplayer(false);
+            }
         }
         pGGrafico->setFundo("Data/Imagens/fundoFaseJardim.png", "Data/Imagens/meioFaseJardim.png", "");
         Entidade::Personagem::Inimigo::Inimigo::setJogadores(pJog1, pJog2);

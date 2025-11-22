@@ -13,10 +13,10 @@ namespace Menu {
 
     void MenuPausa::criarBotoesPausa() {
         incluirTexto(&titulo);
-        Entidade::Botao* pBotao = new Entidade::Botao("Continuar");
+        Botao* pBotao = new Botao("Continuar");
         pBotao->moverBotao({390, 300});
         incluirBotao(pBotao);
-        pBotao = new Entidade::Botao("Sair");
+        pBotao = new Botao("Sair");
         pBotao->moverBotao({390, 450});
         incluirBotao(pBotao);
         botoes[selecao]->destacar();

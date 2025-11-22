@@ -27,7 +27,20 @@ namespace Gerenciador {
         return teclasSoltas;
     }
 
+    sf::Uint32 GerenciadorEvento::getEntradaTexto() {
+        return c;
+    }
+
+    sf::Vector2f GerenciadorEvento::getClique() {
+        return clique;
+    }
+
+
     void GerenciadorEvento::verificaTeclasPressionadas(sf::Event evento) {
+        if (evento.type == sf::Event::TextEntered) {
+            c = evento.text.unicode;
+        }
+
         if (evento.type == sf::Event::KeyPressed) {
             teclasAtivas.insert(evento.key.code);
         }
@@ -36,34 +49,12 @@ namespace Gerenciador {
             teclasSoltas.insert(evento.key.code);
         }
 
-        /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            //pJogador->andar(false);
-        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            //pJogador->andar(true);
-        } else {
-            //pJogador->parar();
+        if (evento.type == sf::Event::MouseButtonPressed) {
+            if (evento.mouseButton.button == sf::Mouse::Left) {
+                clique.x = evento.mouseButton.x;
+                clique.y = evento.mouseButton.y;
+            }
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            //pJogador->pular(1);
-        } else {
-            //pJogador->liberaPulo();
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            //pJogador->atacar();
-        } else {
-            //pJogador->liberaAtaque();
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
-            pGEstados->sair();
-        }*/
-    }
-
-    void GerenciadorEvento::verificaTeclaSolta() {
-        /*if (sf::Keyboard::(sf::Keyboard::A)) {
-            pJogador->parar();
-        } else if (tecla == sf::Keyboard::D) {
-            pJogador->parar();
-        }*/
     }
 
     void GerenciadorEvento::executar() {
@@ -74,9 +65,11 @@ namespace Gerenciador {
             }
             verificaTeclasPressionadas(evento);
         }
-        if (!teclasAtivas.empty() || !teclasSoltas.empty()) {
+        if (!teclasAtivas.empty() || !teclasSoltas.empty() || (clique.x != 0 && clique.y != 0)) {
             notificar();
             teclasSoltas.clear();
+            clique = {0, 0};
+            c = 0;
         }
     }
 

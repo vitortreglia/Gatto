@@ -19,12 +19,12 @@ void Parallax::setTexturas(std::string tFundo, std::string tMeio, std::string tF
     fundo.loadFromFile(tFundo);
     fundo.setRepeated(true);
     spriteFundo.setTexture(fundo);
-    //spriteFundo.setScale(0.5, 0.5);
     if (tMeio != "") {
         spriteMeio.setColor(sf::Color::White);
         meio.loadFromFile(tMeio);
         meio.setRepeated(true);
         spriteMeio.setTexture(meio);
+
     } else {
         spriteMeio.setColor(sf::Color::Transparent);
     }

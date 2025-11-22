@@ -1,17 +1,16 @@
-#include "Texto.h"
+#include "../../includes/UI/Texto.h"
 
 
-    Texto::Texto(std::string conteudo, int tamanho, float x, float y):
+Texto::Texto(std::string conteudo, int tamanho, float x, float y):
     Ente(&texto)
     {
-        fonte.loadFromFile("Data/Fontes/RubikBubbles-Regular.ttf");
+        fonte.loadFromFile("Data/Fontes/KirangHaerang-Regular.ttf");
         texto.setString(conteudo);
         texto.setCharacterSize(tamanho);
         texto.setPosition(x, y);
         texto.setFont(fonte);
-        texto.setColor({120, 99, 27, 255});
-        texto.setOutlineThickness(10);
-        texto.setOutlineColor({231, 211, 41, 255});
+        texto.setColor({63, 61, 61, 255});
+
     }
 
     Texto::~Texto() {}
@@ -42,8 +41,10 @@
         return texto.getGlobalBounds();
     }
 
+    string Texto::getTexto() {
+        return texto.getString();
+    }
+
     void Texto::executar() {
         desenhar();
     }
-
-

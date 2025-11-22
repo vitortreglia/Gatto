@@ -3,7 +3,6 @@
 
 namespace Entidade {
     namespace Personagem {
-        Gerenciador::GerenciadorEvento* Jogador::pGEvento(nullptr);
 
         Jogador::Jogador(int nJog, int p):
         Personagem(600.0f, sf::Vector2f(100, 100), 1600, 4500, 7),
@@ -41,10 +40,6 @@ namespace Entidade {
 
         bool Jogador::getVencedor() {
             return vencedor;
-        }
-
-        void Jogador::setGerenciadorEvento() {
-            pGEvento = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
         }
 
         void Jogador::observarEntrada() {

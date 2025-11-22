@@ -5,6 +5,7 @@
 #include "Fase/FaseCidade.h"
 #include "Fase/FaseJardim.h"
 #include "Entidade/Entidade.h"
+#include "Estado/EstadoFimDeJogo.h"
 
 namespace Estados {
     EstadoJogo* EstadoJogo::pEstadoJogo(nullptr);
@@ -14,17 +15,14 @@ namespace Estados {
     pJog1(nullptr),
     pJog2(nullptr),
     pontosP1(0),
-    pontosP2(0) {
-        Entidade::Personagem::Jogador::setGerenciadorEvento();
-    }
+    pontosP2(0) {}
 
     EstadoJogo *EstadoJogo::getEstadoJogo(void* args) {
         if (!pEstadoJogo)
             pEstadoJogo = new EstadoJogo();
-
         pEstadoJogo->iniciar(args);
-
         return pEstadoJogo;
+
     }
 
     //args:
@@ -32,10 +30,13 @@ namespace Estados {
     //[1]: num jogs (1 ou 2)
     //[2]: 1 = fase jardim 2 = fase cidade
     void EstadoJogo::iniciar(void *args) {
+        abort = false;
+        pGEvento->inscrever(this);
         if (args) {
             int* a = (int*)args;
             for (int i = 0; i < 3; i++)
                 arg[i] = a[i];
+
             if (pJog1) {
                 delete pJog1;
                 pJog1 = nullptr;
@@ -44,6 +45,11 @@ namespace Estados {
                 delete pJog2;
                 pJog2 = nullptr;
             }
+            if (pFase) {
+                delete pFase;
+                pFase = nullptr;
+            }
+
             if (arg[0] == 2) {
                 try {
                     ifstream carregamento("Data/Fases/save.txt");
@@ -62,51 +68,55 @@ namespace Estados {
                     }
                     if (pFase)
                         delete pFase;
-
                     if (arg[2] == 1) {
                         pFase = new Fase::FaseJardim(pJog1, pJog2, carregamento);
                     } else if (arg[2] == 2) {
                         pFase = new Fase::FaseCidade(pJog1, pJog2, carregamento);
                     }
                     carregamento.close();
+                    if (pJog1)
+                        pJog1->observarEntrada();
+                    if (pJog2)
+                        pJog2->observarEntrada();
                 }
                 catch (const std::runtime_error &e) {
                     cout << e.what() << endl;
-                    *a = 2;
-                    sair(a);
+                    abort = true;
                 }
             } else {
                 pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
                 if (arg[1] == 2) {
                     pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
                 }
-                if (pFase)
-                    delete pFase;
                 if (arg[2] == 1) {
                     pFase = new Fase::FaseJardim(pJog1, pJog2);
                 } else if (arg[2] == 2) {
                     pFase = new Fase::FaseCidade(pJog1, pJog2);
                 }
+                if (pJog1)
+                    pJog1->observarEntrada();
+                if (pJog2)
+                    pJog2->observarEntrada();
             }
+
+        } else {
+            if (pJog1)
+                pJog1->observarEntrada();
+            if (pJog2)
+                pJog2->observarEntrada();
         }
-        pGEvento->inscrever(this);
-        pJog1->observarEntrada();
-        if (pJog2)
-            pJog2->observarEntrada();
     }
 
     void EstadoJogo::sair(void *args) {
+        pontosP1 = 0;
+        pontosP2 = 0;
         int* a = static_cast<int*>(args);
-        pGEvento->desinscrever(this);
-        pJog1->ignorarEntrada();
-        if (pJog2)
-            pJog2->ignorarEntrada();
-        switch (*a) {
+        switch (a[0]) {
             case 1:
                 mudarEstado(EstadoPausa::getEstadoPausa(NULL));
                 break;
             case 2:
-                mudarEstado(EstadoMenuPrincipal::getEstadoMenuPrincipal(NULL));
+                mudarEstado(EstadoFimDeJogo::getEstadoFimDeJogo(args));
                 break;
         }
     }
@@ -117,45 +127,82 @@ namespace Estados {
 
         if (teclasSoltas.count(sf::Keyboard::P)) {
             int a = 1;
+            pGEvento->desinscrever(this);
+            pJog1->ignorarEntrada();
+            if (pJog2)
+                pJog2->ignorarEntrada();
             sair(&a);
         } else if (teclasSoltas.count(sf::Keyboard::K)) {
             pFase->salvar();
         }
     }
 
-    void EstadoJogo::atualizar() {
-        pFase->executar();
-        if (pJog1->getVencedor()) {
-            arg[2] = 2;
-            sf::sleep(sf::seconds(2));
-            if (pFase->getFase() == 2) {
-                int a = 2;
-                sair(&a);
+    void EstadoJogo::verificaFimJogo() {
+        int fim = 0;
+        if (pJog1) {
+            if (pJog1->getVencedor()) {
+                fim = 1;
+            } else if (!pJog2 && !pJog1->estaAtivo()) {
+                fim = 2;
             }
-            pJog1->ignorarEntrada();
-            if (pJog2)
-                pJog2->ignorarEntrada();
-            pGEvento->desinscrever(this);
-            iniciar(arg);
         }
         if (pJog2) {
             if (pJog2->getVencedor()) {
-                arg[2] = 2;
-                sf::sleep(sf::seconds(2));
-                if (pFase->getFase() == 2) {
-                    int a = 2;
-                    sair(&a);
-                }
-                pJog1->ignorarEntrada();
-                pJog2->ignorarEntrada();
-                pGEvento->desinscrever(this);
-                iniciar(arg);
+                fim = 1;
             }
         }
+        if (pJog2 && !pJog1->estaAtivo() && !pJog2->estaAtivo())
+            fim = 2;
+
+        if (fim) {
+            pJog1->ignorarEntrada();
+            pontosP1 = pJog1->getPontuacao();
+            if (pJog2) {
+                pJog2->ignorarEntrada();
+                pontosP2 = pJog2->getPontuacao();
+            }
+            pGEvento->desinscrever(this);
+            sf::sleep(sf::seconds(1));
+            if (fim == 1) {
+                if (pFase->getFase() == 2) {
+                    arg[0] = 2;
+                    if (pontosP1 > pontosP2) {
+                        arg[1] = 1;
+                        arg[2] = pontosP1;
+                    } else {
+                        arg[1] = 2;
+                        arg[2] = pontosP2;
+                    }
+                    sair(arg);
+                } else {
+                    arg[2] = 2;
+                    iniciar(arg);
+                }
+            } else {
+                arg[0] = 2;
+                if (pontosP1 > pontosP2) {
+                    arg[1] = 1;
+                    arg[2] = pontosP1;
+                } else {
+                    arg[1] = 2;
+                    arg[2] = pontosP2;
+                }
+                sair(arg);
+            }
+        }
+    }
+
+    void EstadoJogo::atualizar() {
+        if (abort) {
+            int a = 2;
+            sair(&a);
+        }
+        if (pFase)
+            pFase->executar();
+        verificaFimJogo();
     }
 
     void EstadoJogo::desenhar() {
 
     }
-
 }

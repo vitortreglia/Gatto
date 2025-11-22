@@ -30,7 +30,13 @@ file(GLOB_RECURSE SOURCES
 )
 
 # --- Cria o executável ---
-add_executable(Gatto ${SOURCES})
+add_executable(Gatto ${SOURCES}
+        src/Menu/MenuFimDeJogo.cpp
+        includes/Menu/MenuFimDeJogo.h
+        src/UI/CaixaDeTexto.cpp
+        includes/UI/CaixaDeTexto.h
+        src/Estado/EstadoFimDeJogo.cpp
+        includes/Estado/EstadoFimDeJogo.h)
 
 # --- Diretórios de include ---
 target_include_directories(Gatto PRIVATE
