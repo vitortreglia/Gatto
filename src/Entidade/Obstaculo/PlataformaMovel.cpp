@@ -9,6 +9,7 @@ namespace Entidade {
         somaTempo(0.0f),
         direcao(direcao),
         somaMovimento(0.0f) {
+            setVoador(true);
             textura.inserirTextura("base", "Data/Imagens/placeholder.png");
             textura.setAnimacao("base");
         }
@@ -32,6 +33,7 @@ namespace Entidade {
         }
 
         void PlataformaMovel::executar() {
+            calculaVelocidade();
             somaTempo += tempoFrame;
             if (somaTempo > tempoMax) {
                 somaTempo = 0.0f;

@@ -6,6 +6,7 @@ namespace Entidade {
         Entidade({44.0f, 38.0f}, 0, 0),
         tempoLancamento(0.0f)
         {
+            setVoador(true);
             setAtivo(false);
             textura.inserirTextura("base", "Data/Imagens/osso.png");
             textura.setAnimacao("base");
@@ -18,6 +19,7 @@ namespace Entidade {
         }
 
         void Projetil::mover() {
+            calculaVelocidade();
             tempoLancamento += tempoFrame;
             if (tempoLancamento < 4.0f) {
                 if (direita) {

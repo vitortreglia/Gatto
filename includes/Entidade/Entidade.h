@@ -10,19 +10,27 @@ namespace Entidade {
         float x, y;
         static float tempoFrame;
         bool ativo;
+        sf::Vector2f deslocamento;
         Animacao textura;
         ostream buffer;
         istream entrada;
+        bool voador;
+        const float gravidade;
     public:
         Entidade(sf::Vector2f tamanho = {50.0f, 50.0f}, float posx = 50.0f, float posy = 50.0f);
         virtual ~Entidade();
         const bool estaAtivo() const;
         void setAtivo(bool at);
+        void setVoador(bool voador);
         void setPosicao(sf::Vector2f posicao);
         const sf::Vector2f getPosicao() const;
         void setTamanho(sf::Vector2f tamanho);
         const sf::Vector2f getTamanho() const;
         vector<sf::Vector2f> getCoordenadas();
+        virtual void calculaVelocidade();
+        void balancearGravidade();
+        const sf::Vector2f getDeslocamento() const;
+        void setDeslocamento(sf::Vector2f desl);
         static void getTempoFrame();
         void lerDataBuffer();
         virtual void carregar(istream &entrada) = 0;

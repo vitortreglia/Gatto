@@ -49,9 +49,8 @@ namespace Estados {
                 int i = 0;
                 for (multimap<int, string>::const_iterator it = ranking.begin();
                     it != ranking.end() && i < 10; it++) {
-                    //cout << (*it).second << " " << (*it).first << endl;
                         saidaRanking << (*it).second << ' ' << (*it).first << endl;
-                    i++;
+                        i++;
                 }
                 saidaRanking.close();
             }

@@ -4,16 +4,13 @@ namespace Entidade {
     namespace Personagem {
         Personagem::Personagem(float vel, sf::Vector2f tam, float px, float py, int vidas):
         Entidade(tam, px, py),
-        vMax(sf::Vector2f(vel, 1000.0f)),
-        gravidade(100.0f),
+        vMax(vel),
         direita(true),
         andando(false),
         noChao(false),
         numVidas(vidas),
         sofrendoDano(false),
-        tempoDano(0.0f),
-        deslocamento({0.0f, 0.0f}),
-        voador(false)
+        tempoDano(0.0f)
         {}
 
         Personagem::~Personagem() {
@@ -33,26 +30,19 @@ namespace Entidade {
             return direita;
         }
 
-        const sf::Vector2f Personagem::getDeslocamento() const {
-            return deslocamento;
-        }
-
-        void Personagem::setDeslocamento(sf::Vector2f desl) {
-            deslocamento = desl;
-        }
-
         void Personagem::calculaVelocidade() {
             if (!sofrendoDano) {
                 if (andando) {
-                    direita ? deslocamento.x = (vMax.x * tempoFrame) : deslocamento.x = -(vMax.x * tempoFrame);
+                    direita ? deslocamento.x = (vMax * tempoFrame) : deslocamento.x = -(vMax * tempoFrame);
                 } else {
                     deslocamento.x = 0.0f;
                 }
             }
-            if (!voador) {
-                deslocamento.y += gravidade * tempoFrame;
-                if (deslocamento.y > vMax.y * tempoFrame)
-                    deslocamento.y = vMax.y * tempoFrame;
+            deslocamento.y += gravidade * tempoFrame;
+            if (deslocamento.y > 1000 * tempoFrame)
+                deslocamento.y = 1000 * tempoFrame;
+            if (voador) {
+                balancearGravidade();
             }
         }
 
@@ -77,12 +67,7 @@ namespace Entidade {
                 textura.setAnimacao("dano");
                 sofrendoDano = true;
                 numVidas -= dano;
-                cout << "dano em " << ID << endl;
             }
-        }
-
-        void Personagem::setVoador(bool voador) {
-            this->voador = voador;
         }
 
         void Personagem::lerDataBuffer() {

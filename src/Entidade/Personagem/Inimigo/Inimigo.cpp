@@ -30,7 +30,6 @@ namespace Entidade {
 
             void Inimigo::verificaVidas() {
                 if (numVidas <= 0) {
-                    cout << "inimigo morreu" << endl;
                     if (pUltimoAtacante)
                         pUltimoAtacante->pontuar(nivelMaldade * 100 + 100);
                     setAtivo(false);

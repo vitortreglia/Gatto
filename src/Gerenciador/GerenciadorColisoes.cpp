@@ -191,20 +191,16 @@ namespace Gerenciador {
         sf::Vector2f colisao;
             for (vector<Entidade::Personagem::Inimigo::Inimigo*>::const_iterator it = LIs.begin(); it != LIs.end(); it++) {
                 if ((*it)->estaAtivo()) {
-                    if (!pJogador1->getImunidadeDano()) {
-                        colisao = verificarColisao(pJogador1, *it);
-                        if (colisao.x != 0.0f || colisao.y != 0.0f) {
-                            corrigirColisao(pJogador1, colisao);
-                            pJogador1->colidir(*it, colisao);
-                        }
+                    colisao = verificarColisao(pJogador1, *it);
+                    if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                        corrigirColisao(pJogador1, colisao);
+                        pJogador1->colidir(*it, colisao);
                     }
                     if (pJogador2) {
-                        if (!pJogador2->getImunidadeDano()) {
-                            colisao = verificarColisao(pJogador2, *it);
-                            if (colisao.x != 0.0f || colisao.y != 0.0f) {
-                                corrigirColisao(pJogador2, colisao);
-                                pJogador2->colidir(*it, colisao);
-                            }
+                        colisao = verificarColisao(pJogador2, *it);
+                        if (colisao.x != 0.0f || colisao.y != 0.0f) {
+                            corrigirColisao(pJogador2, colisao);
+                            pJogador2->colidir(*it, colisao);
                         }
                     }
                 }

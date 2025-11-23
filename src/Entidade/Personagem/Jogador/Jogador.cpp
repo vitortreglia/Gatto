@@ -137,7 +137,6 @@ namespace Entidade {
 
         void Jogador::verificaVidas() {
             if (numVidas <= 0) {
-                cout << "morreu " << endl;
                 setAtivo(false);
                 pGGrafico->setMultiplayer(false);
             } else if (imunidadeDano) {

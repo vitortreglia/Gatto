@@ -18,7 +18,7 @@ namespace Entidade {
                 {
 
                 textura.inserirTextura("parado", "Data/Imagens/cachorro.png");
-                vMax.x = velocidade;
+                vMax = velocidade;
                 andar(true);
                 textura.setAnimacao("parado");
             }
@@ -48,7 +48,7 @@ namespace Entidade {
                     raioPercepcaoX = 450.0f;
                     raioAtaque = 350.0f;
                 }
-                    vMax.x = velocidade * fatorFuria;
+                    vMax = velocidade * fatorFuria;
             }
 
             void Cachorro::patrulhar() {

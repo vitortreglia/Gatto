@@ -8,6 +8,7 @@ namespace Entidade {
         Entidade({50, 50}, x, y),
         movimento(60),
         sentido(true) {
+            setVoador(true);
             textura.inserirTextura("base", "Data/Imagens/peixe.png");
             textura.setAnimacao("base");
         }
@@ -29,6 +30,7 @@ namespace Entidade {
 
         void Peixe::executar() {
             textura.animar(false);
+            calculaVelocidade();
             mover();
         }
 

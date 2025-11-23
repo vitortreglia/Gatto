@@ -5,6 +5,7 @@ namespace Entidade {
         Roseira::Roseira(bool dano, float x, float y):
         Obstaculo(dano, {200, 100}, x, y),
         tempo(0.0f) {
+            setVoador(true);
             textura.inserirTextura("base", "Data/Imagens/roseira.png");
             textura.setAnimacao("base");
             atualizarTextura();
@@ -27,6 +28,7 @@ namespace Entidade {
         }
 
         void Roseira::executar() {
+            calculaVelocidade();
             tempo += tempoFrame;
             if (tempo > 2) {
                 tempo = 0.0f;

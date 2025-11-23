@@ -12,10 +12,12 @@ namespace Entidade {
     corpo(tam),
     ativo(true),
     buffer(nullptr),
-    entrada(nullptr)
+    entrada(nullptr),
+    deslocamento({0.0f, 0.0f}),
+    gravidade(100.0f),
+    voador(false)
     {
         setPosicao(sf::Vector2f(x, y));
-        //corpo.setFillColor(sf::Color::Blue);
         textura.setCorpo(&corpo);
     }
 
@@ -29,6 +31,10 @@ namespace Entidade {
 
     void Entidade::setAtivo(bool at) {
         ativo = at;
+    }
+
+    void Entidade::setVoador(bool voador) {
+        this->voador = voador;
     }
 
     const sf::Vector2f Entidade::getPosicao() const {
@@ -59,6 +65,28 @@ namespace Entidade {
             coordenadas[i].y = c.y;
         }
         return coordenadas;
+    }
+
+    const sf::Vector2f Entidade::getDeslocamento() const {
+        return deslocamento;
+    }
+
+    void Entidade::setDeslocamento(sf::Vector2f desl) {
+        deslocamento = desl;
+    }
+
+    void Entidade::calculaVelocidade() {
+        deslocamento.y += gravidade * tempoFrame;
+        if (deslocamento.y > 1000 * tempoFrame)
+            deslocamento.y = 1000 * tempoFrame;
+        if (voador) {
+            balancearGravidade();
+        }
+        setPosicao({getPosicao().x, getPosicao().y + deslocamento.y});
+    }
+
+    void Entidade::balancearGravidade() {
+        deslocamento.y += -gravidade * tempoFrame;
     }
 
     void Entidade::getTempoFrame() {

@@ -10,6 +10,7 @@ namespace Entidade {
         somaTempo(0.0f),
         posInicial({x, y})
         {
+            setVoador(true);
             textura.inserirTextura("base", "Data/Imagens/placeholder.png");
             textura.setAnimacao("base");
         }
@@ -28,8 +29,7 @@ namespace Entidade {
         }
 
         void GiraGira::executar() {
-            //obstaculizar();
-            //desenhar();
+            calculaVelocidade();
             somaTempo += tempoFrame;
             if (angulo < 180.0f) {
                 angulo += velocidadeGiro;

@@ -55,7 +55,6 @@ namespace Estados {
         } else if (teclasSoltas.count(sf::Keyboard::S)) {
             pMenu->proximo();
         } else if (teclasSoltas.count(sf::Keyboard::Enter)) {
-            cout << "enter" << endl;
             int args[] = {0, 1, 1};
             if (pMenu->getSelecao() == 0) {
                 args[0] = 1;
