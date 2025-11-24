@@ -3,6 +3,12 @@
 #include "Texto.h"
 #include "Gerenciador/GerenciadorEvento.h"
 
+/*  CaixaDeTexto
+ *
+ *      Implementacao autoral com base em conhecimentos adquiridos estudando a documentacao
+ *      da biblioteca SFML. Documentacao disponivel em https://www.sfml-dev.org/documentation/2.6.2/
+ *
+ */
 
 class CaixaDeTexto : public Ente, public Observer {
 private:

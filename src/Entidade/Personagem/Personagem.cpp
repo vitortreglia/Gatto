@@ -30,7 +30,7 @@ namespace Entidade {
             return direita;
         }
 
-        void Personagem::calculaVelocidade() {
+        void Personagem::calculaVelocidade() { //calculo de gravidade e deslocamento para personagens
             if (!sofrendoDano) {
                 if (andando) {
                     direita ? deslocamento.x = (vMax * tempoFrame) : deslocamento.x = -(vMax * tempoFrame);

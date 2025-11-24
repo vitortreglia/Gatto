@@ -3,6 +3,13 @@
 #include "Estado/EstadoJogo.h"
 #include "Observer/Observer.h"
 
+/*  Gerenciador de Estados
+*
+*      Implementacao do padrao State realizada utilizando como referencia
+*       o livro Padroes de Projeto, de Erich Gamma, Richard Helm, Ralph Johnson
+*       e John Vlissides
+*
+*/
 
 namespace Gerenciador {
     class GerenciadorEstados {

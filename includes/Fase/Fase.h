@@ -7,6 +7,14 @@
 
 #include "Entidade/Personagem/Inimigo/Gaivota.h"
 
+/*  Fase
+*
+*      Implementacao do padrao Template, utilizado no metodo criarCenario, realizado
+*      conforme o livro Padroes de Projeto, de Erich Gamma, Richard Helm, Ralph Johnson
+*      e John Vlissides
+*
+*/
+
 namespace Fase {
     class Fase : public Ente {
     protected:

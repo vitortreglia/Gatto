@@ -2,6 +2,11 @@
 #define PARALLAX_H
 #include <SFML/Graphics.hpp>
 
+/*  Parallax
+ *
+ *      Implementacao autoral com base em conhecimentos previos.
+ *
+ */
 
 class Parallax {
 private:

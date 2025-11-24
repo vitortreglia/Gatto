@@ -6,7 +6,7 @@
 
 /*  Gerenciador de Eventos feito usando o Padrao de Projeto Singleton e Observer
  *
- *      Implementacao de padrao de projeto baseada no material disponibilizado
+ *      Implementacao de padrao de projeto Singleton baseada no material disponibilizado
  *      pelo então monitor Giovane Limas Salvi, no 2º semestre de 2022 em
  *      https://www.youtube.com/watch?v=gfGE5KY1OQU e
  *      https://github.com/Giovanenero/JogoPlataforma2D-Jungle/tree/main

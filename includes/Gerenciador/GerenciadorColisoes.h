@@ -13,11 +13,17 @@
 #include "Entidade/Personagem/Inimigo/Inimigo.h"
 #include "Entidade/Personagem/Jogador/Jogador.h"
 
+/*  Gerenciador de Colisoes
+ *
+ *      Implementacao do calculo de colisoes autoral, com referencias em conceitos
+ *      de algebra linear e geometria analitica.
+ *
+ */
+
 using namespace std;
 namespace Gerenciador {
     class GerenciadorColisoes {
     private:
-        Lista::ListaEntidades* pListaPersonagens;
         list<Entidade::Obstaculo::Obstaculo*> LOs;
         list<Entidade::Chao*> LCs;
         vector<Entidade::Personagem::Inimigo::Inimigo*> LIs;
@@ -26,7 +32,7 @@ namespace Gerenciador {
         vector<Entidade::Itens::Peixe*> LPxs;
         set<Entidade::Itens::Projetil*> LPs;
     public:
-        GerenciadorColisoes(Lista::ListaEntidades* pLPersonagens);
+        GerenciadorColisoes();
         ~GerenciadorColisoes();
         void incluirObstaculo(Entidade::Obstaculo::Obstaculo* obs);
         void incluirJogadores(Entidade::Personagem::Jogador* pJog1, Entidade::Personagem::Jogador* pJog2);

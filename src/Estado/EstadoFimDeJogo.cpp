@@ -6,7 +6,8 @@ namespace Estados {
     EstadoFimDeJogo* EstadoFimDeJogo::pEstadoF(nullptr);
 
     EstadoFimDeJogo::EstadoFimDeJogo():
-    pMenu(nullptr){}
+    pMenu(nullptr),
+    pontVencedor(0){}
 
     EstadoFimDeJogo *EstadoFimDeJogo::getEstadoFimDeJogo(void *args) {
         if (pEstadoF)

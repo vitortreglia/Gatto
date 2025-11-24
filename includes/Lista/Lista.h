@@ -1,5 +1,14 @@
 #ifndef LISTA_H
 #define LISTA_H
+
+/*  Template Lista
+ *
+ *      Implementacao com base no grupo de slides 10 parte A e B do Prof. Dr. Jean M. Simão
+ *      da disciplina Tecnicas de Programacao. Material disponivel em
+ *      https://pessoal.dainf.ct.utfpr.edu.br/jeansimao/Fundamentos2/LinguagemC++UML/Fundamentos2-LinguagemC++.htm
+ *
+ */
+
 namespace Lista {
     template<class TL>
     class Lista {

@@ -21,7 +21,7 @@ namespace Fase {
     numJogs(1),
     buffer(nullptr)
     {
-        pGColisoes = new Gerenciador::GerenciadorColisoes(&listaEnt);
+        pGColisoes = new Gerenciador::GerenciadorColisoes();
         pGGrafico->resetaRelogio();
         semearRand();
     }

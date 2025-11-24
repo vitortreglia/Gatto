@@ -70,8 +70,8 @@ namespace Fase {
                 numGiraGira++;
             }
         } else {
-            criarChao(x, y);
-            criarChao(x + 100, y);
+            criarChao(x, y-100);
+            criarChao(x + 100, y+100);
         }
     }
 

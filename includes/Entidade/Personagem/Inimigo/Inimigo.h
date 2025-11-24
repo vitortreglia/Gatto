@@ -5,7 +5,6 @@
 namespace Entidade {
     namespace Personagem {
         class Jogador;
-
         namespace Inimigo {
             class Inimigo : public Personagem {
             protected:

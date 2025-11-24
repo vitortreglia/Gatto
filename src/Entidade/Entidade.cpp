@@ -75,7 +75,7 @@ namespace Entidade {
         deslocamento = desl;
     }
 
-    void Entidade::calculaVelocidade() {
+    void Entidade::calculaVelocidade() {    //calculo da gravidade para todas as entidades
         deslocamento.y += gravidade * tempoFrame;
         if (deslocamento.y > 1000 * tempoFrame)
             deslocamento.y = 1000 * tempoFrame;
@@ -85,7 +85,7 @@ namespace Entidade {
         setPosicao({getPosicao().x, getPosicao().y + deslocamento.y});
     }
 
-    void Entidade::balancearGravidade() {
+    void Entidade::balancearGravidade() {   //anulacao da gravidade para corpos que devem permanecer estaticos
         deslocamento.y += -gravidade * tempoFrame;
     }
 
@@ -93,7 +93,7 @@ namespace Entidade {
         tempoFrame = pGGrafico->getTempo();
     }
 
-    void Entidade::lerDataBuffer() {
+    void Entidade::lerDataBuffer() { //carregamento do jogo, chamado em cascata pelas subclasses
         string ani;
         int frame;
         int TA;
@@ -104,7 +104,7 @@ namespace Entidade {
         textura.setTAnimacao(TA);
     }
 
-    void Entidade::salvarDataBuffer() {
+    void Entidade::salvarDataBuffer() { //salvamento do jogo, chamada em cascata pelas subclasses
         buffer << ID << ' ' << ativo << ' ' << textura.getAnimacao() << ' ' << textura.getFrame() << ' '
         << textura.getTAnimacao() << ' ' << x << ' ' << y << ' ';
     }

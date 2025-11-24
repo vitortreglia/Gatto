@@ -1,15 +1,12 @@
  #include "Gerenciador/GerenciadorColisoes.h"
 
 namespace Gerenciador {
-    GerenciadorColisoes::GerenciadorColisoes(Lista::ListaEntidades *pLPersonagens):
+    GerenciadorColisoes::GerenciadorColisoes():
     pJogador1(nullptr),
     pJogador2(nullptr)
-    {
-        pListaPersonagens = pLPersonagens;
-    }
+    {}
 
     GerenciadorColisoes::~GerenciadorColisoes() {
-        pListaPersonagens = nullptr;
     }
 
     void GerenciadorColisoes::incluirObstaculo(Entidade::Obstaculo::Obstaculo *obs) {

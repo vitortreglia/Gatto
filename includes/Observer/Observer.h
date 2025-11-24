@@ -4,6 +4,14 @@ namespace Gerenciador {
     class GerenciadorEvento;
 }
 
+/*  Observer
+*
+*      Implementacao do padrao Observer, utilizado pelas classes do namespace Estados e
+*      pela classe Jogador, realizado conforme o livro Padroes de Projeto, de Erich Gamma,
+*      Richard Helm, Ralph Johnson e John Vlissides
+*
+*/
+
 class Observer {
 protected:
     static Gerenciador::GerenciadorEvento* pGEvento;
