@@ -71,7 +71,7 @@ namespace Fase {
             }
         } else {
             criarChao(x, y-100);
-            criarChao(x + 100, y+100);
+            criarChao(x + 100, y-100);
         }
     }
 
