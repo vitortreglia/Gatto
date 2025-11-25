@@ -62,22 +62,18 @@ namespace Fase {
 
     void FaseCidade::criarProjetil(float x, float y, bool direita,
         Entidade::Personagem::Inimigo::Cachorro* pCachorro) {
-        if (!pCachorro)
-            return;
 
-        sf::Vector2f pos = pCachorro->getPosicao();
 
         Entidade::Itens::Projetil* proj = new Entidade::Itens::Projetil();
 
         if (proj) {
             proj->setAtivo(false);
             proj->setDirecao(direita);
-            proj->setPosicao(pos);
 
             listaEnt.incluir(proj);
             pGColisoes->incluirProjetil(proj);
-
-            pCachorro->setProjetil(proj);
+            if (pCachorro)
+                pCachorro->setProjetil(proj);
         }
     }
 
@@ -162,24 +158,18 @@ namespace Fase {
 
     void FaseCidade::carregarFase() {
         string tag;
-        Entidade::Personagem::Inimigo::Cachorro* c = nullptr;
-        Entidade::Personagem::Inimigo::Gaivota* g = nullptr;
+        vector<Entidade::Personagem::Inimigo::Cachorro*> c;
+        vector<Entidade::Personagem::Inimigo::Gaivota*> g;
         while (!buffer.eof()) {
             buffer >> tag;
             if (tag == "peixe") {
-                if (g) {
-                    criarPeixe(0, 0, g);
-                    g = nullptr;
-                } else {
-                    criarPeixe(0, 0, nullptr);
-                }
+                criarPeixe(0, 0, nullptr);
             } else if (tag == "cachorro") {
-                c = criarChefao(0, 0);
+                c.push_back(criarChefao(0, 0));
             } else if (tag == "projetil") {
-                criarProjetil(0, 0, true, c);
-                c = nullptr;
+                criarProjetil(0, 0, true, nullptr);
             } else if (tag == "gaivota") {
-                g = criarInimigoGaivota(0, 0);
+                g.push_back(criarInimigoGaivota(0, 0));
             } else if (tag == "chao") {
                 criarChao(0, 0);
             } else if (tag == "pmovel") {
@@ -192,7 +182,20 @@ namespace Fase {
             }
             listaEnt[listaEnt.getTam()-1]->carregar(buffer);
         }
-
+        for (vector<Entidade::Personagem::Inimigo::Cachorro*>::const_iterator it = c.begin(); it != c.end(); it++) {
+            for (int i = 0; i < listaEnt.getTam(); i++) {
+                if (listaEnt[i]->getId() == (*it)->getProjetilID()) {
+                    (*it)->setProjetil(static_cast<Entidade::Itens::Projetil*>(listaEnt[i]));
+                }
+            }
+        }
+        for (vector<Entidade::Personagem::Inimigo::Gaivota*>::const_iterator it = g.begin(); it != g.end(); it++) {
+            for (int i = 0; i < listaEnt.getTam(); i++) {
+                if (listaEnt[i]->getId() == (*it)->getPeixeID()) {
+                    (*it)->setPeixe(static_cast<Entidade::Itens::Peixe*>(listaEnt[i]));
+                }
+            }
+        }
         pGGrafico->setLimitesCamera(limitesFase);
     }
 

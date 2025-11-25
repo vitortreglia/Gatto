@@ -14,7 +14,8 @@ namespace Entidade {
             raioAtaque(300.0f),
             velocidade(100.0f),
             pProjetil(nullptr),
-            tempoPatrulha(0)
+            tempoPatrulha(0),
+            pID(0)
                 {
 
                 textura.inserirTextura("parado", "Data/Imagens/cachorro.png");
@@ -26,6 +27,11 @@ namespace Entidade {
             Cachorro::~Cachorro() {
 
             }
+
+            const int Cachorro::getProjetilID() {
+                return pID;
+            }
+
             void Cachorro::atualizaMaldade() {
 
                 if (nivelMaldade <= 0) {
@@ -76,6 +82,7 @@ namespace Entidade {
                     pProjetil->setAtivo(false);
                     pProjetil->setDirecao(direita);
                     pProjetil->setPosicao(getPosicao());
+                    pID = pProjetil->getId();
                 }
             }
 
@@ -242,7 +249,7 @@ namespace Entidade {
 
             void Cachorro::lerDataBuffer() {
                 Inimigo::lerDataBuffer();
-                entrada >> tempoPatrulha;
+                entrada >> tempoPatrulha >> pID;
             }
 
             void Cachorro::carregar(istream &entrada) {
@@ -253,7 +260,7 @@ namespace Entidade {
             void Cachorro::salvarDataBuffer() {
                 buffer << "cachorro ";
                 Inimigo::salvarDataBuffer();
-                buffer << tempoPatrulha << endl;
+                buffer << tempoPatrulha << ' ' << pID << endl;
             }
 
             void Cachorro::salvar(ostream &saida) {

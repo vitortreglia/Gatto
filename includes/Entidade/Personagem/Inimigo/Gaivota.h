@@ -23,9 +23,11 @@ namespace Entidade {
                 const float raioPercepcaoY;
                 bool possuiPeixe;
                 Itens::Peixe* pPeixe;
+                int pID;
             public:
                 Gaivota(float x, float y);
                 ~Gaivota();
+                const int getPeixeID();
                 void setPeixe(Itens::Peixe* pP);
                 void danificar(Jogador *pJ);
                 void mover();
