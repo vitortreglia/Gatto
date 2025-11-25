@@ -10,7 +10,7 @@ namespace Entidade {
         direcao(direcao),
         somaMovimento(0.0f) {
             setVoador(true);
-            textura.inserirTextura("base", "Data/Imagens/placeholder.png");
+            textura.inserirTextura("base", "Data/Imagens/plataformaMovel.png");
             textura.setAnimacao("base");
         }
 

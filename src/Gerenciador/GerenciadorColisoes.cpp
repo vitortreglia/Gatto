@@ -229,12 +229,14 @@ namespace Gerenciador {
             if ((*it)->estaAtivo()) {
                 colisao = verificarColisao(*it, pJogador1);
                 if (colisao.x != 0.0f || colisao.y != 0.0f) {
-                    pJogador1->coletarPeixe(*it);
+                    (*it)->setAtivo(false);
+                    pJogador1->operator++();
                 }
                 if (pJogador2) {
                     colisao = verificarColisao(*it, pJogador2);
                     if (colisao.x != 0.0f || colisao.y != 0.0f) {
-                        pJogador2->coletarPeixe(*it);
+                        (*it)->setAtivo(false);
+                        pJogador2->operator++();
                     }
                 }
             }

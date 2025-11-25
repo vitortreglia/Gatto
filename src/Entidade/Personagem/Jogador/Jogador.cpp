@@ -67,8 +67,7 @@ namespace Entidade {
             }
         }
 
-        void Jogador::coletarPeixe(Itens::Peixe *pPeixe) {
-            pPeixe->setAtivo(false);
+        void Jogador::coletarPeixe() {
             peixes++;
             pontuar(500);
             if (numVidas < 7)
@@ -275,6 +274,23 @@ namespace Entidade {
             buffer.rdbuf(saida.rdbuf());
             salvarDataBuffer();
         }
+
+        void Jogador::operator++() {
+            peixes++;
+            pontuar(500);
+            if (numVidas < 7)
+                numVidas++;
+        }
+
+        const bool Jogador::operator--() {
+            if (peixes > 0) {
+                peixes--;
+                pontuar(-500);
+                return true;
+            }
+            return false;
+        }
+
 
     }
 }

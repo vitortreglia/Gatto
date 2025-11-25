@@ -39,7 +39,7 @@ namespace Entidade {
                 if (!pJ->getImunidadeDano() && !sofrendoDano) {
                     nivelMaldade++;
                     if (nivelMaldade > 1 && !possuiPeixe && ataque.getAtacando()) {
-                        possuiPeixe = pJ->perderPeixe();
+                        possuiPeixe = pJ->operator--();
                     }
                     pJ->tomarDano(1);
                 }

@@ -29,7 +29,7 @@ namespace Entidade {
             void ignorarEntrada();
             void liberaPulo();
             void pular(float multiplicador);
-            void coletarPeixe(Itens::Peixe* pPeixe);
+            void coletarPeixe();
             const bool perderPeixe();
             const bool getImunidadeDano() const;
             void colidir(Inimigo::Inimigo* pInimigo, sf::Vector2f colisao);
@@ -46,6 +46,8 @@ namespace Entidade {
             void carregar(istream &entrada);
             void salvar(ostream& saida);
             void salvarDataBuffer();
+            void operator++();
+            const bool operator--();
         };
     }
 }
