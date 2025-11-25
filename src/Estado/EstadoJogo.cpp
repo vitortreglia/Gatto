@@ -17,11 +17,11 @@ namespace Estados {
     pontosP1(0),
     pontosP2(0) {}
 
-    EstadoJogo *EstadoJogo::getEstadoJogo(void* args) {
-        if (!pEstadoJogo)
+    EstadoJogo *EstadoJogo::getEstadoJogo(void* args) { // singleton do estado de jogo
+        if (!pEstadoJogo) // se nao existe ainda, cria
             pEstadoJogo = new EstadoJogo();
-        pEstadoJogo->iniciar(args);
-        return pEstadoJogo;
+        pEstadoJogo->iniciar(args); // sempre chama pra configurar
+        return pEstadoJogo; // retorna ponteiro
 
     }
 
@@ -41,69 +41,71 @@ namespace Estados {
                 pGEvento->desinscrever(this);
                 pFase->salvar();
                 abort = true;
-            } else {
-                if (pJog1) {
-                    delete pJog1;
-                    pJog1 = nullptr;
-                }
-                if (pJog2) {
-                    delete pJog2;
-                    pJog2 = nullptr;
-                }
-                if (pFase) {
-                    delete pFase;
-                    pFase = nullptr;
-                }
-
-                if (arg[0] == 2) {
-                    try {
-                        ifstream carregamento("Data/Fases/save.txt");
-
-                        if (!carregamento.is_open())
-                            throw std::runtime_error("nao ha jogo salvo");
-
-                        carregamento >> arg[1] >> arg[2];
-
-                        pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
-
-                        pJog1->carregar(carregamento);
-                        if (arg[1] == 2) {
-                            pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
-                            pJog2->carregar(carregamento);
-                        }
-                        if (pFase)
-                            delete pFase;
-                        if (arg[2] == 1) {
-                            pFase = new Fase::FaseJardim(pJog1, pJog2, carregamento);
-                        } else if (arg[2] == 2) {
-                            pFase = new Fase::FaseCidade(pJog1, pJog2, carregamento);
-                        }
-                        carregamento.close();
-                        if (pJog1)
-                            pJog1->observarEntrada();
-                        if (pJog2)
-                            pJog2->observarEntrada();
+            } else
+                // apaga as instancias antigas jogadores e fase
+                    if (pJog1) {
+                        delete pJog1;
+                        pJog1 = nullptr;
                     }
-                    catch (const std::runtime_error &e) {
-                        cout << e.what() << endl;
-                        abort = true;
-                    }
-                } else {
+            if (pJog2) {
+                delete pJog2;
+                pJog2 = nullptr;
+            }
+            if (pFase) {
+                delete pFase;
+                pFase = nullptr;
+            }
+
+            if (arg[0] == 2) {
+                // se carrregar jogo abre o arquivo
+                try {
+                    ifstream carregamento("Data/Fases/save.txt");
+
+                    if (!carregamento.is_open())
+                        throw std::runtime_error("nao ha jogo salvo");
+
+                    carregamento >> arg[1] >> arg[2];
+
                     pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
+
+                    pJog1->carregar(carregamento);
                     if (arg[1] == 2) {
                         pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
+                        pJog2->carregar(carregamento);
                     }
+                    if (pFase) // cria a fase correta passando o arquivo
+                        delete pFase;
                     if (arg[2] == 1) {
-                        pFase = new Fase::FaseJardim(pJog1, pJog2);
+                        pFase = new Fase::FaseJardim(pJog1, pJog2, carregamento);
                     } else if (arg[2] == 2) {
-                        pFase = new Fase::FaseCidade(pJog1, pJog2);
+                        pFase = new Fase::FaseCidade(pJog1, pJog2, carregamento);
                     }
+                    carregamento.close();
                     if (pJog1)
                         pJog1->observarEntrada();
                     if (pJog2)
                         pJog2->observarEntrada();
                 }
+                catch (const std::runtime_error &e) {
+                    cout << e.what() << endl;
+                    abort = true;
+                }
+            } else { // cria novo jogo
+                pJog1 = new Entidade::Personagem::Jogador(1, pontosP1);
+                if (arg[1] == 2) {
+                    pJog2 = new Entidade::Personagem::Jogador(2, pontosP2);
+                }
+                if (arg[2] == 1) {
+                    pFase = new Fase::FaseJardim(pJog1, pJog2);
+                } else if (arg[2] == 2) {
+                    pFase = new Fase::FaseCidade(pJog1, pJog2);
+                }
+                if (pJog1)
+                    pJog1->observarEntrada();
+                if (pJog2)
+                    pJog2->observarEntrada();
             }
+
         } else {
             if (pJog1)
                 pJog1->observarEntrada();
@@ -129,23 +131,23 @@ namespace Estados {
         }
     }
 
-    void EstadoJogo::tratarEventos() {
+    void EstadoJogo::tratarEventos() { // atalhos durante o jogo
         set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
         set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
 
-        if (teclasSoltas.count(sf::Keyboard::P)) {
+        if (teclasSoltas.count(sf::Keyboard::P)) { // se soltar p, pausa
             int a = 1;
             pGEvento->desinscrever(this);
             pJog1->ignorarEntrada();
             if (pJog2)
                 pJog2->ignorarEntrada();
             sair(&a);
-        } else if (teclasSoltas.count(sf::Keyboard::K)) {
+        } else if (teclasSoltas.count(sf::Keyboard::K)) { // se soltar k, apenas salva a fase
             pFase->salvar();
         }
     }
 
-    void EstadoJogo::verificaFimJogo() {
+    void EstadoJogo::verificaFimJogo() { // dececta vitoria ou game over
         int fim = 0;
         if (pJog1) {
             if (pJog1->getVencedor()) {
@@ -202,7 +204,7 @@ namespace Estados {
     }
 
     void EstadoJogo::atualizar() {
-        if (abort) {
+        if (abort) {   // se abort for true volta pro menu
             int a = -1;
             sair(&a);
         }
