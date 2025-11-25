@@ -11,21 +11,21 @@ namespace Estados {
     {}
 
     EstadoMenuPrincipal *EstadoMenuPrincipal::getEstadoMenuPrincipal(void *args) {
-        if (!pEstadoMenu)
+        if (!pEstadoMenu)  // se ainda nao existe estadoMenu, cria
             pEstadoMenu = new EstadoMenuPrincipal();
-        pEstadoMenu->iniciar(args);
+        pEstadoMenu->iniciar(args); // chama sempre pra resetar menu
         return pEstadoMenu;
     }
 
-    void EstadoMenuPrincipal::iniciar(void *args) {
-        if (pMenu)
+    void EstadoMenuPrincipal::iniciar(void *args) { // monta menu principal
+        if (pMenu) // se ja havia menu, deleta
             delete pMenu;
-        pMenu = new Menu::MenuPrincipal();
-        pGEvento->inscrever(this);
+        pMenu = new Menu::MenuPrincipal(); // cria menu principal
+        pGEvento->inscrever(this);     // inscreve no gerenciador de eventos
     }
 
-    void EstadoMenuPrincipal::sair(void *args) {
-        pGEvento->desinscrever(this);
+    void EstadoMenuPrincipal::sair(void *args) { // troca para o proximo estado
+        pGEvento->desinscrever(this);  // desinscreve de eventos
         int* arg = static_cast<int*>(args);
         if (arg[0] == 3) {
             mudarEstado(EstadoRanking::getEstadoRanking(static_cast<void*>(arg)));
@@ -34,10 +34,11 @@ namespace Estados {
         }
     }
 
-    void EstadoMenuPrincipal::tratarEventos() {
+    void EstadoMenuPrincipal::tratarEventos() { // le teclado/clique e decide ação
         set<sf::Keyboard::Key> teclasPressionadas = pGEvento->getTeclasPressionadas();
         set<sf::Keyboard::Key> teclasSoltas = pGEvento->getTeclasSoltas();
         if (pMenu->tratarCliques(pGEvento->getClique())) {
+            // se menu detecta clique valido, decide o que fazer:
             int args[] = {1, 1, 1};
             if (pMenu->getSelecao() == 0) {
                 args[0] = 1;
