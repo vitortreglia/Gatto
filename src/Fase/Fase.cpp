@@ -47,7 +47,7 @@ namespace Fase {
     }
 
     void Fase::criarPlataformaMovel(float x, float y, bool direcao) {
-        if ((rand()%10 <= 10 || numPMovel < 3 || y == 0) && numPMovel < maxPMovel) {
+        if ((rand()%10 <= 9 || numPMovel < 3 || y == 0) && numPMovel < maxPMovel) {
             Entidade::Entidade* objEntidade = new Entidade::Obstaculo::PlataformaMovel(x, y+50, direcao);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);

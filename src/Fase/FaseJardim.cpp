@@ -61,7 +61,7 @@ namespace Fase {
     }
 
     void FaseJardim::criarGiraGira(float x, float y) {
-        if ((rand()%10 < 1 || numGiraGira < 3 || y == 0) && numGiraGira < maxGiraGira) {
+        if ((rand()%10 <= 9 || numGiraGira < 3 || y == 0) && numGiraGira < maxGiraGira) {
             Entidade::Entidade* objEntidade = new Entidade::Obstaculo::GiraGira(x, y);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);
@@ -75,7 +75,7 @@ namespace Fase {
     }
 
     void FaseJardim::criarInimigoRato(float x, float y) {
-        if ((rand()%10 < 9 || numInimRato < 3 || y == 0) && numInimRato < maxInimRato) {
+        if ((rand()%10 <= 9 || numInimRato < 3 || y == 0) && numInimRato < maxInimRato) {
             Entidade::Entidade* objEntidade = new Entidade::Personagem::Inimigo::Rato(x, y);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);

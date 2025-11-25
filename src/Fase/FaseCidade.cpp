@@ -94,7 +94,7 @@ namespace Fase {
     }
 
     void FaseCidade::criarRoseira(float x, float y, bool danoso) {
-        if ((rand()%10 <= 10 || numRoseira < 3 || y == 0) && numRoseira < maxRoseiras) {
+        if ((rand()%10 <= 9 || numRoseira < 3 || y == 0) && numRoseira < maxRoseiras) {
             Entidade::Entidade* objEntidade = new Entidade::Obstaculo::Roseira(danoso, x, y);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);
