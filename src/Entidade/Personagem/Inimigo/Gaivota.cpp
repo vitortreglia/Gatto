@@ -32,7 +32,14 @@ namespace Entidade {
             Gaivota::~Gaivota(){}
 
             void Gaivota::setPeixe(Itens::Peixe *pP) {
-                pPeixe = pP;
+                if (pP) {
+                    pPeixe = pP;
+                    pID = pPeixe->getId();
+                }
+            }
+
+            const int Gaivota::getPeixeID() {
+                return pID;
             }
 
             void Gaivota::danificar(Jogador *pJ) {
@@ -127,7 +134,7 @@ namespace Entidade {
                 float vax;
                 float vay;
                 float tatk;
-                entrada >> tempo >> possuiPeixe >> t >> vax >> vay >> tatk;
+                entrada >> tempo >> possuiPeixe >> t >> vax >> vay >> tatk >> pID;
                 if (vax == 0 && vay == 0) {
                     setEstado(dynamic_cast <EstadoGaivota*>(new EstadoPatrulha(this)));
                 } else {
@@ -157,10 +164,10 @@ namespace Entidade {
                     buffer << static_cast<EstadoRasante*>(estado)->getTempo() << ' ' <<
                         static_cast<EstadoRasante*>(estado)->getVetorAtaque().x << ' ' <<
                             static_cast<EstadoRasante*>(estado)->getVetorAtaque().y << ' '
-                                << ataque.getTempoAtaque() << endl;
+                                << ataque.getTempoAtaque() << ' ' << pID << endl;
                 }
                 catch (std::exception &e) {
-                    buffer << 0 << ' ' << 0 << ' ' << 0 << ' ' << 0 << endl;
+                    buffer << 0 << ' ' << 0 << ' ' << 0 << ' ' << 0 << ' ' << pID << endl;
                 }
             }
 

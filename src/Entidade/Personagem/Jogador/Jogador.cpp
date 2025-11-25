@@ -16,6 +16,7 @@ namespace Entidade {
         interface("oiii", 30, 20, 50),
         imunidadeDano(false)
         {
+            interface.setCor(255,255,255,255);
             if (numJog == 2) {
                 textura.inserirTextura("parado", "Data/Imagens/Gato2/parado.png");
                 textura.inserirTextura("andando", "Data/Imagens/Gato2/andando.png");

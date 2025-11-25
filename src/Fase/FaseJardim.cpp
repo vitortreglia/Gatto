@@ -56,13 +56,12 @@ namespace Fase {
         carregarFase();
     }
 
-
     FaseJardim::~FaseJardim() {
 
     }
 
     void FaseJardim::criarGiraGira(float x, float y) {
-        if ((rand()%10 < 9 || numGiraGira < 3 || y == 0) && numGiraGira < maxGiraGira) {
+        if ((rand()%10 < 1 || numGiraGira < 3 || y == 0) && numGiraGira < maxGiraGira) {
             Entidade::Entidade* objEntidade = new Entidade::Obstaculo::GiraGira(x, y);
             if (objEntidade) {
                 listaEnt.incluir(objEntidade);
@@ -70,8 +69,8 @@ namespace Fase {
                 numGiraGira++;
             }
         } else {
-            criarChao(x, y-100);
-            criarChao(x + 100, y-100);
+            criarChao(x, y-80);
+            criarChao(x + 100, y-80);
         }
     }
 
@@ -129,20 +128,15 @@ namespace Fase {
 
     void FaseJardim::carregarFase() {
         string tag;
-        Entidade::Personagem::Inimigo::Gaivota* g = nullptr;
+        vector<Entidade::Personagem::Inimigo::Gaivota*> g;
         while (!buffer.eof()) {
             buffer >> tag;
             if (tag == "peixe") {
-                if (g) {
-                    criarPeixe(0, 0, g);
-                    g = nullptr;
-                } else {
-                    criarPeixe(0, 0, nullptr);
-                }
+                criarPeixe(0, 0, nullptr);
             } else if (tag == "rato") {
                 criarInimigoRato(0, 0);
             } else if (tag == "gaivota") {
-                g = criarInimigoGaivota(0, 0);
+                g.push_back(criarInimigoGaivota(0, 0));
             } else if (tag == "chao") {
                 criarChao(0, 0);
             } else if (tag == "pmovel") {
@@ -154,6 +148,14 @@ namespace Fase {
                 break;
             }
             listaEnt[listaEnt.getTam()-1]->carregar(buffer);
+        }
+
+        for (vector<Entidade::Personagem::Inimigo::Gaivota*>::const_iterator it = g.begin(); it != g.end(); it++) {
+            for (int i = 0; i < listaEnt.getTam(); i++) {
+                if (listaEnt[i]->getId() == (*it)->getPeixeID()) {
+                    (*it)->setPeixe(static_cast<Entidade::Itens::Peixe*>(listaEnt[i]));
+                }
+            }
         }
 
         pGGrafico->setLimitesCamera(limitesFase);

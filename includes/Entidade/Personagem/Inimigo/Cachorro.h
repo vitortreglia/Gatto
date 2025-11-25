@@ -18,10 +18,12 @@ namespace Entidade {
                     float fatorFuria;
                     Itens::Projetil* pProjetil;
                     float tempoPatrulha;
+                    int pID;
 
                 public:
                     Cachorro(float x, float y);
                     ~Cachorro();
+                    const int getProjetilID();
                     void mover();
                     void executar();
                     void danificar(Jogador *pJ);
