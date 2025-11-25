@@ -24,7 +24,7 @@ namespace Fase {
             }
         }
         pGGrafico->setFundo("Data/Imagens/fundoFaseCidade.png", "", "");
-        pGGrafico->setMovimentoFundo(0, 0, 0.5);
+        pGGrafico->setMovimentoFundo(0, 0, 0);
         Entidade::Personagem::Inimigo::Inimigo::setJogadores(pJog1, pJog2);
         pGColisoes->incluirJogadores(pJog1, pJog2);
         criarCenario("Data/Fases/FaseCidade.dat");
